@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <%= render 'shared/devise_messages' ,locale: { notice: notice, alert: alert }%>
     <%= yield %>
   </body>
 </html>
