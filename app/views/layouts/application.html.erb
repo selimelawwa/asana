@@ -9,6 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <%= render 'shared/navbar' %>
   <body>
     <%= render 'shared/devise_messages' ,locale: { notice: notice, alert: alert }%>
     <%= yield %>

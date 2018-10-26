@@ -31,6 +31,8 @@ gem 'devise', '~> 4.4'
 gem 'pry', '~> 0.11.3'
 
 gem 'materialize-sass', '~> 1.0.0'
+gem 'material_icons', '~> 2.2', '>= 2.2.1'
+gem 'jquery-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
