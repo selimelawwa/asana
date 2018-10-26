@@ -9,6 +9,7 @@
         <li> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"grey-text" %></li>
       <% else %>
         <li> <%= link_to "Sign in", new_user_session_path, class:"grey-text" %></li>
+        <li> <%= link_to "Register", new_user_registration_path, class:"grey-text" %></li>
       <% end %>
     </ul>
   </div>
@@ -21,6 +22,7 @@
     <li> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"grey-text" %></li>
   <% else %>
     <li> <%= link_to "Sign in", new_user_session_path, class:"grey-text" %></li>
+    <li> <%= link_to "Register", new_user_registration_path, class:"grey-text" %></li>
   <% end %>
 </ul>
 
