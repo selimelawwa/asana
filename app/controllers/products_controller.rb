@@ -1,7 +1,11 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: [:destroy, :destroy]
+  
   def index
     @products = Product.all.paginate(:page => params[:page], :per_page => 4)
     @custom_paginate_renderer = custom_paginate_renderer
+  end
+  def show
   end
   def new
     @product = Product.new
@@ -15,9 +19,21 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    if @product.destroy
+      redirect_to products_path
+    else
+      products_path
+    end
+  end
+
   private
   def product_params
     params.require(:product).permit(:name, :gender, :main_photo)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
   end
 
 end
