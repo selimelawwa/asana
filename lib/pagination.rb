@@ -20,9 +20,9 @@ class Pagination < ::WillPaginate::ActionView::LinkRenderer
 
   def previous_or_next_page(page, text, classname)
     if classname == "previous_page"
-      tag :li, link('<i class="mdi-hardware-keyboard-arrow-left"></i>', page || '#'), :class => ["waves-effect", classname, ('disabled' unless page)].join(' ')
+      tag :li, link('<i class="material-icons small"> keyboard_arrow_left </i>', page || '#'), :class => ["waves-effect", classname, ('disabled' unless page)].join(' ')
     else 
-      tag :li, link('<i class="mdi-hardware-keyboard-arrow-right"></i>', page || '#'), :class => ["waves-effect", classname, ('disabled' unless page)].join(' ')
+      tag :li, link('<i class="material-icons small">keyboard_arrow_right </i>', page || '#'), :class => ["waves-effect", classname, ('disabled' unless page)].join(' ')
     end
   end
 end
