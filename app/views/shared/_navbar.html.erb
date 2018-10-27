@@ -3,9 +3,8 @@
      <%= link_to "ASANA", root_path ,class:"brand-logo grey-text"%>
     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons grey-text">menu</i></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
       <%  if user_signed_in? %>
+        <li> <%= link_to "Edit account", edit_registration_path(:user), class:"grey-text" %> </li>
         <li> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"grey-text" %></li>
       <% else %>
         <li> <%= link_to "Sign in", new_user_session_path, class:"grey-text" %></li>
@@ -16,9 +15,8 @@
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-  <li><a href="sass.html">Sass</a></li>
-  <li><a href="badges.html">Components</a></li>
   <%  if user_signed_in? %>
+    <li> <%= link_to "Edit account", edit_registration_path(:user), class:"grey-text" %> </li>
     <li> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"grey-text" %></li>
   <% else %>
     <li> <%= link_to "Sign in", new_user_session_path, class:"grey-text" %></li>
