@@ -1,0 +1,40 @@
+<div class = "container">
+  <div class = "row">
+    <div class= "col s12 m9">
+      <%= simple_form_for @product, url: products_path do |f| %>
+
+        <div class="input-field ">
+          <%= f.input :name, label: 'Product Name'%>
+        </div>
+
+        <%= f.label :gender %>
+        <p>
+          
+          <label>
+            <%= f.radio_button :gender, "male", :checked => true %>  
+            <span>Male</span>  
+          </label>
+          <label>
+            <%= f.radio_button :gender, "female", :checked => false %>  
+            <span>Female</span>  
+          </label>
+        </p>
+
+        <%= f.label :main_photo %>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Main Photo</span>
+            <%= f.input :main_photo, as: :file, label: false %>
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

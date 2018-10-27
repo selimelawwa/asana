@@ -34,6 +34,11 @@ gem 'materialize-sass', '~> 1.0.0'
 gem 'material_icons', '~> 2.2', '>= 2.2.1'
 gem 'jquery-rails'
 
+gem "paperclip", "~> 6.0.0"
+gem 'simple_form'
+
+gem 'will_paginate', '~> 3.1.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
