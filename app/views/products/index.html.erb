@@ -1,8 +1,9 @@
 <h1> Products </h1>
 <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
 
-<%= will_paginate @products %>
-
+<div  class= "center-align">
+  <%= will_paginate @products , renderer: @custom_paginate_renderer %>
+</div>
 <div class="row">
   <% @products.each do |p| %>
     <div class="col s6 m3">
