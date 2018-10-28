@@ -21,6 +21,9 @@
                     data: { confirm: 'Are you sure?' } do
                     "<i class='material-icons left'>delete</i>".html_safe
           end %> 
+          <%= link_to edit_product_path(p.id), 
+                  class: "waves-effect waves-light btn-floating green lighten-1" do  "<i class='material-icons left'>edit</i>".html_safe
+          end %> 
           </div>
 
 

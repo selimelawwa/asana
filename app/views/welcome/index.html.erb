@@ -4,14 +4,13 @@
     <div class="card large">
       <div class="card-image">
         <%= image_tag 'home1.png' %>
-        <span class="card-title">Card Title</span>
+        <span class="card-title"> <%= link_to "Sport Shoes", products_path %> </span>
       </div>
       <div class="card-content">
-        <p>I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively.</p>
+        <p>Passion for Sports!!.</p>
       </div>
       <div class="card-action">
-        <a href="#">This is a link</a>
+        <%= link_to "Link to Products", products_path %>
       </div>
     </div>
   </div>

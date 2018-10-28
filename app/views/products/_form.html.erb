@@ -1,0 +1,45 @@
+<div class = "container">
+  <% if product.id? %>
+    <h1> Edit <%= @product.name %> </h1>
+  <% else %>
+    <h1> New Product  </h1>
+  <% end %>
+  <div class = "row">
+    <div class= "col s12 m9">
+      <%= simple_form_for product, url: (product.new_record? ? products_path : product_path)  do |f| %>
+
+        <div class="input-field ">
+          <%= f.input :name, label: 'Product Name', required: true%>
+        </div>
+
+        <%= f.label :gender %>
+        <p>
+          <label>
+            <%= f.radio_button :gender, "male", :checked => true %>  
+            <span>Male</span>  
+          </label>
+          <label>
+            <%= f.radio_button :gender, "female", :checked => false %>  
+            <span>Female</span>  
+          </label>
+        </p>
+
+        <%= f.label :main_photo %>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Main Photo</span>
+            <%= f.input :main_photo, as: :file, label: false %>
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+
+        <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+        
+      <% end %>
+    </div>
+  </div>
+</div>
