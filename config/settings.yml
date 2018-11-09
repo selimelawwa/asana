@@ -1,6 +1,0 @@
-s3:
-  secret_access_key: 'WJyXaQOTs2n2d5aZwGgkRpqd78dwDEOn9fJFxyRA'
-  access_key_id: 'AKIAJ6UWQFETKJFNZ7DA'
-  bucket:
-    name: 'asana-eg'
-    region: 'us-east-2'
