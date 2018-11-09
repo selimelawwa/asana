@@ -43,6 +43,8 @@ gem 'ransack'
 gem 'config'
 gem 'aws-sdk', '~> 3'
 
+gem "loofah", ">= 2.2.3"
+
 
 
 gem 'will_paginate', '~> 3.1.0'
