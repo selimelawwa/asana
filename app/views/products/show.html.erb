@@ -1,0 +1,13 @@
+<div class="row">
+      <h1> <%= link_to @product.name, product_path(@product) %> </h1> 
+      <div class="col s5">
+        <div class="card small">
+          <%= image_tag @product.main_photo.url(:medium), class: "responsive-img" %>
+        </div>
+      </div>
+</div>
+
+
+           
+
+

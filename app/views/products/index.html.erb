@@ -1,5 +1,7 @@
 <h1> Products </h1>
-<%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
+<% if policy(Product).create? %>
+  <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
+<% end %>
 
 <div  class= "center-align">
   <%= will_paginate @products , renderer: @custom_paginate_renderer %>
@@ -12,19 +14,22 @@
           <%= image_tag p.main_photo.url(:medium), class: "responsive-img" %>
         </div>
         <div class="card-content">
-          <span class="card-title"> <%= p.name%> </span>
+          <span class="card-title"> <%= link_to p.name, product_path(p) %> </span>
           <p> <%= p.gender %> </p>
-          <div class="right-align">
-          <%= link_to product_path(p.id), 
-                    class: "waves-effect waves-light btn-floating red darken-3 ",
-                    method: :delete, 
-                    data: { confirm: 'Are you sure?' } do
-                    "<i class='material-icons left'>delete</i>".html_safe
-          end %> 
-          <%= link_to edit_product_path(p.id), 
-                  class: "waves-effect waves-light btn-floating green lighten-1" do  "<i class='material-icons left'>edit</i>".html_safe
-          end %> 
-          </div>
+          <% if policy(p).update? %>
+
+            <div class="right-align">
+            <%= link_to product_path(p.id), 
+                      class: "waves-effect waves-light btn-floating red darken-3 ",
+                      method: :delete, 
+                      data: { confirm: 'Are you sure?' } do
+                      "<i class='material-icons left'>delete</i>".html_safe
+            end %> 
+            <%= link_to edit_product_path(p.id), 
+                    class: "waves-effect waves-light btn-floating green lighten-1" do  "<i class='material-icons left'>edit</i>".html_safe
+            end %> 
+            </div>
+          <% end %>
 
 
         </div>

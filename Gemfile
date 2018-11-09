@@ -38,6 +38,8 @@ gem "paperclip", "~> 6.0.0"
 gem 'simple_form'
 
 gem "pundit"
+gem 'ransack'
+
 
 
 gem 'will_paginate', '~> 3.1.0'
