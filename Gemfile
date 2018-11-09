@@ -37,6 +37,9 @@ gem 'jquery-rails'
 gem "paperclip", "~> 6.0.0"
 gem 'simple_form'
 
+gem "pundit"
+
+
 gem 'will_paginate', '~> 3.1.0'
 
 # Use ActiveStorage variant
