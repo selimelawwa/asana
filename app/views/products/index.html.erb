@@ -1,7 +1,30 @@
-<h1> Products </h1>
-<% if policy(Product).create? %>
-  <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
-<% end %>
+<div class="row">
+  <div class = "col s4">
+    <h1> Products </h1>
+  </div>
+  <div class = "col s4 offset-s4">
+    <% if policy(Product).create? %>
+      <br><br><br>
+      <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s8">
+    <div class="nav-wrapper">
+      <%= search_form_for @q, url: products_path do |f| %>
+        <div class= "input-field">
+          <%= f.search_field :name_cont%>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        </div>
+        <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <div  class= "center-align">
   <%= will_paginate @products , renderer: @custom_paginate_renderer %>
@@ -15,9 +38,7 @@
         </div>
         <div class="card-content">
           <span class="card-title"> <%= link_to p.name, product_path(p) %> </span>
-          <p> <%= p.gender %> </p>
           <% if policy(p).update? %>
-
             <div class="right-align">
             <%= link_to product_path(p.id), 
                       class: "waves-effect waves-light btn-floating red darken-3 ",
@@ -30,11 +51,10 @@
             end %> 
             </div>
           <% end %>
-
-
         </div>
         <div class="card-action">
-          <a href="#">This is a link</a>
+          <%= p.description %>
+          <%= "EGP #{p.price}" %>
         </div>
       </div>
     </div>  

@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:destroy, :edit, :update, :show]
   
   def index
-    @search = Product.all.ransack(params[:q])
-    @products = @search.result.order(:created_at).paginate(:page => params[:page], :per_page => 4)
+    @q = Product.ransack(params[:q])
+    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 4)
     @custom_paginate_renderer = custom_paginate_renderer
   end
 
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :gender, :main_photo)
+    params.require(:product).permit(:name, :gender, :main_photo, :description, :price)
   end
 
   def set_product

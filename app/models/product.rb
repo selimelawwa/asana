@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   validates_attachment_content_type :main_photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
   private
-  def self.ransackable_attributes
+  def ransackable_attributes
     %w(name gender)
   end
   

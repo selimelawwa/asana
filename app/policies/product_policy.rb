@@ -1,8 +1,8 @@
 class ProductPolicy < ApplicationPolicy
   def create?
-    user.admin?
+    user && user.admin?
   end
   def update?
-    user.admin?
+    user && user.admin?
   end 
 end

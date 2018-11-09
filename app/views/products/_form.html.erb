@@ -12,6 +12,10 @@
           <%= f.input :name, label: 'Product Name', required: true%>
         </div>
 
+        <div class="input-field ">
+          <%= f.input :price, label: 'Product Price', required: true%>
+        </div>
+
         <%= f.label :gender %>
         <p>
           <label>
@@ -23,6 +27,11 @@
             <span>Female</span>  
           </label>
         </p>
+
+        <div class="input-field ">
+          <%= f.input :description, label: 'Product Description', as: :text , 
+                input_html: { id:"textarea1", class:"materialize-textarea" } %>
+        </div>
 
         <%= f.label :main_photo %>
         <div class="file-field input-field">
