@@ -40,6 +40,9 @@ gem 'simple_form'
 gem "pundit"
 gem 'ransack'
 
+gem 'config'
+gem 'aws-sdk', '~> 3'
+
 
 
 gem 'will_paginate', '~> 3.1.0'
