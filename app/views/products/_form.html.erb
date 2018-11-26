@@ -33,6 +33,12 @@
                 input_html: { id:"textarea1", class:"materialize-textarea" } %>
         </div>
 
+        <div class="field">
+          <%= f.label :category %>
+          <%= f.select :category_ids, Category.all.map  { |c| [c.name, c.id] }, {include_blank: true},value:"",class: "input-field", id: "product_category" %>
+        </div>
+
+
         <%= f.label :main_photo %>
         <div class="file-field input-field">
           <div class="btn">
@@ -52,3 +58,9 @@
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    $('#product_category').formSelect();
+  });
+</script>

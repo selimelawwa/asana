@@ -2,7 +2,12 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:destroy, :edit, :update, :show]
   
   def index
-    @q = Product.ransack(params[:q])
+    if params[:category_id].blank?
+      @products = Product.all
+    else
+      @products = Category.find( params[:category_id]).products
+    end
+    @q = @products.ransack(params[:q])
     @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 4)
     @custom_paginate_renderer = custom_paginate_renderer
   end
@@ -27,6 +32,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    binding.pry
     @product = Product.new(product_params)
     if @product.save
       redirect_to products_path
@@ -45,7 +51,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :gender, :main_photo, :description, :price)
+    params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :category_ids)
   end
 
   def set_product
