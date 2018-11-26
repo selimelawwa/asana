@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
     if params[:category_id].blank?
       @products = Product.all
     else
-      @products = Category.find( params[:category_id]).products
+      @category = Category.find( params[:category_id])
+      @products = @category.products
     end
     @q = @products.ransack(params[:q])
     @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 4)
