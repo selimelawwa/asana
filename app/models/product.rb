@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  has_and_belongs_to_many :categories
+  
   has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "100x100>" },
     :convert_options => {:medium => "-gravity center -extent 300x300"}
     
