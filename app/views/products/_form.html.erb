@@ -4,16 +4,19 @@
   <% else %>
     <h1> New Product  </h1>
   <% end %>
+
   <div class = "row">
-    <div class= "col s12 m9">
+    <div class= "col-md-9">
       <%= simple_form_for product, url: (product.new_record? ? products_path : product_path)  do |f| %>
 
-        <div class="input-field ">
-          <%= f.input :name, label: 'Product Name', required: true%>
+        <div class="form-group ">
+          <%= f.label 'Product Name', :name %>
+          <%= f.text_field :name, class: 'form-control'  %>
         </div>
 
-        <div class="input-field ">
-          <%= f.input :price, label: 'Product Price', required: true%>
+        <div class="form-group ">
+          <%= f.label 'Product Price', :price %>
+          <%= f.text_field :price, class: 'form-control' %>
         </div>
 
         <%= f.label :gender %>
@@ -28,21 +31,18 @@
           </label>
         </p>
 
-        <div class="input-field ">
+        <div class="form-group ">
           <%= f.input :description, label: 'Product Description', as: :text , 
-                input_html: { id:"textarea1", class:"materialize-textarea" } %>
+                input_html: { id:"textarea1" , class: 'form-control' } %>
         </div>
 
-        <div class="field">
-          <%= f.label :category %>
-          <%= f.select :category_ids, Category.all.map  { |c| [c.name, c.id] }, {include_blank: true},value:"",class: "input-field", id: "product_category" %>
-        </div>
 
-        <%= f.collection_select(:category_ids, Category.all, :name, :id, prompt: true) %>
+
+        <%= f.collection_select(:category_ids, Category.all, :id, :name, prompt: true) %>
 
 
         <%= f.label :main_photo %>
-        <div class="file-field input-field">
+        <div class="file-field form-group">
           <div class="btn">
             <span>Main Photo</span>
             <%= f.input :main_photo, as: :file, label: false %>

@@ -32,7 +32,7 @@ gem 'pry', '~> 0.11.3'
 
 # will remove the materialize gem
 # gem 'materialize-sass', '~> 1.0.0'
-# gem 'material_icons', '~> 2.2', '>= 2.2.1'
+gem 'material_icons', '~> 2.2', '>= 2.2.1'
 
 gem 'bootstrap', '~> 4.1.3'
 

@@ -1,11 +1,9 @@
-<br><br>
-
-<div class="collection">
-  <%= link_to 'All Products', products_path, class:"collection-item" %>
+<ul class="list-group">
+  <li class="list-group-item"> <%= link_to 'All Products', products_path%> </li>
   <% if Category.any? %>
     <% Category.category.each do |c| %>
-      <%= link_to c.name, products_path(category_id: c.id), class:"collection-item" %>
+      <li class="list-group-item"> <%= link_to c.name, products_path(category_id: c.id) %> </li>
     <% end %>
   <% end %>
-</div>
+</ul>
 

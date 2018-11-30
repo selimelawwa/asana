@@ -1,3 +1,14 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// styling to pagination 
+
+.page-item:first-child .page-link, .page-item:last-child .page-link{
+  padding: 2px 6px 2px 6px;
+}
+
+
+.page-item:first-child .page-link .material-icons, .page-item:last-child .page-link .material-icons{
+  padding-top: 3px;
+}

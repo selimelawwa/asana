@@ -1,21 +1,29 @@
 
 <div class="row">
-  <div class="col s3">
+  <div class="col-sm-3">
     <%= render 'shared/sidebar'%>
   </div>
-  <div class="col s9 m9">
-    <div class="card large">
-      <div class="card-image">
-        <%= image_tag 'home1.png' %>
-        <span class="card-title"> <%= link_to "Sport Shoes", products_path %> </span>
+  <div class="col-sm-8">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= image_tag 'home1.png' %>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag 'home3.jpg' %>
+        </div>
       </div>
-      <div class="card-content">
-        <p>Passion for Sports!!.</p>
-      </div>
-      <div class="card-action">
-        <%= link_to "Products", products_path %>
-      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
   </div>
 </div>
+
+
             

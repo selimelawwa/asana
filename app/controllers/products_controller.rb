@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
       @products = @category.products
     end
     @q = @products.ransack(params[:q])
-    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 4)
+    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 3)
     @custom_paginate_renderer = custom_paginate_renderer
   end
 
@@ -21,7 +21,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    binding.pry
     if @product.update(product_params)
       redirect_to products_path
     else
