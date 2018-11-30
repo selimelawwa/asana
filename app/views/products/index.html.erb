@@ -6,14 +6,14 @@
 
   <div class = "col-sm-9">
     <div class="row">
-      <div class = "col s6">
+      <div class = "col-sm-6">
         <% if params[:category_id].blank? %>
           <h1> All Products </h1>
         <% else %>
           <h1> <%= "#{@category.name}'s Products" %> </h1>
         <% end %>
       </div>
-      <div class = "col s4 offset-s2">
+      <div class = "col-sm-4 offset-sm-2">
         <% if policy(Product).create? %>
           <br><br><br>
           <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
@@ -22,14 +22,14 @@
     </div>
 
     <div class="row">
-      <div class="col s8">
+      <div class="col-sm-4">
         <div class="nav-wrapper">
           <%= search_form_for @q, url: products_path do |f| %>
-            <div class= "input-field">
-              <%= f.search_field :name_cont%>
-              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+            <div class= "form-group">
+              <%= f.search_field :name_cont,  class: 'form-control' %>
+              <i class="material-icons">search</i>
             </div>
-            <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Submit
+            <button class="btn btn-success btn-large" type="submit" name="action">Submit
               <i class="material-icons right">send</i>
             </button>
           <% end %>
