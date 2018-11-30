@@ -4,5 +4,7 @@ class CreateProductCategory < ActiveRecord::Migration[5.2]
       t.belongs_to :product, index: true
       t.belongs_to :category, index: true
     end
+    add_column :categories, :kind, :int
+    add_reference :categories, :parent, index: true
   end
 end

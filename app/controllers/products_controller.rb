@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    binding.pry
     if @product.update(product_params)
       redirect_to products_path
     else
@@ -30,10 +31,10 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    authorize @product
   end
 
   def create
-    binding.pry
     @product = Product.new(product_params)
     if @product.save
       redirect_to products_path

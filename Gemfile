@@ -30,8 +30,13 @@ gem 'devise', '~> 4.4'
 
 gem 'pry', '~> 0.11.3'
 
-gem 'materialize-sass', '~> 1.0.0'
-gem 'material_icons', '~> 2.2', '>= 2.2.1'
+# will remove the materialize gem
+# gem 'materialize-sass', '~> 1.0.0'
+# gem 'material_icons', '~> 2.2', '>= 2.2.1'
+
+gem 'bootstrap', '~> 4.1.3'
+
+#needed for bootstrap or materialize
 gem 'jquery-rails'
 
 gem "paperclip", "~> 6.0.0"
@@ -43,6 +48,7 @@ gem 'ransack'
 gem 'config'
 gem 'aws-sdk', '~> 3'
 
+# added loofah gem for a security alert. 
 gem "loofah", ">= 2.2.3"
 
 

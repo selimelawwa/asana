@@ -3,7 +3,7 @@
 <div class="collection">
   <%= link_to 'All Products', products_path, class:"collection-item" %>
   <% if Category.any? %>
-    <% Category.all.each do |c| %>
+    <% Category.category.each do |c| %>
       <%= link_to c.name, products_path(category_id: c.id), class:"collection-item" %>
     <% end %>
   <% end %>

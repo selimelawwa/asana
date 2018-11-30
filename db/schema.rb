@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 2018_11_26_201451) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "kind"
+    t.bigint "parent_id"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
   create_table "categories_products", id: false, force: :cascade do |t|

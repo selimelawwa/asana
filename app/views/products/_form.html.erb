@@ -38,6 +38,8 @@
           <%= f.select :category_ids, Category.all.map  { |c| [c.name, c.id] }, {include_blank: true},value:"",class: "input-field", id: "product_category" %>
         </div>
 
+        <%= f.collection_select(:category_ids, Category.all, :name, :id, prompt: true) %>
+
 
         <%= f.label :main_photo %>
         <div class="file-field input-field">
