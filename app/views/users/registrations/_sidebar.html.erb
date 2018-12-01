@@ -1,4 +1,8 @@
-<div class="collection">
-  <%= link_to "Edit account", edit_registration_path(:user), class:"collection-item #{'active' if current == 'edit'} " %>
-  <%= link_to "Change Password", edit_user_password_path, class:"collection-item #{'active' if current == 'edit_password'} " %>
-</div>
+<ul class="list-group">
+  <li class="list-group-item">
+    <%= link_to "Edit account", edit_registration_path(:user), class:"collection-item #{'active' if current == 'edit'} " %>
+  </li>
+  <li class="list-group-item">
+    <%= link_to "Change Password", edit_user_password_path, class:"collection-item #{'active' if current == 'edit_password'} " %>
+  </li>
+</ul>

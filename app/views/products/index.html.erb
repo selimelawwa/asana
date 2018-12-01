@@ -5,7 +5,7 @@
   </div>
 
   <div class = "col-sm-9">
-    <div class="row">
+    <div class="row d-flex align-items-center">
       <div class = "col-sm-6">
         <% if params[:category_id].blank? %>
           <h1> All Products </h1>
@@ -15,26 +15,23 @@
       </div>
       <div class = "col-sm-4 offset-sm-2">
         <% if policy(Product).create? %>
-          <br><br><br>
           <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
         <% end %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-sm-4">
-        <div class="nav-wrapper">
-          <%= search_form_for @q, url: products_path do |f| %>
-            <div class= "form-group">
-              <%= f.search_field :name_cont,  class: 'form-control' %>
-              <i class="material-icons">search</i>
+        <%= search_form_for @q, url: products_path do |f| %>
+          <div class="form-row align-items-center">
+            <div class= "col-auto">
+              <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
+              <i class="material-icons search-icon">search</i>
             </div>
-            <button class="btn btn-success btn-large" type="submit" name="action">Submit
+            <button class="btn btn-success btn-large mb-2" type="submit" name="action">Submit
               <i class="material-icons right">send</i>
             </button>
-          <% end %>
-        </div>
-      </div>
+          </div>
+        <% end %>
     </div>
 
     <div  class= "center-align">

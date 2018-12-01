@@ -3,28 +3,28 @@
     <h2>Edit <%= resource_name.to_s.humanize %></h2>
   </div>
   <div class = "row">
-    <div class= "col s12 m8">
+    <div class= "col-sm-9">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= devise_error_messages! %>
 
-        <div class="field">
+        <div class="form-group">
           <%= f.label :name %>
-          <%= f.text_field :name, autofocus: true, placeholder: "please enter your name", value: resource.name %>
+          <%= f.text_field :name, autofocus: true, placeholder: "please enter your name", value: resource.name, class: 'form-control' %>
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <%= f.label :email %><br />
-          <%= f.email_field :email, autocomplete: "email" %>
+          <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <%= f.label :city %>
-          <%= f.select :city, ['Alexandria','Cairo'] , {include_blank: true}, selected: @user.city, class: "input-field", id: "user_city"%>
+          <%= f.select :city, ['Alexandria','Cairo'] , {include_blank: true}, selected: @user.city, class: 'form-control'%>
         </div>
 
-        <div class="field">
+        <div class="form-group">
           <%= f.label :birthday %>
-          <%= f.date_field :birthday %>
+          <%= f.date_field :birthday, class: 'form-control' %>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit
@@ -32,20 +32,8 @@
         </button>
       <% end %>
     </div>
-    <div class="col m3 offset-m1">
+    <div class="col-sm-3">
       <%= render 'sidebar', current: 'edit'%>
     </div>
   </div>
 </div>
-
-<script>
-  $(document).ready(function(){
-    $('#user_city').formSelect();
-  });
-</script>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>

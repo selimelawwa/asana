@@ -18,17 +18,17 @@
           <%= f.input :price, label: 'Product Price', class: 'form-control' %>
         </div>
 
+        <div class="form-group">
         <%= f.label :gender %>
-        <p>
-          <label>
-            <%= f.radio_button :gender, "male", :checked => true %>  
-            <span>Male</span>  
-          </label>
-          <label>
-            <%= f.radio_button :gender, "female", :checked => false %>  
-            <span>Female</span>  
-          </label>
-        </p>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :gender, "male", :checked => true, class:"form-check-input" %>  
+            <%= f.label "male", :gender, class:"form-check-label" %>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :gender, "female", :checked => false, class:"form-check-input" %>  
+            <%= f.label "female", :gender, class:"form-check-label" %>
+          </div>
+        </div>
 
         <div class="form-group ">
           <%= f.input :description, label: 'Product Description', as: :text , 
