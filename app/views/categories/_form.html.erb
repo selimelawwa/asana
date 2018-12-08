@@ -1,0 +1,30 @@
+<div class = "container">
+  <% if category.id? %>
+    <h1> Edit <%= category.name %> </h1>
+  <% else %>
+    <h1> New Category  </h1>
+  <% end %>
+
+  <div class = "row">
+    <div class= "col-md-9">
+      <%= simple_form_for category, url: (category.new_record? ? categories_path : category_path)  do |f| %>
+
+        <div class="form-group">
+          <%= f.label 'Category Name', :name %>
+          <%= f.text_field :name, class: 'form-control'  %>
+        </div>
+
+        <%= f.input :kind, as: :hidden, input_html: { value: 'category' }%>
+
+        <br><br>
+
+        <div class="d-flex flex-row-reverse">
+          <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+        
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,11 @@ Rails.application.routes.draw do
     put 'users/update_password', to: 'users/registrations#update_password', as: 'update_user_password'
   end
   resources :products
+  
+  scope '/admin' do
+    resources :categories
+  end
+  
   get 'welcome/index'
   root 'welcome#index'
 end
