@@ -44,6 +44,8 @@ gem 'simple_form'
 
 gem "pundit"
 gem 'ransack'
+gem "rack", ">= 2.0.6"
+
 
 gem 'config'
 gem 'aws-sdk', '~> 3'
