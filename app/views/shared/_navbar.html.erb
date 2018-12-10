@@ -1,18 +1,41 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <%= link_to "ASANA", root_path , class: "navbar-brand brand-logo grey-text"%>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+<nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-end" id="nav1">
+  <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
     <ul class="navbar-nav">
-     <%  if user_signed_in? %>
+      <% if user_signed_in? %>
         <li class="nav-item"> <%= link_to "Edit account", edit_registration_path(:user), class:"nav-link" %> </li>
         <li class="nav-item"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
       <% else %>
-        <li class="nav-item"> <%= link_to "Sign in", new_user_session_path, class:"nav-link" %></li>
-        <li class="nav-item"> <%= link_to "Register", new_user_registration_path, class:"nav-link" %></li>
+        <li class="nav-item"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
+        <li class="nav-item"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
       <% end %>
+      <li class="nav-item"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
     </ul>
   </div>
 </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav2">
+  <div class="container-fluid ">
+    <div class="navbar-header">
+        <%= link_to "ASANA", root_path ,class:"navbar-brand brand-logo grey-text"%>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item"> <%= link_to 'All Products', products_path%> </li>
+      <% if Category.any? %>
+        <% Category.category.each do |c| %>
+          <li class="nav-item"> <%= link_to c.name, products_path(category_id: c.id) %> </li>
+        <% end %>
+      <% end %>
+    </ul>
+    <%= search_form_for @q, url: search_products_path do |f| %>
+      <div class="form-row align-items-center">
+        <div class= "col-auto">
+          <%= f.search_field :name_cont,  class: 'form-control' %>
+          <i class="material-icons search-icon">search</i>
+        </div>
+        <button class="btn btn-secondary btn-large" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    <% end %>
+  </div>
+</nav> 

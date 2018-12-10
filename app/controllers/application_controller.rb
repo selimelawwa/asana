@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  before_action :set_global_search_variable
+
+  def set_global_search_variable
+    @q ||= Product.ransack(params[:q])
+  end
+
   private
 
   def user_not_authorized
