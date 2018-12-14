@@ -11,7 +11,13 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_path
     else
-      render 'new'
+      if @category.category?
+        flash.now[:alert] = @category.errors.messages
+        render 'new' 
+      else
+        flash[:alert] = @category.errors.messages
+        redirect_to categories_path
+      end
     end
   end
 
