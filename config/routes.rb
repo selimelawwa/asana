@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   
   scope '/admin' do
     resources :categories
+    resources :sizes, only: %i[index new create edit update]
+    resources :colors, only: %i[index new create edit update]
   end
   
   get 'welcome/index'

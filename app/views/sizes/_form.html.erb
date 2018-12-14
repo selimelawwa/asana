@@ -1,0 +1,27 @@
+<div class = "container">
+  <% if size.new_record? %>
+    <h1> Edit <%= size.name %> </h1>
+  <% else %>
+    <h1> New size  </h1>
+  <% end %>
+
+  <div class = "row">
+    <div class= "col-md-9">
+      <%= simple_form_for size, url: (size.new_record? ? sizes_path : size_path)  do |f| %>
+
+        <div class="form-group">
+          <%= f.label 'Size Name', :name %>
+          <%= f.text_field :name, class: 'form-control'  %>
+        </div>
+        <br><br>
+
+        <div class="d-flex flex-row-reverse">
+          <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+        
+      <% end %>
+    </div>
+  </div>
+</div>

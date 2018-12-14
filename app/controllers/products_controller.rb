@@ -34,6 +34,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    binding.pry
     @product = Product.new(product_params)
     if @product.save
       redirect_to products_path
@@ -54,6 +55,10 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :category_ids, :sub_category_ids)
   end
+
+  # def variant_params
+  #   params.require(:product).permit(variants: [])
+  # end
 
   def set_product
     @product = Product.find(params[:id])

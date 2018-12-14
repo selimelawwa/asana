@@ -49,6 +49,10 @@
         
 
         <br><br>
+        
+        <%= f.simple_fields_for :variants do |variants_form| %>
+          <%= variants_form.input :size_id, collection: Size.all, as: :check_boxes %>
+        <% end %>
 
         <div class="d-flex flex-row-reverse">
           <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
