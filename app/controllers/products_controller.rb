@@ -30,12 +30,14 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @product.variants.build
     authorize @product
   end
 
   def create
     binding.pry
     @product = Product.new(product_params)
+    @product.variants_attributes = variant_params
     if @product.save
       redirect_to products_path
     else
@@ -53,12 +55,12 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :category_ids, :sub_category_ids)
+    params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :category_ids, :sub_category_ids, variants_attributes: [:size_id])
   end
 
-  def variant_params
-    params.require(:product).permit(variants: [:size])
-  end
+  # def variant_params
+  #   params.require(:product).permit(variants_attributes: [:size_id])
+  # end
 
   def set_product
     @product = Product.find(params[:id])

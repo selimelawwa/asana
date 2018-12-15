@@ -3,8 +3,12 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :sub_categories, -> { where(kind: :sub_category) },:class_name => "Category", source: :categories
   has_many :variants, inverse_of: :product, dependent: :destroy
 
+  accepts_nested_attributes_for :variants
+
   has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "100x100>" },
     :convert_options => {:medium => "-gravity center -extent 300x300"}
+
+  before_create :create_related_variants
     
   validates_attachment_content_type :main_photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
@@ -24,6 +28,10 @@ class Product < ApplicationRecord
         end
       end
     end
+  end
+
+  def create_related_variants
+    binding.pry
   end
 
   private

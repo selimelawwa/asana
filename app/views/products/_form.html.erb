@@ -49,7 +49,6 @@
         
 
         <br><br>
-        
         <%= f.simple_fields_for :variants do |variants_form| %>
           <%= variants_form.input :size_id, collection: Size.all, as: :check_boxes %>
         <% end %>
