@@ -56,9 +56,9 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :category_ids, :sub_category_ids)
   end
 
-  # def variant_params
-  #   params.require(:product).permit(variants: [])
-  # end
+  def variant_params
+    params.require(:product).permit(variants: [:size])
+  end
 
   def set_product
     @product = Product.find(params[:id])
