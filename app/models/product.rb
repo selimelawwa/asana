@@ -3,14 +3,14 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :sub_categories, -> { where(kind: :sub_category) },:class_name => "Category", source: :categories
   has_many :variants, inverse_of: :product, dependent: :destroy
 
-  accepts_nested_attributes_for :variants
+  attr_accessor :color_ids
 
   has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "100x100>" },
     :convert_options => {:medium => "-gravity center -extent 300x300"}
-
-  before_create :create_related_variants
     
   validates_attachment_content_type :main_photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+  
+  after_create :create_variants_based_on_colors
 
   # validations
   validates :name, :price, :category_ids, :sub_category_ids, :main_photo, presence: true
@@ -30,8 +30,13 @@ class Product < ApplicationRecord
     end
   end
 
-  def create_related_variants
-    binding.pry
+  def create_variants_based_on_colors
+    product_color_ids = self.color_ids.reject { |c| c.empty? }
+    product_color_ids.each do |c|
+      Size.all.each do |s|
+        variants.create(color_id: c, size_id: s.id, price: price)
+      end
+    end
   end
 
   private

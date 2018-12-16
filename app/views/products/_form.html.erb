@@ -49,8 +49,9 @@
         
 
         <br><br>
-        <%= f.simple_fields_for :variants do |variants_form| %>
-          <%= variants_form.input :size_id, collection: Size.all, as: :check_boxes %>
+        
+        <% if product.new_record? %>
+          <%= collection_check_boxes(:product, :color_ids, Color.all, :id, :name) %>
         <% end %>
 
         <div class="d-flex flex-row-reverse">
