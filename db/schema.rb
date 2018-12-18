@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_14_231155) do
+ActiveRecord::Schema.define(version: 2018_12_18_215604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,14 +37,22 @@ ActiveRecord::Schema.define(version: 2018_12_14_231155) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "images", force: :cascade do |t|
+    t.bigint "variant_id"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "alt_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["variant_id"], name: "index_images_on_variant_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "barcode"
     t.string "gender"
-    t.string "products_file_name"
-    t.string "products_content_type"
-    t.integer "products_file_size"
-    t.datetime "products_updated_at"
     t.string "main_photo_file_name"
     t.string "main_photo_content_type"
     t.integer "main_photo_file_size"
@@ -94,6 +102,7 @@ ActiveRecord::Schema.define(version: 2018_12_14_231155) do
     t.decimal "price", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "stock"
     t.index ["color_id"], name: "index_variants_on_color_id"
     t.index ["product_id"], name: "index_variants_on_product_id"
     t.index ["size_id"], name: "index_variants_on_size_id"
