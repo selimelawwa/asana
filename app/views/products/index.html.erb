@@ -1,8 +1,4 @@
 <div class = "row">
-  
-  <div class="col-sm-3">
-    <%= render 'shared/sidebar'%>
-  </div>
 
   <div class = "col-sm-9">
     <div class="row d-flex align-items-center">
@@ -20,19 +16,6 @@
       </div>
     </div>
 
-    <div class="row">
-        <%= search_form_for @q, url: products_path do |f| %>
-          <div class="form-row align-items-center">
-            <div class= "col-auto">
-              <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
-              <i class="material-icons search-icon">search</i>
-            </div>
-            <button class="btn btn-success btn-large mb-2" type="submit" name="action">Submit
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
-        <% end %>
-    </div>
 
     <div  class= "center-align">
       <%= will_paginate @products , renderer: @custom_paginate_renderer %>
