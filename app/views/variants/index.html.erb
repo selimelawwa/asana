@@ -1,0 +1,33 @@
+
+<div class="row d-flex align-items-center">
+  <div>
+    <h1> <%= "#{@product.name} Variants " %> </h1>
+  </div>
+  <div class = "offset-sm-6">
+    <% if policy(Product).create? %>
+      <%= link_to 'Add a Variant', new_product_variant_path, class: "push-m9" %>
+    <% end %>
+  </div>
+</div>
+<% if @variants%>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Size</th>
+          <th scope="col">Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @variants.each_with_index do |v,i| %>
+          <tr>
+            <th scope="row"><%= i %></th>
+            <td><%= v.size.name %></td>
+            <td><%= v.color.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
