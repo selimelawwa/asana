@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to products_path
+      redirect_to product_path
     else
       render 'edit'
     end

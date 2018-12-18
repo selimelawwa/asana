@@ -10,7 +10,7 @@ class Product < ApplicationRecord
     
   validates_attachment_content_type :main_photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   
-  after_create :create_variants_based_on_colors
+  after_save :create_variants_based_on_colors
 
   # validations
   validates :name, :price, :category_ids, :sub_category_ids, :main_photo, presence: true
@@ -32,9 +32,11 @@ class Product < ApplicationRecord
 
   def create_variants_based_on_colors
     product_color_ids = self.color_ids.reject { |c| c.empty? }
-    product_color_ids.each do |c|
-      Size.all.each do |s|
-        variants.create(color_id: c, size_id: s.id, price: price)
+    if product_color_ids
+      product_color_ids.each do |c|
+        Size.all.each do |s|
+          variants.first_or_create(color_id: c, size_id: s.id, price: price)
+        end
       end
     end
   end
