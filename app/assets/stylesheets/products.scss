@@ -21,6 +21,14 @@
 #nav2 > div > ul > li > a{
   color: #fff;
 }
+#nav2 > div> div > ul > li > ul > li > a{
+  color: #fff;
+  font-size: 0.8em !important;
+}
+
+ul.nav li.dropdown:hover ul.dropdown-menu {
+  display: block;
+}
 
 // styling to pagination 
 .page-item:first-child .page-link, .page-item:last-child .page-link{
