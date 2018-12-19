@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="sticky-top">
 
 <!-- <nav class="navbar navbar-expand-sm bg-light navbar-light" id="nav1">
@@ -19,7 +20,10 @@
   
   <nav class="navbar navbar-expand-md navbar-dark bg-dark" id="nav2">
     <div class="container">
-      <a class="navbar-brand" href="<%= "/"%>"><%= image_tag 'asana.png'%></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand d-none d-sm-block" href="<%= "/"%>"><%= image_tag 'asana.png'%></a>
       <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="nav navbar-nav mx-auto w-auto justify-content-center">
               <li class="nav-item">
@@ -56,9 +60,6 @@
           <% end %>
         <!-- End Search bar -->
       </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-  </div>
+    </div>
   </nav>   
 </div>
