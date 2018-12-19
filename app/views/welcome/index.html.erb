@@ -22,6 +22,20 @@
 <!-- Carousel End -->
 
 <!-- Jumbotron Start -->
+<div class="container-fluid">
+  <div class="row jumbotron">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-8">
+        <%= image_tag 'jumbotron.png' %>
+    </div>
+    <div class="center col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 jumbotron-div">
+      <p>Look for something positive in each day, even if some days have to look a little harder.</p>
+      <a href="<%= products_path(category_id: 1) %>"><button type="button" class="btn btn-outline-secondary btn-lg">Shop Men</button></a>
+      <a href="<%= products_path(category_id: 4) %>"><button type="button" class="btn btn-outline-secondary btn-lg">Shop Women</button></a>
+    </div>
+  </div>
+</div>
+
+<!-- Jumbotron End -->
 
 <!-- Connect Start -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
