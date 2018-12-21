@@ -7,5 +7,5 @@ class Image < ApplicationRecord
     :convert_options => {:medium => "-gravity center -extent 300x300"}
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
-
+  validates :image, attachment_presence: true
 end

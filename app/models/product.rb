@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :sub_categories, -> { where(kind: :sub_category) },:class_name => "Category", source: :categories
   has_many :variants, inverse_of: :product, dependent: :destroy
 
+
   attr_accessor :color_ids
 
   has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "100x100>" },
@@ -35,7 +36,7 @@ class Product < ApplicationRecord
     if product_color_ids
       product_color_ids.each do |c|
         Size.all.each do |s|
-          variants.first_or_create(color_id: c, size_id: s.id, price: price)
+          variants.where(color_id: c, size_id: s.id).first_or_create(price: price)
         end
       end
     end

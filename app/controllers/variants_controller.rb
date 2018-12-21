@@ -9,6 +9,7 @@ class VariantsController < ApplicationController
   def new
   end
   def create
+    # we create variant by update product and creating associated variants
     if @product.update(product_params)
       redirect_to product_variants_path
     else

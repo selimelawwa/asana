@@ -1,5 +1,8 @@
 <div class = "container">
- <h1> <%= " #{product.name} Add New Colors"%> </h1>
+<% if @colors.present?%>
+  <h1> 
+    <%= " #{product.name} Add New Colors"%> 
+  </h1>
   <div class = "row">
     <div class= "col-md-9">
       <%= form_with model: product,url: product_variants_path, method: :post, local: true do |f| %>
@@ -16,4 +19,7 @@
       <% end %>
     </div>
   </div>
+<% else %>
+  <h3> You have selected all possible colors, <%= link_to 'create new color', new_color_path %> </h3>
+<% end %>
 </div>
