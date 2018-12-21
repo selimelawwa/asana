@@ -1,25 +1,25 @@
 <div class = "container">
-<% if @colors.present?%>
-  <h1> 
-    <%= " #{product.name} Add New Colors"%> 
-  </h1>
-  <div class = "row">
-    <div class= "col-md-9">
-      <%= form_with model: product,url: product_variants_path, method: :post, local: true do |f| %>
-        <div class="form-group">
-          <%= f.label :color_ids, 'Available unselected colors'%>
-          <br>
-          <%= collection_check_boxes(:product, :color_ids, @colors, :id, :name) %>
-        </div>
-        <div class="d-flex flex-row-reverse">
-          <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
-        </div>
-      <% end %>
+  <% if @colors.present?%>
+    <h1> 
+      <%= " #{product.name} Add New Colors"%> 
+    </h1>
+    <div class = "row">
+      <div class= "col-md-9">
+        <%= form_with model: product,url: product_variants_path, method: :post, local: true do |f| %>
+          <div class="form-group">
+            <%= f.label :color_ids, 'Available unselected colors'%>
+            <br>
+            <%= collection_check_boxes(:product, :color_ids, @colors, :id, :name) %>
+          </div>
+          <div class="d-flex flex-row-reverse">
+            <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% else %>
-  <h3> You have selected all possible colors, <%= link_to 'create new color', new_color_path %> </h3>
-<% end %>
+  <% else %>
+    <h3> You have selected all possible colors, <%= link_to 'create new color', new_color_path %> </h3>
+  <% end %>
 </div>

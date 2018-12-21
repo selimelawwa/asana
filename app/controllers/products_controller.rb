@@ -12,6 +12,18 @@ class ProductsController < ApplicationController
     @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 3)
     @custom_paginate_renderer = custom_paginate_renderer
   end
+  #list for admin
+  def list
+    if params[:category_id].blank?
+      @products = Product.all
+    else
+      @category = Category.find( params[:category_id])
+      @products = @category.products
+    end
+    @q = @products.ransack(params[:q])
+    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 3)
+    @custom_paginate_renderer = custom_paginate_renderer
+  end
 
   def show
   end
@@ -36,7 +48,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_path
+      redirect_to product_list_path
     else
       render 'new'
     end

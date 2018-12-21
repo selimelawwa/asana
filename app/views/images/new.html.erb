@@ -1,0 +1,10 @@
+<div class = "container">
+  <%= form_for [@product, @image], html: { multipart: true } do |f| %>
+    <%= render partial: 'form', locals: { f: f, image: @image } %>
+    <div class="d-flex flex-row-reverse">
+      <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  <% end %>
+</div>

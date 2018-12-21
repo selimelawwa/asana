@@ -4,7 +4,7 @@ class VariantsController < ApplicationController
   before_action :set_available_colors_sizes, only: %i[new]
   def index
     sort_order = ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL", "6XL"]
-    @variants = @product.variants.includes(variant_includes).sort_by { |x| [x.color.name , sort_order.index(x.size.name)] }
+    @variants = @product.variants.sized.includes(variant_includes).sort_by { |x| [x.color.name , sort_order.index(x.size.name)] }
   end
   def new
   end
@@ -24,7 +24,7 @@ class VariantsController < ApplicationController
     @product = Product.find(params[:product_id])
   end
   def set_available_colors_sizes
-    excluded_color_ids = @product.variants.map(&:color_id).uniq if @product.variants
+    excluded_color_ids = @product.variants.main.map(&:color_id).uniq if @product.variants
     @colors = Color.where.not(id: excluded_color_ids)
   end
   def variant_includes

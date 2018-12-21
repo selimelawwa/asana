@@ -6,7 +6,7 @@
       <%= link_to 'Add a New Color', new_product_variant_path, class: "push-m9" %>
     <% end %>
   </div>
-  <% if @variants%>
+  <% if @variants.any?%>
     <div class="table-responsive">
       <table class="table">
         <thead>
