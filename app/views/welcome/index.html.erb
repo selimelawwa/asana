@@ -27,7 +27,7 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xl-8">
         <%= image_tag 'jumbotron.png', :class => "img-fluid" %>
     </div>
-    <div class="center col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 jumbotron-div">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 jumbotron-div">
       <p>Look for something positive in each day, even if some days have to look a little harder.</p>
       <a href="<%= products_path(category_id: 1) %>"><button type="button" class="btn btn-outline-secondary btn-lg">Shop Men</button></a>
       <a href="<%= products_path(category_id: 4) %>"><button type="button" class="btn btn-outline-secondary btn-lg">Shop Women</button></a>
@@ -36,6 +36,71 @@
 </div>
 
 <!-- Jumbotron End -->
+
+<!-- New Arrivals Start -->
+
+<!-- <div class="container-fluid padding">
+  <div class="row text-center welcome">
+    <div class="col-12">
+      <h2>New Arrivals</h2>
+    </div>
+    <hr>
+  </div>
+</div> -->
+<div class="">
+  <div class="row mr-4">
+    <div class="col-md-4">
+      <%= image_tag 'newarrivals.jpg', class: "img-fluid" %>
+    </div>
+    <div class="col-md-2">
+        <div class="card shadow border-0" style="width: 11rem;">
+          <div class="inner">
+            <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Card title</h6>
+            <p class="card-text"><small class="text-muted">100 L.E</small></p>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card shadow border-0" style="width: 11rem;">
+          <div class="inner">
+            <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Card title</h6>
+            <p class="card-text"><small class="text-muted">100 L.E</small></p>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card shadow border-0" style="width: 11rem;">
+          <div class="inner">
+            <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+          </div>
+          <div class="card-body">
+              <h6 class="card-title">Card title</h6>
+            <p class="card-text"><small class="text-muted">100 L.E</small></p>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card shadow border-0" style="width: 11rem;">
+          <div class="inner">
+            <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Card title</h6>
+            <p class="card-text"><small class="text-muted">100 L.E</small></p>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+  
+<!-- New Arrivals End -->
+
 
 <!-- Connect Start -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
