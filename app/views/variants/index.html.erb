@@ -1,0 +1,33 @@
+
+<div class="container">
+  <div class="row d-flex align-items-center justify-content-between">
+    <h1> <%= "#{@product.name} Variants " %> </h1>
+    <% if policy(Product).create? %>
+      <%= link_to 'Add a New Color', new_product_variant_path, class: "push-m9" %>
+    <% end %>
+  </div>
+  <% if @variants.any?%>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Size</th>
+            <th scope="col">Color</th>
+            <th scope="col">Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @variants.each_with_index do |v,i| %>
+            <tr>
+              <th scope="row"><%= i %></th>
+              <td><%= v.size.name %></td>
+              <td><%= v.color.name %></td>
+              <td><%= v.stock %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

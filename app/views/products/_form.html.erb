@@ -1,8 +1,8 @@
 <div class = "container">
-  <% if product.id? %>
-    <h1> Edit <%= product.name %> </h1>
-  <% else %>
+  <% if product.new_record? %>
     <h1> New Product  </h1>
+  <% else %>
+    <h1> Edit <%= product.name %> </h1>
   <% end %>
 
   <div class = "row">
@@ -46,8 +46,13 @@
         <div class="custom-file">
           <%= f.input :main_photo, as: :file, class: 'custom-file-input' %>
         </div>
+        
 
         <br><br>
+        
+        <% if product.new_record? %>
+          <%= collection_check_boxes(:product, :color_ids, Color.all, :id, :name) %>
+        <% end %>
 
         <div class="d-flex flex-row-reverse">
           <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit

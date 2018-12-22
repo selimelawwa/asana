@@ -13,11 +13,6 @@
           <h1> <%= "#{@category.name}'s Products" %> </h1>
         <% end %>
       </div>
-      <div class = "offset-sm-6">
-        <% if policy(Product).create? %>
-          <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
-        <% end %>
-      </div>
     </div>
 
     <div class="row">

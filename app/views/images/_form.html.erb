@@ -1,0 +1,11 @@
+<div data-hook="file" class="form-group required_field">
+  <%= f.label :image, 'Image' %>
+  <%= f.file_field :image , class: 'form-control'%>
+</div>
+
+<div class="form-group">
+  <%= f.label :variant_ids, 'Select Colors'%>
+  <br>
+  <%= collection_check_boxes(:image, :variant_ids, @variants, :id, :color_text) %>
+</div>
+
