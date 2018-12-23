@@ -7,6 +7,9 @@ class Variant < ApplicationRecord
   has_many :variant_images, dependent: :destroy
   has_many :images, through: :variant_images
 
+  has_many :line_items, -> { order(:created_at) }, inverse_of: :variant
+  has_many :orders, through: :line_items
+
   has_many :sized_variants, -> { where kind: 'sized' }, :class_name => "Variant", :dependent => :destroy, :foreign_key => "main_id"
   belongs_to :main_variant, -> { where kind: 'main' }, :class_name => "Variant", optional: true, :foreign_key => "main_id"
 
