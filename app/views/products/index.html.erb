@@ -1,40 +1,69 @@
 
-<div class = "col-sm-9">
-  <div class="row d-flex align-items-center">
-    <div>
-      <% if params[:category_id].blank? %>
-        <h1> All Products </h1>
-      <% else %>
-        <h1> <%= "#{@category.name}'s Products" %> </h1>
-      <% end %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-md-center pt-3">
+            <% if params[:category_id].blank? %>
+              <h1> All Products </h1>
+            <% else %>
+              <h1> <%= "#{@category.name}" %> </h1>
+            <% end %>
+        </div>
+        <div class="col-md-12 text-md-right">
+            <% if policy(Product).create? %>
+              <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
+            <% end %>
+        </div>
     </div>
-    <div class = "offset-sm-6">
-      <% if policy(Product).create? %>
-        <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
-      <% end %>
+    <hr class="mb-3">
+</div>
+
+<div class="container padding">
+  <div class="row padding justify-content-left">
+    <div class="card-deck">
+        <% @products.each do |p| %>
+          <div class="card border-0"  style="">
+            <%= image_tag p.main_photo.url(:medium), class: "card-img-top" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to p.name, product_path(p) %></h5>
+              <p class="card-text"><%= p.description %></p>
+              <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
+            </div>
+          </div>
+        <% end %>
     </div>
   </div>
-
-
-  <div  class= "center-align">
+</div>
+<div  class= "center-align">
     <%= will_paginate @products , renderer: @custom_paginate_renderer %>
   </div>
   
+<!-- <div class = "row">
   
+  <div class="col-sm-2">
+    <%= render 'shared/sidebar'%>
+  </div>
 
-  <div class="row">
-    <div class="card-deck">
-      <% @products.each do |p| %>
-        <div class="card">
-          <%= image_tag p.main_photo.url(:medium), class: "card-img-top" %>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to p.name, product_path(p) %></h5>
-            <p class="card-text"><%= p.description %></p>
-            <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
+  <div class = "col-sm-8">
+    <div  class= "center-align">
+      <%= will_paginate @products , renderer: @custom_paginate_renderer %>
+    </div>
+    
+    <div class="row">
+      <div class="card-deck">
+        <% @products.each do |p| %>
+          <div class="card border-0">
+            <%= image_tag p.main_photo.url(:medium), class: "card-img-top" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to p.name, product_path(p) %></h5>
+              <p class="card-text"><%= p.description %></p>
+              <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 
-</div>
+</div> -->
+
+

@@ -1,6 +1,3 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-
 <div class="sticky-top">
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark d-none d-sm-block" id="nav">
@@ -10,7 +7,7 @@
             <%= search_form_for @q, url: search_products_path do |f| %>
             <div class="form-row align-items-center">
               <div class= "col-auto">
-                <%= f.search_field :name_cont,  class: 'form-control' %>
+                <%= f.search_field :name_cont,  class: 'form-control', placeholder: "Search", style: 'height:50%;' %>
               </div>
               <button class="btn btn-dark" type="submit" name="action">
                 <i class="fa fa-search"></i>
@@ -43,39 +40,57 @@
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="d-block d-sm-none">
+          <!-- Search bar -->
+          <%= search_form_for @q, url: search_products_path do |f| %>
+              <div class="form-row align-items-center">
+                <div class= "col-auto">
+                  <%= f.search_field :name_cont,  class: 'form-control', placeholder: "Search", style: 'height:50%; width:100%; background-color:#343a40; color:white;',  maxlength: 255, size: 31  %>
+                </div>
+                <button class="btn btn-dark" type="submit" name="action">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+          <% end %>
+          <!-- End Search bar -->
+        </div>
+        <span class="border-top my-1 d-block d-sm-none"></span>
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link" href="<%= products_path %>">All Products</a>
+          <li class="nav-item">
+              <a class="nav-link" href="<%= "/"%>">Home</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<%= products_path %>">All Products</a>
+          </li>
+          <% if Category.any? %>
+            <% Category.category.each do |c| %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= c.name %>
+              </a>
+              <ul class="dropdown-menu bg-dark">
+                <a class="dropdown-item text-white" style="text-decoration: underline;" id="nav-all" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
+                <!-- <div class="dropdown-divider"></div> -->
+                <% Category.sub_category.where(parent_id: c.id).each do |c| %>
+                  <li class="dropdown-item text-white">
+                    <a href="<%= products_path(category_id: c.id) %>">
+                      <%= c.name %>
+                    </a>
+                  </li>
+                <% end %>
+              </ul>
             </li>
-            <% if Category.any? %>
-              <% Category.category.each do |c| %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <%= c.name %>
-                </a>
-                <ul class="dropdown-menu bg-dark">
-                  <a class="dropdown-item text-white" id="nav-all" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
-                  <div class="dropdown-divider"></div>
-                  <% Category.sub_category.where(parent_id: c.id).each do |c| %>
-                    <li class="dropdown-item text-white">
-                      <a href="<%= products_path(category_id: c.id) %>">
-                        <%= c.name %>
-                      </a>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
-              <% end %>
             <% end %>
-            <span class="border-top my-1 d-block d-sm-none"></span>
-            <li class="nav-item d-block d-sm-none"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
-            <% if user_signed_in? %>
-              <li class="nav-item d-block d-sm-none"> <%= link_to "Edit account", edit_registration_path(:user), class:"nav-link" %> </li>
-              <li class="nav-item d-block d-sm-none"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
-            <% else %>
-              <li class="nav-item d-block d-sm-none"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
-              <li class="nav-item d-block d-sm-none"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
-            <% end %>
+          <% end %>
+          <span class="border-top my-1 d-block d-sm-none"></span>
+          <li class="nav-item d-block d-sm-none"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
+          <% if user_signed_in? %>
+            <li class="nav-item d-block d-sm-none"> <%= link_to "Edit account", edit_registration_path(:user), class:"nav-link" %> </li>
+            <li class="nav-item d-block d-sm-none"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
+          <% else %>
+            <li class="nav-item d-block d-sm-none"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
+            <li class="nav-item d-block d-sm-none"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
+          <% end %>
         </ul>
       </div>
     </div>

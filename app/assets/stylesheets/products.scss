@@ -138,3 +138,11 @@ hr.divider {
 .inner:hover img {
   transform: scale(1.5);
 }
+
+#messages {
+  position: fixed;
+  top: 116px;
+  left: 0;
+  right: 0;
+  z-index: 7000;
+}
