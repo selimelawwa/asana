@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_185618) do
+ActiveRecord::Schema.define(version: 2018_12_21_194917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,14 +31,30 @@ ActiveRecord::Schema.define(version: 2018_11_30_185618) do
     t.index ["product_id"], name: "index_categories_products_on_product_id"
   end
 
+  create_table "colors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.integer "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "alt_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "barcode"
     t.string "gender"
-    t.string "products_file_name"
-    t.string "products_content_type"
-    t.integer "products_file_size"
-    t.datetime "products_updated_at"
     t.string "main_photo_file_name"
     t.string "main_photo_content_type"
     t.integer "main_photo_file_size"
@@ -47,6 +63,13 @@ ActiveRecord::Schema.define(version: 2018_11_30_185618) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.decimal "price", precision: 8, scale: 2
+  end
+
+  create_table "sizes", force: :cascade do |t|
+    t.string "name"
+    t.integer "size_for"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,6 +95,32 @@ ActiveRecord::Schema.define(version: 2018_11_30_185618) do
     t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "variant_images", force: :cascade do |t|
+    t.bigint "variant_id"
+    t.bigint "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_variant_images_on_image_id"
+    t.index ["variant_id"], name: "index_variant_images_on_variant_id"
+  end
+
+  create_table "variants", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "size_id"
+    t.bigint "color_id"
+    t.decimal "price", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "stock", default: 0, null: false
+    t.integer "kind"
+    t.bigint "main_id"
+    t.index ["color_id"], name: "index_variants_on_color_id"
+    t.index ["main_id"], name: "index_variants_on_main_id"
+    t.index ["product_id", "color_id", "size_id"], name: "index_variants_on_product_id_and_color_id_and_size_id", unique: true
+    t.index ["product_id"], name: "index_variants_on_product_id"
+    t.index ["size_id"], name: "index_variants_on_size_id"
   end
 
 end

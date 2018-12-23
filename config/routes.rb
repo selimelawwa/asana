@@ -11,10 +11,15 @@ Rails.application.routes.draw do
     collection do
       match 'search' => 'products#search', via: [:get, :post], as: :search
     end
+    resources :variants
+    resources :images
   end
   
   scope '/admin' do
+    get 'products/list', to: 'products#list', as: 'product_list'
     resources :categories
+    resources :sizes, only: %i[index new create edit update]
+    resources :colors, only: %i[index new create edit update]
   end
   
   get 'welcome/index'
