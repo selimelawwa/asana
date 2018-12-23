@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     put 'users/update_password', to: 'users/registrations#update_password', as: 'update_user_password'
   end
   resources :products do
+    collection do
+      match 'search' => 'products#search', via: [:get, :post], as: :search
+    end
     resources :variants
     resources :images
   end

@@ -1,44 +1,22 @@
-<div class = "row">
-  
-  <div class="col-sm-3">
-    <%= render 'shared/sidebar'%>
-  </div>
 
-  <div class = "col-sm-9">
-    <div class="row d-flex align-items-center">
-      <div>
-        <% if params[:category_id].blank? %>
-          <h1> All Products </h1>
-        <% else %>
-          <h1> <%= "#{@category.name}'s Products" %> </h1>
-        <% end %>
-      </div>
-    </div>
-
+<div class="container">
     <div class="row">
-        <%= search_form_for @q, url: products_path do |f| %>
-          <div class="form-row align-items-center">
-            <div class= "col-auto">
-              <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
-              <i class="material-icons search-icon">search</i>
-            </div>
-            <button class="btn btn-success btn-large mb-2" type="submit" name="action">Submit
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
-        <% end %>
+        <div class="col-md-12 text-md-center pt-3">
+            <% if params[:category_id].blank? %>
+              <h1> All Products </h1>
+            <% else %>
+              <h1> <%= "#{@category.name}" %> </h1>
+            <% end %>
+        </div>
     </div>
+    <hr class="mb-3">
+</div>
 
-    <div  class= "center-align">
-      <%= will_paginate @products , renderer: @custom_paginate_renderer %>
-    </div>
-    
-    
-
-    <div class="row">
-      <div class="card-deck">
+<div class="container padding">
+  <div class="row padding justify-content-left">
+    <div class="card-deck">
         <% @products.each do |p| %>
-          <div class="card">
+          <div class="card border-0"  style="">
             <%= image_tag p.main_photo.url(:medium), class: "card-img-top" %>
             <div class="card-body">
               <h5 class="card-title"><%= link_to p.name, product_path(p) %></h5>
@@ -47,9 +25,11 @@
             </div>
           </div>
         <% end %>
-      </div>
     </div>
-
   </div>
-
 </div>
+<div  class= "center-align">
+  <%= will_paginate @products , renderer: @custom_paginate_renderer %>
+</div>
+
+

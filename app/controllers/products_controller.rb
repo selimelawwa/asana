@@ -25,6 +25,11 @@ class ProductsController < ApplicationController
     @custom_paginate_renderer = custom_paginate_renderer
   end
 
+  def search
+    index
+    render :index
+  end
+
   def show
   end
 
