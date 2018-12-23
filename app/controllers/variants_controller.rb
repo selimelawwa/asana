@@ -3,8 +3,8 @@ class VariantsController < ApplicationController
   before_action :set_variant, only: [:destroy, :edit, :update, :show]
   before_action :set_available_colors_sizes, only: %i[new]
   def index
-    sort_order = ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL", "6XL"]
-    @variants = @product.variants.sized.includes(variant_includes).sort_by { |x| [x.color.name , sort_order.index(x.size.name)] }
+    sort_order = ["XS","S", "M", "L", "XL", "2XL", "3XL"]
+    @variants = @product.variants.sized.includes(variant_includes).order("colors.name , position(sizes.name in '#{sort_order.join(",")}') asc")
   end
   def new
   end
