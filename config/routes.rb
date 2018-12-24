@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resources :variants
     resources :images
   end
+
+  resources :orders, only: %i[index]
+  post 'add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
   
   scope '/admin' do
     get 'products/list', to: 'products#list', as: 'product_list'

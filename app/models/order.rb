@@ -3,4 +3,7 @@ class Order < ApplicationRecord
   has_many :variants, through: :line_items
   has_many :products, through: :variants
   belongs_to :user
+
+  enum status: %i[in_cart address confirmed delivered canceled]
+
 end
