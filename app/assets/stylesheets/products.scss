@@ -10,32 +10,23 @@ hr.divider {
   background-color: white;
 }
 
-#nav{
-  width: 100%;
-  height: 60px;
-}
-#nav a{
- font-size: 0.7em !important;
+#left-nav{
+   font-size: 0.7em !important;
 }
 
-#nav2 > div > ul > li{
-  padding-left: 20px;
+#nav-all{
+  font-size: 0.9em !important;
 }
-
-#nav2 > div> div > ul > li > ul > li > a{
-  color: #fff;
-  font-size: 0.8em !important;
-}
-
-#nav2 > div> div > ul > li > ul > li:hover{
-  background-color: #868e96;
-}
-
 #nav-all:hover{
   background-color: #868e96;
 }
-
-
+#nav-all > a{
+  color: #fff;
+}
+#nav-all-col > li > a{
+  font-size: 0.9em !important;
+  color: #fff;
+}
 // styling to pagination 
 .page-item:first-child .page-link, .page-item:last-child .page-link{
   padding: 2px 6px 2px 6px;
@@ -136,8 +127,229 @@ hr.divider {
 
 #messages {
   position: fixed;
-  top: 116px;
+  top: 68px;
   left: 0;
   right: 0;
   z-index: 7000;
 }
+@import url(https://fonts.googleapis.com/css?family=Roboto:400);
+
+
+@mixin cf {
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+
+.header-nav {
+	@include cf;
+	position: relative;
+	padding-right: 3em;
+}
+
+
+.search-button {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	transform: translate(0,-50%);
+}
+.search-button:hover{
+  color: white;
+}
+
+.search-toggle {
+	position: relative;
+	display: block;
+	height: 18px;
+	width: 18px;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		display: block;
+		transition: all 0.1s;
+	}
+
+	&::before {
+		border: 4px solid #868e96;
+		border-radius: 50%;
+		width: 100%;
+		height: 100%;
+		left: 10px;
+		top: -4px;
+	}
+
+	&::after {
+		height: 4px;
+		width: 12px;
+		background: #868e96;
+		top: 12px;
+		left: 22px;
+		transform: rotate(45deg);
+	}
+
+	&.active {
+		
+		&::before{
+			width: 0;
+			border-width: 1px;
+			border-radius: 0;
+			transform: rotate(45deg);
+			top: 0px;
+			left: 17px;
+		}
+
+		&::after {
+			width: 12px;
+			left: 13px;
+			top: 5px;
+		}
+	}
+}
+
+.search-input {
+
+	&:focus {
+		outline: none;
+	}
+}
+
+
+#header-1 {
+	border-bottom: 2px solid #353D42;
+
+	.search-box {
+		position: absolute;
+    bottom: 0;
+    left: 5px;
+		width: 100%;
+		height: 100%;
+		max-height: 0;
+		transform: translateY(100%);
+		background-color: #d3d3d3;
+		transition: all 0.3s;
+
+		.search-input {
+			width: 100%;
+			height: 100%;
+			padding: 0 1em;
+			border: 0;
+			background-color: transparent;
+			opacity: 0;
+      color: #353D42;
+
+			&::-webkit-input-placeholder {
+				color: rgba(#353D42, 0.4);
+			}
+		}
+	}
+
+	&.show {
+
+		.search-box {
+			max-height: 40px;
+
+			.search-input {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+
+// Extra small devices (portrait phones, less than 576px)
+
+// iphone 5,5s portrait
+  @media only screen 
+  and (min-device-width : 320px) 
+  and (max-device-width : 568px) 
+  and (orientation : portrait) { 
+    #search-col{
+      width:14.5rem;
+      height:50%;
+      background-color:#343a40;
+      color:white;
+    }
+  }
+
+// iphone x portrait
+  @media only screen 
+  and (min-device-width : 375px) 
+  and (max-device-width : 812px) 
+  and (-webkit-device-pixel-ratio : 3)
+  and (orientation : portrait) { 
+    #search-col{
+      width:18rem;
+      height:50%;
+      background-color:#343a40;
+      color:white;
+    }
+  }
+
+//  iphone 7,8 portrait
+  @media only screen 
+  and (min-device-width : 375px) 
+  and (max-device-width : 667px) 
+  and (orientation : portrait) {
+    #search-col{
+      width:18rem;
+      height:50%;
+      background-color:#343a40;
+      color:white;
+    }
+  }
+
+// iphone 7,8 plus portrait
+  @media only screen 
+  and (min-device-width : 414px) 
+  and (max-device-width : 736px) 
+  and (orientation : portrait) { 
+    #search-col{
+      width:20rem;
+      height:50%;
+      background-color:#343a40;
+      color:white;
+    }
+   }
+
+// Extra small devices (portrait phones, less than 576px)
+  @media (max-width: 575.98px) { 
+    
+   }
+
+// Small devices (landscape phones, 576px and up)
+  @media (min-width: 576px) and (max-width: 767.98px) { 
+
+  }
+
+// Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) and (max-width: 991.98px) { 
+    #new-arr-img{
+      height: 205px;
+    }
+    .jumbotron-div{
+      padding-top: 2%;
+    }
+  }
+
+// Large devices (desktops, 992px and up)
+  @media (min-width: 992px) and (max-width: 1199.98px) { 
+    .jumbotron-div{
+      padding-top: 6%;
+    }
+  }
+
+// Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) { 
+
+    }
+    

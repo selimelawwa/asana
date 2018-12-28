@@ -24,13 +24,30 @@
 <!-- Jumbotron Start -->
 <div class="container-fluid">
   <div class="row jumbotron">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
         <%= image_tag 'jumbotron.png', :class => "img-fluid" %>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 jumbotron-div">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 jumbotron-div">
       <p>Look for something positive in each day, even if some days have to look a little harder.</p>
-      <a href="<%= products_path(category_id: 1) %>"><button type="button" class="btn btn-outline-secondary btn-lg">Shop Men</button></a>
-      <a href="<%= products_path(category_id: 4) %>"><button type="button" class="btn btn-outline-secondary btn-lg">Shop Women</button></a>
+      <!-- Small screens only -->
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="d-block d-sm-none">
+            <a href="<%= products_path(category_id: 1) %>"><button type="button" class="btn btn-outline-secondary btn-md">Shop Men</button></a>
+            <a href="<%= products_path(category_id: 4) %>"><button type="button" class="btn btn-outline-secondary btn-md">Shop Women</button></a>
+          </div>
+        </div>
+      </div>
+      <!-- Medium screens only -->
+      <div class="d-none d-md-block d-lg-none"> 
+          <a href="<%= products_path(category_id: 1) %>"><button type="button" class="btn btn-outline-secondary btn-sm">Shop Men</button></a>
+          <a href="<%= products_path(category_id: 4) %>"><button type="button" class="btn btn-outline-secondary btn-sm">Shop Women</button></a>
+      </div>
+      <!-- Large screens only -->
+      <div class="d-md-none d-lg-block d-none d-sm-block">
+          <a href="<%= products_path(category_id: 1) %>"><button type="button" class="btn btn-outline-secondary btn-lg">Shop Men</button></a>
+          <a href="<%= products_path(category_id: 4) %>"><button type="button" class="btn btn-outline-secondary btn-lg">Shop Women</button></a>
+      </div>
     </div>
   </div>
 </div>
@@ -40,13 +57,13 @@
 <!-- New Arrivals Start -->
 
 <!-- Visible on Desktop Computers -->
-<div class="d-none d-xl-block">
+<div class="d-none d-sm-block">
     <div class="row mr-4">
         <div class="col-md-4">
-          <%= image_tag 'newarrivals.jpg', class: "img-fluid" %>
+          <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid", id:"new-arr-img" %></a>
         </div>
         <div class="col-md-2 mx-auto">
-            <div class="card shadow border-0" style="width: 11rem;">
+            <div class="card shadow border-0 card-wid">
               <div class="inner">
                 <%= image_tag 'shoes.jpg', class: "card-img-top" %>
               </div>
@@ -57,7 +74,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 11rem;">
+            <div class="card shadow border-0 card-wid">
               <div class="inner">
                 <%= image_tag 'shoes.jpg', class: "card-img-top" %>
               </div>
@@ -68,7 +85,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 11rem;">
+            <div class="card shadow border-0 card-wid">
               <div class="inner">
                 <%= image_tag 'shoes.jpg', class: "card-img-top" %>
               </div>
@@ -79,7 +96,7 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 11rem;">
+            <div class="card shadow border-0 card-wid">
               <div class="inner">
                 <%= image_tag 'shoes.jpg', class: "card-img-top" %>
               </div>
@@ -92,118 +109,15 @@
       </div>
 </div>
 
-<!-- Visible on ipad pro -->
-<div class="d-none d-lg-block d-xl-none">
-    <div class="row mr-4">
-        <div class="col-md-4">
-          <%= image_tag 'newarrivals.jpg', class: "img-fluid" %>
-        </div>
-        <div class="col-md-2 mx-auto">
-            <div class="card shadow border-0" style="width: 8rem;">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 8rem;">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 8rem;">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 8rem;">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-      </div>
-</div>
-
-<!-- Visible on ipad -->
-<div class="d-none d-md-block d-lg-none">
-    <div class="row mr-4">
-        <div class="col-md-4">
-          <%= image_tag 'newarrivals.jpg', class: "img-fluid", style: "height:205px;" %>
-        </div>
-        <div class="col-md-2 mx-auto">
-            <div class="card shadow border-0" style="width: 7rem;">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 7rem;">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 7rem;">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0" style="width: 7rem;">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-      </div>
-</div>
 
 <!-- Visible on Mobile Phones -->
 <div class="d-block d-sm-none">
-    <%= image_tag 'newarrivals.jpg', class: "img-fluid" %>
-    <div class="row pt-1">
-        <div class="col-6 pr-1">
-          <div class="card border-0" style="width: 100%;">
+  <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid" %></a>
+  <div class="container-fluid mt-2">
+    <div class="row">
+      <div class="col-6">
+        <div class="row px-1">
+          <div class="card border-0">
             <div class="inner">
               <%= image_tag 'shoes.jpg', class: "card-img-top" %>
             </div>
@@ -213,8 +127,10 @@
             </div>
           </div>
         </div>
-        <div class="col-6 pl-1">
-          <div class="card border-0" style="width: 100%;">
+      </div>
+      <div class="col-6">
+        <div class="row px-1">
+          <div class="card border-0">
             <div class="inner">
               <%= image_tag 'shoes.jpg', class: "card-img-top" %>
             </div>
@@ -224,32 +140,38 @@
             </div>
           </div>
         </div>
+      </div>
     </div>
-    <div class="row pt-1">
-      <div class="col-6 pr-1">
-        <div class="card border-0" style="width: 100%;">
-          <div class="inner">
-            <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Card title</h6>
-            <p class="card-text"><small class="text-muted">100 L.E</small></p>
+    <div class="row">
+        <div class="col-6">
+          <div class="row px-1">
+            <div class="card border-0">
+              <div class="inner">
+                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Card title</h6>
+                <p class="card-text"><small class="text-muted">100 L.E</small></p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-6 pl-1">
-        <div class="card border-0" style="width: 100%;">
-          <div class="inner">
-            <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Card title</h6>
-            <p class="card-text"><small class="text-muted">100 L.E</small></p>
+        <div class="col-6">
+          <div class="row px-1">
+            <div class="card border-0">
+              <div class="inner">
+                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Card title</h6>
+                <p class="card-text"><small class="text-muted">100 L.E</small></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
   </div>
-  </div>
+</div>
 
 
 <!-- New Arrivals End -->
