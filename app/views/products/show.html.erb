@@ -12,53 +12,104 @@
   <section class="single_product_details_area section_padding_0_100 pt-5">
     <div class="container">
       <div class="row">
+        
+        <!-- Product Images Small Screens -->
+        <div class="col-12 d-block d-sm-none">
+            <div class="single_product_thumb">
+              <div id="product_details_slider2" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(/assets/shoes.jpg);">
+                  </li>
+                  <li data-target="#product_details_slider2" data-slide-to="1" style="background-image: url(/assets/shoes2.jpg);">
+                  </li>
+                  <li data-target="#product_details_slider2" data-slide-to="2" style="background-image: url(/assets/shoes3.jpg);">
+                  </li>
+                  <li data-target="#product_details_slider2" data-slide-to="3" style="background-image: url(/assets/shoes4.jpg);">
+                  </li>
+                </ol>
+  
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <a class="gallery_img" href="/assets/shoes.jpg">
+                    <%= image_tag 'shoes.jpg', class:"d-block w-100", alt: "First slide" %>
+                  </a>
+                  </div>
+                  <div class="carousel-item">
+                    <a class="gallery_img" href="/assets/shoes2.jpg">
+                    <%= image_tag 'shoes2.jpg', class:"d-block w-100", alt: "Second slide" %>
+                  </a>
+                  </div>
+                  <div class="carousel-item">
+                    <a class="gallery_img" href="/assets/shoes3.jpg">
+                    <%= image_tag 'shoes3.jpg', class:"d-block w-100", alt: "Third slide" %>
+                  </a>
+                  </div>
+                  <div class="carousel-item">
+                    <a class="gallery_img" href="/assets/shoes4.jpg">
+                    <%= image_tag 'shoes4.jpg', class:"d-block w-100", alt: "Fourth slide" %>
+                  </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div> 
+
         <!-- Product Details -->
         <div class="col-12 col-md-6">
           <div class="single_product_desc">
 
             <h3 class="title"><%= @product.name %></h3>
 
-            <h5 class="price">L.E <%= @product.price %></h5>
+            <h5 class="price mb-4">L.E <%= @product.price %></h5>
+
+            <div class="form-group">
+              <div class="container">
+                <div class="row">
+                    <label class="pt-1 mr-40" for="sel1">Size</label>
+                    <select class="form-control pb-2" id="sel1" style="width:20%; height:0%;font-size:0.8em;">
+                      <option>XS</option>
+                      <option>S</option>
+                      <option>M</option>
+                      <option>L</option>
+                      <option>XL</option>
+                      <option>XXL</option>
+                    </select>
+                </div>
+              </div>
+            </div>
+
+            <form class="cart clearfix mb-30 d-flex" method="post">
+              <div class="container">
+                <div class="row">
+                    <label class="pt-2 mr-10" for="sel1">Quantity</label>
+                    <div class="quantity">
+                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                        <input type="number" class="qty-text form-control" id="qty" step="1" min="1" max="12" name="quantity" value="1">
+                    </div>
+                </div>
+              </div>
+            </form>
 
             <p class="available">Available: <span class="text-muted">In Stock</span></p>
 
-            <div class="single_product_ratings mb-15">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
+            <div class="single_product_ratings mb-30">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
             </div>
 
-            <div class="widget size mb-50">
-                <h6 class="widget-title">Size</h6>
-                <div class="widget-desc">
-                    <ul class="">
-                        <li><a href="#">XS</a></li>
-                        <li><a href="#">S</a></li>
-                        <li><a href="#">M</a></li>
-                        <li><a href="#">L</a></li>
-                        <li><a href="#">XL</a></li>
-                        <li><a href="#">XXL</a></li>
-                    </ul>
-                </div>
+            <div class="cart">
+              <button type="submit" name="addtocart" value="5" class="btn cart-submit d-block ml-0 mb-5">Add to cart</button>
             </div>
-
-            <!-- Add to Cart Form -->
-            <form class="cart clearfix mb-50 d-flex" method="post">
-              <div class="quantity">
-                  <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                  <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
-                  <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-              </div>
-              <button type="submit" name="addtocart" value="5" class="btn cart-submit d-block">Add to cart</button>
-            </form>
 
             <div id="accordion" role="tablist">
               <div class="card">
                 <div class="card-header" role="tab" id="headingOne">
                   <h6 class="mb-0">
-                      <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Information</a>
+                    <a class="text-color-dark" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Information</a>
                   </h6>
                 </div>
 
@@ -73,7 +124,7 @@
               <div class="card">
                 <div class="card-header" role="tab" id="headingTwo">
                   <h6 class="mb-0">
-                      <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Cart Details</a>
+                      <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Cart Details</a>
                   </h6>
                 </div>
                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
@@ -86,7 +137,7 @@
               <div class="card">
                 <div class="card-header" role="tab" id="headingThree">
                   <h6 class="mb-0">
-                    <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">shipping &amp; Returns</a>
+                    <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">shipping &amp; Returns</a>
                   </h6>
                 </div>
                 <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
@@ -101,51 +152,80 @@
           </div>
         </div>
         
-        <!-- Product Images -->
-        <div class="col-12 col-md-6">
-            <div class="single_product_thumb">
-                <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-
-                    <ol class="carousel-indicators">
-                        <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(/assets/shoes.jpg);">
-                        </li>
-                        <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(/assets/shoes2.jpg);">
-                        </li>
-                        <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(/assets/shoes3.jpg);">
-                        </li>
-                        <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(/assets/shoes4.jpg);">
-                        </li>
-                    </ol>
-
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <a class="gallery_img" href="#">
-                            <%= image_tag 'shoes.jpg', class:"d-block w-100", alt: "First slide" %>
-                        </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a class="gallery_img" href="#">
-                            <%= image_tag 'shoes2.jpg', class:"d-block w-100", alt: "Second slide" %>
-                        </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a class="gallery_img" href="#">
-                            <%= image_tag 'shoes3.jpg', class:"d-block w-100", alt: "Third slide" %>
-                        </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a class="gallery_img" href="#">
-                            <%= image_tag 'shoes4.jpg', class:"d-block w-100", alt: "Fourth slide" %>
-                        </a>
-                        </div>
+        <!-- Product Images Large Screens -->
+        <div class="col-md-6 d-none d-sm-block">
+          <div class="single_product_thumb">
+            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(/assets/shoes.jpg);">
+                </li>
+                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(/assets/shoes2.jpg);">
+                </li>
+                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(/assets/shoes3.jpg);">
+                </li>
+                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(/assets/shoes4.jpg);">
+                </li>
+              </ol>
+              
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <a class="gallery_img" href="/assets/shoes.jpg">
+                    <div class="tile">
+                      <%= image_tag 'shoes.jpg', class:"photo d-block w-100", alt: "First slide" %>
                     </div>
+                  </a>
                 </div>
+                <div class="carousel-item">
+                  <a class="gallery_img" href="/assets/shoes2.jpg">
+                    <div class="tile">
+                      <%= image_tag 'shoes2.jpg', class:"photo d-block w-100", alt: "Second slide" %>
+                    </div>
+                  </a>
+                </div>
+                <div class="carousel-item">
+                  <a class="gallery_img" href="/assets/shoes3.jpg">
+                    <div class="tile">
+                      <%= image_tag 'shoes3.jpg', class:"photo d-block w-100", alt: "Third slide" %>
+                    </div>
+                  </a>
+                </div>
+                <div class="carousel-item">
+                  <a class="gallery_img" href="/assets/shoes4.jpg">
+                    <div class="tile">
+                      <%= image_tag 'shoes4.jpg', class:"photo d-block w-100", alt: "Fourth slide" %>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
+          </div>
         </div>   
       </div>
     </div>
   </section>
   <!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
+    
 </div>
 
 
+<script>
+    $('.tile')
+    // tile mouse actions
+    .on('mouseover', function(){
+      $(this).children('.photo').css({'transform': 'scale(2.4)'});
+    })
+    .on('mouseout', function(){
+      $(this).children('.photo').css({'transform': 'scale(1)'});
+    })
+    .on('mousemove', function(e){
+      $(this).children('.photo').css({'transform-origin': ((e.pageX - $(this).offset().left) / $(this).width()) * 100 + '% ' + ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +'%'});
+    })
+    // tiles set up
+    .each(function(){
+      $(this)
+        // add a photo container
+        .append('<div class="photo"></div>')
+        // set up a background image for each tile based on data-image attribute
+        .children('.photo').css({'background-image': 'url('+ $(this).attr('data-image') +')'});
+    })
+</script>
