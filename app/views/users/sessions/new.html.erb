@@ -1,51 +1,39 @@
-<div class = "container">
-  <div class = "row">
-    <div class= "col s12 m9">
-      <h2>Log in</h2>
-
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "email" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "current-password", id: "password" %>
-        </div>
-
-        <% if devise_mapping.rememberable? -%>
-          <div class = "field"> 
-            <label>
-              <%= f.check_box :remember_me, id:"remember_me" %>
-              <span>Remember me</span>
-            </label>
+<div class="sign-in-form">
+  <div class = "container">
+    <div class = "row">
+      <div class= "col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body shadow border-0">
+              <h5 class="card-title text-center">Sign In</h5>
+              <div class="form-signin">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="form-label-group">
+                  <%= f.email_field :email, required: true, autocomplete: "email", id: "email", class: "form-control", placeholder: "Email address" %>
+                  <label for="email">Email address</label>
+                </div>
+                <div class="form-label-group">
+                  <%= f.password_field :password,required: true, autocomplete: "current-password", id: "password", class: "form-control", placeholder: "Password" %>
+                  <label for="password">Password</label>
+                </div>
+                <% if devise_mapping.rememberable? -%>
+                  <div class = "field pl-2 mt-1"> 
+                    <label>
+                      <%= f.check_box :remember_me, id:"remember_me" %>
+                      <span>Remember me</span>
+                    </label>
+                  </div>
+                <% end -%>
+                <button class="btn btn-lg btn-dark btn-block text-uppercase mt-2" type="submit">Sign in</button>
+                <% end %>
+                <div class="container mt-4">
+                  <div class="row">
+                    <%= link_to "New to Asana? Sign up here!", new_user_registration_path, class:"mx-auto text-dark" %>
+                  </div>
+                </div>
+              </div>
           </div>
-        <% end -%>
-
-        <div class="actions">
-          <button class="btn waves-effect waves-light disabled" id="login-submit-button" type="submit" name="action">Submit
-          <i class="material-icons right">send</i>
-          </button>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
-
-<script>
-$(document).ready(function (){
-    validate();
-    $('#email, #password').keypress(validate);
-});
-
-function validate(){
-    if ($('#email').val().length   >   0   &&
-        $('#password').val().length  >   0 ) {
-        $("#login-submit-button").removeClass("disabled");
-    }
-    else {
-        $("#login-submit-button").addClass("disabled");
-    }
-}
-</script>
