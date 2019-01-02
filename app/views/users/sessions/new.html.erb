@@ -4,7 +4,12 @@
       <div class= "col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body shadow border-0">
-              <h5 class="card-title text-center">Sign In</h5>
+              <div class="container">
+                  <div class="row justify-content-center">
+                    <i class="fas fa-sign-in-alt fa-2x pr-2"></i>
+                    <h5 class="card-title text-center">Sign In</h5>
+                  </div>
+                </div>
               <div class="form-signin">
                 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                 <div class="form-label-group">
