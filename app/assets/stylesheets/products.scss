@@ -2444,3 +2444,68 @@ img {
     left: -8px;
     content: "✖";
   }
+
+
+  // Product Color Start
+  .pr_color {
+    padding-bottom: 15px;
+  }
+  
+  .pr_color {
+    max-width: 460px;
+    margin-top: 22px;
+  }
+  
+  .pr_color .color_list li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .pr_color .color_list li a {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #1cbbb4;
+    display: inline-block;
+  }
+  
+  .pr_color .color_list li:nth-child(2) a {
+    background: #000000;
+  }
+  
+  .pr_color .color_list li:nth-child(3) a {
+    background: #00aeef;
+  }
+  
+  .pr_color .color_list li:nth-child(4) a {
+    background: #00a99d;
+  }
+  
+  .pr_color .color_list li:nth-child(5) a {
+    background: #e7352b;
+  }
+  
+  .pr_color .color_list li:last-child {
+    margin-right: 0px;
+  }
+  
+  .pr_color .color_list li:last-child a {
+    background: #fbf4d9;
+  }
+  
+  .pr_color .bootstrap-select {
+    width: 100% !important;
+    cursor: pointer;
+  }
+
+  // Product color End
+
+
+  // Dropdown on hover
+//   ul.nav li.dropdown:hover ul.dropdown-menu {
+//     display: block;
+//   }
+
+//   .test:hover{
+//     pointer-events: none;
+//   }

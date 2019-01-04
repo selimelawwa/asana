@@ -15,7 +15,7 @@
           <% if Category.any? %>
             <% Category.category.each do |c| %>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle test" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%= c.name %>
               </a>
               <ul class="dropdown-menu bg-dark">
@@ -88,7 +88,6 @@
           <%= image_tag 'asana.png', class: "", style: "height: 42px; width: 96px;" %>
         </a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-
             <%= search_form_for @q, url: search_products_path do |f| %>
                 <div class="form-row align-items-center">
                   <div class= "col-auto">
@@ -99,7 +98,6 @@
                   </button>
                 </div>
             <% end %>
-
           <span class="border-top my-1 d-block d-sm-none"></span>
           <ul class="nav navbar-nav mx-auto w-auto justify-content-center">
             <li class="nav-item">

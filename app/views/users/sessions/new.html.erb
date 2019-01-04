@@ -20,6 +20,9 @@
                   <%= f.password_field :password,required: true, autocomplete: "current-password", id: "password", class: "form-control", placeholder: "Password" %>
                   <label for="password">Password</label>
                 </div>
+                <div class="float-right pr-3" style="font-size:0.8rem;">
+                  <%= link_to "Forgot Password?", class:"mx-auto text-dark" %>
+                </div>
                 <% if devise_mapping.rememberable? -%>
                   <div class = "field pl-2 mt-1"> 
                     <label>

@@ -56,15 +56,15 @@
             <div class="form-group">
               <div class="container">
                 <div class="row">
-                    <label class="pt-1 mr-40" for="sel1">Size</label>
-                    <select class="form-control pb-2" id="sel1" style="width:20%; height:0%;font-size:0.8em;">
-                      <option>XS</option>
-                      <option>S</option>
-                      <option>M</option>
-                      <option>L</option>
-                      <option>XL</option>
-                      <option>XXL</option>
-                    </select>
+                  <label class="pt-1 mr-40" for="sel1">Size</label>
+                  <select class="form-control pb-2" id="sel1" style="width:20%; height:0%;font-size:0.8em;">
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    <option>XXL</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -72,15 +72,27 @@
             <form class="cart clearfix mb-30 d-flex" method="post">
               <div class="container">
                 <div class="row">
-                    <label class="pt-2 mr-10" for="sel1">Quantity</label>
-                    <div class="quantity">
-                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                        <input type="number" class="qty-text form-control" id="qty" step="1" min="1" max="12" name="quantity" value="1">
-                    </div>
+                  <label class="pt-2 mr-10" for="sel1">Quantity</label>
+                  <div class="quantity">
+                      <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                      <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                      <input type="number" class="qty-text form-control" id="qty" step="1" min="1" max="12" name="quantity" value="1">
+                  </div>
                 </div>
               </div>
             </form>
+
+            <div class="pr_color">
+              <label class="pt-2 mr-10" for="sel1">Availabe Colors</label>
+              <ul class="color_list mt-2 pl-1">
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+              </ul>
+            </div>
 
             <p class="available">Available: <span class="text-muted">In Stock</span></p>
 
