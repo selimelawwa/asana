@@ -38,7 +38,7 @@
           <ul class="navbar-nav" id="left-nav">
             <% if user_signed_in? %>
               <li class="nav-item"> <%= link_to edit_registration_path(:user), class:"nav-link" do %>
-                <i class="fas fa-user-edit fa-2x" data-toggle="tooltip" title="Edit Profile"></i>
+                <i class="fas fa-user fa-2x" data-toggle="tooltip" title="Profile"></i>
                 <% end %> 
               </li>
               <li class="nav-item"> <%= link_to destroy_session_path(:user), :method => :delete, class:"nav-link" do %>
