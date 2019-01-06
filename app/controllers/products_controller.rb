@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
       @products = @category.products
     end
     @q = @products.ransack(params[:q])
-    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 6)
+    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 3)
     @custom_paginate_renderer = custom_paginate_renderer
   end
   #list for admin
