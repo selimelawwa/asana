@@ -2,7 +2,7 @@
 
   <header id="header-1" class="header">
     <!-- Navbar on large screens -->
-    <nav class="header-nav navbar navbar-expand-md bg-dark navbar-dark  d-none d-sm-block">
+    <nav class="header-nav navbar navbar-expand-md bg-dark navbar-dark d-none d-sm-none d-md-block">
       <div class="container-fluid">
         <a class="navbar-brand pl-3" href="<%= "/"%>"><%= image_tag 'asana.png', class: "", style: "height: 42px; width: 96px;" %></a>
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center">
@@ -79,7 +79,7 @@
 
 
   <!-- Navbar on small screens -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark d-block d-sm-none" id="nav-col">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark d-none d-block d-sm-block d-md-none" id="nav-col">
       <div class="container">
         <button class="navbar-toggler mb-1" type="button" data-toggle="collapse" data-target="#navbarResponsive">
             <span class="navbar-toggler-icon"></span>
@@ -360,5 +360,6 @@
       });
   
   })(jQuery);
+  
 
 </script>

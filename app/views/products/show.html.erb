@@ -57,7 +57,7 @@
               <div class="container">
                 <div class="row">
                   <label class="pt-1 mr-40" for="sel1">Size</label>
-                  <select class="form-control pb-2" id="sel1" style="width:20%; height:0%;font-size:0.8em;">
+                  <select class="form-control pb-2 bg-light" id="sel1" style="width:20%; height:0%;font-size:0.8em;">
                     <option>XS</option>
                     <option>S</option>
                     <option>M</option>
@@ -74,9 +74,9 @@
                 <div class="row">
                   <label class="pt-2 mr-10" for="sel1">Quantity</label>
                   <div class="quantity">
-                      <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                      <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                      <input type="number" class="qty-text form-control" id="qty" step="1" min="1" max="12" name="quantity" value="1">
+                      <span class="qty-plus" style="background: #f8f9fa;" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                      <span class="qty-minus" style="background: #f8f9fa;" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                      <input type="number" class="qty-text form-control" style="background: #f8f9fa;" id="qty" step="1" min="1" max="30" name="quantity" value="1">
                   </div>
                 </div>
               </div>
