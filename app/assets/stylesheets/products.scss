@@ -2,13 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// navbar
+.form-control:focus {
+    outline: none;
+    box-shadow:none !important;
+    border:1px solid #422918;
+  }
 
-hr.divider { 
-  margin: 0em;
-  border-width: 1px;
-  background-color: white;
-}
+// navbar
 
 #left-nav{
    font-size: 0.7em !important;
@@ -17,16 +17,33 @@ hr.divider {
 #nav-all{
   font-size: 0.9em !important;
 }
+
 #nav-all:hover{
   background-color: #868e96;
 }
+
 #nav-all > a{
   color: #fff;
 }
+
 #nav-all-col > li > a{
   font-size: 0.9em !important;
   color: #fff;
 }
+
+
+// Dropdown on hover(dah law 3amaltelo uncommenting hay5aly el navbar dropdown on hover
+// bas beykoon fy ta3lee2a kda law sebt el mouse 3al dropdown menu)
+
+//   ul.nav li.dropdown:hover ul.dropdown-menu {
+//     display: block;
+//   }
+
+//   .test:hover{
+//     pointer-events: none;
+//   }
+
+
 // styling to pagination 
 .page-item:first-child .page-link, .page-item:last-child .page-link{
   padding: 2px 6px 2px 6px;
@@ -82,6 +99,7 @@ hr.divider {
   margin-top: 0.8rem;
   margin-bottom: 0.6rem;
 }
+
 //homepage
 .carousel-inner img{
   width: 100%;
@@ -1679,6 +1697,7 @@ img {
 
 .widget-desc .custom-control-description {
     font-size: 14px;
+    // padding-right: 2rem;
 }
 
 .widget.rating .widget-desc a {
@@ -1688,6 +1707,8 @@ img {
 
 .widget.size .widget-desc li {
     display: inline-block;
+    border: 0.03rem solid #D3D3D3;
+    
 }
 
 .widget.size .widget-desc a {
@@ -2519,16 +2540,8 @@ img {
   // Product color End
 
 
-  // Dropdown on hover
-//   ul.nav li.dropdown:hover ul.dropdown-menu {
-//     display: block;
-//   }
 
-//   .test:hover{
-//     pointer-events: none;
-//   }
-
-
+// filters in products
 #sort-by{
     font-size: 0.9rem;
 }
@@ -2537,16 +2550,10 @@ img {
     background-color: #f9f9f9;
 }
 
-.form-control:focus {
-    outline: none;
-    box-shadow:none !important;
-    border:1px solid #422918;
-  }
+.size-filter{
+    padding-left: 0px;
+}
 
-  .size-filter{
-      padding-left: 0px;
-  }
-
-  .size-filter li a{
-    color: #343a40;
-  }
+.size-filter li a{
+color: #343a40;
+}
