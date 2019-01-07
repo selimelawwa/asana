@@ -13,8 +13,11 @@
           <%= f.label 'Color Name', :name %>
           <%= f.text_field :name, class: 'form-control'  %>
         </div>
-        <br><br>
-
+        <div data-hook="file" class="form-group required_field">
+          <%= f.label :photo, 'Image' %>
+          <%= f.file_field :photo , class: 'form-control'%>
+        </div>
+        <br>
         <div class="d-flex flex-row-reverse">
           <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
             <i class="material-icons right">send</i>

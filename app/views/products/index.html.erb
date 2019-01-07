@@ -31,36 +31,30 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="form-group mt-3">
-                <h6 class="filter-title mb-3">Sort By</h6>
-                <select class="form-control bg-light" id="sort-by">
-                  <option>Featured</option>
-                  <option>New Arrivals</option>
-                  <option>Low Price</option>
-                  <option>High Price</option>
-                </select>
-              </div>
+              <h6 class="filter-title mb-3">Sort By</h6>
+              <select class="form-control bg-light" id="sort-by">
+                <option>Featured</option>
+                <option>New Arrivals</option>
+                <option>Low Price</option>
+                <option>High Price</option>
+              </select>
+            </div>
               <!-- <hr class="mt-2"> -->
               <div class="pr_color">
                 <h6 class="filter-title mb-4">Color</h6>
                 <ul class="color_list mt-3 pl-1">
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
-                  <li><a href="#"></a></li>
+                  <% Color.with_photo.each do |c| %>
+                    <li> <%= link_to image_tag(c.photo.url(:thumb), :class => "color_filter"), products_path(request.query_parameters.merge(q: {variants_color_id_in: c.id})) %> </li>
+                  <% end %>
                 </ul>
               </div>
               <div class="widget size mb-50">
                 <h6 class="filter-title mb-3">Filter by Size</h6>
                 <div class="widget-desc">
                   <ul class="d-flex justify-content-between size-filter">
-                    <li><a href="#">XS</a></li>
-                    <li><a href="#">S</a></li>
-                    <li><a href="#">M</a></li>
-                    <li><a href="#">L</a></li>
-                    <li><a href="#">XL</a></li>
-                    <li><a href="#">XXL</a></li>
+                    <% Size.all.each do |s|%>
+                      <li> <%= link_to s.name, products_path(request.query_parameters.merge(q: {variants_size_id_in: s.id})) %> </li>
+                    <% end %>
                   </ul>
                 </div>
               </div>
@@ -123,24 +117,18 @@
         <div class="pr_color">
           <h6 class="filter-title mb-4">Color</h6>
           <ul class="color_list mt-3 pl-1">
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
+            <% Color.with_photo.each do |c| %>
+              <li> <%= link_to image_tag(c.photo.url(:thumb), :class => "color_filter"), products_path(request.query_parameters.merge(q: {variants_color_id_in: c.id})) %> </li>
+            <% end %>
           </ul>
         </div>
         <div class="widget size mb-50">
           <h6 class="filter-title mb-3">Filter by Size</h6>
           <div class="widget-desc">
               <ul class="justify-content-between size-filter">
-                <li><a href="#">XS</a></li>
-                <li><a href="#">S</a></li>
-                <li><a href="#">M</a></li>
-                <li><a href="#">L</a></li>
-                <li class="mt-1"><a href="#">XL</a></li>
-                <li><a href="#">XXL</a></li>
+                <% Size.all.each do |s|%>
+                  <li> <%= link_to s.name, products_path(request.query_parameters.merge(q: {variants_size_id_in: s.id})) %> </li>
+                <% end %>
               </ul>
           </div>
         </div>

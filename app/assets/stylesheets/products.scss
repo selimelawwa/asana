@@ -535,33 +535,33 @@
     height: 24px;
     width: 24px;
     border-radius: 50%;
-    background: #1cbbb4;
+    // background: #1cbbb4;
     display: inline-block;
   }
   
-  .pr_color .color_list li:nth-child(2) a {
-    background: #000000;
-  }
+//   .pr_color .color_list li:nth-child(2) a {
+//     background: #000000;
+//   }
   
-  .pr_color .color_list li:nth-child(3) a {
-    background: #00aeef;
-  }
+//   .pr_color .color_list li:nth-child(3) a {
+//     background: #00aeef;
+//   }
   
-  .pr_color .color_list li:nth-child(4) a {
-    background: #00a99d;
-  }
+//   .pr_color .color_list li:nth-child(4) a {
+//     background: #00a99d;
+//   }
   
-  .pr_color .color_list li:nth-child(5) a {
-    background: #e7352b;
-  }
+//   .pr_color .color_list li:nth-child(5) a {
+//     background: #e7352b;
+//   }
   
   .pr_color .color_list li:last-child {
     margin-right: 0px;
   }
   
-  .pr_color .color_list li:last-child a {
-    background: #fbf4d9;
-  }
+  // .pr_color .color_list li:last-child a {
+  //   background: #fbf4d9;
+  // }
   
   .pr_color .bootstrap-select {
     width: 100% !important;
@@ -1197,4 +1197,13 @@ img {
 .modal-content {
     box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.15);
     border: 1px solid #ebebeb;
+}
+.color_img{
+  border-radius: 50%;
+  height: 45px;
+}
+
+.color_filter{
+  border-radius: 50%;
+  height: 20px;
 }

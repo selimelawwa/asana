@@ -31,4 +31,5 @@ class Variant < ApplicationRecord
   def color_text
     "#{color.name}"
   end
+
 end
