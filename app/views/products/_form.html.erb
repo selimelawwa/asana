@@ -1,6 +1,6 @@
-<div class = "container">
+<div class = "container mt-3">
   <% if product.new_record? %>
-    <h1> New Product  </h1>
+    <h1> New Product </h1>
   <% else %>
     <h1> Edit <%= product.name %> </h1>
   <% end %>
@@ -18,7 +18,7 @@
           <%= f.input :price, label: 'Product Price', class: 'form-control', input_html: { min: '0', step: 'any' } %>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
         <%= f.label :gender %>
           <div class="form-check form-check-inline">
             <%= f.radio_button :gender, "male", :checked => true, class:"form-check-input" %>  
@@ -28,7 +28,7 @@
             <%= f.radio_button :gender, "female", :checked => false, class:"form-check-input" %>  
             <%= f.label "female", :gender, class:"form-check-label" %>
           </div>
-        </div>
+        </div> -->
 
         <div class="form-group ">
           <%= f.input :description, label: 'Product Description', as: :text , 
@@ -55,8 +55,8 @@
         <% end %>
 
         <div class="d-flex flex-row-reverse">
-          <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
+          <button class="btn btn-primary btn-large align-right mb-3" type="submit" name="action">Add product
+            <!-- <i class="material-icons right">send</i> -->
           </button>
         </div>
         

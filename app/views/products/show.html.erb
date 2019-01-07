@@ -1,13 +1,362 @@
-<div class="row">
-      <div class="col-sm-5">
-        <h1><%= link_to @product.name, product_path(@product) %> </h1> 
-        <div class="card">
-          <%= image_tag @product.main_photo.url(:medium), class: "card-img-top img-fluid" %>
+<div id="wrapper">
+  <!-- <<<<<<<<<<<<<<<<<<<< Product Details Area Start >>>>>>>>>>>>>>>>>>>>>>>>> -->
+  <section class="single_product_details_area section_padding_0_60 pt-5">
+    <div class="container">
+      <div class="row">
+        
+        <!-- Product Images Small Screens -->
+        <div class="col-12 d-block d-sm-none pb-4">
+            <div class="single_product_thumb">
+              <div id="product_details_slider2" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(/assets/shoes.jpg);">
+                  </li>
+                  <li data-target="#product_details_slider2" data-slide-to="1" style="background-image: url(/assets/shoes2.jpg);">
+                  </li>
+                  <li data-target="#product_details_slider2" data-slide-to="2" style="background-image: url(/assets/shoes3.jpg);">
+                  </li>
+                  <li data-target="#product_details_slider2" data-slide-to="3" style="background-image: url(/assets/shoes4.jpg);">
+                  </li>
+                </ol>
+  
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <a class="gallery_img" href="/assets/shoes.jpg">
+                    <%= image_tag 'shoes.jpg', class:"d-block w-100", alt: "First slide" %>
+                  </a>
+                  </div>
+                  <div class="carousel-item">
+                    <a class="gallery_img" href="/assets/shoes2.jpg">
+                    <%= image_tag 'shoes2.jpg', class:"d-block w-100", alt: "Second slide" %>
+                  </a>
+                  </div>
+                  <div class="carousel-item">
+                    <a class="gallery_img" href="/assets/shoes3.jpg">
+                    <%= image_tag 'shoes3.jpg', class:"d-block w-100", alt: "Third slide" %>
+                  </a>
+                  </div>
+                  <div class="carousel-item">
+                    <a class="gallery_img" href="/assets/shoes4.jpg">
+                    <%= image_tag 'shoes4.jpg', class:"d-block w-100", alt: "Fourth slide" %>
+                  </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div> 
+
+        <!-- Product Details -->
+        <div class="col-12 col-md-6">
+          <div class="single_product_desc">
+
+            <h3 class="title"><%= @product.name %></h3>
+
+            <h5 class="price mb-4">EGP <%= @product.price %></h5>
+
+            <div class="form-group">
+              <div class="container">
+                <div class="row">
+                  <label class="pt-1 mr-40" for="sel1">Size</label>
+                  <select class="form-control pb-2 bg-light" id="sel1" style="width:20%; height:0%;font-size:0.8em;">
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    <option>XXL</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <form class="cart clearfix mb-30 d-flex" method="post">
+              <div class="container">
+                <div class="row">
+                  <label class="pt-2 mr-10" for="sel1">Quantity</label>
+                  <div class="quantity">
+                      <span class="qty-plus" style="background: #f8f9fa;" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                      <span class="qty-minus" style="background: #f8f9fa;" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                      <input type="number" class="qty-text form-control" style="background: #f8f9fa;" id="qty" step="1" min="1" max="30" name="quantity" value="1">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="pr_color">
+              <label class="pt-2 mr-10" for="sel1">Availabe Colors</label>
+              <ul class="color_list mt-2 pl-1">
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+              </ul>
+            </div>
+
+            <p class="available">Available: <span class="text-muted">In Stock</span></p>
+
+            <div class="single_product_ratings mb-30">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            </div>
+
+            <div class="cart">
+              <button type="submit" name="addtocart" value="5" class="btn cart-submit d-block ml-0 mb-5">Add to cart</button>
+            </div>
+
+            <div id="accordion" role="tablist">
+              <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                  <h6 class="mb-0">
+                    <a class="text-color-dark" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Information</a>
+                  </h6>
+                </div>
+
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</p>
+                    <p>Approx length 66cm/26" (Based on a UK size 8 sample) Mixed fibres</p>
+                    <p>The Model wears a UK size 8/ EU size 36/ US size 4 and her height is 5'8"</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+                  <h6 class="mb-0">
+                      <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Cart Details</a>
+                  </h6>
+                </div>
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                  <div class="card-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo quis in veritatis officia inventore, tempore provident dignissimos nemo, nulla quaerat. Quibusdam non, eos, voluptatem reprehenderit hic nam! Laboriosam, sapiente! Praesentium.</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia magnam laborum eaque.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" role="tab" id="headingThree">
+                  <h6 class="mb-0">
+                    <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">shipping &amp; Returns</a>
+                  </h6>
+                </div>
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                  <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse quo sint repudiandae suscipit ab soluta delectus voluptate, vero vitae, tempore maxime rerum iste dolorem mollitia perferendis distinctio. Quibusdam laboriosam rerum distinctio. Repudiandae fugit odit, sequi id!</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae qui maxime consequatur laudantium temporibus ad et. A optio inventore deleniti ipsa.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <!-- Product Images Large Screens -->
+        <div class="col-md-6 d-none d-sm-block">
+          <div class="single_product_thumb">
+            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(/assets/shoes.jpg);">
+                </li>
+                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(/assets/shoes2.jpg);">
+                </li>
+                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(/assets/shoes3.jpg);">
+                </li>
+                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(/assets/shoes4.jpg);">
+                </li>
+              </ol>
+              
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <a class="gallery_img" href="/assets/shoes.jpg">
+                    <div class="tile">
+                      <%= image_tag 'shoes.jpg', class:"photo d-block w-100", alt: "First slide" %>
+                    </div>
+                  </a>
+                </div>
+                <div class="carousel-item">
+                  <a class="gallery_img" href="/assets/shoes2.jpg">
+                    <div class="tile">
+                      <%= image_tag 'shoes2.jpg', class:"photo d-block w-100", alt: "Second slide" %>
+                    </div>
+                  </a>
+                </div>
+                <div class="carousel-item">
+                  <a class="gallery_img" href="/assets/shoes3.jpg">
+                    <div class="tile">
+                      <%= image_tag 'shoes3.jpg', class:"photo d-block w-100", alt: "Third slide" %>
+                    </div>
+                  </a>
+                </div>
+                <div class="carousel-item">
+                  <a class="gallery_img" href="/assets/shoes4.jpg">
+                    <div class="tile">
+                      <%= image_tag 'shoes4.jpg', class:"photo d-block w-100", alt: "Fourth slide" %>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>   
+      </div>
+    </div>
+  </section>
+  <!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+  <!-- <<<<<<<<<<<<<<<<<<<< Related Products Area Start >>>>>>>>>>>>>>>>>>>>>>>>> -->
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-12 col-md-12 text-center">
+          <h3>You may also like</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visible on Desktop Computers -->
+  <div class="d-none d-sm-block mt-4 mb-2">
+    <div class="container pb-4 pt-3">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card border-0 card-wid">
+            <div class="inner">
+              <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Product 1</h5>
+              <p class="card-text">Great</p>
+              <p class="card-text"><small class="text-muted">EGP 400</small></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card border-0 card-wid">
+            <div class="inner">
+              <%= image_tag 'shoes2.jpg', class: "card-img-top" %>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Product 2</h5>
+              <p class="card-text">Great</p>
+              <p class="card-text"><small class="text-muted">EGP 400</small></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card border-0 card-wid">
+            <div class="inner">
+              <%= image_tag 'shoes3.jpg', class: "card-img-top" %>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Product 3</h5>
+              <p class="card-text">Great</p>
+              <p class="card-text"><small class="text-muted">EGP 400</small></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card border-0 card-wid">
+            <div class="inner">
+              <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Product 4</h5>
+              <p class="card-text">Great</p>
+              <p class="card-text"><small class="text-muted">EGP 400</small></p>
+            </div>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+
+  <!-- Visible on Mobile Phones -->
+  <div class="d-block d-sm-none">
+    <div class="container-fluid mt-2 pb-5">
+      <div class="row">
+        <div class="col-6">
+          <div class="row px-1">
+            <div class="card border-0">
+              <div class="inner">
+                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Card title</h6>
+                <p class="card-text"><small class="text-muted">100 L.E</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row px-1">
+            <div class="card border-0">
+              <div class="inner">
+                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Card title</h6>
+                <p class="card-text"><small class="text-muted">100 L.E</small></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="row">
+          <div class="col-6">
+            <div class="row px-1">
+              <div class="card border-0">
+                <div class="inner">
+                  <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title">Card title</h6>
+                  <p class="card-text"><small class="text-muted">100 L.E</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row px-1">
+              <div class="card border-0">
+                <div class="inner">
+                  <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title">Card title</h6>
+                  <p class="card-text"><small class="text-muted">100 L.E</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- <<<<<<<<<<<<<<<<<<<< Related Products Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
 </div>
 
 
-           
-
-
+<script>
+    $('.tile')
+    // tile mouse actions
+    .on('mouseover', function(){
+      $(this).children('.photo').css({'transform': 'scale(2.4)'});
+    })
+    .on('mouseout', function(){
+      $(this).children('.photo').css({'transform': 'scale(1)'});
+    })
+    .on('mousemove', function(e){
+      $(this).children('.photo').css({'transform-origin': ((e.pageX - $(this).offset().left) / $(this).width()) * 100 + '% ' + ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +'%'});
+    })
+    // tiles set up
+    .each(function(){
+      $(this)
+        // add a photo container
+        .append('<div class="photo"></div>')
+        // set up a background image for each tile based on data-image attribute
+        .children('.photo').css({'background-image': 'url('+ $(this).attr('data-image') +')'});
+    })
+</script>

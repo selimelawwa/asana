@@ -1,69 +1,160 @@
-<div class = "container">
-  <div class = "row">
-    <div class= "col s12 m9">
-      <h2>Sign Up</h2>
-
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
-
-        <div class="field">
-          <%= f.label :name %>
-          <%= f.text_field :name, placeholder: "please enter your name", id: "name" %>
+<div class="sign-up-form">
+  <div class = "container">
+    <div class = "row">
+      <div class= "col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body shadow border-0">
+            <div class="container">
+              <div class="row justify-content-center">
+                <i class="fas fa-user-plus fa-2x pr-2"></i>
+                <h5 class="card-title text-center pt-1">Sign Up</h5>
+              </div>
+            </div>
+            <div class="form-signin">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <div class="form-label-group">
+                <%= f.text_field :name, required: true, placeholder: "Name", id: "name", class: "form-control" %>
+                <label for="name" class="py-auto">Name</label>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="form-label-group mob-only">
+                    <%= f.text_field :city, required: true, placeholder: "city", id: "user_city", class: "form-control" %>
+                    <label for="user_city" class="py-auto">City</label>
+                  </div>
+                  <div class="form-label-group pl-1 mob-only">
+                    <%= f.date_field :birthday, max: Date.today, required: true, placeholder: "Date of Birth", id: "birthday", class: "form-control datepicker", style: "font-size:0.9rem" %>
+                    <label for="birthday" class="py-auto">Date of Birth</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-label-group">
+                <%= f.email_field :email, required: true, autocomplete: "email", id: "email", class: "form-control", placeholder: "Email address" %>
+                <label for="email" class="py-auto">Email address</label>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="form-label-group mob-only">
+                    <%= f.password_field :password,required: true, id: "password", class: "form-control", placeholder: "Password" %>
+                    <label for="password" class="py-auto">Password</label>
+                  </div>
+                  <div class="form-label-group pl-1 mob-only">
+                    <%= f.password_field :password_confirmation, required: true, placeholder: "confirm password", id: "password_confirmation", class: "form-control" %>
+                    <label for="password_confirmation" class="py-auto">Confirm Password</label>
+                  </div>
+                </div>
+              </div>
+              <div class="pl-3" id="message">
+                <p id="match" class="invalid" style="display:none;">Passwords match</p>
+                <p id="length" class="invalid" style="display:none;">Minimum 6 characters</p>
+              </div>
+              <button class="btn btn-lg btn-dark btn-block text-uppercase mt-2 disabled" id="sign-up-button" type="submit">Sign Up</button>
+              <% end %>
+              <div class="container mt-4">
+                <div class="row">
+                  <%= link_to "Already have account? Sign in here!", new_user_session_path, class:"mx-auto text-dark" %>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="field">
-          <%= f.label :email %>
-          <%= f.email_field :email, autofocus: true, placeholder: "please enter your email", id: "email" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %>
-          <%= f.password_field :password, placeholder: "new-password", id: "password"%>
-        </div>
-
-        <div class="field">
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, placeholder: "password confirmation", id: "password_confirmation" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :city %>
-          <%= f.select :city, ['Alexandria','Cairo'] , {include_blank: true},value:"",class: "input-field", id: "user_city"%>
-        </div>
-
-        <div class="field">
-          <%= f.label :birthday %>
-          <%= f.date_field :birthday , class: "datepicker", id: "birthday"%>
-        </div>
-
-        <button class="btn waves-effect waves-light" id = "register-submit-button" type="submit" name="action">Submit
-          <i class="material-icons right">send</i>
-        </button>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-  $(document).ready(function(){
-    $('#user_city').formSelect();
-    validate();
-    $('#name, #email, #password, #password_confirmation, #birthday, #user_city').change(validate).keypress(validate).keyup(validate);
-  });
+    var password = document.getElementById("password")
+    , confirm_password = document.getElementById("password_confirmation")
+    , length = document.getElementById("length")
+    , match = document.getElementById("match")
+    , sign_up_button = document.getElementById("sign-up-button");
+
+  
+  function validatePassword(){
+    var flag1 = 0;
+    var flag2 = 0;
+    if (password.value.length == 0)
+    {
+      document.getElementById("length").style.display = "none";
+      flag1 = 0;
+    }
+    else
+    {
+      document.getElementById("length").style.display = "block";
+      if(password.value.length < 6) {
+        length.classList.remove("valid");
+        length.classList.add("invalid");
+        flag1 = 0;
+      } 
+      else {
+        length.classList.remove("invalid");
+        length.classList.add("valid");
+        flag1 = 1;
+      }
+    }
+    if (confirm_password.value.length == 0)
+    {
+      document.getElementById("match").style.display = "none";
+      flag2 = 0;
+    }
+    else
+    {
+      document.getElementById("match").style.display = "block";
+      if(password.value != confirm_password.value) 
+      {
+        match.classList.remove("valid");
+        match.classList.add("invalid");
+        flag2 = 0;
+      } 
+      else 
+      {
+        match.classList.remove("invalid");
+        match.classList.add("valid");
+        flag2 = 1;
+      }
+    }
+    if (flag1 == 1 && flag2 == 1)
+    {
+      sign_up_button.classList.remove("disabled")
+    }
+    else
+    {
+      sign_up_button.classList.add("disabled")
+    }
+  }
+
+  password.onkeyup = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+  
 
 
-function validate(){
-    if ($('#name').val().length   >   0   &&
-        $('#email').val().length   >   0   &&
-        $('#password').val().length  >   0 &&
-        $('#password_confirmation').val().length  >   0 ) {
-        $("#register-submit-button").removeClass("disabled");
+  var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
     }
-    else {
-        $("#register-submit-button").addClass("disabled");
-    }
-}
+  };
+  
+  if ( !isMobile.any() ) {
+    $('.mob-only').addClass('w-50')
+  }
+  else {
+    $('.mob-only').addClass('w-100')
+  }
+
 </script>
