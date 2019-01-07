@@ -32,7 +32,7 @@
           <div class="panel-body">
             <div class="form-group mt-3">
               <h6 class="filter-title mb-3">Sort By</h6>
-              <select class="form-control bg-light" id="sort-by">
+              <select class="sort_select form-control bg-light" id="sort-by">
                 <option>Featured</option>
                 <option>New Arrivals</option>
                 <option>Low Price</option>
@@ -106,7 +106,7 @@
       <div class="col-md-3 col-lg-2">
         <div class="form-group mt-3">
           <h6 class="filter-title mb-3">Sort By</h6>
-          <select class="form-control bg-light" id="sort-by">
+          <select class="sort_select form-control bg-light" id="sort-by">
             <option>Featured</option>
             <option>New Arrivals</option>
             <option>Low Price</option>
@@ -156,9 +156,22 @@
 </div>
 
 <!-- Desktop Computers End -->
-
 <div  class= "center-align mt-5">
   <%= will_paginate @products , renderer: @custom_paginate_renderer %>
 </div>
 
 
+<script type="text/javascript">
+  $('.sort_select').change(function(){
+    if (this.value == "Featured") {
+      window.location.href = "<%= j products_path(request.query_parameters) %>";
+    } else if (this.value == "New Arrivals") {
+      window.location.href = $("<%= j sort_link @q, :created_at , default_order: :desc%>").attr('href'); 
+    } else if (this.value == "Low Price") {
+      window.location.href = $("<%= j sort_link @q, :price , default_order: :asc%>").attr('href'); 
+    } else {
+      window.location.href = $("<%= j sort_link @q, :price , default_order: :desc%>").attr('href'); 
+    }
+  });
+  
+</script>
