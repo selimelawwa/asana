@@ -52,8 +52,19 @@ class Product < ApplicationRecord
     Color.where(id: available_colors_ids)
   end
 
+  def available_in_stock_colors_ids
+    c_ids = variants.main.pluck(:color_id)
+    in_stock_c_ids = []
+    c_ids.each do |c|
+      if variants.sized.where("color_id = ? AND stock > 0",c).any?
+        in_stock_c_ids << c
+      end
+    end
+    in_stock_c_ids
+  end
+
   def main_color_id
-    variants.main.first.color_id
+    available_in_stock_colors_ids.first
   end
 
   private
