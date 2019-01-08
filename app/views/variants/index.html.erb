@@ -15,6 +15,7 @@
             <th scope="col">Size</th>
             <th scope="col">Color</th>
             <th scope="col">Stock</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -23,8 +24,26 @@
               <th scope="row"><%= i %></th>
               <td><%= v.size.name %></td>
               <td><%= v.color.name %></td>
-              <td><%= v.stock %></td>
+              <td id = "<%="stock-#{v.id}"%>"><%= v.stock %></td>
+              <td>
+                <a data-toggle="modal" data-target="<%="#modal_#{v.id}"%>">Edit</a>
+              </td>
             </tr>
+
+            <div class="modal fade" id="<%="modal_#{v.id}"%>" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title"><%= "Update #{v.product.name} - #{v.options_text}"%></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="temp-modal-body">
+                    <%= render partial: 'update_stock_form' , locals: {variant: v} %>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
         </tbody>
       </table>

@@ -133,6 +133,10 @@
   padding-top: 8%;
 }
 
+.tile{
+    max-height: 400px;
+}
+
 .inner{
   overflow: hidden;
 }
@@ -1206,4 +1210,16 @@ img {
 .color_filter{
   border-radius: 50%;
   height: 20px;
+}
+
+td a{
+    color: #478DC1 !important;
+}
+
+td a:hover{
+    text-decoration: underline !important;
+}
+.temp-modal-body{
+    padding-left: 15px;
+    padding-right: 10px;
 }

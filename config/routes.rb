@@ -11,10 +11,15 @@ Rails.application.routes.draw do
     collection do
       match 'search' => 'products#search', via: [:get, :post], as: :search
     end
-    resources :variants
+    resources :variants do 
+      post '/update_stock', to: 'variants#update_stock', as: :update_stock
+    end
     resources :images
   end
 
+
+
+  
   resources :orders, only: %i[index]
   post 'add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
   

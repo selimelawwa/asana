@@ -45,6 +45,17 @@ class Product < ApplicationRecord
     end
   end
 
+  def available_colors_ids
+    variants.main.pluck(:color_id)
+  end
+  def available_colors
+    Color.where(id: available_colors_ids)
+  end
+
+  def main_color_id
+    variants.main.first.color_id
+  end
+
   private
   def ransackable_attributes
     %w(name gender)

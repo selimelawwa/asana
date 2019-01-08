@@ -32,6 +32,8 @@ class ProductsController < ApplicationController
   end
 
   def show
+    params[:color_id] ||= @product.main_color_id
+    @colored_variant = @product.variants.main.where(color_id: params[:color_id]).first
   end
 
   def edit

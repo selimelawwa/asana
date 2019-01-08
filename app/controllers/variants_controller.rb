@@ -16,6 +16,15 @@ class VariantsController < ApplicationController
       render 'new'
     end
   end
+
+  def update_stock
+    @variant =  Variant.find(params[:variant_id])
+    if @variant.update(stock: params[:new_stock])
+      updated_variant = @variant.reload
+      render json: { new_stock: updated_variant.stock }
+    end
+  end
+  
   private
   def set_variant
     @variant = Variant.find(params[:id])
