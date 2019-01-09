@@ -53,7 +53,7 @@ class Product < ApplicationRecord
   end
 
   def available_in_stock_colors_ids
-    c_ids = variants.main.pluck(:color_id)
+    c_ids = available_colors_ids
     in_stock_c_ids = []
     c_ids.each do |c|
       if variants.sized.where("color_id = ? AND stock > 0",c).any?

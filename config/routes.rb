@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
 
   
-  resources :orders, only: %i[index]
+  resources :orders, only: %i[index show]
   post 'add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
   
   scope '/admin' do

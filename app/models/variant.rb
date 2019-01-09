@@ -25,6 +25,10 @@ class Variant < ApplicationRecord
     end
   end
 
+  def main_photo
+    photos.first
+  end
+
   def options_text
     "#{color.name} - #{size.name}"
   end

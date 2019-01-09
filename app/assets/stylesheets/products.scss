@@ -1212,6 +1212,10 @@ img {
   height: 20px;
 }
 
+tbody.order_details > tr > td{
+    vertical-align: middle;
+}
+
 td a{
     color: #478DC1 !important;
 }
@@ -1222,4 +1226,28 @@ td a:hover{
 .temp-modal-body{
     padding-left: 15px;
     padding-right: 10px;
+}
+
+.modal-body .title{
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 1.28px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.modal-body > div > button{
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #343a40;
+}
+
+.modal-body > div > a{
+    background-color: #343a40;
+    color: #fff;
+}
+
+.modal-body > div > button, .modal-body > div > a{
+    min-width: 75%;
+    border-radius: 0;
 }

@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
       @category = Category.find( params[:category_id])
       @products = @category.products
     end
+    authorize @products
     @q = @products.ransack(params[:q])
     @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 3)
     @custom_paginate_renderer = custom_paginate_renderer
@@ -41,6 +42,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    authorize @product
     if @product.update(product_params)
       redirect_to product_path
     else
@@ -55,6 +57,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    authorize @product
     if @product.save
       redirect_to product_list_path
     else
@@ -63,6 +66,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    authorize @product
     if @product.destroy
       redirect_to products_path
     else

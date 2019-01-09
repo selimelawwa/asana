@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
     @q ||= Product.ransack(params[:q])
   end
 
+  def current_order
+    return nil unless current_user
+    current_user.orders.where(cart: true).first_or_create
+  end
+  helper_method :current_order
+
   private
 
   def user_not_authorized
