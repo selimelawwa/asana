@@ -4,8 +4,14 @@ class Order < ApplicationRecord
   has_many :products, through: :variants
   belongs_to :user
 
-  enum status: %i[in_cart address confirmed delivered canceled]
+  enum status: %i[cart address confirmed delivered canceled]
   
   scope :cart, -> { where(cart: true) }
   scope :completed, -> { where(cart: false) }
+
+  before_create :set_default_status
+
+  def set_default_status
+    self.status = 'cart'
+  end
 end

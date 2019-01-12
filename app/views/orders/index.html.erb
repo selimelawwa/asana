@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row d-flex align-items-center">
+        <% if current_user.admin? %>
+          <h1> System Orders </h1>
+        <% else %>
+          <h1> My Order </h1>
+        <% end %>
+      </div>
+      <div class="row">
+        <% if @orders.any?%>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th> Order Number </th>
+                  <th>Status</th>
+                  <th>Created at</th>
+                  <th>Total Cost</th>
+                  <% if current_user.admin? %>
+                    <th> User Name </th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody class="order_details">
+                <% @orders.each_with_index do |o,i| %>
+                  <tr>
+                    <td scope="row"><%= i+1 %></td>
+                    <td> <%= link_to "Order-#{o.id}", order_path(o.id) %> </td>
+                    <td><%= o.status.humanize %></td>
+                    <td><%= o.created_at %></td>
+                    <td> <%= o.total_cost%> </td>
+                    <% if current_user.admin? %>
+                      <td> <%= o.user.name%> </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <% if current_user.admin? %>
+            <p> System still has no completed orders</p>
+          <% else %>
+            <p>Your have no completed orders, <%= link_to 'Continue Shopping', products_path %> </p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
