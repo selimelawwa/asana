@@ -3,13 +3,13 @@ class ProductsController < ApplicationController
   
   def index
     if params[:category_id].blank?
-      @products = Product.all
+      @products = Product.with_photos
     else
       @category = Category.find(params[:category_id])
-      @products = @category.products
+      @products = @category.products.with_photos
     end
     @q = @products.ransack(params[:q])
-    @products = @q.result(distinct: true).order(:created_at).paginate(:page => params[:page], :per_page => 3)
+    @products = @q.result(distinct: true).order(:created_at).paginate(:page => params[:page], :per_page => 15)
     @custom_paginate_renderer = custom_paginate_renderer
   end
 

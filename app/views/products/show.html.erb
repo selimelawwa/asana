@@ -70,8 +70,8 @@
             <div class="pr_color">
               <label class="pt-2 mr-10" for="sel2">Available Colors</label>
               <ul class="color_list mt-2 pl-1">
-                <% @product.available_colors.each do |c| %>
-                  <li> <%= link_to image_tag(c.photo.url(:thumb), :class => "color_select #{'selected' if params[:color_id] == c.id.to_s}"), product_path(@product.id, color_id: c.id) %> </li>
+                <% @product.available_colors_with_images.each do |c| %>
+                  <li> <%= link_to image_tag(@product.main_variant_image(c.id).url(:thumb), :class => "color_select #{'selected' if params[:color_id] == c.id.to_s}"), product_path(@product.id, color_id: c.id) %> </li>
                 <% end %>
               </ul>
             </div>

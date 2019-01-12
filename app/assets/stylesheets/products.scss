@@ -533,39 +533,20 @@
   .pr_color .color_list li {
     display: inline-block;
     margin-right: 10px;
+    height: 45px;
+    width: 45px;
   }
   
   .pr_color .color_list li a {
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    // background: #1cbbb4;
+    height: 100%;
+    width: 100%;
     display: inline-block;
   }
   
-//   .pr_color .color_list li:nth-child(2) a {
-//     background: #000000;
-//   }
-  
-//   .pr_color .color_list li:nth-child(3) a {
-//     background: #00aeef;
-//   }
-  
-//   .pr_color .color_list li:nth-child(4) a {
-//     background: #00a99d;
-//   }
-  
-//   .pr_color .color_list li:nth-child(5) a {
-//     background: #e7352b;
-//   }
-  
+
   .pr_color .color_list li:last-child {
     margin-right: 0px;
   }
-  
-  // .pr_color .color_list li:last-child a {
-  //   background: #fbf4d9;
-  // }
   
   .pr_color .bootstrap-select {
     width: 100% !important;
@@ -1208,13 +1189,13 @@ img {
 }
 
 .color_filter{
-  border-radius: 50%;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 .color_select{
-    height: 30px;
-    width: 30px;
+    height: 100%;
+    width: 100%;
 }
 
 .color_select:hover, .color_select.selected{

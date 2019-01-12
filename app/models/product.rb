@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :sub_categories, -> { where(kind: :sub_category) },:class_name => "Category", source: :categories
   has_many :variants, inverse_of: :product, dependent: :destroy
 
+  scope :with_photos, -> { joins(variants: :variant_images).distinct } 
+
 
   attr_accessor :color_ids
 
@@ -56,6 +58,10 @@ class Product < ApplicationRecord
   def available_color_ids_with_images
     variants.main.joins(:variant_images).map(&:color_id)&.uniq
   end
+  
+  def available_colors_with_images
+    Color.where(id: available_color_ids_with_images)
+  end
 
   def available_in_stock_colors_ids
     c_ids = available_color_ids_with_images
@@ -69,7 +75,11 @@ class Product < ApplicationRecord
   end
 
   def main_color_id
-    available_in_stock_colors_ids.first
+    available_in_stock_colors_ids.first || available_colors_ids.first
+  end
+
+  def main_variant_image(color_id)
+    variants.main.where(color_id: color_id).first.main_photo&.image || Color.find(color_id).photo
   end
 
   private
