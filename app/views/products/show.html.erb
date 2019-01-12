@@ -8,7 +8,7 @@
         <div class="col-12 d-block d-sm-none pb-4">
             <div class="single_product_thumb">
               <div id="product_details_slider2" class="carousel slide" data-ride="carousel">
-                <% if @colored_variant.photos.any?%>
+                <% if @colored_variant && @colored_variant.photos.any?%>
                   <ol class="carousel-indicators">
                     <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
                       <li class="<%= "#{'active' if i == 0}" %>" data-target="#product_details_slider2" data-slide-to="<%="#{i}"%>" style="background-image: url(<%=p.image.url%>);">
@@ -32,8 +32,8 @@
 
         <!-- Product Details -->
         <%= render 'added_to_cart_modal'%>
-        <%= render 'max_5_modal'%>
-        <%= render 'no_stock_modal'%>
+        <div id="error_modal_div">
+        </div>
         <div class="col-12 col-md-6">
           <div class="single_product_desc">
 
@@ -71,7 +71,7 @@
               <label class="pt-2 mr-10" for="sel2">Available Colors</label>
               <ul class="color_list mt-2 pl-1">
                 <% @product.available_colors.each do |c| %>
-                  <li> <%= link_to image_tag(c.photo.url(:thumb), :class => "color_filter"), product_path(@product.id, color_id: c.id) %> </li>
+                  <li> <%= link_to image_tag(c.photo.url(:thumb), :class => "color_select #{'selected' if params[:color_id] == c.id.to_s}"), product_path(@product.id, color_id: c.id) %> </li>
                 <% end %>
               </ul>
             </div>
@@ -141,7 +141,7 @@
         <div class="col-md-6 d-none d-sm-block">
           <div class="single_product_thumb">
             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-              <% if @colored_variant.photos.any?%>
+              <% if @colored_variant && @colored_variant.photos.any?%>
                 <ol class="carousel-indicators">
                   <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
                     <li class="<%= "#{'active' if i == 0}" %>" data-target="#product_details_slider" data-slide-to="<%="#{i}"%>" style="background-image: url(<%=p.image.url%>);">
@@ -331,22 +331,16 @@
         url: '/add_to_cart',
         data: {size_id: size_id, quantity: quantity, product_id: product_id, color_id: color_id},
         success: function(response, data, status, xhr) {
-          debugger;
           if (response['saved'] == 1){
             $('#exampleModalCenter').modal('show');
-          } else if(response['error'] == 1){
-            $('#exampleModalCenter3').modal('show');
           } else{
-            $('#exampleModalCenter2').modal('show');
+            $('#error_modal_div').html(response);
+            $('#add_to_cart_error_modal').modal('show');
           }
         },
         error: function() {
           alert('error');
         }
       });
-    });
-
-    $("#exampleModalCenter3").on("hidden.bs.modal", function () {
-      location.reload();
     });
 </script>

@@ -11,25 +11,16 @@ class OrdersController < ApplicationController
     product = Product.find(params[:product_id])
     @variant = product.variants.sized.where(color_id: params[:color_id], size_id: params[:size_id])&.first
     line_item = current_order.line_items.find_or_initialize_by(variant_id: @variant.id)
-    if @variant.stock >= params[:quantity]&.to_i
-      if line_item.quantity && line_item.quantity < 5
-        line_item.quantity += params[:quantity]&.to_i
-        line_item.save
-        @variant.stock -= params[:quantity]&.to_i
-        @variant.save
+    if @variant.stock >= params[:quantity]&.to_i + line_item.quantity
+      line_item.quantity += params[:quantity]&.to_i
+      if line_item.save
         render json: { saved: 1 }
-      elsif !line_item.quantity
-        line_item.quantity = params[:quantity]
-        line_item.save
-        @variant.stock -= params[:quantity]&.to_i
-        @variant.save
-        render json: { saved: 1 }
-      else
-        render json: { saved: 0, error: 0 }
+      else 
+        render partial: 'products/add_to_cart_error_modal_partial' , locals: {error: 'max_5_already_set', current_quantity: line_item&.reload&.quantity}
       end
     else
-      #out of stock
-      render json: { saved: 0, error: 1 }
+      #no enough stock
+      render partial: 'products/add_to_cart_error_modal_partial' , locals: {error: 'no_enough_stock', available_stock: @variant.reload.stock , current_quantity: line_item&.quantity}
     end
   end
 

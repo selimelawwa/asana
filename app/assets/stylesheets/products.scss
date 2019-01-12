@@ -1212,6 +1212,16 @@ img {
   height: 20px;
 }
 
+.color_select{
+    height: 30px;
+    width: 30px;
+}
+
+.color_select:hover, .color_select.selected{
+    border: 1px solid;
+    padding: 1px;
+}
+
 tbody.order_details > tr > td{
     vertical-align: middle;
 }

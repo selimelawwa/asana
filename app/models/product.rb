@@ -48,12 +48,17 @@ class Product < ApplicationRecord
   def available_colors_ids
     variants.main.pluck(:color_id)
   end
+
   def available_colors
     Color.where(id: available_colors_ids)
   end
 
+  def available_color_ids_with_images
+    variants.main.joins(:variant_images).map(&:color_id)&.uniq
+  end
+
   def available_in_stock_colors_ids
-    c_ids = available_colors_ids
+    c_ids = available_color_ids_with_images
     in_stock_c_ids = []
     c_ids.each do |c|
       if variants.sized.where("color_id = ? AND stock > 0",c).any?

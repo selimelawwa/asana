@@ -1,0 +1,28 @@
+<% case error%>
+<% when 'no_enough_stock'%>
+<% if available_stock > 0%>
+  <% error_message = "You have requested more than available stock, only #{available_stock} available"%>
+<% else %>
+  <% error_message = "This size is out of stock!"%>
+<% end %>
+<% when 'max_5_already_set'%>
+<% error_message = "Can't add to cart more than 5 items of same item, you already have #{current_quantity} of this item at cart"%>
+<% end %>
+
+<div class="modal fade" id="add_to_cart_error_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="border-radius: 0;">
+      <div class="modal-header" style="border-bottom: none;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <p class="title"> <%= error_message %> </p>
+        <div class="d-flex  flex-column align-items-center">
+          <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
