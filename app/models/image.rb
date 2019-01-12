@@ -9,6 +9,8 @@ class Image < ApplicationRecord
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   validates :image, attachment_presence: true
 
+  validates :variants, presence: true
+
   def variant_colors
     color_ids = variants.pluck(:color_id).uniq
     colors = Color.where(id: color_ids)

@@ -28,6 +28,12 @@ class ImagesController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    if @image.destroy
+      redirect_to product_images_path(id: params[:product_id])
+    end
+  end
   private
   def load_edit_data
     @product = Product.includes(variants: [:size, :color]).find(params[:product_id])
@@ -37,6 +43,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
   end
   def image_params
+    params[:image][:variant_ids] = [params.dig(:image,:variant_ids)]
     params.require(:image).permit(:image,variant_ids: [])
   end
 end

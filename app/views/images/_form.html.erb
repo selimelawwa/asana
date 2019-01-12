@@ -3,9 +3,9 @@
   <%= f.file_field :image , class: 'form-control'%>
 </div>
 
-<div class="form-group">
-  <%= f.label :variant_ids, 'Select Colors'%>
-  <br>
-  <%= collection_check_boxes(:image, :variant_ids, @variants, :id, :color_text) %>
+<% binding.pry%>
+
+<div class="form-group ">
+  <%= f.input :variant_ids, collection: @variants, label_method: :color_text, value_method: :id , label: 'Select Colors', class: 'form-control', include_blank: false %>
 </div>
 

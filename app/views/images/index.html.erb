@@ -21,10 +21,14 @@
         <tbody>
           <% @images.each_with_index do |i,index| %>
             <tr>
-              <th scope="row"><%= index %></th>
+              <td scope="row"><%= index + 1 %></td>
               <td><%= image_tag i.image.url(:thumb) %></td>
               <td><%= i.variant_colors %></td>
-              <td> <%= link_to 'Edit', edit_product_image_path(id: i.id) %> </td>
+              <td class="text-right"> 
+                <%= link_to 'Edit', edit_product_image_path(id: i.id) %> 
+                <%= link_to 'Delete', product_image_path(id: i.id), method: :delete, 
+                         data: { confirm: 'Are you sure?' }  %>
+              </td>
             </tr>
           <% end %>
         </tbody>
