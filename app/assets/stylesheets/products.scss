@@ -1188,17 +1188,22 @@ img {
   height: 45px;
 }
 
-.color_filter{
-  width: 25px;
-  height: 25px;
-}
-
 .color_select{
     height: 100%;
     width: 100%;
 }
 
 .color_select:hover, .color_select.selected{
+    border: 1px solid;
+    padding: 1px;
+}
+
+.color_filter{
+    width: 25px;
+    height: 25px;
+  }
+
+.color_filter:hover, .color_filter.selcted{
     border: 1px solid;
     padding: 1px;
 }
