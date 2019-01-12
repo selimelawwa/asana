@@ -7,7 +7,6 @@ class Order < ApplicationRecord
 
   enum status: %i[cart address confirmed delivered canceled]
   
-  scope :cart, -> { where(cart: true) }
   scope :completed, -> { where(cart: false) }
 
   before_create :set_default_status

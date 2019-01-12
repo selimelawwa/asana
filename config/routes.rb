@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :sizes, only: %i[index new create edit update]
     resources :colors, only: %i[index new create edit update]
+    resources :tags
   end
   
   get 'welcome/index'
