@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div class="row d-flex align-items-center">
+        <h1> Tags </h1>
+      </div>
+      <div class="row">
+        <% if @tags.any?%>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th> Name </th>
+                </tr>
+              </thead>
+              <tbody class="order_details">
+                <% @tags.each_with_index do |o,i| %>
+                  <tr>
+                    <td scope="row"><%= i+1 %></td>
+                    <td> <%= o.name %> </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <p>Your have no tags, <%= link_to 'Create a new tag', new_tag_path %> </p>
+        <% end %>
+      </div>
+    </div>
+    <div class = "col-3">
+    <%= render partial: 'shared/admin_sidebar' , locals: {current: 'tags'}%>
+  </div>
+  </div>
+</div>
