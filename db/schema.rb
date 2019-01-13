@@ -104,12 +104,12 @@ ActiveRecord::Schema.define(version: 2019_01_13_214129) do
   end
 
   create_table "products_tags", id: false, force: :cascade do |t|
-    t.bigint "products_id"
-    t.bigint "tags_id"
+    t.bigint "product_id"
+    t.bigint "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["products_id"], name: "index_products_tags_on_products_id"
-    t.index ["tags_id"], name: "index_products_tags_on_tags_id"
+    t.index ["product_id"], name: "index_products_tags_on_product_id"
+    t.index ["tag_id"], name: "index_products_tags_on_tag_id"
   end
 
   create_table "sizes", force: :cascade do |t|

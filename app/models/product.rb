@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :categories, -> { where(kind: :category) },:class_name => "Category", source: :categories
   has_and_belongs_to_many :sub_categories, -> { where(kind: :sub_category) },:class_name => "Category", source: :categories
   has_many :variants, inverse_of: :product, dependent: :destroy
+  has_and_belongs_to_many :tags
 
   #TODO handle this to get the sized
   scope :with_photos, -> { joins(variants: :variant_images).distinct } 
