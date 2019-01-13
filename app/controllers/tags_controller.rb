@@ -31,6 +31,12 @@ class TagsController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    authorize @tag
+    @tag.destroy
+    redirect_to tags_path  
+  end
   
   private
   def tag_params

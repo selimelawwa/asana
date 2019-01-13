@@ -12,13 +12,19 @@
                 <tr>
                   <th>#</th>
                   <th> Name </th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody class="order_details">
-                <% @tags.each_with_index do |o,i| %>
+                <% @tags.each_with_index do |t,i| %>
                   <tr>
                     <td scope="row"><%= i+1 %></td>
-                    <td> <%= o.name %> </td>
+                    <td> <%= t.name %> </td>
+                    <td class="text-right"> 
+                      <%= link_to 'Edit', edit_tag_path(id: t.id) %> 
+                      <%= link_to 'Delete', tag_path(id: t.id), method: :delete, 
+                              data: { confirm: 'Are you sure?' }  %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
