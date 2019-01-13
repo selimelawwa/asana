@@ -3,8 +3,6 @@
   <%= f.file_field :image , class: 'form-control'%>
 </div>
 
-<% binding.pry%>
-
 <div class="form-group ">
   <%= f.input :variant_ids, collection: @variants, label_method: :color_text, value_method: :id , label: 'Select Colors', class: 'form-control', include_blank: false %>
 </div>

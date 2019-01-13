@@ -14,7 +14,7 @@ class Product < ApplicationRecord
     
   validates_attachment_content_type :main_photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   
-  after_save :create_variants_based_on_colors
+  after_create :create_variants_based_on_colors
 
   # validations
   validates :name, :price, :category_ids, :sub_category_ids, :main_photo, presence: true
@@ -79,6 +79,16 @@ class Product < ApplicationRecord
     available_in_stock_colors_ids.first || available_colors_ids.first
   end
 
+  #to be shown in index, get main_variant image or product main image
+  def medium_photo
+    variant_medium_photo(main_color_id)&.url(:medium) ||  main_photo.url(:medium)
+  end
+
+  def variant_medium_photo(color_id)
+    variants.main.where(color_id: color_id).first.main_photo&.image
+  end
+
+  #to be viewed with color select at product show
   def main_variant_image(color_id)
     variants.main.where(color_id: color_id).first.main_photo&.image || Color.find(color_id).photo
   end

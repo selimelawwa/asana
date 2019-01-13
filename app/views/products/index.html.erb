@@ -32,32 +32,9 @@
           <div class="panel-body">
             <div class="form-group mt-3">
               <h6 class="filter-title mb-3">Sort By</h6>
-              <select class="sort_select form-control bg-light" id="sort-by">
-                <option>Featured</option>
-                <option>New Arrivals</option>
-                <option>Low Price</option>
-                <option>High Price</option>
-              </select>
+              <%= render 'sort_partial'%>
             </div>
-              <!-- <hr class="mt-2"> -->
-              <div class="pr_color">
-                <h6 class="filter-title mb-4">Color</h6>
-                <ul class="color_list mt-3 pl-1">
-                  <% Color.with_photo.each do |c| %>
-                    <li> <%= link_to image_tag(c.photo.url(:thumb), :class => "color_filter"), products_path(request.query_parameters.merge(q: {variants_color_id_in: c.id})) %> </li>
-                  <% end %>
-                </ul>
-              </div>
-              <div class="widget size mb-50">
-                <h6 class="filter-title mb-3">Filter by Size</h6>
-                <div class="widget-desc">
-                  <ul class="d-flex justify-content-between size-filter">
-                    <% Size.all.each do |s|%>
-                      <li> <%= link_to s.name, products_path(request.query_parameters.merge(q: {variants_size_id_in: s.id})) %> </li>
-                    <% end %>
-                  </ul>
-                </div>
-              </div>
+            <%= render 'filter_form'%>
           </div>
         </div>
       </div>        
@@ -70,19 +47,7 @@
         <div class="col-6">
           <div class="row px-1">
             <div class="card border-0">
-              <%= image_tag p.main_photo.url(:medium), class: "card-img-top"%>
-              <div class="card-body">
-                <h5 class="card-title"><%= link_to p.name, product_path(p) %></h5>
-                <p class="card-text"><%= p.description %></p>
-                <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row px-1">
-            <div class="card border-0">
-              <%= image_tag p.main_photo.url(:medium), class: "card-img-top"%>
+              <%= link_to image_tag(p.medium_photo, class: "card-img-top"), product_path(p) %>
               <div class="card-body">
                 <h5 class="card-title"><%= link_to p.name, product_path(p) %></h5>
                 <p class="card-text"><%= p.description %></p>
@@ -106,12 +71,7 @@
       <div class="col-md-3 col-lg-2">
         <div class="form-group mt-3">
           <h6 class="filter-title mb-3">Sort By</h6>
-          <select class="sort_select form-control bg-light" id="sort-by">
-            <option>Featured</option>
-            <option>New Arrivals</option>
-            <option>Low Price</option>
-            <option>High Price</option>
-          </select>
+          <%= render 'sort_partial'%>
         </div>
         <%= render 'filter_form'%>
       </div>
@@ -121,7 +81,7 @@
             <div class="col-xs-6 col-sm-4">
               <div class="row">
                 <div class="card border-0 ml-0">
-                  <%= image_tag p.main_photo.url(:medium), class: "card-img-top", style: 'width:100%;'%>
+                  <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
                   <div class="card-body">
                     <h5 class="card-title"><%= link_to p.name, product_path(p) %></h5>
                     <p class="card-text"><%= p.description %></p>

@@ -1,15 +1,19 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:destroy, :edit, :update, :show]
+  before_action :set_params, only: [:index]
   
-  def index
+  def index    
     if params[:category_id].blank?
-      @products = Product.with_photos
+      @products = Product.all
     else
       @category = Category.find(params[:category_id])
-      @products = @category.products.with_photos
+      @products = @category.products
+    end
+    if params.dig(:q,:variants_size_id_in).present?
+      @products = @products.joins(:variants).where("variants.size_id IN (?) AND variants.stock > 0",params[:q][:variants_size_id_in])
     end
     @q = @products.ransack(params[:q])
-    @products = @q.result(distinct: true).order(:created_at).paginate(:page => params[:page], :per_page => 15)
+    @products = @q.result(distinct: true).order(:created_at).paginate(:page => params[:page], :per_page => 25)
     @custom_paginate_renderer = custom_paginate_renderer
   end
 
@@ -23,7 +27,7 @@ class ProductsController < ApplicationController
     end
     authorize @products
     @q = @products.ransack(params[:q])
-    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 3)
+    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 25)
     @custom_paginate_renderer = custom_paginate_renderer
   end
 
@@ -76,11 +80,21 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :category_ids, :sub_category_ids, color_ids: [])
+    params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :category_ids, 
+            :fabric_details, :model_wearing, :sub_category_ids, color_ids: [])
   end
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def set_params
+    params[:q] ||= HashWithIndifferentAccess.new
+    params[:q][:s] ||= "created_at desc"   
+    params[:q].delete(:variants_size_id_in) if params.dig(:q,:variants_size_id_in) == ""
+    params[:q].delete(:variants_color_id_in) if params.dig(:q,:variants_color_id_in) == ""
+    params[:q][:variants_size_id_in] =  params.dig(:q,:variants_size_id_in)&.reject { |c| c.empty? } 
+    params[:q][:variants_color_id_in] =  params.dig(:q,:variants_color_id_in)&.reject { |c| c.empty? }
   end
 
 end

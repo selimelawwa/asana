@@ -18,22 +18,19 @@
           <%= f.input :price, label: 'Product Price', class: 'form-control', input_html: { min: '0', step: 'any' } %>
         </div>
 
-        <!-- <div class="form-group">
-        <%= f.label :gender %>
-          <div class="form-check form-check-inline">
-            <%= f.radio_button :gender, "male", :checked => true, class:"form-check-input" %>  
-            <%= f.label "male", :gender, class:"form-check-label" %>
-          </div>
-          <div class="form-check form-check-inline">
-            <%= f.radio_button :gender, "female", :checked => false, class:"form-check-input" %>  
-            <%= f.label "female", :gender, class:"form-check-label" %>
-          </div>
-        </div> -->
-
         <div class="form-group ">
           <%= f.input :description, label: 'Product Description', as: :text , 
                 input_html: { id:"textarea1" , class: 'form-control' } %>
         </div>
+
+        <div class="form-group ">
+          <%= f.input :fabric_details, label: 'Fabric Details', as: :text , 
+                input_html: {  class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.input :model_wearing, class: 'form-control'  %>
+        </div>        
 
         <div class="form-group ">
           <%= f.input :category_ids, collection: Category.category , label: 'Category', class: 'form-control' %>
@@ -54,9 +51,10 @@
           <%= collection_check_boxes(:product, :color_ids, Color.all, :id, :name) %>
         <% end %>
 
+        <% submit_label = product.new_record? ? "Add Product" : "Update Product"%>
+
         <div class="d-flex flex-row-reverse">
-          <button class="btn btn-primary btn-large align-right mb-3" type="submit" name="action">Add product
-            <!-- <i class="material-icons right">send</i> -->
+          <button class="btn btn-primary btn-large align-right mb-3" type="submit" name="action"><%= submit_label%>
           </button>
         </div>
         

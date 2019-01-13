@@ -7,7 +7,7 @@
     <div class ="offset-sm-1 col-sm-10 categories-container">
       <% @colors.each do |c|%>
         <ul class="list-group">
-          <li class="list-group-item"> 
+          <li class="list-group-item no_padding"> 
             <%= image_tag c.photo.url(:thumb), :class => "color_img" %>
             <%= link_to c.name, edit_color_path(c.id) %> 
           </li>

@@ -1184,8 +1184,13 @@ img {
     border: 1px solid #ebebeb;
 }
 .color_img{
-  border-radius: 50%;
   height: 45px;
+  width: 45px;
+  margin-right: 5px;
+}
+
+.no_padding{
+    padding: 0 !important;
 }
 
 .color_select{
@@ -1193,7 +1198,7 @@ img {
     width: 100%;
 }
 
-.color_select:hover, .color_select.selected{
+.color_select:hover, .color_select.selected, img.selected{
     border: 1px solid;
     padding: 1px;
 }
@@ -1203,7 +1208,7 @@ img {
     height: 25px;
   }
 
-.color_filter:hover, .color_filter.selcted{
+.color_filter:hover, .color_filter.active{
     border: 1px solid;
     padding: 1px;
 }
@@ -1223,6 +1228,17 @@ td a:hover{
     padding-left: 15px;
     padding-right: 10px;
 }
+.checkbox_label.size{
+    border: 0.03rem solid #D3D3D3;
+    padding: 5px 10px;
+}
+
+.checkbox_label.size:hover, .checkbox_label.size.active {
+    background-color: #343a40;
+    color: #fff;
+}
+
+
 
 .modal-body .title{
     font-size: 16px;
