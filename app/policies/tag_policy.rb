@@ -8,4 +8,10 @@ class TagPolicy < ApplicationPolicy
   def destroy?
     user && user.admin?
   end
+  def available_products?
+    user && user.admin?
+  end
+  def assign_products?
+    user && user.admin?
+  end
 end

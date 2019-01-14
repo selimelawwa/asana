@@ -93,8 +93,11 @@ class ProductsController < ApplicationController
     params[:q][:s] ||= "created_at desc"   
     params[:q].delete(:variants_size_id_in) if params.dig(:q,:variants_size_id_in) == ""
     params[:q].delete(:variants_color_id_in) if params.dig(:q,:variants_color_id_in) == ""
+    params[:q].delete(:tags_id_in) if params.dig(:q,:tags_id_in) == ""
+
     params[:q][:variants_size_id_in] =  params.dig(:q,:variants_size_id_in)&.reject { |c| c.empty? } 
     params[:q][:variants_color_id_in] =  params.dig(:q,:variants_color_id_in)&.reject { |c| c.empty? }
+    params[:q][:tags_id_in] =  params.dig(:q,:tags_id_in)&.reject { |c| c.empty? }
   end
 
 end

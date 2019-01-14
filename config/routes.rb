@@ -28,7 +28,10 @@ Rails.application.routes.draw do
     resources :categories
     resources :sizes, only: %i[index new create edit update]
     resources :colors, only: %i[index new create edit update]
-    resources :tags
+    resources :tags do
+      get 'available_products', to: 'tags#available_products', as: 'available_products'
+      post 'assign_products', to: 'tags#assign_products', as: 'assign_products'
+    end
   end
   
   get 'welcome/index'

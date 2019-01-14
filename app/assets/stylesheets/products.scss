@@ -796,7 +796,7 @@ img {
 
 .widget {
     border-bottom: 2px solid #ebebeb;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 }
 
 .widget:last-child {
@@ -1236,6 +1236,13 @@ td a:hover{
 .checkbox_label.size:hover, .checkbox_label.size.active {
     background-color: #343a40;
     color: #fff;
+}
+
+.tag_label.active::before{
+    content:  "\2713 ";
+}
+.tag_label{
+    display: block;
 }
 
 
