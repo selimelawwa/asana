@@ -14,4 +14,8 @@ class Order < ApplicationRecord
   def set_default_status
     self.status = 'cart'
   end
+
+  def current_total_cost
+    line_items.map(&:total_cost).inject(0){|sum,x| sum + x }
+  end
 end
