@@ -202,54 +202,19 @@
   <div class="d-none d-sm-block mt-4 mb-2">
     <div class="container pb-4 pt-3">
       <div class="row">
-        <div class="col-md-3">
-          <div class="card border-0 card-wid">
-            <div class="inner">
-              <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Product 1</h5>
-              <p class="card-text">Great</p>
-              <p class="card-text"><small class="text-muted">EGP 400</small></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card border-0 card-wid">
-            <div class="inner">
-              <%= image_tag 'shoes2.jpg', class: "card-img-top" %>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Product 2</h5>
-              <p class="card-text">Great</p>
-              <p class="card-text"><small class="text-muted">EGP 400</small></p>
+        <% @related_products.each do |p|%>
+          <div class="col-md-3">
+            <div class="card border-0 card-wid">
+              <div class="inner">
+                <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"> <%= link_to p.name, product_path(p) %> </h5>
+                <p class="card-text"><small class="text-muted"> <%=p.price%> EGP </small></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card border-0 card-wid">
-            <div class="inner">
-              <%= image_tag 'shoes3.jpg', class: "card-img-top" %>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Product 3</h5>
-              <p class="card-text">Great</p>
-              <p class="card-text"><small class="text-muted">EGP 400</small></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card border-0 card-wid">
-            <div class="inner">
-              <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Product 4</h5>
-              <p class="card-text">Great</p>
-              <p class="card-text"><small class="text-muted">EGP 400</small></p>
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>    
     </div>
   </div>
@@ -259,61 +224,22 @@
   <div class="d-block d-sm-none">
     <div class="container-fluid mt-2 pb-5">
       <div class="row">
+      <% @related_products.each do |p|%>
         <div class="col-6">
           <div class="row px-1">
             <div class="card border-0">
               <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+                <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
               </div>
               <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
+                <h5 class="card-title"> <%= link_to p.name, product_path(p) %> </h5>
+                <p class="card-text"><small class="text-muted"> <%=p.price%> EGP </small></p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6">
-          <div class="row px-1">
-            <div class="card border-0">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <% end %>
       </div>
-      <div class="row">
-          <div class="col-6">
-            <div class="row px-1">
-              <div class="card border-0">
-                <div class="inner">
-                  <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p class="card-text"><small class="text-muted">100 L.E</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row px-1">
-              <div class="card border-0">
-                <div class="inner">
-                  <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                  <p class="card-text"><small class="text-muted">100 L.E</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
     </div>
   </div>
   <!-- <<<<<<<<<<<<<<<<<<<< Related Products Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
