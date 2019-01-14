@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:select_address, :create_address, :assign_address, :confirm_details]
   def index
     if current_user.admin?
       @orders = Order.all
@@ -27,5 +28,48 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     authorize @order
+  end
+
+  def select_address
+    @addresses = current_user.addresses
+    @address  = @order.addresses.new
+  end
+
+  def assign_address
+    @address = Address.find(params[:address_id])
+    if @address && (@address.user_id == current_user.id)
+      @order.addresses << @address
+      @order.remove_order_id_from_other_addresses(@address.id)
+      redirect_to order_confirm_details_path(order_id:  @order.id)
+    else
+      redirect_to select_address_path(order_id: @order.id)
+    end
+  end
+  
+  def create_address
+    @addresses = current_user.addresses
+    @address = @order.addresses.new(address_params)
+    @address.user_id = current_user.id
+    if @address.save
+      @order.remove_order_id_from_other_addresses(@address.id)
+      redirect_to order_confirm_details_path(order_id:  @order.id)
+    else
+      render 'select_address'
+    end
+  end
+
+  def confirm_details
+    @address = @order.get_delivery_address
+    redirect_to order_select_address_path(order_id: @order.id) unless @address
+    redirect_to order_path(@order) unless @order.valid_for_finalize?
+  end
+
+  private
+  def address_params
+    params.require(:address).permit(:city, :mobile, :telephone, :address, :default_addresses)
+  end
+
+  def set_order
+    @order = current_order
   end
 end

@@ -1,0 +1,32 @@
+<%= simple_form_for address, url: order_create_address_url(order_id: address.order_id)  do |f| %>
+
+  <div class="form-group">
+    <%= f.input :address, class: 'form-control'  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :city,  collection: [ "Alexandria", "Cairo"], include_blank: false %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :mobile, label: 'Mobile Number', class: 'form-control' %>
+    <%= f.hint 'Please enter number without country code' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :telephone, label: 'Telephone Number', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Use as default address?', :default_addresses %>
+    <%=  f.input_field :default_addresses, as: :boolean, boolean_style: :inline %>
+  </div>
+
+  <% submit_label = address.new_record? ? "Confirm Adress" : "Update Adress"%>
+
+  <div class="d-flex flex-row-reverse">
+    <button class="btn btn-primary btn-large align-right mb-3" type="submit" name="action"><%= submit_label%>
+    </button>
+  </div>
+  
+<% end %>

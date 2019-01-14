@@ -20,7 +20,12 @@ Rails.application.routes.draw do
 
 
   
-  resources :orders, only: %i[index show]
+  resources :orders, only: %i[index show] do
+    get 'select_address', to: 'orders#select_address', as: 'select_address'
+    post 'assign_address', to: 'orders#assign_address', as: 'assign_address'
+    post 'create_address', to: 'orders#create_address', as: 'create_address'
+    get 'confirm_details', to: 'orders#confirm_details', as: 'confirm_details'
+  end
   post 'add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
   
   scope '/admin' do

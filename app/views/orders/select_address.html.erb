@@ -1,0 +1,59 @@
+<div class="container">
+  <h1> Delivery Adress </h1>
+    <div class="row">
+      <div class="col-12 mb-50 mt-30">
+        <% if @addresses.any? %>
+        <h5> Select from old addresses </h5>
+        <div class="table-responsive">
+          <table class="table">
+              <thead>
+                <tr>
+                <th></th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Mobile</th>
+                <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @addresses.each_with_index do |a,i| %>
+                <tr>
+                    <td>
+                      <input type="radio" name="address" class="checked_products" id="<%= "address_#{a.id}" %>" value="<%= "#{a.id}" %>">
+                    </td>
+                    <td><%= a.address&.truncate(50) %></td>
+                    <td><%= a.city %></td>
+                    <td><%= a.mobile %></td>
+                    <td><%= a.city %></td>
+                </tr>
+                <% end %>
+              </tbody>
+          </table>
+        </div> 
+        <button type="button" name="save" class="btn btn-success" id="btn_select_address">Select</button>
+        <% end %>
+      </div>
+
+      <div class="col-12">
+        <h4> Create a new address</h4>
+        <%= render partial: 'address_form', locals: {address: @address} %>
+      </div>
+    </div>
+</div>
+
+<script>
+  $('#btn_select_address').click(function(){
+    var address_id = $("input[type='radio']:checked").val();
+    $.ajax({
+      type: "POST",
+      url: "<%= j order_assign_address_url(order_id: @order.id) %>",
+      data: {address_id: address_id},
+      success: function(response, data, status, xhr) {
+        
+      },
+      error: function() {
+        alert('error');
+      }
+    });
+  });
+</script>

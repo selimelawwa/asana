@@ -1,12 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="row d-flex align-items-center">
-        <% if @order.cart? %>
-            <h1> Cart Details </h1>
-          <% else %>
-            <h1> <%= "Order Number #{@order.id}" %> </h1>
-          <% end %>
-      </div>
+      <h1> Order Details </h1>
+    </div>
   </div>
   <div class="row">
     <% if @order.line_items.any?%>
@@ -44,12 +40,34 @@
       <div class="col-4">
         <h4> Order Summary</h4>
         <p> Total Amount:  <%= @order.current_total_cost%></p>
-        <% if @order.cart? %>
-          <%= link_to 'Check Out', order_select_address_path(order_id: @order.id) %>
-        <% end %>
       </div>
-    <% else %>
-      <p>Your cart is empty, <%= link_to 'Continue Shopping', products_path %> </p>
     <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h1> Delivery Address </h1>
+      <div class="table-responsive">
+          <table class="table">
+              <thead>
+                <tr>
+                <th></th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Mobile</th>
+                <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= @address.address&.truncate(50) %></td>
+                  <td><%= @address.city %></td>
+                  <td><%= @address.mobile %></td>
+                  <td><%= @address.city %></td>
+                </tr>
+              </tbody>
+          </table>
+        </div> 
+    </div>
   </div>
 </div>

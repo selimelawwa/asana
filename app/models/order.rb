@@ -18,4 +18,18 @@ class Order < ApplicationRecord
   def current_total_cost
     line_items.map(&:total_cost).inject(0){|sum,x| sum + x }
   end
+
+  def remove_order_id_from_other_addresses(address_id)
+    addresses.where.not(id: address_id).each do |a|
+      a.update(order_id: nil)
+    end
+  end
+
+  def valid_for_finalize?
+    line_items.any?
+  end
+
+  def get_delivery_address
+    addresses.first
+  end
 end
