@@ -43,6 +43,8 @@
                   <th scope="col">Product Name</th>
                   <th>Price</th>
                   <th></th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -53,7 +55,12 @@
                     <td><%= p.name %></td>
                     <td><%= "EGP #{p.price}" %></td>
                     <td>
+                      <%= link_to 'Edit product', edit_product_path(p.id) %>
+                    </td>
+                    <td>
                       <%= link_to 'Variants', product_variants_path(p.id) %>
+                    </td>
+                    <td>
                       <%= link_to 'Images', product_images_path(p.id) %>
                     </td>
                   </tr>
