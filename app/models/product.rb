@@ -16,6 +16,7 @@ class Product < ApplicationRecord
   validates_attachment_content_type :main_photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   
   after_create :create_variants_based_on_colors
+  before_create :validate_color_ids_present
 
   # validations
   validates :name, :price, :category_ids, :sub_category_ids, :main_photo, presence: true
@@ -35,6 +36,14 @@ class Product < ApplicationRecord
     end
   end
 
+  def validate_color_ids_present
+    product_color_ids = self.color_ids.reject { |c| c.empty? }    
+    unless product_color_ids.presence
+      errors.add(:color_ids, "Please select at least 1 color")
+      throw :abort
+    end
+  end
+   
   def create_variants_based_on_colors
     product_color_ids = self.color_ids.reject { |c| c.empty? }
     if product_color_ids
@@ -86,7 +95,7 @@ class Product < ApplicationRecord
   end
 
   def variant_medium_photo(color_id)
-    variants.main.where(color_id: color_id).first.main_photo&.image
+    variants.main.where(color_id: color_id).first&.main_photo&.image
   end
 
   #to be viewed with color select at product show

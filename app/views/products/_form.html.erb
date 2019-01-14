@@ -46,10 +46,10 @@
         
 
         <br><br>
-        
         <% if product.new_record? %>
           <%= collection_check_boxes(:product, :color_ids, Color.all, :id, :name) %>
         <% end %>
+        <%= f.hint 'You must select at least 1 color' %>
 
         <% submit_label = product.new_record? ? "Add Product" : "Update Product"%>
 
