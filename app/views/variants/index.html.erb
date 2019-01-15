@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container my-4">
   <%= render partial: 'shared/products_breadcrum', locals: {active_link: "#{@product.name} Variants"}%>
   <div class="row d-flex align-items-center justify-content-between">
     <h1> <%= "#{@product.name} Variants " %> </h1>
@@ -22,7 +22,7 @@
         <tbody>
           <% @variants.each_with_index do |v,i| %>
             <tr>
-              <th scope="row"><%= i %></th>
+              <th scope="row"><%= i + 1 %></th>
               <td><%= v.size.name %></td>
               <td><%= v.color.name %></td>
               <td id = "<%="stock-#{v.id}"%>"><%= v.stock %></td>
@@ -33,7 +33,6 @@
 
             <div class="modal fade" id="<%="modal_#{v.id}"%>" role="dialog">
               <div class="modal-dialog">
-                <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title"><%= "Update #{v.product.name} - #{v.options_text}"%></h4>

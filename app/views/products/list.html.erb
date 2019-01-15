@@ -1,10 +1,18 @@
-<div class="container my-5">
+<div class="container mt-3">
+  <div class="row justify-content-end">
+    <% if policy(Product).create? %>
+    <h5><%= link_to 'Add a Product', new_product_path, class: "push-m9" %></h5>
+    <% end %>
+  </div>
+</div>
+<div class="container mt-2 mb-5">
   <div class = "row">
-    <div class= "col-sm-3">
+    <div class= "col-md-3">
       <%= render partial: 'shared/admin_sidebar' , locals: {current: 'products'}%>
     </div>
-    <div class = "col-sm-9">
-      <div class="row d-flex align-items-center">
+    <div class = "col-md-9">
+      
+      <div class="col-sm-12 d-flex align-items-center justify-content-between">
         <div>
           <% if params[:category_id].blank? %>
             <h1> All Products </h1>
@@ -12,24 +20,17 @@
             <h1> <%= "#{@category.name}'s Products" %> </h1>
           <% end %>
         </div>
-        <div class = "offset-sm-6">
-          <% if policy(Product).create? %>
-            <%= link_to 'Add a Product', new_product_path, class: "push-m9" %>
-          <% end %>
-        </div>
-      </div>
-      <div class="row">
+        <div class = "offset-sm-4">
           <%= search_form_for @q, url: product_list_path do |f| %>
             <div class="form-row align-items-center">
               <div class= "col-auto">
                 <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
-                <i class="material-icons search-icon">search</i>
               </div>
-              <button class="btn btn-success btn-large mb-2" type="submit" name="action">Submit
-                <i class="material-icons right">send</i>
+              <button class="btn btn-success btn-large mb-2" type="submit" name="action">Search
               </button>
             </div>
           <% end %>
+        </div>
       </div>
       <div  class= "center-align">
         <%= will_paginate @products , renderer: @custom_paginate_renderer %>

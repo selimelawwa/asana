@@ -1,21 +1,23 @@
-<div class = "row">
-  <div class = "col-sm-9">
-    <div class="col-sm-12 d-flex align-items-center justify-content-between">
-        <h1> Available colors </h1>
-        <h5> <%= link_to 'Add a new color', new_color_path %> </h5>
-      </div>
-    <div class ="offset-sm-1 col-sm-10 categories-container">
-      <% @colors.each do |c|%>
-        <ul class="list-group">
-          <li class="list-group-item no_padding"> 
-            <%= image_tag c.photo.url(:thumb), :class => "color_img" %>
-            <%= link_to c.name, edit_color_path(c.id) %> 
-          </li>
-        </ul>
-      <% end %>
+<div class="container my-5">
+  <div class = "row">
+    <div class= "col-sm-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'colors'}%>
     </div>
-  </div>
-  <div class= "col-sm-3">
-    <%= render partial: 'shared/admin_sidebar' , locals: {current: 'colors'}%>
+    <div class = "col-sm-9">
+      <div class="col-sm-12 d-flex align-items-center justify-content-between">
+          <h1> Available colors </h1>
+          <h5> <%= link_to 'Add a new color', new_color_path %> </h5>
+        </div>
+      <div class ="col-sm-10 categories-container">
+        <% @colors.each do |c|%>
+          <ul class="list-group">
+            <li class="list-group-item no_padding"> 
+              <%= image_tag c.photo.url(:thumb), :class => "color_img" %>
+              <%= link_to c.name, edit_color_path(c.id) %> 
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
