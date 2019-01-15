@@ -1,21 +1,40 @@
-<div class = "container mt-3">
-  <% if product.new_record? %>
-    <h1> New Product </h1>
-  <% else %>
-    <h1> Edit <%= product.name %> </h1>
-  <% end %>
-
+<div class = "container my-5">
   <div class = "row">
+    <div class= "col-md-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'products'}%>
+    </div>
     <div class= "col-md-9">
+      <% if product.new_record? %>
+        <h1> New Product </h1>
+      <% else %>
+        <h1> Edit <%= product.name %> </h1>
+      <% end %>
       <%= simple_form_for product, url: (product.new_record? ? products_path : product_path)  do |f| %>
-
-        <div class="form-group">
-          <%= f.label 'Product Name', :name %>
-          <%= f.input :name, class: 'form-control'  %>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <!-- <%= f.label 'Product Name', :name %> -->
+              <%= f.input :name, class: 'form-control'  %>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <%= f.input :price, label: 'Product Price', class: 'form-control', input_html: { min: '0', step: 'any' } %>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <%= f.input :price, label: 'Product Price', class: 'form-control', input_html: { min: '0', step: 'any' } %>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group ">
+              <%= f.input :category_ids, collection: Category.category , label: 'Category', class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <%= f.input :sub_category_ids, collection: Category.sub_category , label: 'Sub Category', class: 'form-control' %>
+            </div>
+          </div>
         </div>
 
         <div class="form-group ">
@@ -31,20 +50,11 @@
         <div class="form-group">
           <%= f.input :model_wearing, class: 'form-control'  %>
         </div>        
-
-        <div class="form-group ">
-          <%= f.input :category_ids, collection: Category.category , label: 'Category', class: 'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.input :sub_category_ids, collection: Category.sub_category , label: 'Sub Category', class: 'form-control' %>
-        </div>
   
-        <div class="custom-file">
+        <div class="custom-file mb-4">
           <%= f.input :main_photo, as: :file, class: 'custom-file-input' %>
         </div>
-        
-
+      
         <br><br>
         <% if product.new_record? %>
           <%= collection_check_boxes(:product, :color_ids, Color.all, :id, :name) %>
@@ -54,7 +64,7 @@
         <% submit_label = product.new_record? ? "Add Product" : "Update Product"%>
 
         <div class="d-flex flex-row-reverse">
-          <button class="btn btn-primary btn-large align-right mb-3" type="submit" name="action"><%= submit_label%>
+          <button class="btn btn-dark btn-large align-right mb-3" type="submit" name="action"><%= submit_label%>
           </button>
         </div>
         

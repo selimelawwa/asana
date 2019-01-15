@@ -1,36 +1,48 @@
-<div class="container my-5">
+<div class="container mt-3">
+  <div class="row justify-content-end">
+    <h5> <%= link_to 'Add a new category', new_category_path, class: 'text-dark' %> </h5>
+  </div>
+</div>
+<div class="container mt-3 mb-5">
   <div class = "row">
     <div class= "col-sm-3">
       <%= render partial: 'shared/admin_sidebar' , locals: {current: 'categories'}%>
     </div>
     <div class = "col-sm-9">
       <div class="col-sm-12 d-flex align-items-center justify-content-between">
-        <h1> All Categories </h1>
-        <h5> <%= link_to 'Add a new category', new_category_path %> </h5>
+        <h1>Categories</h1>
       </div>
-      <div class ="col-sm-10 categories-container">
+      <div class ="col-sm-9 categories-container">
         <% if @categories.any? %>
           <ul class="list-group">
             <% @categories.each do |c|%>
               <li class="list-group-item">
-                  <a data-toggle="collapse" href=<%= "#collapse#{c.id}"%>>
-                    <%= c.name %>
+                  <a data-toggle="collapse" class="text-dark" href=<%= "#collapse#{c.id}"%>>
+                    <u><%= c.name %></u>
                   </a>
               </li>
               <div id= <%= "collapse#{c.id}"%> class="panel-collapse collapse">
                 <ul class="list-group">
                   <% c.sub_categories.each do |s| %>
-                    <li class="list-group-item"> <%= s.name %> </li>
+                    <li class="list-group-item border-bottom-0 border-top-0" style="font-size: 0.9rem;">
+                      <div class="ml-3">
+                        <%= s.name %>
+                      </div> 
+                    </li>
                   <% end %>
-                  <li class="list-group-item">
+                  <li class="list-group-item border-top-0"  style="font-size: 0.9rem;">
                     <%= simple_form_for c.sub_categories.new, url: categories_path  do |f|%>
-                      <div class="form-row align-items-center">
-                        <div class= "col-auto">
-                          <%= f.label "New #{c.name} Sub Category Name", :name %>
-                          <%= f.text_field :name, class: 'form-control'  %>
-                          <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
-                            <i class="material-icons right">send</i>
-                          </button>
+                      <div class="form-row align-items-center ml-3">
+                        <%= f.label "New #{c.name} Sub Category Name", :name %>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-8">
+                              <%= f.text_field :name, class: 'form-control'  %>
+                            </div>
+                            <div class="col-4">
+                              <button class="btn btn-dark btn-large align-right" type="submit" name="action">Add</button>    
+                            </div>
+                          </div>  
                         </div>
                       </div>
                       <%= f.input :kind, as: :hidden, input_html: { value: 'sub_category' }%>

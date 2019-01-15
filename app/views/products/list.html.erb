@@ -1,7 +1,7 @@
-<div class="container mt-3">
+<div class="container mt-4">
   <div class="row justify-content-end">
     <% if policy(Product).create? %>
-    <h5><%= link_to 'Add a Product', new_product_path, class: "push-m9" %></h5>
+    <h5><%= link_to 'Add a Product', new_product_path, class: "push-m9 text-dark" %></h5>
     <% end %>
   </div>
 </div>
@@ -15,12 +15,13 @@
       <div class="col-sm-12 d-flex align-items-center justify-content-between">
         <div>
           <% if params[:category_id].blank? %>
-            <h1> All Products </h1>
+            <h1 class="d-md-none d-lg-block entry-title"> All Products </h1>
+            <h3 class="d-none d-md-block d-lg-none"> All Products </h3>
           <% else %>
             <h1> <%= "#{@category.name}'s Products" %> </h1>
           <% end %>
         </div>
-        <div class = "offset-sm-4">
+        <div class = "offset-xl-4 d-none d-sm-block">
           <%= search_form_for @q, url: product_list_path do |f| %>
             <div class="form-row align-items-center">
               <div class= "col-auto">
@@ -43,7 +44,7 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th></th>
+                  <th>Main Image</th>
                   <th scope="col">Product Name</th>
                   <th>Price</th>
                   <th></th>
@@ -54,18 +55,18 @@
               <tbody>
                 <% @products.each_with_index do |p,i| %>
                   <tr>
-                    <th scope="row"><%= i %></th>
+                    <th scope="row"><%= i + 1 %></th>
                     <td><%= image_tag p.main_photo.url(:thumb) %></td>
                     <td><%= p.name %></td>
                     <td><%= "EGP #{p.price}" %></td>
                     <td>
-                      <%= link_to 'Edit product', edit_product_path(p.id) %>
+                      <%= link_to 'Edit product', edit_product_path(p.id), class: 'text-dark' %>
                     </td>
                     <td>
-                      <%= link_to 'Variants', product_variants_path(p.id) %>
+                      <%= link_to 'Variants', product_variants_path(p.id), class: 'text-dark' %>
                     </td>
                     <td>
-                      <%= link_to 'Images', product_images_path(p.id) %>
+                      <%= link_to 'Images', product_images_path(p.id), class: 'text-dark' %>
                     </td>
                   </tr>
                 <% end %>
