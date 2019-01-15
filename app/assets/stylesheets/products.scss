@@ -141,6 +141,10 @@
   overflow: hidden;
 }
 
+.pointer{
+    cursor: pointer;
+  }
+  
 .inner img {
   transition: all 1.5s ease;
 }
@@ -568,10 +572,11 @@
 
 .size-filter{
     padding-left: 0px;
+    font-size: 0.8rem;
 }
 
 .size-filter li a{
-color: #343a40;
+    color: #343a40;
 }
 
 
@@ -1209,8 +1214,8 @@ img {
   }
 
 .color_filter:hover, .color_filter.active{
-    border: 1px solid;
-    padding: 1px;
+    border: 2px solid;
+    padding: 0.05rem;
 }
 
 tbody.order_details > tr > td{
