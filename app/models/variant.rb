@@ -29,8 +29,12 @@ class Variant < ApplicationRecord
     photos.first
   end
 
+  def name_with_options_text
+    "#{product.name} - #{options_text}"
+  end
+
   def options_text
-    "#{color.name} - #{size.name}"
+    "#{color.name} - #{size&.name}"
   end
   def color_text
     "#{color.name}"

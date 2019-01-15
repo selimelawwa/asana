@@ -1,4 +1,4 @@
-<%= simple_form_for address, url: order_create_address_url(order_id: address.order_id)  do |f| %>
+<%= simple_form_for address, url: order_create_address_url(order_id: order)  do |f| %>
 
   <div class="form-group">
     <%= f.input :address, class: 'form-control'  %>

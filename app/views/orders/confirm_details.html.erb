@@ -4,40 +4,21 @@
       <h1> Order Details </h1>
     </div>
   </div>
+  <% if @error_msg %>
+    <ul style="padding-left: 0;">
+      <li> 
+        <pre class="error_msg_pre"><%= @error_msg %> </pre>
+      </li>
+    </ul>
+  <% end %>
   <div class="row">
     <% if @order.line_items.any?%>
-      <div class="col-8">
-        <div class="row">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th></th>
-                  <th scope="col">Product Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total Cost</th>
-                </tr>
-              </thead>
-              <tbody class="order_details">
-                <% @order.line_items.each_with_index do |l,i| %>
-                  <tr>
-                    <% variant = l.variant%>
-                    <td scope="row"><%= i %></td>
-                    <td><%= image_tag variant.main_photo.image.url(:thumb) %></td>
-                    <td><%= "#{variant.product.name} - #{variant.options_text}" %></td>
-                    <td><%= "EGP #{variant.product.price}" %></td>
-                    <td><%= l.quantity%> </td>
-                    <td> <%= l.total_cost%> </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
+      <div class="col-9">
+        <div class="row" id="order_details_div">
+          <%= render partial: 'order_details_partial', locals: {line_items: @order.line_items}%>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-3" style="text-align: right;">
         <h4> Order Summary</h4>
         <p> Total Amount:  <%= @order.current_total_cost%></p>
       </div>
@@ -45,29 +26,43 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
-      <h1> Delivery Address </h1>
-      <div class="table-responsive">
-          <table class="table">
-              <thead>
-                <tr>
-                <th></th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Mobile</th>
-                <th>City</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><%= @address.address&.truncate(50) %></td>
-                  <td><%= @address.city %></td>
-                  <td><%= @address.mobile %></td>
-                  <td><%= @address.city %></td>
-                </tr>
-              </tbody>
-          </table>
-        </div> 
+    <% if @address%>
+      <div class="col-12 mt-30">
+        <h1> Delivery Address </h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                  <th>Address</th>
+                  <th>City</th>
+                  <th>Mobile</th>
+                  <th>City</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><%= @address.address&.truncate(50) %></td>
+                    <td><%= @address.city %></td>
+                    <td><%= @address.mobile %></td>
+                    <td><%= @address.city %></td>
+                  </tr>
+                </tbody>
+            </table>
+          </div> 
+      </div>
+    <% end %>
+  </div>
+  <div class= "row">
+    <div class="offset-6 col-6">
+      <%= link_to 'Confirm Order', order_confirm_order_path(@order), method: :post, class: "confirm_order_btn float-right" %>
     </div>
   </div>
 </div>
+
+<script>
+   $(document).ready(function() {
+      setTimeout(function(){ 
+        $('.error_msg_pre').hide();
+        }, 3000);
+    });
+</script>

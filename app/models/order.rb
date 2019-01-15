@@ -2,34 +2,62 @@ class Order < ApplicationRecord
   has_many :line_items, -> { order(:created_at) }, inverse_of: :order, dependent: :destroy
   has_many :variants, through: :line_items
   has_many :products, through: :variants
-  has_many :addresses
+
+  belongs_to :address, optional: true
   belongs_to :user
 
-  enum status: %i[cart address confirmed delivered canceled]
+  enum status: %i[in_cart confirmed delivered canceled]
   
-  scope :completed, -> { where(cart: false) }
-
+  before_create :ensure_no_other_un_confirmed_orders
   before_create :set_default_status
 
+  before_update :validate_no_out_of_stock_variants
+
+  def finalize
+    update(cart: false, status: 'confirmed')
+  end
+  
+  def validate_no_out_of_stock_variants
+    if cart_changed?
+      no_stock_variants = out_of_stock_variants
+      if no_stock_variants
+        errors_messages = no_stock_variants.map do |v|
+          difference_in_stock(v)
+        end&.join('\n')
+        errors.add(:out_of_stock_variants, "#{errors_messages} \nPlease remove items/adjust quantity to complete order", variant_ids: no_stock_variants.ids)
+        throw :abort
+      end
+    end
+  end
+
+  def difference_in_stock(variant)
+    if variant.stock.zero?
+      "#{variant.name_with_options_text} is out of stock!"
+    else
+      "Only #{variant.stock} items available of #{variant.name_with_options_text}"
+    end
+  end
+
+  def out_of_stock_variants
+    Variant.joins(line_items: :order).where(orders: {user_id: user_id, cart: true}).where('variants.stock < line_items.quantity').presence
+  end
+
   def set_default_status
-    self.status = 'cart'
+    self.status = 'in_cart'
   end
 
   def current_total_cost
     line_items.map(&:total_cost).inject(0){|sum,x| sum + x }
   end
 
-  def remove_order_id_from_other_addresses(address_id)
-    addresses.where.not(id: address_id).each do |a|
-      a.update(order_id: nil)
-    end
-  end
-
-  def valid_for_finalize?
+  def has_line_items?
     line_items.any?
   end
 
-  def get_delivery_address
-    addresses.first
+  def ensure_no_other_un_confirmed_orders
+    if user.orders.where(cart: true).any?
+      errors.add(:base, "Cant create a new order while old one is not confirmed")
+      throw :abort
+    end
   end
 end

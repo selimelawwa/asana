@@ -1,0 +1,75 @@
+<% if line_items.any?%>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Image</th>
+          <th scope="col">Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total Cost</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="order_details">
+        <% line_items.each_with_index do |l,i| %>
+          <tr>
+            <% variant = l.variant%>
+            <td scope="row"><%= i %></td>
+            <td><%= image_tag variant.main_photo.image.url(:thumb) %></td>
+            <td><%= variant.name_with_options_text %></td>
+            <td><%= "EGP #{variant.product.price}" %></td>
+            <td>
+              <div class="quantity">
+                <% input_id = "qty_#{l.id}"%>
+                <span class="qty-plus" style="background: #f8f9fa;" onclick="var effect = document.getElementById('<%= input_id %>'); var qty = effect.value; if( !isNaN( qty )&amp;&amp; qty &lt; 5) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                <span class="qty-minus" style="background: #f8f9fa;" onclick="var effect = document.getElementById('<%= input_id %>'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                <input type="number" class="qty-text form-control" style="background: #f8f9fa;" id="<%= input_id%>" step="1" min="1" max="5" name="quantity" value= <%= l.quantity%> >
+              </div>
+            </td>
+            <td> <%= l.total_cost%> </td>
+            <td>
+              <a class="remove_item" id="<%="li_#{l.id}"%>"> <i class="fas fa-trash fa-2x red"></i> </a>
+              <a class="update_quantity" id="<%="li_#{l.id}"%>"> <i class="fas fa-sync-alt fa-2x green"></i> </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<script>
+  $('.remove_item').click(function(){
+    line_item_id = this.id.substring(3);
+    $.ajax({
+      type: "POST",
+      url: '/remove_line_item',
+      data: {line_item_id: line_item_id},
+      success: function(response, data, status, xhr) {
+        $('#order_details_div').html(response);
+      },
+      error: function() {
+        alert('error');
+      }
+    });
+  });
+
+  $('.update_quantity').click(function(){
+    line_item_id = this.id.substring(3);
+    quantity = $('#qty_'+line_item_id).val();
+    debugger
+    $.ajax({
+      type: "POST",
+      url: '/update_line_item_quantity',
+      data: {line_item_id: line_item_id, quantity: quantity},
+      success: function(response, data, status, xhr) {
+        $('#order_details_div').html(response);
+      },
+      error: function() {
+        alert('error');
+      }
+    });
+  });
+</script>
