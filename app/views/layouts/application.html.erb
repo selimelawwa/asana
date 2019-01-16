@@ -15,7 +15,9 @@
   <%= render 'shared/navbar' %>
   <body>
     <%= render 'shared/devise_messages' ,locale: { notice: notice, alert: alert }%>
-    <%= yield %>
+    <div class="fix-footer">
+      <%= yield %>
+    </div>
   </body>
   <%= render 'shared/footer' %>
 </html>

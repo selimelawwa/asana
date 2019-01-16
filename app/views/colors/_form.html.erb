@@ -20,8 +20,9 @@
           <%= f.file_field :photo , class: 'form-control'%>
         </div>
         <br>
+        <% submit_label = color.new_record? ? "Add Color" : "Update Color"%>
         <div class="d-flex flex-row-reverse">
-          <button class="btn btn-dark btn-large align-right" type="submit" name="action">Save</button>
+          <button class="btn btn-dark btn-large align-right mt-4 mb-3 col-12 col-sm-2" type="submit" name="action"><%= submit_label %></button>
         </div>
       <% end %>
     </div>

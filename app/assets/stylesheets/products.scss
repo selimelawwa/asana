@@ -358,7 +358,10 @@
 
 // Small devices (landscape phones, 576px and up)
   @media (min-width: 576px) and (max-width: 767.98px) { 
-
+    .fix-footer{
+        // height: 600px;
+        min-height: calc(100vh - 428px);
+    }
   }
 
 // Medium devices (tablets, 768px and up)
@@ -373,6 +376,12 @@
         margin-top: 10%;
         margin-bottom: 13%;
     }
+    .fix-footer{
+        min-height: calc(100vh - 426px);
+    }
+    .edit-pass-font{
+        font-size: 0.7rem;
+    }
   }
 
 // Large devices (desktops, 992px and up)
@@ -385,11 +394,16 @@
         margin-top: 26%;
         margin-bottom: 24%;
     }
+    .fix-footer{
+        min-height: calc(100vh - 426px);
+    }
   }
 
 // Extra large devices (large desktops, 1200px and up)
     @media (min-width: 1200px) { 
-
+        .fix-footer{
+            min-height: calc(100vh - 426px);
+        }
     }
 
 .text-color-dark{

@@ -36,6 +36,12 @@
           </li>
         </ul>
           <ul class="navbar-nav" id="left-nav">
+            <% if policy(Product).create? %>
+              <li class="nav-item"> <%= link_to product_list_path, class:"nav-link" do %>
+                <i class="fas fa-toolbox fa-2x" data-toggle="tooltip" title="Admin Settings"></i>
+                <% end %>
+              </li>
+            <% end %> 
             <% if user_signed_in? %>
               <li class="nav-item"> <%= link_to edit_registration_path(:user), class:"nav-link" do %>
                 <i class="fas fa-user fa-2x" data-toggle="tooltip" title="Profile"></i>
@@ -125,14 +131,17 @@
               </li>
               <% end %>
             <% end %>
-            <span class="border-top my-1 d-block d-sm-none"></span>
-            <li class="nav-item d-block d-sm-none"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
+            <span class="border-top my-1"></span>
+            <% if policy(Product).create? %>
+              <li class="nav-item"> <%= link_to "Admin Pages", product_list_path, class:"nav-link" %></li>
+            <% end %>
+            <li class="nav-item"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
             <% if user_signed_in? %>
-              <li class="nav-item d-block d-sm-none"> <%= link_to "Edit account", edit_registration_path(:user), class:"nav-link" %> </li>
-              <li class="nav-item d-block d-sm-none"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
+              <li class="nav-item"> <%= link_to "Edit account", edit_registration_path(:user), class:"nav-link" %> </li>
+              <li class="nav-item"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
             <% else %>
-              <li class="nav-item d-block d-sm-none"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
-              <li class="nav-item d-block d-sm-none"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
+              <li class="nav-item"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
+              <li class="nav-item"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
             <% end %>
           </ul>
         </div>

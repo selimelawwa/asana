@@ -1,12 +1,13 @@
-<div class="container">
+<div class="container my-5">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       <div class="row d-flex align-items-center">
         <% if @order.cart? %>
-            <h1> Cart Details </h1>
-          <% else %>
-            <h1> <%= "Order Number #{@order.id}" %> </h1>
-          <% end %>
+          <i class="fas fa-shopping-cart fa-2x mx-3 pb-1"></i>
+          <h1> Cart </h1>
+        <% else %>
+          <h1> <%= "Order Number #{@order.id}" %> </h1>
+        <% end %>
       </div>
       <div class="row">
         <% if @order.line_items.any?%>
@@ -15,7 +16,7 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th></th>
+                  <th>Product Image</th>
                   <th scope="col">Product Name</th>
                   <th>Price</th>
                   <th>Quantity</th>
@@ -26,7 +27,7 @@
                 <% @order.line_items.each_with_index do |l,i| %>
                   <tr>
                     <% variant = l.variant%>
-                    <td scope="row"><%= i %></td>
+                    <td scope="row"><%= i + 1 %></td>
                     <td><%= image_tag variant.main_photo.image.url(:thumb) %></td>
                     <td><%= "#{variant.product.name} - #{variant.options_text}" %></td>
                     <td><%= "EGP #{variant.product.price}" %></td>
