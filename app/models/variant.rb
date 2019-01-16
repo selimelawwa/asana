@@ -16,6 +16,8 @@ class Variant < ApplicationRecord
   validates :size, presence: true, if: -> { sized? }
   validates :main_variant, presence: true, if: -> { sized? }
   validates_uniqueness_of :product_id, scope: [:color_id, :size_id]
+  validates :stock, numericality: { greater_than_or_equal_to: 0,  only_integer: true }
+
 
   def photos
     if sized?
@@ -29,8 +31,12 @@ class Variant < ApplicationRecord
     photos.first
   end
 
+  def name_with_options_text
+    "#{product.name} - #{options_text}"
+  end
+
   def options_text
-    "#{color.name} - #{size.name}"
+    "#{color.name} - #{size&.name}"
   end
   def color_text
     "#{color.name}"

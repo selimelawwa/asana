@@ -1,4 +1,12 @@
 <div class = "container my-5">
+  <% if product.new_record? %>
+    <%= render partial: 'shared/products_breadcrum', locals: {active_link: "New Product"}%>
+    <h1> New Product </h1>
+  <% else %>
+    <%= render partial: 'shared/products_breadcrum', locals: {active_link: "#{product.name}"}%>
+    <h1> Edit <%= product.name %> </h1>
+  <% end %>
+
   <div class = "row">
     <div class= "col-md-3">
       <%= render partial: 'shared/admin_sidebar' , locals: {current: 'products'}%>
@@ -58,8 +66,8 @@
         <br><br>
         <% if product.new_record? %>
           <%= collection_check_boxes(:product, :color_ids, Color.all, :id, :name) %>
+          <%= f.hint 'You must select at least 1 color' %>
         <% end %>
-        <%= f.hint 'You must select at least 1 color' %>
 
         <% submit_label = product.new_record? ? "Add Product" : "Update Product"%>
 

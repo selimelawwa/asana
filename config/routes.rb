@@ -20,15 +20,27 @@ Rails.application.routes.draw do
 
 
   
-  resources :orders, only: %i[index show]
+  resources :orders, only: %i[index show] do
+    get 'select_address', to: 'orders#select_address', as: 'select_address'
+    post 'assign_address', to: 'orders#assign_address', as: 'assign_address'
+    post 'create_address', to: 'orders#create_address', as: 'create_address'
+    get 'confirm_details', to: 'orders#confirm_details', as: 'confirm_details'
+    post 'confirm_order', to: 'orders#confirm_order', as: 'confirm_order'
+  end
   post 'add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
+  post 'remove_line_item', to: 'orders#remove_line_item', as: 'remove_line_item'
+  post 'update_line_item_quantity', to: 'orders#update_line_item_quantity', as: 'update_line_item_quantity'
+  
   
   scope '/admin' do
     get 'products/list', to: 'products#list', as: 'product_list'
     resources :categories
     resources :sizes, only: %i[index new create edit update]
     resources :colors, only: %i[index new create edit update]
-    resources :tags
+    resources :tags do
+      get 'available_products', to: 'tags#available_products', as: 'available_products'
+      post 'assign_products', to: 'tags#assign_products', as: 'assign_products'
+    end
   end
   
   get 'welcome/index'

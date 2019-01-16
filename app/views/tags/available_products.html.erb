@@ -1,0 +1,82 @@
+<div class="container">
+  <%= render partial: 'shared/tags_breadcrum', locals: {active_link: "#{@tag.name} / Select Products"}%>
+  <div class = "row">
+    <div class = "col-sm-9">
+      <div class="row d-flex align-items-center">
+        <div>
+          <h1> Available Products </h1>
+        </div>
+      </div>
+      <div class="row">
+          <%= search_form_for @q, url: product_list_path do |f| %>
+            <div class="form-row align-items-center">
+              <div class= "col-auto">
+                <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
+                <i class="material-icons search-icon">search</i>
+              </div>
+              <button class="btn btn-success btn-large mb-2" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          <% end %>
+      </div>
+      <div  class= "center-align">
+        <%= will_paginate @products , renderer: @custom_paginate_renderer %>
+      </div>
+      
+      <div class="row">
+        <% if @products.any?%>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th scope="col">Product Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @products.each_with_index do |p,i| %>
+                  <tr>
+                    <td>
+                      <input type="checkbox" class="checked_products" id="<%= "product_#{p.id}" %>" value="<%= "#{p.id}" %>">
+                    </td>
+                    <td><%= image_tag p.main_photo.url(:thumb) %></td>
+                    <td><%= p.name %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+            <button type="button" name="save" class="btn btn-success" id="btn_checked_products">Add</button>
+        <% end %>
+      </div>
+    </div>
+    <div class= "col-sm-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'tags'}%>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#btn_checked_products').click(function(){
+    var checked_ids = [];
+    $.each($("input[type='checkbox']:checked"), function(){            
+      checked_ids.push($(this).val());
+    });
+    if (checked_ids.length > 0){
+      $.ajax({
+        type: "POST",
+        url: "<%= j tag_assign_products_url %>",
+        data: {product_ids: checked_ids},
+        success: function(response, data, status, xhr) {
+          window.location.href = "<%= j tags_path %>";
+        },
+        error: function() {
+          alert('error');
+        }
+      });
+    }
+  });
+</script>
+

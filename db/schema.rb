@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_214129) do
+ActiveRecord::Schema.define(version: 2019_01_15_193837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.bigint "order_id"
     t.bigint "user_id"
     t.boolean "default_addresses", default: false
     t.string "city"
@@ -25,7 +24,6 @@ ActiveRecord::Schema.define(version: 2019_01_13_214129) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_addresses_on_order_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -84,6 +82,8 @@ ActiveRecord::Schema.define(version: 2019_01_13_214129) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "address_id"
+    t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -176,9 +176,9 @@ ActiveRecord::Schema.define(version: 2019_01_13_214129) do
     t.index ["size_id"], name: "index_variants_on_size_id"
   end
 
-  add_foreign_key "addresses", "orders"
   add_foreign_key "addresses", "users"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "variants"
+  add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"
 end
