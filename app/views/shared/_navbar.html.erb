@@ -61,7 +61,7 @@
                 <% end %> 
               </li>
             <% end %>
-            <li class="nav-item pr-4"> <%= link_to order_path(current_order), class:"nav-link" do %>
+            <li class="nav-item pr-4"> <%= link_to cart_path, class:"nav-link" do %>
               <i class="fas fa-shopping-cart fa-2x" data-toggle="tooltip" title="Cart"></i>
             <% end if current_user%> 
             </li>

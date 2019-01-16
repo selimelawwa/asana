@@ -97,14 +97,6 @@
 
             <p class="available">Available: <span class="text-muted">In Stock</span></p>
 
-            <div class="single_product_ratings mb-30">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </div>
-
             <div class="cart">
               <button id= "add_to_cart" type="submit" name="addtocart" value="5" class="btn cart-submit d-block ml-0 mb-5">Add to cart</button>
             </div>
@@ -277,6 +269,7 @@
         url: '/add_to_cart',
         data: {size_id: size_id, quantity: quantity, product_id: product_id, color_id: color_id},
         success: function(response, data, status, xhr) {
+          debugger;
           if (response['saved'] == 1){
             $('#exampleModalCenter').modal('show');
           } else{

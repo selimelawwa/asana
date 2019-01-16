@@ -50,6 +50,12 @@ class OrdersController < ApplicationController
     @order.refresh_line_items if @order.cart?
   end
 
+  def cart
+    @order = current_order
+    authorize @order
+    @order.refresh_line_items if @order.cart?
+  end
+
   def select_address
     @addresses = current_user.addresses.where.not(id: nil)
     @address  = current_user.addresses.new
