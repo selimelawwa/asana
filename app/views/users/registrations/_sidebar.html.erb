@@ -6,8 +6,10 @@
     <li class="list-group-item bg-light">
       <%= link_to "CHANGE PASSWORD", edit_user_password_path, class:"text-dark collection-item #{'active' if current == 'edit_password'} " %>
     </li>
-    <li class="list-group-item bg-light">
-      <%= link_to "MY ORDERS", orders_path, class:"text-dark" %>
-    </li>
+    <% unless current_user.admin? %>
+      <li class="list-group-item bg-light">
+        <%= link_to "MY ORDERS", orders_path, class:"text-dark" %>
+      </li>
+    <% end %>
   </ul>
 </div>
