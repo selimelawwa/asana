@@ -1,12 +1,14 @@
-<div class = "container">
-  <% if color.new_record? %>
-    <h1> Edit <%= color.name %> </h1>
-  <% else %>
-    <h1> New color  </h1>
-  <% end %>
-
+<div class = "container my-5">
   <div class = "row">
+    <div class = "col-md-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'colors'}%>
+    </div>
     <div class= "col-md-9">
+      <% if color.new_record? %>
+        <h1> New color  </h1>
+      <% else %>
+        <h1> Edit <%= color.name %>  Color</h1>
+      <% end %>
       <%= simple_form_for color, url: (color.new_record? ? colors_path : color_path)  do |f| %>
 
         <div class="form-group">
@@ -18,12 +20,10 @@
           <%= f.file_field :photo , class: 'form-control'%>
         </div>
         <br>
+        <% submit_label = color.new_record? ? "Add Color" : "Update Color"%>
         <div class="d-flex flex-row-reverse">
-          <button class="btn btn-primary btn-large align-right" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
+          <button class="btn btn-dark btn-large align-right mt-4 mb-3 col-12 col-sm-2" type="submit" name="action"><%= submit_label %></button>
         </div>
-        
       <% end %>
     </div>
   </div>

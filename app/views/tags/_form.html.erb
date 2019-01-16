@@ -1,26 +1,31 @@
-<% if tag.new_record? %>
-  <h1> New Tag </h1>
-<% else %>
-  <h1> Edit <%= tag.name %> </h1>
-<% end %>
-<div class = "row">
-  <div class= "col-md-9">
-    <%= simple_form_for tag, url: (tag.new_record? ? tags_path : tag_path)  do |f| %>
-
-      <div class="form-group">
-        <%= f.label 'Tag Name', :name %>
-        <%= f.input :name, class: 'form-control'  %>
+<div class="container my-5">
+  <div class = "row">
+    <div class = "col-md-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'tags'}%>
+    </div>
+    <div class= "col-md-9">
+      <div class="row">
+        <div class="mx-auto">
+          <% if tag.new_record? %>
+            <h1> New Tag </h1>
+          <% else %>
+            <h1> Edit <%= tag.name %> </h1>
+          <% end %>
+        </div>
       </div>
-
-      <% submit_label = tag.new_record? ? "Add Tag" : "Update Tag"%>
-      <div class="d-flex flex-row-reverse">
-        <button class="btn btn-primary btn-large align-right mb-3" type="submit" name="action"><%= submit_label%>
-        </button>
-      </div>
-      
-    <% end %>
-  </div>
-  <div class = "col-md-3">
-    <%= render partial: 'shared/admin_sidebar' , locals: {current: 'tags'}%>
-  </div>
+      <%= simple_form_for tag, url: (tag.new_record? ? tags_path : tag_path)  do |f| %>
+  
+        <div class="form-group">
+          <!-- <%= f.label 'Tag Name', :name %> -->
+          <%= f.input :name, class: 'form-control'  %>
+        </div>
+  
+        <% submit_label = tag.new_record? ? "Add Tag" : "Update Tag"%>
+        <div class="d-flex flex-row-reverse">
+          <button class="btn btn-dark btn-large align-right mb-3" type="submit" name="action"><%= submit_label%>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>      
 </div>

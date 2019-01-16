@@ -1,7 +1,7 @@
 <div class="sign-up-form">
   <div class = "container">
     <div class = "row">
-      <div class= "col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class= "col-sm-9 col-md-8 col-lg-6 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body shadow border-0">
             <div class="container">
@@ -18,13 +18,21 @@
               </div>
               <div class="container">
                 <div class="row">
-                  <div class="form-label-group mob-only">
-                    <%= f.text_field :city, required: true, placeholder: "city", id: "user_city", class: "form-control" %>
-                    <label for="user_city" class="py-auto">City</label>
+                  <div class="col-12 col-lg-6">
+                    <div class="row">
+                      <div class="form-label-group w-100">
+                        <%= f.text_field :city, required: true, placeholder: "city", id: "user_city", class: "form-control" %>
+                        <label for="user_city" class="py-auto">City</label>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-label-group pl-1 mob-only">
-                    <%= f.date_field :birthday, max: Date.today, required: true, placeholder: "Date of Birth", id: "birthday", class: "form-control datepicker", style: "font-size:0.9rem" %>
-                    <label for="birthday" class="py-auto">Date of Birth</label>
+                  <div class="col-12 col-lg-6">
+                    <div class="row">
+                      <div class="form-label-group pl-1 w-100">
+                        <%= f.date_field :birthday, max: Date.today, required: true, placeholder: "Date of Birth", id: "birthday", class: "form-control datepicker", style: "font-size:0.9rem" %>
+                        <label for="birthday" class="py-auto">Date of Birth</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -34,13 +42,21 @@
               </div>
               <div class="container">
                 <div class="row">
-                  <div class="form-label-group mob-only">
-                    <%= f.password_field :password,required: true, id: "password", class: "form-control", placeholder: "Password" %>
-                    <label for="password" class="py-auto">Password</label>
+                  <div class="col-12 col-lg-6">
+                    <div class="row">
+                      <div class="form-label-group w-100">
+                        <%= f.password_field :password,required: true, id: "password", class: "form-control", placeholder: "Password" %>
+                        <label for="password" class="py-auto">Password</label>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-label-group pl-1 mob-only">
-                    <%= f.password_field :password_confirmation, required: true, placeholder: "confirm password", id: "password_confirmation", class: "form-control" %>
-                    <label for="password_confirmation" class="py-auto">Confirm Password</label>
+                  <div class="col-12 col-lg-6">
+                    <div class="row">
+                      <div class="form-label-group pl-1 w-100">
+                        <%= f.password_field :password_confirmation, required: true, placeholder: "confirm password", id: "password_confirmation", class: "form-control" %>
+                        <label for="password_confirmation" class="py-auto">Confirm Password</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -149,12 +165,12 @@
         return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
     }
   };
-  
+  /*
   if ( !isMobile.any() ) {
     $('.mob-only').addClass('w-50')
   }
   else {
     $('.mob-only').addClass('w-100')
-  }
+  }*/
 
 </script>

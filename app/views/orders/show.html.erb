@@ -1,11 +1,12 @@
-<div class="container">
+<div class="container my-5">
   <div class="row">
     <div class="row d-flex align-items-center">
       <% if @order.cart? %>
-          <h1> Cart Details </h1>
-        <% else %>
-          <h1> <%= "Order Number #{@order.id}" %> </h1>
-        <% end %>
+        <i class="fas fa-shopping-cart fa-2x mx-3 pb-1"></i>
+        <h1> Cart </h1>
+      <% else %>
+        <h1> <%= "Order Number #{@order.id}" %> </h1>
+      <% end %>
     </div>
   </div>
   <div class="row">
