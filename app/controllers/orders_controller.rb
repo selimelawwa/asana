@@ -47,6 +47,7 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     authorize @order
+    @order.refresh_line_items if @order.cart?
   end
 
   def select_address
@@ -80,14 +81,16 @@ class OrdersController < ApplicationController
       @error_msg = flash[:error]
       flash.discard(:error) 
     end
+    @order.refresh_line_items
     @address = @order.address
     redirect_to order_select_address_path(order_id: @order.id) unless @address
     redirect_to order_path(@order) unless @order.has_line_items?
   end
 
   def confirm_order
-    @address = @order.address
+    @address = @order.address    
     if @order.finalize
+      redirect_to order_path(@order)
     else
       flash[:error] = @order.errors[:out_of_stock_variants]&.first if @order.errors.any?
       redirect_to order_confirm_details_path(@order)

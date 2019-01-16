@@ -14,7 +14,23 @@ class Order < ApplicationRecord
   before_update :validate_no_out_of_stock_variants
 
   def finalize
-    update(cart: false, status: 'confirmed')
+    if update(cart: false, status: 'confirmed')
+      decrement_variant_stocks
+    end
+  end
+
+  def decrement_variant_stocks
+    line_items.each do |l|
+      v = l.variant
+      v.stock = v.stock - l.quantity
+      v.save
+    end
+  end
+
+  def refresh_line_items
+    line_items.each do |l|
+      l.verify_cost
+    end
   end
   
   def validate_no_out_of_stock_variants
@@ -24,7 +40,7 @@ class Order < ApplicationRecord
         errors_messages = no_stock_variants.map do |v|
           difference_in_stock(v)
         end&.join('\n')
-        errors.add(:out_of_stock_variants, "#{errors_messages} \nPlease remove items/adjust quantity to complete order", variant_ids: no_stock_variants.ids)
+        errors.add(:out_of_stock_variants, "#{errors_messages} \nPlease remove item(s)/adjust quantity to complete order", variant_ids: no_stock_variants.ids)
         throw :abort
       end
     end

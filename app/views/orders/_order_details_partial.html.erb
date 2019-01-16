@@ -8,7 +8,8 @@
           <th scope="col">Product Name</th>
           <th>Price</th>
           <th>Quantity</th>
-          <th>Total Cost</th>
+          <th>Total Amount</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -18,8 +19,8 @@
             <% variant = l.variant%>
             <td scope="row"><%= i %></td>
             <td><%= image_tag variant.main_photo.image.url(:thumb) %></td>
-            <td><%= variant.name_with_options_text %></td>
-            <td><%= "EGP #{variant.product.price}" %></td>
+            <td><%= link_to variant.name_with_options_text, product_path(variant.product) %> </td>
+            <td><%= "EGP #{l.cost}" %></td>
             <td>
               <div class="quantity">
                 <% input_id = "qty_#{l.id}"%>
@@ -30,8 +31,10 @@
             </td>
             <td> <%= l.total_cost%> </td>
             <td>
-              <a class="remove_item" id="<%="li_#{l.id}"%>"> <i class="fas fa-trash fa-2x red"></i> </a>
               <a class="update_quantity" id="<%="li_#{l.id}"%>"> <i class="fas fa-sync-alt fa-2x green"></i> </a>
+            </td>
+            <td>
+              <a class="remove_item" id="<%="li_#{l.id}"%>"> <i class="fas fa-trash fa-2x red"></i> </a>
             </td>
           </tr>
         <% end %>

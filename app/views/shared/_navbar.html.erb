@@ -57,7 +57,7 @@
             <% end %>
             <li class="nav-item pr-4"> <%= link_to order_path(current_order), class:"nav-link" do %>
               <i class="fas fa-shopping-cart fa-2x" data-toggle="tooltip" title="Cart"></i>
-              <% end %> 
+            <% end if current_user%> 
             </li>
             <div class="search-button pr-4">
               <a href="#" class="search-toggle" data-selector="#header-1" data-toggle="tooltip" title="Search"></a>

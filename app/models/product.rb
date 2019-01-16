@@ -45,7 +45,7 @@ class Product < ApplicationRecord
   end
    
   def create_variants_based_on_colors
-    product_color_ids = self.color_ids.reject { |c| c.empty? }
+    product_color_ids = self.color_ids.reject { |c| c.empty? } if self.color_ids
     if product_color_ids.presence
       product_color_ids.each do |c|
         main = variants.where(color_id: c, kind: 'main', size_id: nil).first_or_create(price: price)
