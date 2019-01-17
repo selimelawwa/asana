@@ -51,21 +51,29 @@ class OrdersController < ApplicationController
   end
 
   def cart
-    @order = current_order
-    authorize @order
-    @order.refresh_line_items if @order.cart?
+    if current_user || current_or_guest_user.orders.any?
+      @order = current_order
+      authorize @order
+      @order.refresh_line_items if @order.cart?
+    else
+      
+    end
   end
 
   def select_address
-    @addresses = current_user.addresses.where.not(id: nil)
-    @address  = current_user.addresses.new
+    if current_user
+      @addresses = current_user.addresses.where.not(id: nil)
+      @address  = current_user.addresses.new
+    else
+      redirect_to new_user_session_path(redirect_to: order_select_address_path(order_id: current_order.id))
+    end
   end
 
   def assign_address
     @address = Address.find(params[:address_id])
     if @address && (@address.user_id == current_user.id)
       @order.update(address_id: @address.id)
-      redirect_to order_confirm_details_path(order_id:  @order.id)
+      redirect_to order_path(order_id:  @order.id)
     else
       redirect_to select_address_path(order_id: @order.id)
     end
@@ -83,6 +91,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm_details
+    redirect_to new_user_session_path(redirect_to: order_select_address_path(order_id: current_order.id)) unless current_user.presence
     if flash[:error]
       @error_msg = flash[:error]
       flash.discard(:error) 
