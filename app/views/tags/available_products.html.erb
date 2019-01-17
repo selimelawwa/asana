@@ -1,24 +1,41 @@
-<div class="container">
-  <%= render partial: 'shared/tags_breadcrum', locals: {active_link: "#{@tag.name} / Select Products"}%>
+<div class="container mt-4 mb-5">
+  <div class="d-flex bd-highlight mb-3">
+    <div class="p-2 bd-highlight">
+      <%= render partial: 'shared/tags_breadcrum' ,locals: {active_link: "#{@tag.name} "}%>
+    </div>
+    <div class="ml-auto p-2 bd-highlight d-none d-sm-block">
+      <%= search_form_for @q, url: product_list_path do |f| %>
+        <div class="form-row align-items-center">
+          <div class= "col-auto">
+            <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
+            <i class="material-icons search-icon">search</i>
+          </div>
+          <button id="filter-btn" class="btn btn-success btn-large mb-2" type="submit" name="action">Search</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <div class = "row">
-    <div class = "col-sm-9">
+    <div class= "col-md-4 col-lg-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'tags'}%>
+    </div>
+    <div class="d-block d-sm-none mx-auto mb-3 mt-1">
+      <%= search_form_for @q, url: product_list_path do |f| %>
+        <div class="form-row align-items-center">
+          <div class= "col-auto">
+            <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
+            <i class="material-icons search-icon">search</i>
+          </div>
+          <button id="filter-btn" class="btn btn-success btn-large mb-2" type="submit" name="action">Search</button>
+        </div>
+      <% end %>
+    </div>
+    <div class = "col-md-8 col-lg-9 pl-5">
       <div class="row d-flex align-items-center">
         <div>
-          <h1> Available Products </h1>
+          <h2> Available Products </h2>
         </div>
-      </div>
-      <div class="row">
-          <%= search_form_for @q, url: product_list_path do |f| %>
-            <div class="form-row align-items-center">
-              <div class= "col-auto">
-                <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
-                <i class="material-icons search-icon">search</i>
-              </div>
-              <button class="btn btn-success btn-large mb-2" type="submit" name="action">Submit
-                <i class="material-icons right">send</i>
-              </button>
-            </div>
-          <% end %>
+        
       </div>
       <div  class= "center-align">
         <%= will_paginate @products , renderer: @custom_paginate_renderer %>
@@ -30,30 +47,31 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th></th>
-                  <th></th>
+                  <th scope="col">Image</th>
                   <th scope="col">Product Name</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <% @products.each_with_index do |p,i| %>
                   <tr>
+                    <td><%= image_tag p.main_photo.url(:thumb) %></td>
+                    <td><%= p.name %></td>
                     <td>
                       <input type="checkbox" class="checked_products" id="<%= "product_#{p.id}" %>" value="<%= "#{p.id}" %>">
                     </td>
-                    <td><%= image_tag p.main_photo.url(:thumb) %></td>
-                    <td><%= p.name %></td>
                   </tr>
                 <% end %>
               </tbody>
             </table>
           </div>
-            <button type="button" name="save" class="btn btn-success" id="btn_checked_products">Add</button>
+          <div class="container">
+            <div class="row justify-content-end">
+              <button type="button" name="save" class="btn btn-dark" id="btn_checked_products">Add Tag</button>
+            </div>
+          </div>
         <% end %>
       </div>
-    </div>
-    <div class= "col-sm-3">
-      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'tags'}%>
     </div>
   </div>
 </div>
@@ -78,5 +96,6 @@
       });
     }
   });
+
 </script>
 

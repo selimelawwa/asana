@@ -11,7 +11,19 @@
       <%= render partial: 'shared/admin_sidebar' , locals: {current: 'products'}%>
     </div>
     <div class = "col-md-9">
-      
+      <div class="row">
+        <div class="d-block d-sm-none mx-auto mb-3 mt-1">
+          <%= search_form_for @q, url: product_list_path do |f| %>
+            <div class="form-row align-items-center">
+              <div class= "col-auto">
+                <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
+              </div>
+              <button class="btn btn-success btn-large mb-2" type="submit" name="action">Search
+              </button>
+            </div>
+          <% end %>
+        </div>
+      </div>
       <div class="col-sm-12 d-flex align-items-center justify-content-between">
         <% if params[:category_id].blank? %>
           <h1 class="d-md-none d-lg-block entry-title"> All Products </h1>
@@ -30,6 +42,7 @@
             </div>
           <% end %>
         </div>
+        <div></div>
       </div>
       <div  class= "center-align">
         <%= will_paginate @products , renderer: @custom_paginate_renderer %>

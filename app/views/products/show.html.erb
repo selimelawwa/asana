@@ -3,57 +3,62 @@
   <section class="single_product_details_area section_padding_0_60 pt-5">
     <div class="container">
       <div class="row">
-        
-        <!-- Product Images Small Screens -->
-        <div class="col-12 d-block d-sm-none pb-4">
-            <div class="single_product_thumb">
-              <div id="product_details_slider2" class="carousel slide" data-ride="carousel">
-                <% if @colored_variant && @colored_variant.photos.any?%>
-                  <ol class="carousel-indicators">
-                    <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
-                      <li class="<%= "#{'active' if i == 0}" %>" data-target="#product_details_slider2" data-slide-to="<%="#{i}"%>" style="background-image: url(<%=p.image.url%>);">
-                      </li>
-                    <% end %>
-                  </ol>
-    
-                  <div class="carousel-inner">
-                    <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
-                      <div class="carousel-item <%= "#{'active' if i == 0}" %>">
-                        <a class="gallery_img">
-                          <%= image_tag p.image.url(:medium), class:"d-block w-100", alt: "First slide" %>
-                        </a>
-                      </div>
-                    <% end %>
-                  </div>
-                <% else %>
-                  <ol class="carousel-indicators">
-                    <li class="active" data-target="#product_details_slider2" data-slide-to="1" style="background-image: url(<%=@product.main_photo.url%>);">
-                      </li>
-                  </ol>
-                  <div class="carousel-inner">
-                    <div class="carousel-item active ">
-                      <a class="gallery_img">
-                        <div class="tile">
-                          <%= image_tag @product.main_photo.url(:medium), class:"photo d-block w-100", alt: "slide" %>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-        </div> 
 
-        <!-- Product Details -->
         <%= render 'added_to_cart_modal'%>
         <div id="error_modal_div">
         </div>
-        <div class="col-12 col-md-6">
+
+        <!-- Product Images -->
+        <div class="col-12  col-md-6 mb-4">
+          <div class="single_product_thumb">
+            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+              <% if @colored_variant && @colored_variant.photos.any?%>
+                <ol class="carousel-indicators">
+                  <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
+                    <li class="<%= "#{'active' if i == 0}" %>" data-target="#product_details_slider" data-slide-to="<%="#{i}"%>" style="background-image: url(<%=p.image.url%>);">
+                    </li>
+                  <% end %>
+                </ol>
+                <div class="carousel-inner">
+                  <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
+                    <div class="carousel-item <%= "#{'active' if i == 0}" %> ">
+                      <a class="gallery_img">
+                        <div class="tile">
+                          <%= image_tag p.image.url(:medium), class:"photo d-block w-100", alt: "slide" %>
+                        </div>
+                      </a>
+                    </div>
+                  <% end %>
+                </div>
+              <% else %>
+                <ol class="carousel-indicators">
+                  <li class="active" data-target="#product_details_slider" data-slide-to="1" style="background-image: url(<%=@product.main_photo.url%>);">
+                    </li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active ">
+                    <a class="gallery_img">
+                      <div class="tile">
+                        <%= image_tag @product.main_photo.url(:medium), class:"photo d-block w-100", alt: "slide" %>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div> 
+
+        <!-- Product Details -->
+
+        <div class="col-12 col-md-6 pl-3">
           <div class="single_product_desc">
 
             <h3 class="title"><%= @product.name %></h3>
 
             <h5 class="price mb-4">EGP <%= @product.price %></h5>
+
+            <p class="available">Available: <span class="text-muted">In Stock</span></p>
 
             <div class="form-group">
               <div class="container">
@@ -95,7 +100,6 @@
               </ul>
             </div>
 
-            <p class="available">Available: <span class="text-muted">In Stock</span></p>
 
             <div class="cart">
               <button id= "add_to_cart" type="submit" name="addtocart" value="5" class="btn cart-submit d-block ml-0 mb-5">Add to cart</button>
@@ -148,48 +152,7 @@
             </div>
 
           </div>
-        </div>
-
-        <!-- Product Images Large Screens -->
-        <div class="col-md-6 d-none d-sm-block">
-          <div class="single_product_thumb">
-            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-              <% if @colored_variant && @colored_variant.photos.any?%>
-                <ol class="carousel-indicators">
-                  <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
-                    <li class="<%= "#{'active' if i == 0}" %>" data-target="#product_details_slider" data-slide-to="<%="#{i}"%>" style="background-image: url(<%=p.image.url%>);">
-                    </li>
-                  <% end %>
-                </ol>
-                <div class="carousel-inner">
-                  <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
-                    <div class="carousel-item <%= "#{'active' if i == 0}" %> ">
-                      <a class="gallery_img">
-                        <div class="tile">
-                          <%= image_tag p.image.url(:medium), class:"photo d-block w-100", alt: "slide" %>
-                        </div>
-                      </a>
-                    </div>
-                  <% end %>
-                </div>
-              <% else %>
-                <ol class="carousel-indicators">
-                  <li class="active" data-target="#product_details_slider" data-slide-to="1" style="background-image: url(<%=@product.main_photo.url%>);">
-                    </li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active ">
-                    <a class="gallery_img">
-                      <div class="tile">
-                        <%= image_tag @product.main_photo.url(:medium), class:"photo d-block w-100", alt: "slide" %>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>   
+        </div>  
       </div>
     </div>
   </section>
@@ -256,7 +219,9 @@
     $('.tile')
     // tile mouse actions
     .on('mouseover', function(){
-      $(this).children('.photo').css({'transform': 'scale(2.4)'});
+      $(this).children('.photo').css({'transform': 'scale(1.8)'});
+      $(this).children('.photo').css({'cursor': 'grabbing'});
+      $(this).children('.photo').css({'cursor': '-webkit-grabbing'});
     })
     .on('mouseout', function(){
       $(this).children('.photo').css({'transform': 'scale(1)'});

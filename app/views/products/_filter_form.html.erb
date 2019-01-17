@@ -11,7 +11,7 @@
           <input type="checkbox" style="display: none;" value="<%= c.id%>" name="q[variants_color_id_in][]" id="<%="q_variants_color_id_in_#{c.id}"%>">
         <% end %>
         <% selected = params.dig(:q,:variants_color_id_in) && (params[:q][:variants_color_id_in].include? c.id.to_s)%>
-        <label class="checkbox_label pointer" for="<%="q_variants_color_id_in_#{c.id}"%>"><%= image_tag(c.photo.url(:thumb),  style: "border-radius: 100%;", :class => "color_filter #{'active' if selected}") %></label>
+        <label class="checkbox_label pointer" for="<%="q_variants_color_id_in_#{c.id}"%>"><%= image_tag(c.photo.url(:thumb), :class => "color_filter #{'active' if selected}") %></label>
       <% end %>
     </ul>
   </div>
@@ -38,7 +38,7 @@
   <div class="widget size mb-30">
     <h6 class="filter-title mb-3">Tags</h6>
     <div class="widget-desc">
-        <ul class="justify-content-between size-filter">
+        <ul class="justify-content-between size-filter ml-2">
           <% Tag.with_products.each do |t| %>
             <% if params.dig(:q,:tags_id_in) && (params.dig(:q,:tags_id_in).include? t.id.to_s)%>
               <input type="checkbox" style="display: none;" checked value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
@@ -46,7 +46,7 @@
               <input type="checkbox" style="display: none;" value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
             <% end %>
             <% selected = params.dig(:q,:tags_id_in) && (params[:q][:tags_id_in].include? t.id.to_s)%>
-            <label class="checkbox_label tag_label <%="#{'active' if selected}"%> " for="<%="q_tags_id_in_#{t.id}"%>"><%= t.name%></label>
+            <label class="checkbox_label pointer tag_label <%="#{'active' if selected}"%> " for="<%="q_tags_id_in_#{t.id}"%>"><%= t.name%></label>
           <% end %>
         </ul>
     </div>
