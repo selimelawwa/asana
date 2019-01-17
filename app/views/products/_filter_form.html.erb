@@ -38,7 +38,7 @@
   <div class="widget size mb-30">
     <h6 class="filter-title mb-3">Tags</h6>
     <div class="widget-desc">
-        <ul class="justify-content-between size-filter">
+        <ul class="justify-content-between size-filter ml-2">
           <% Tag.with_products.each do |t| %>
             <% if params.dig(:q,:tags_id_in) && (params.dig(:q,:tags_id_in).include? t.id.to_s)%>
               <input type="checkbox" style="display: none;" checked value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
