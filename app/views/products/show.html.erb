@@ -121,11 +121,25 @@
                   </div>
                 </div>
               <% end %>
+              <% unless @product.model_wearing.blank?%>
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingTwo">
+                    <h6 class="mb-0">
+                        <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Size & Fit</a>
+                    </h6>
+                  </div>
+                  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      <p> <%= @product.model_wearing %> </p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
               <% unless @product.fabric_details.blank?%>
                 <div class="card">
                   <div class="card-header" role="tab" id="headingTwo">
                     <h6 class="mb-0">
-                        <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Fabric Details</a>
+                        <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Fabric & Care Details</a>
                     </h6>
                   </div>
                   <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
