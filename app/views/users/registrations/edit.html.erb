@@ -8,10 +8,10 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <div class="container">
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-md-4 col-lg-4 col-xl-3">
               <%= render 'sidebar', current: 'edit_password'%>
             </div>
-            <div class="col-sm-9">
+            <div class="col-md-7 col-lg-6 col-xl-6">
               <div class="form-group">
                 <%= f.label :name %>
                 <%= f.text_field :name, placeholder: "Name", required: true, value: resource.name, class: 'form-control' %>
@@ -24,14 +24,21 @@
       
               <div class="container">
                 <div class="row">
-                  <div class="form-group w-50 pr-2">
-                    <%= f.label :city %>
-                    <%= f.select :city, ['Alexandria','Cairo'] , {include_blank: true}, selected: @user.city, class: 'form-control', required: true %>
+                  <div class="col-12 col-md-6">
+                    <div class="row">
+                      <div class="form-group w-100">
+                        <%= f.label :city %>
+                        <%= f.select :city, ['Alexandria','Cairo'] , {include_blank: true}, selected: @user.city, class: 'form-control', required: true %>
+                      </div>
+                    </div>
                   </div>
-            
-                  <div class="form-group w-50">
-                    <%= f.label :birthday %>
-                    <%= f.date_field :birthday, class: 'form-control', required: true %>
+                  <div class="col-12 col-md-6">
+                    <div class="row">
+                      <div class="form-group w-100 pl-1">
+                        <%= f.label :birthday %>
+                        <%= f.date_field :birthday, class: 'form-control', required: true %>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -44,7 +51,7 @@
               </div> -->
               <div class="container mt-3">
                 <div class="row justify-content-end">
-                  <button class="col-12 col-sm-3 btn btn-dark" id="submit-button" type="submit" name="action">
+                  <button class="col-12 col-md-5 col-lg-4 col-xl-3 btn btn-dark" id="submit-button" type="submit" name="action">
                     Save Changes
                   </button>
                 </div>

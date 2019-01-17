@@ -11,7 +11,7 @@
           <input type="checkbox" style="display: none;" value="<%= c.id%>" name="q[variants_color_id_in][]" id="<%="q_variants_color_id_in_#{c.id}"%>">
         <% end %>
         <% selected = params.dig(:q,:variants_color_id_in) && (params[:q][:variants_color_id_in].include? c.id.to_s)%>
-        <label class="checkbox_label pointer" for="<%="q_variants_color_id_in_#{c.id}"%>"><%= image_tag(c.photo.url(:thumb),  style: "border-radius: 100%;", :class => "color_filter #{'active' if selected}") %></label>
+        <label class="checkbox_label pointer" for="<%="q_variants_color_id_in_#{c.id}"%>"><%= image_tag(c.photo.url(:thumb), :class => "color_filter #{'active' if selected}") %></label>
       <% end %>
     </ul>
   </div>

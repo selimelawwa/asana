@@ -242,7 +242,8 @@
     $('.tile')
     // tile mouse actions
     .on('mouseover', function(){
-      $(this).children('.photo').css({'transform': 'scale(2.4)'});
+      $(this).children('.photo').css({'transform': 'scale(1.8)'});
+      $(this).children('.photo').css({'cursor': 'zoom-in'});
     })
     .on('mouseout', function(){
       $(this).children('.photo').css({'transform': 'scale(1)'});

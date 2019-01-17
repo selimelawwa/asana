@@ -5,15 +5,12 @@
 </div>
 <div class="container mt-3 mb-5">
   <div class="row">
-    <div class = "col-md-3">
+    <div class = "col-md-4 col-lg-3">
       <%= render partial: 'shared/admin_sidebar' , locals: {current: 'tags'}%>
     </div>
-    <div class="col-9">
+    <div class="col-md-8 col-lg-9">
       <div class="col-sm-12 d-flex align-items-center justify-content-between">
-          <h1> Tags </h1>
-          <% if policy(Tag).create? %>
-            <%= link_to 'Create a new Tag', new_tag_path, class: "push-m9" %>
-          <% end %>
+        <h1> Tags </h1>
       </div>
       <div class="row">
         <% if @tags.any?%>
@@ -45,9 +42,7 @@
               </tbody>
             </table>
           </div>
-        <!-- <% else %>
-          <p>Your have no tags, <%= link_to 'Create a new tag', new_tag_path %> </p> -->
-        <!-- <% end %> -->
+        <% end %>
       </div>
     </div>
   </div>
