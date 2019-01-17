@@ -46,7 +46,7 @@
               <input type="checkbox" style="display: none;" value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
             <% end %>
             <% selected = params.dig(:q,:tags_id_in) && (params[:q][:tags_id_in].include? t.id.to_s)%>
-            <label class="checkbox_label tag_label <%="#{'active' if selected}"%> " for="<%="q_tags_id_in_#{t.id}"%>"><%= t.name%></label>
+            <label class="checkbox_label pointer tag_label <%="#{'active' if selected}"%> " for="<%="q_tags_id_in_#{t.id}"%>"><%= t.name%></label>
           <% end %>
         </ul>
     </div>
