@@ -248,7 +248,6 @@
         url: '/add_to_cart',
         data: {size_id: size_id, quantity: quantity, product_id: product_id, color_id: color_id},
         success: function(response, data, status, xhr) {
-          debugger;
           if (response['saved'] == 1){
             $('#exampleModalCenter').modal('show');
           } else{
