@@ -21,7 +21,6 @@
         <div class="row">
           <div class="col-12 col-md-6">
             <div class="form-group">
-              <!-- <%= f.label 'Product Name', :name %> -->
               <%= f.input :name, class: 'form-control'  %>
             </div>
           </div>
@@ -51,12 +50,12 @@
         </div>
 
         <div class="form-group ">
-          <%= f.input :fabric_details, label: 'Fabric Details', as: :text , 
+          <%= f.input :fabric_details, label: 'Fabric & Care Details', as: :text , 
                 input_html: {  class: 'form-control' } %>
         </div>
 
         <div class="form-group">
-          <%= f.input :model_wearing, class: 'form-control'  %>
+          <%= f.input :model_wearing, label: 'Size & Fit', class: 'form-control'  %>
         </div>        
   
         <div class="custom-file mb-4">
