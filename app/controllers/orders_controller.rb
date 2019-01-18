@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
       @addresses = current_user.addresses.where.not(id: nil)
       @address  = current_user.addresses.new
     else
-      redirect_to new_user_session_path(redirect_to: order_select_address_path(order_id: current_order.id))
+      redirect_to new_user_session_path(redirect_to: cart_path)
     end
   end
 
@@ -75,7 +75,7 @@ class OrdersController < ApplicationController
     @address = Address.find(params[:address_id])
     if @address && (@address.user_id == current_user.id)
       @order.update(address_id: @address.id)
-      redirect_to order_path(order_id:  @order.id)
+      redirect_to order_confirm_details_path(order_id:  @order.id)
     else
       redirect_to select_address_path(order_id: @order.id)
     end
@@ -93,7 +93,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm_details
-    redirect_to new_user_session_path(redirect_to: order_select_address_path(order_id: current_order.id)) unless current_user.presence
+    redirect_to new_user_session_path(redirect_to: cart_path) unless current_user.presence
     if flash[:error]
       @error_msg = flash[:error]
       flash.discard(:error) 
@@ -107,7 +107,7 @@ class OrdersController < ApplicationController
   def confirm_order
     @address = @order.address    
     if @order.finalize
-      flash[:notice]
+      flash[:notice] = "Order Confirmed"
       redirect_to order_path(@order)
     else
       flash[:error] = @order.errors[:out_of_stock_variants]&.first if @order.errors.any?

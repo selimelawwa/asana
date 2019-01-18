@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   before_update :validate_no_out_of_stock_variants
 
   def finalize
-    if update(cart: false, status: 'confirmed')
+    if update(cart: false, status: 'confirmed', total_cost: current_total_cost)
       decrement_variant_stocks
     end
   end
