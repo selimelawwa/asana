@@ -46,7 +46,13 @@ module GuestsHelper
   def create_guest_user
     u = User.new(:name => "guest", :email => "guest_#{Time.now.to_i}#{rand(100)}@example.com", guest: true)
     u.save!(:validate => false)
-    cookies.signed.permanent[:guest_user_id] = u.id
+    # cookies.signed.permanent[:guest_user_id] = u.id
+    response.set_cookie(:guest_user_id, {
+      value: u.id,
+      path: '/',                 # cookie remains all pages in this domain
+      expires: 5.year.from_now, # cookie expires after 2 week
+      httponly: true,            # prevent javascript modify this cookie
+    })
     u
   end
 end
