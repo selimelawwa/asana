@@ -4,10 +4,10 @@ class ProductsController < ApplicationController
   
   def index    
     if params[:category_id].blank?
-      @products = Product.all
+      @products = Product.published
     else
       @category = Category.find(params[:category_id])
-      @products = @category.products
+      @products = @category.products.published
     end
     if params.dig(:q,:variants_size_id_in).present?
       @products = @products.joins(:variants).where("variants.size_id IN (?) AND variants.stock > 0",params[:q][:variants_size_id_in])
@@ -76,6 +76,14 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       products_path
+    end
+  end
+
+  # TODO - handle fail
+  def publish
+    @product = Product.find(params[:product_id])
+    if @product.update(published: true)
+      redirect_to product_list_path
     end
   end
 

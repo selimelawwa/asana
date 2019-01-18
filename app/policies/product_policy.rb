@@ -11,4 +11,7 @@ class ProductPolicy < ApplicationPolicy
   def list?
     user && user.admin?
   end
+  def publish?
+    user && user.admin?
+  end
 end

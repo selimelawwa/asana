@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       post '/update_stock', to: 'variants#update_stock', as: :update_stock
     end
     resources :images
+    post 'publish', to: 'products#publish', as: 'publish'
   end
 
 
