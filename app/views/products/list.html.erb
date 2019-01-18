@@ -82,9 +82,9 @@
                     </td>
                     <td>
                       <% if p.published?%>
-                        <%= link_to 'Hide', product_publish_path(product_id: p.id), method: :post %>
+                        <%= link_to 'Hide', product_publish_path(product_id: p.id), class: 'red', method: :post %>
                       <% else %>
-                        <%= link_to 'Publish', product_publish_path(product_id: p.id), method: :post %>
+                        <%= link_to 'Publish', product_publish_path(product_id: p.id), class: 'green', method: :post %>
                       <% end %>
                     </td>
                   </tr>

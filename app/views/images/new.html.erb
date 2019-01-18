@@ -2,7 +2,7 @@
   <%= simple_form_for [@product, @image], html: { multipart: true } do |f| %>
     <%= render partial: 'form', locals: { f: f, image: @image } %>
     <div class="d-flex flex-row-reverse">
-      <button class="col-12 col-md-2 mt-4 btn btn-dark btn-large align-right" type="submit" name="action">Add Image</button>
+      <button class="col-12 col-md-2 mt-4 btn color-semi-black btn-large align-right" type="submit" name="action">Add Image</button>
     </div>
   <% end %>
 </div>
