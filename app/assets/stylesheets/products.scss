@@ -29,7 +29,11 @@
 
 #nav-all-col > li > a{
   font-size: 0.9em !important;
-  color: #fff;
+  color: #000;
+}
+
+#nav-bar-col > li > a {
+    color: #000;
 }
 
 
@@ -315,7 +319,7 @@
     #search-col{
       width:14.5rem;
       height:50%;
-      background-color:#343a40;
+      background-color:#fff;
       color:white;
     }
   }
@@ -329,7 +333,7 @@
     #search-col{
       width:18rem;
       height:50%;
-      background-color:#343a40;
+      background-color:#fff;
       color:white;
     }
   }
@@ -342,7 +346,7 @@
     #search-col{
       width:18rem;
       height:50%;
-      background-color:#343a40;
+      background-color:#fff;
       color:white;
     }
   }
@@ -355,7 +359,7 @@
     #search-col{
       width:20rem;
       height:50%;
-      background-color:#343a40;
+      background-color:#fff;
       color:white;
     }
    }

@@ -81,7 +81,7 @@
                       <%= link_to 'Images', product_images_path(p.id), class: 'text-dark' %>
                     </td>
                     <td>
-                      <%= link_to 'Publish', product_publish_path(product_id: p.id), method: :post unless p.published? %>
+                      <%= link_to 'Publish', product_publish_path(product_id: p.id), class: "text-dark" ,method: :post unless p.published? %>
                     </td>
                   </tr>
                 <% end %>
