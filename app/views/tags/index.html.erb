@@ -33,7 +33,7 @@
                     <td> <%= t.name %> </td>
                     <td class="text-right"> 
                       <%= link_to 'Edit', edit_tag_path(id: t.id), class: 'text-dark' %> 
-                      <%= link_to 'Delete', tag_path(id: t.id), class: 'text-dark', method: :delete, 
+                      <%= link_to 'Delete', tag_path(id: t.id), class: 'red', method: :delete, 
                               data: { confirm: 'Are you sure?' }  %>
                     </td>
                     <td class="text-right">
