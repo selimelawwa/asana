@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="row justify-content-end">
     <% if policy(Tag).create? && @tags.any?%>
-      <h5> <%= link_to 'Create a new Tag', new_tag_path, class: "push-m9" %> </h5> 
+      <h5> <%= link_to 'Create a new Tag', new_tag_path, class: "push-m9 text-dark" %> </h5> 
     <% end %>
   </div>
 </div>
@@ -24,6 +24,7 @@
                   <th> Name </th>
                   <th></th>
                   <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody class="order_details">
@@ -33,11 +34,13 @@
                     <td> <%= t.name %> </td>
                     <td class="text-right"> 
                       <%= link_to 'Edit', edit_tag_path(id: t.id), class: 'text-dark' %> 
+                    </td>
+                    <td class="text-right">
                       <%= link_to 'Delete', tag_path(id: t.id), class: 'red', method: :delete, 
                               data: { confirm: 'Are you sure?' }  %>
                     </td>
                     <td class="text-right">
-                      <%= link_to 'Add products', tag_available_products_path(tag_id: t.id) %> 
+                      <%= link_to 'Add products', tag_available_products_path(tag_id: t.id), class: "text-dark" %> 
                     </td>
                   </tr>
                 <% end %>
