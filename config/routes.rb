@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get 'available_products', to: 'tags#available_products', as: 'available_products'
       post 'assign_products', to: 'tags#assign_products', as: 'assign_products'
     end
+    resources :slides, except: :show
   end
   
   get 'welcome/index'

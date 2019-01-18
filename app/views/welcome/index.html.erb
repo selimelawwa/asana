@@ -2,35 +2,32 @@
 
 <!-- height: 480px -->
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner" role="listbox">
-    <!-- Slide One - Set the background image for this slide in the line below -->
-    <div class="carousel-item active">
-      <%= image_tag 'home22.png' %>
+<% if @slides.any?%>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <% @slides.each_with_index do |s,i|%>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<%=i%>" class="<%= 'active' if i==0%>"></li>
+      <% end %>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <% @slides.each_with_index do |s,i|%>
+        <div class="carousel-item <%= 'active' if i==0%> ">
+          <%= image_tag s.photo.url %>
+        </div>
+      <% end %>
     </div>
-    <!-- Slide Two - Set the background image for this slide in the line below -->
-    <div class="carousel-item">
-      <%= image_tag 'home11.png' %>
-    </div>
-    <!-- Slide Three - Set the background image for this slide in the line below -->
-    <div class="carousel-item">
-      <%= image_tag 'home33.jpg' %>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <% if @slides.count > 1%>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-</div>
+    <% end %>
+  </div>
+<% end %>
 
 <!-- Carousel End -->
 
@@ -70,123 +67,54 @@
 <!-- New Arrivals Start -->
 
 <!-- Visible on Desktop Computers -->
-<div class="d-none d-sm-block mt-4">
+<% if @new_arrivals.any? %>
+
+  <div class="d-none d-sm-block mt-4">
     <div class="row mr-4">
-        <div class="col-md-4">
-          <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid", id:"new-arr-img" %></a>
-        </div>
+      <div class="col-md-4">
+        <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid", id:"new-arr-img" %></a>
+      </div>
+      <% @new_arrivals.each do |n_p| %>
         <div class="col-md-2 mx-auto">
-            <div class="card shadow border-0 card-wid">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0 card-wid">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0 card-wid">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                  <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow border-0 card-wid">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-        </div>
-      </div>
-</div>
-
-
-<!-- Visible on Mobile Phones -->
-<div class="d-block d-sm-none">
-  <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid" %></a>
-  <div class="container-fluid mt-2">
-    <div class="row">
-      <div class="col-6">
-        <div class="row px-1">
-          <div class="card border-0">
+          <div class="card shadow border-0 card-wid">
             <div class="inner">
-              <%= image_tag 'shoes.jpg', class: "card-img-top" %>
+              <%= link_to image_tag(n_p.medium_photo, class: "card-img-top"), product_path(n_p) %>
             </div>
             <div class="card-body">
-              <h6 class="card-title">Card title</h6>
-              <p class="card-text"><small class="text-muted">100 L.E</small></p>
+              <h6 class="card-title"><%= link_to n_p.name, product_path(n_p) %></h6>
+              <p class="card-text"><small class="text-muted"><%= "EGP #{n_p.price}" %></small></p>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-6">
-        <div class="row px-1">
-          <div class="card border-0">
-            <div class="inner">
-              <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-            </div>
-            <div class="card-body">
-              <h6 class="card-title">Card title</h6>
-              <p class="card-text"><small class="text-muted">100 L.E</small></p>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Visible on Mobile Phones -->
+  <div class="d-block d-sm-none">
+    <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid" %></a>
+    <div class="container-fluid mt-2">
+      <div class="row">
+        <% @new_arrivals.each do |n_p| %>
+          <div class="col-6">
+            <div class="row px-1">
+              <div class="card border-0">
+                <div class="inner">
+                  <%= link_to image_tag(n_p.medium_photo, class: "card-img-top"), product_path(n_p) %>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title"><%= link_to n_p.name, product_path(n_p) %></h6>
+                  <p class="card-text"><small class="text-muted"><%= "EGP #{n_p.price}" %></small></p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
-    <div class="row">
-        <div class="col-6">
-          <div class="row px-1">
-            <div class="card border-0">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row px-1">
-            <div class="card border-0">
-              <div class="inner">
-                <%= image_tag 'shoes.jpg', class: "card-img-top" %>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Card title</h6>
-                <p class="card-text"><small class="text-muted">100 L.E</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
   </div>
-</div>
-
-
+  
+<% end %>
 <!-- New Arrivals End -->
 
 

@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   #list for admin
   def list
     if params[:category_id].blank?
-      @products = Product.all
+      @products = Product.unscoped
     else
       @category = Category.find( params[:category_id])
       @products = @category.products
@@ -72,7 +72,7 @@ class ProductsController < ApplicationController
 
   def destroy
     authorize @product
-    if @product.destroy
+    if @product.update(published: false)
       redirect_to products_path
     else
       products_path
@@ -82,9 +82,8 @@ class ProductsController < ApplicationController
   # TODO - handle fail
   def publish
     @product = Product.find(params[:product_id])
-    if @product.update(published: true)
-      redirect_to product_list_path
-    end
+    @product.published? ? @product.update(published: false) : @product.update(published: true)
+    redirect_to product_list_path
   end
 
   private

@@ -75,13 +75,17 @@
                       <%= link_to 'Edit product', edit_product_path(p.id), class: 'text-dark' %>
                     </td>
                     <td>
-                      <%= link_to 'Variants', product_variants_path(p.id), class: 'text-dark' %>
+                      <%= link_to 'Product Stocks', product_variants_path(p.id), class: 'text-dark' %>
                     </td>
                     <td>
                       <%= link_to 'Images', product_images_path(p.id), class: 'text-dark' %>
                     </td>
                     <td>
-                      <%= link_to 'Publish', product_publish_path(product_id: p.id), class: "text-dark" ,method: :post unless p.published? %>
+                      <% if p.published?%>
+                        <%= link_to 'Hide', product_publish_path(product_id: p.id), method: :post %>
+                      <% else %>
+                        <%= link_to 'Publish', product_publish_path(product_id: p.id), method: :post %>
+                      <% end %>
                     </td>
                   </tr>
                 <% end %>
