@@ -2,26 +2,26 @@
 
   <header id="header-1" class="header">
     <!-- Navbar on large screens -->
-    <nav class="header-nav navbar navbar-expand-md bg-dark navbar-dark d-none d-sm-none d-md-block">
+    <nav class="header-nav navbar navbar-expand-md bg-white navbar-white d-none d-sm-none d-md-block">
       <div class="container-fluid">
-        <a class="navbar-brand pl-3" href="<%= "/"%>"><%= image_tag 'asana.png', class: "", style: "height: 42px; width: 96px;" %></a>
+        <a class="navbar-brand pl-3" href="<%= "/"%>"><%= image_tag 'Asana_logo_design_Rv02.svg', class: "", style: "height: 53px; width: 89px;" %></a>
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center">
           <li class="nav-item">
-              <a class="nav-link" href="<%= "/"%>">Home</a>
+              <a class="nav-link color-black text-muted-hover" href="<%= "/"%>">Home</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="#">New</a>
+              <a class="nav-link color-black text-muted-hover" href="#">New</a>
           </li>
           <% if Category.any? %>
             <% Category.category.each do |c| %>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle test" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle test color-black text-muted-hover" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%= c.name %>
               </a>
-              <ul class="dropdown-menu bg-dark">
-                <a class="dropdown-item text-white" style="text-decoration: underline;" id="nav-all" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
+              <ul class="dropdown-menu">
+                <a class="dropdown-item" style="text-decoration: underline;" id="nav-all" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
                 <% Category.sub_category.where(parent_id: c.id).each do |c| %>
-                  <li class="dropdown-item text-white" id="nav-all">
+                  <li class="dropdown-item" id="nav-all">
                     <a href="<%= products_path(category_id: c.id) %>">
                       <%= c.name %>
                     </a>
@@ -32,37 +32,37 @@
             <% end %>
           <% end %>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sale</a>
+            <a class="nav-link color-black text-muted-hover" href="#">Sale</a>
           </li>
         </ul>
           <ul class="navbar-nav" id="left-nav">
             <% if policy(Product).create? %>
               <li class="nav-item"> <%= link_to product_list_path, class:"nav-link" do %>
-                <i class="fas fa-toolbox fa-2x" data-toggle="tooltip" title="Admin Settings"></i>
+                <i class="fas fa-toolbox fa-2x color-black" data-toggle="tooltip" title="Admin Settings"></i>
                 <% end %>
               </li>
             <% end %> 
             <% if user_signed_in? %>
               <li class="nav-item"> <%= link_to edit_registration_path(:user), class:"nav-link" do %>
-                <i class="fas fa-user fa-2x" data-toggle="tooltip" title="Profile"></i>
+                <i class="fas fa-user fa-2x color-black" data-toggle="tooltip" title="Profile"></i>
                 <% end %> 
               </li>
               <li class="nav-item"> <%= link_to destroy_session_path(:user), :method => :delete, class:"nav-link" do %>
-                <i class="fas fa-sign-out-alt fa-2x" data-toggle="tooltip" title="Logout"></i>
+                <i class="fas fa-sign-out-alt fa-2x color-black" data-toggle="tooltip" title="Logout"></i>
                 <% end %> 
               </li>
             <% else %>
               <li class="nav-item"> <%= link_to new_user_session_path, class:"nav-link" do %>
-                <i class="fas fa-sign-in-alt fa-2x" data-toggle="tooltip" title="Login"></i>
+                <i class="fas fa-sign-in-alt fa-2x color-black" data-toggle="tooltip" title="Login"></i>
                 <% end %> 
               </li>
               <li class="nav-item"> <%= link_to new_user_registration_path, class:"nav-link" do %>
-                <i class="fas fa-user-plus fa-2x" data-toggle="tooltip" title="Sign Up"></i>
+                <i class="fas fa-user-plus fa-2x color-black" data-toggle="tooltip" title="Sign Up"></i>
                 <% end %> 
               </li>
             <% end %>
             <li class="nav-item pr-4"> <%= link_to cart_path, class:"nav-link" do %>
-              <i class="fas fa-shopping-cart fa-2x" data-toggle="tooltip" title="Cart"></i>
+              <i class="fas fa-shopping-cart fa-2x color-black" data-toggle="tooltip" title="Cart"></i>
             <% end if current_user%> 
             </li>
             <div class="search-button pr-4">
@@ -91,7 +91,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand mx-auto pr-4" href="<%= "/"%>">
-          <%= image_tag 'asana.png', class: "", style: "height: 42px; width: 96px;" %>
+          <%= image_tag 'Asana_logo_design_Rv02.png', class: "", style: "height: 45px; width: 96px;" %>
         </a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <%= search_form_for @q, url: search_products_path do |f| %>
