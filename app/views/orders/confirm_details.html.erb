@@ -15,7 +15,7 @@
     <% if @order.line_items.any?%>
       <div class="col-9">
         <div class="row" id="order_details_div">
-          <%= render partial: 'order_details_partial', locals: {line_items: @order.line_items}%>
+          <%= render partial: 'order_details_partial', locals: {order: @order, line_items: @order.line_items}%>
         </div>
       </div>
       <div class="col-3" style="text-align: right;">

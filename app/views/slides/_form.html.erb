@@ -1,0 +1,35 @@
+<div class = "container my-5">
+  <% if slide.new_record? %>
+    <%= render partial: 'shared/slides_breadcrum', locals: {active_link: "New Slide"}%>
+    <h1> New Slide </h1>
+  <% else %>
+    <%= render partial: 'shared/slides_breadcrum', locals: {active_link: "#{slide.id}"}%>
+    <h1> Edit Slide # <%= slide.id %> </h1>
+  <% end %>
+
+  <div class = "row">
+    <div class= "col-md-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'slides'}%>
+    </div>
+    <div class= "col-md-9">
+      <%= simple_form_for slide, url: (slide.new_record? ? slides_path : slide_path)  do |f| %>
+
+        <div class="custom-file mb-4">
+          <%= f.input :photo, as: :file, class: 'custom-file-input' %>
+        </div>
+
+        <div class="form-group ">
+          <%= f.input :description, label: 'Slide Description', as: :text , 
+                input_html: { id:"textarea1" , class: 'form-control' } %>
+        </div>   
+      
+        <br>
+
+        <% submit_label = slide.new_record? ? "Add Slide" : "Update Slide"%>
+        <div class="d-flex flex-row-reverse">
+          <button class="btn btn-dark btn-large align-right mt-4 mb-3 col-12 col-sm-2" type="submit" name="action"><%= submit_label%></button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

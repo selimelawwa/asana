@@ -25,11 +25,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  #TODO handle fail update cart quantity  
   def remove_line_item
     line_item = current_order.line_items.find_by(id: params[:line_item_id])
     if line_item.destroy
       if current_order.reload.line_items.any?
-        render partial: 'order_details_partial', locals: {line_items: current_order.reload.line_items}
+        render partial: 'order_details_partial', locals: {order: current_order.reload, line_items: current_order.reload.line_items}
       else
         redirect_to request.referrer
       end
@@ -39,8 +40,9 @@ class OrdersController < ApplicationController
   def update_line_item_quantity
     line_item = current_order.line_items.find_by(id: params[:line_item_id])
     if line_item.update(quantity: params[:quantity])
-      render partial: 'order_details_partial', locals: {line_items: current_order.reload.line_items}
+      render partial: 'order_details_partial', locals: {order: current_order.reload, line_items: current_order.reload.line_items}
     else
+      redirect_to request.referrer
     end
   end
 
@@ -105,6 +107,7 @@ class OrdersController < ApplicationController
   def confirm_order
     @address = @order.address    
     if @order.finalize
+      flash[:notice]
       redirect_to order_path(@order)
     else
       flash[:error] = @order.errors[:out_of_stock_variants]&.first if @order.errors.any?

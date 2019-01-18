@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       post '/update_stock', to: 'variants#update_stock', as: :update_stock
     end
     resources :images
+    post 'publish', to: 'products#publish', as: 'publish'
   end
 
 
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
       get 'available_products', to: 'tags#available_products', as: 'available_products'
       post 'assign_products', to: 'tags#assign_products', as: 'assign_products'
     end
+    resources :slides, except: :show
   end
   
   get 'welcome/index'

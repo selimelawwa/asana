@@ -31,6 +31,14 @@ class Variant < ApplicationRecord
     photos.first
   end
 
+  def main_photo_thubmnail
+    if photos.first.presence
+      photos.first.image.url(:thumb) 
+    else
+      product.main_photo.url(:thumb)
+    end
+  end
+
   def name_with_options_text
     "#{product.name} - #{options_text}"
   end
