@@ -32,12 +32,12 @@ module GuestsHelper
     current_user_cart = current_user.orders.where(cart: true).first_or_create
     if guest_cart
       guest_cart.line_items.each do |l|
-        user_cart_line_item = current_user_cart.line_items.find_or_initialize_by(variant_id: l.variant_id)
-        if user_cart_line_item.quantity&.to_i + l.quantity&.to_i > 5 
-          user_cart_line_item.update(quantity: 5)
+        current_user_cart_line_item = current_user_cart.line_items.find_or_initialize_by(variant_id: l.variant_id)
+        if current_user_cart_line_item.quantity&.to_i + l.quantity&.to_i > 5 
+          current_user_cart_line_item.update(quantity: 5)
         else
-          user_cart_line_item.quantity = user_cart_line_item.quantity + l.quantity
-          user_cart_line_item.save
+          current_user_cart_line_item.quantity = current_user_cart_line_item.quantity + l.quantity
+          current_user_cart_line_item.save
         end
       end
     end
