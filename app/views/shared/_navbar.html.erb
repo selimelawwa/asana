@@ -136,15 +136,33 @@
           <% end %>
           <span class="border-top my-1"></span>
           <% if policy(Product).create? %>
+          <div class="row" id="nav-row">
+            <i class="fas fa-toolbox pt-2 pl-3 pr-2 color-black"></i>
             <li class="nav-item"> <%= link_to "Admin Pages", product_list_path, class:"nav-link" %></li>
+          </div>
           <% end %>
-          <li class="nav-item"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
+          <div class="row" id="nav-row">
+            <i class="fas fa-shopping-cart pt-2 pl-3 pr-2 color-black"></i>
+            <li class="nav-item"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
+          </div>
           <% if user_signed_in? %>
-            <li class="nav-item"> <%= link_to "Edit account", edit_registration_path(:user), class:"nav-link" %> </li>
-            <li class="nav-item"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
+            <div class="row" id="nav-row">
+              <i class="fas fa-user pt-2 pl-3 pr-2 color-black"></i>
+              <li class="nav-item"> <%= link_to "Profile", edit_registration_path(:user), class:"nav-link" %> </li>
+            </div>
+            <div class="row" id="nav-row">
+              <i class="fas fa-sign-out-alt pt-2 pl-3 pr-2 color-black"></i>
+              <li class="nav-item"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
+            </div>
           <% else %>
-            <li class="nav-item"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
-            <li class="nav-item"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
+            <div class="row" id="nav-row">
+              <i class="fas fa-sign-in-alt pt-2 pl-3 pr-2 color-black"></i>
+              <li class="nav-item"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
+            </div>
+            <div class="row" id="nav-row">
+              <i class="fas fa-user-plus pt-2 pl-3 pr-2 color-black"></i>
+              <li class="nav-item"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
+            </div>
           <% end %>
         </ul>
       </div>
