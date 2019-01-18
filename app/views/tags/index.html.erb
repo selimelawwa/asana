@@ -33,14 +33,14 @@
                     <td scope="row"><%= i+1 %></td>
                     <td> <%= t.name %> </td>
                     <td class="text-right"> 
-                      <%= link_to 'Edit', edit_tag_path(id: t.id), class: 'text-dark' %> 
+                      <%= link_to 'Edit', edit_tag_path(id: t.id) %> 
                     </td>
                     <td class="text-right">
                       <%= link_to 'Delete', tag_path(id: t.id), class: 'red', method: :delete, 
                               data: { confirm: 'Are you sure?' }  %>
                     </td>
                     <td class="text-right">
-                      <%= link_to 'Add products', tag_available_products_path(tag_id: t.id), class: "text-dark" %> 
+                      <%= link_to 'Add products', tag_available_products_path(tag_id: t.id)%> 
                     </td>
                   </tr>
                 <% end %>

@@ -35,7 +35,7 @@
                     <td><%= image_tag s.photo.url(:thumb) %></td>
                     <td><%= s.description&.truncate(50) %></td>
                     <td>
-                      <%= link_to 'Edit slide', edit_slide_path(s), class: 'text-dark' %>
+                      <%= link_to 'Edit slide', edit_slide_path(s) %>
                     </td>
                     <td>
                       <%= link_to 'Delete', slide_path(s), method: :delete, class: 'red',
