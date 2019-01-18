@@ -82,75 +82,74 @@
       </div>
     </nav>
   </header>
-
+</div>
 
   <!-- Navbar on small screens -->
   <nav class="navbar navbar-expand-md navbar-light bg-white d-none d-block d-sm-block d-md-none" id="nav-col">
-      <div class="container">
-        <button class="navbar-toggler mb-1" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand mx-auto pr-2" href="<%= "/"%>">
-          <%= image_tag 'Asana_logo_design_Rv02.png', class: "", style: "height: 48px; width: 116px;" %>
-        </a>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <%= search_form_for @q, url: search_products_path do |f| %>
-              <div class="form-row align-items-center">
-                <div class= "col-auto">
-                  <%= f.search_field :name_cont,  class: 'form-control', placeholder: "Search", id: "search-col"%>
-                </div>
-                <button class="btn btn-link" type="submit" name="action">
-                  <i class="fa fa-search" style="color: #868e96;"></i>
-                </button>
+    <div class="container">
+      <button class="navbar-toggler mb-1" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand mx-auto pr-2" href="<%= "/"%>">
+        <%= image_tag 'Asana_logo_design_Rv02.png', class: "", style: "height: 48px; width: 116px;" %>
+      </a>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+          <%= search_form_for @q, url: search_products_path do |f| %>
+            <div class="form-row align-items-center">
+              <div class= "col-auto">
+                <%= f.search_field :name_cont,  class: 'form-control', placeholder: "Search", id: "search-col"%>
               </div>
-            <% end %>
-          <span class="border-top my-1 d-block d-sm-none"></span>
-          <ul class="nav navbar-nav mx-auto w-auto justify-content-center" id="nav-bar-col">
-            <li class="nav-item">
-                <a class="nav-link" href="<%= "/"%>">Home</a>
+              <button class="btn btn-link" type="submit" name="action">
+                <i class="fa fa-search" style="color: #868e96;"></i>
+              </button>
+            </div>
+          <% end %>
+        <span class="border-top my-1 d-block d-sm-none"></span>
+        <ul class="nav navbar-nav mx-auto w-auto justify-content-center" id="nav-bar-col">
+          <li class="nav-item">
+              <a class="nav-link" href="<%= "/"%>">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">New</a>
+          </li>
+          <% if Category.any? %>
+            <% Category.category.each do |c| %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= c.name %>
+              </a>
+              <ul class="dropdown-menu"  id="nav-all-col">
+                <a class="dropdown-item" style="text-decoration: underline;" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
+                <% Category.sub_category.where(parent_id: c.id).each do |c| %>
+                  <li class="dropdown-item">
+                    <a href="<%= products_path(category_id: c.id) %>">
+                      <%= c.name %>
+                    </a>
+                  </li>
+                <% end %>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">New</a>
-            </li>
-            <% if Category.any? %>
-              <% Category.category.each do |c| %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <%= c.name %>
-                </a>
-                <ul class="dropdown-menu"  id="nav-all-col">
-                  <a class="dropdown-item" style="text-decoration: underline;" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
-                  <% Category.sub_category.where(parent_id: c.id).each do |c| %>
-                    <li class="dropdown-item">
-                      <a href="<%= products_path(category_id: c.id) %>">
-                        <%= c.name %>
-                      </a>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
-              <% end %>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Sale</a>
-            </li>
             <% end %>
-            <span class="border-top my-1"></span>
-            <% if policy(Product).create? %>
-              <li class="nav-item"> <%= link_to "Admin Pages", product_list_path, class:"nav-link" %></li>
-            <% end %>
-            <li class="nav-item"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
-            <% if user_signed_in? %>
-              <li class="nav-item"> <%= link_to "Edit account", edit_registration_path(:user), class:"nav-link" %> </li>
-              <li class="nav-item"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
-            <% else %>
-              <li class="nav-item"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
-              <li class="nav-item"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
-            <% end %>
-          </ul>
-        </div>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sale</a>
+          </li>
+          <% end %>
+          <span class="border-top my-1"></span>
+          <% if policy(Product).create? %>
+            <li class="nav-item"> <%= link_to "Admin Pages", product_list_path, class:"nav-link" %></li>
+          <% end %>
+          <li class="nav-item"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
+          <% if user_signed_in? %>
+            <li class="nav-item"> <%= link_to "Edit account", edit_registration_path(:user), class:"nav-link" %> </li>
+            <li class="nav-item"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
+          <% else %>
+            <li class="nav-item"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
+            <li class="nav-item"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
+          <% end %>
+        </ul>
       </div>
-    </nav>
-</div>
+    </div>
+  </nav>
 
 <script>
     $('.header').on('click', '.search-toggle', function(e) {
