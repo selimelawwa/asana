@@ -24,7 +24,7 @@
                     <div class="carousel-item <%= "#{'active' if i == 0}" %> ">
                       <a class="gallery_img">
                         <div class="tile">
-                          <%= image_tag p.image.url(:medium), class:"photo d-block w-100", alt: "slide" %>
+                          <%= image_tag p.image.url, class:"photo d-block w-100", alt: "slide" %>
                         </div>
                       </a>
                     </div>
@@ -39,7 +39,7 @@
                   <div class="carousel-item active ">
                     <a class="gallery_img">
                       <div class="tile">
-                        <%= image_tag @product.main_photo.url(:medium), class:"photo d-block w-100", alt: "slide" %>
+                        <%= image_tag @product.main_photo.url, class:"photo d-block w-100", alt: "slide" %>
                       </div>
                     </a>
                   </div>
