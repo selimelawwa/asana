@@ -36,7 +36,9 @@ Rails.application.routes.draw do
   
   scope '/admin' do
     get 'products/list', to: 'products#list', as: 'product_list'
-    resources :categories
+    resources :categories, except: :destroy do 
+      resources :subcategories, except: :destroy
+    end
     resources :sizes, only: %i[index new create edit update]
     resources :colors, only: %i[index new create edit update]
     resources :tags do

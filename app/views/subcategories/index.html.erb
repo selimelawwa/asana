@@ -1,6 +1,7 @@
 <div class="container mt-3">
-  <div class="row justify-content-end">
-    <h5> <%= link_to 'Add a New Category', new_category_path, class: 'text-dark' %> </h5>
+  <div class="row justify-content-between">
+    <%= render partial: 'shared/sub_categories_breadcrum', locals: {category: @category, active_link: nil}%>
+    <h5> <%= link_to 'Add A New Sub-Category', new_category_subcategory_path(category_id: @category.id) %> </h5>
   </div>
 </div>
 <div class="container mt-3 mb-5">
@@ -10,10 +11,10 @@
     </div>
     <div class = "col-md-8 col-lg-9">
       <div class="col-sm-12 d-flex align-items-center justify-content-between">
-        <h1>Categories</h1>
+        <h1> <%= "#{@category.name} Sub Categories"%> </h1>
       </div>
       <div class ="col-sm-9 categories-container">
-        <% if @categories.any? %>
+        <% if @sub_categories.any? %>
           <ul class="list-group">
             <div class="table-responsive">
               <table class="table">
@@ -22,19 +23,15 @@
                     <th>#</th>
                     <th> Name </th>
                     <th></th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody class="order_details">
-                  <% @categories.each_with_index do |c,i| %>
+                  <% @sub_categories.each_with_index do |s,i| %>
                     <tr>
                       <td scope="row"><%= i+1 %></td>
-                      <td> <%= c.name %> </td>
+                      <td> <%= s.name %> </td>
                       <td class="text-right"> 
-                        <%= link_to 'Edit', edit_category_path(id: c.id) %> 
-                      </td>
-                      <td class="text-right">
-                        <%= link_to 'Sub Categories', category_subcategories_path(category_id: c.id)%> 
+                        <%= link_to 'Edit', edit_category_subcategory_path(category_id: @category.id, id: s.id) %> 
                       </td>
                     </tr>
                   <% end %>
