@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   #TODO handle this to get the sized
   scope :with_photos, -> { joins(variants: :variant_images).distinct } 
   scope :published, -> { where(published: true) }
+  scope :hidden, -> { where(published: false) }
 
   attr_accessor :color_ids
 

@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row justify-content-end">
     <% if policy(Product).create? %>
-    <h5><%= link_to 'Add a Product', new_product_path, class: "push-m9 text-dark" %></h5>
+    <h5><%= link_to 'Add a Product', new_product_path, class: "push-m9" %></h5>
     <% end %>
   </div>
 </div>
@@ -12,40 +12,44 @@
     </div>
     <div class = "col-md-9">
       <div class="row">
-        <div class="d-block d-sm-none mx-auto mb-3 mt-1">
-          <%= search_form_for @q, url: product_list_path do |f| %>
-            <div class="form-row align-items-center">
-              <div class= "col-auto">
-                <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
-              </div>
-              <button class="btn btn-success btn-large mb-2" type="submit" name="action">Search
-              </button>
-            </div>
+        <div class="col-12 d-flex align-items-center justify-content-between">
+          <% if params[:show_hidden] == "1" %>
+            <h1> Hidden Products </h1>
+          <% else %>
+            <h1 class="d-md-none d-lg-block entry-title"> All Products </h1>
+            <h3 class="d-none d-md-block d-lg-none"> All Products </h3>
+          <% end %>
+        </div>
+        <div class="col-12 mb-1">
+          <% if params[:show_hidden] == "1" %>
+            <%= link_to 'Show Published Products', product_list_path %>
+          <% else %>
+            <%= link_to 'Show Hidden Products', product_list_path(show_hidden: 1) %>
           <% end %>
         </div>
       </div>
-      <div class="col-sm-12 d-flex align-items-center justify-content-between">
-        <% if params[:category_id].blank? %>
-          <h1 class="d-md-none d-lg-block entry-title"> All Products </h1>
-          <h3 class="d-none d-md-block d-lg-none"> All Products </h3>
-        <% else %>
-          <h1> <%= "#{@category.name}'s Products" %> </h1>
-        <% end %>
-        <div class = "offset-xl-4 d-none d-sm-block">
-          <%= search_form_for @q, url: product_list_path do |f| %>
-            <div class="form-row align-items-center">
-              <div class= "col-auto">
+      <div class="row">
+        <div class = "col-12 d-sm-block">
+          <%= search_form_for @search, url: product_list_path do |f| %>
+            <div class="row">
+              <div class="col">
+                <%= f.label :name_cont, 'Name Contain' %>
                 <%= f.search_field :name_cont,  class: 'form-control mb-2' %>
               </div>
-              <button class="btn btn-success btn-large mb-2" type="submit" name="action">Search
-              </button>
+              <div class="col">
+                <%= f.label :color_id_in, 'Filter by Category' %>
+                <%= f.select :categories_id_in, Category.category.map {|c| [c.name, c.id]} , {include_blank: true}, class: 'form-control' %>
+              </div>
             </div>
+            <button class="btn btn-success btn-large mb-2 mt-2 float-right" type="submit" name="action">Search
+            </button>
           <% end %>
         </div>
-        <div></div>
       </div>
-      <div  class= "center-align">
-        <%= will_paginate @products , renderer: @custom_paginate_renderer %>
+      <div class="row">
+        <div  class= "center-align">
+          <%= will_paginate @products , renderer: @custom_paginate_renderer %>
+        </div>
       </div>
       
       <div class="row">
