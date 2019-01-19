@@ -1,0 +1,47 @@
+<div class = "container my-5">
+  <% if category.new_record? %>
+    <%= render partial: 'shared/sub_categories_breadcrum', locals: {category: category, active_link: "New Sub-Category"}%>
+  <% else %>
+    <% label = "Edit #{sub_category.name} "%>
+    <%= render partial: 'shared/sub_categories_breadcrum', locals: {category: category, active_link: label}%>
+  <% end %>
+  <div class = "row">
+    <div class = "col-md-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'categories'}%>
+    </div>
+    <div class= "col-md-9">
+      <% if sub_category.new_record? %>
+        <h1> New Sub-Category  </h1>
+      <% else %>
+        <h1> Edit <%= sub_category.name %> </h1>
+      <% end %>
+      <%= simple_form_for sub_category, url: (sub_category.new_record? ? category_subcategories_path(category_id: @category.id) : category_subcategory_path(category_id: @category.id))  do |f| %>
+        
+        <% if @sub_category.errors.any? %>
+          <div id="error_explanation" class="red">
+            <h2><%= pluralize(@sub_category.errors.count, "error") %> prohibited this article from being saved:</h2>
+        
+            <ul>
+            <% @sub_category.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= f.label 'Sub-Category Name', :name %>
+          <%= f.text_field :name, class: 'form-control'  %>
+        </div>
+        <%= f.input :kind, as: :hidden, input_html: { value: 'sub_category' }%>
+        <%= f.input :parent_id, as: :hidden, input_html: { value: category.id }%>
+
+
+        <% sumbit_label = category.new_record? ? 'Add Sub-Category' : 'Update Sub-Category' %>
+        <div class="d-flex flex-row-reverse">
+          <button class="btn color-semi-black btn-large align-right" type="submit" name="action"> <%= sumbit_label%> </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

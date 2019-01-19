@@ -11,14 +11,27 @@
       <% end %>
       <%= simple_form_for category, url: (category.new_record? ? categories_path : category_path)  do |f| %>
 
+        <% if @category.errors.any? %>
+          <div id="error_explanation" class="red">
+            <h2><%= pluralize(@category.errors.count, "error") %> prohibited this article from being saved:</h2>
+        
+            <ul>
+            <% @category.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
         <div class="form-group">
           <%= f.label 'Category Name', :name %>
           <%= f.text_field :name, class: 'form-control'  %>
         </div>
         <%= f.input :kind, as: :hidden, input_html: { value: 'category' }%>
-        <br><br>
+
+        <% sumbit_label = category.new_record? ? 'Add Category' : 'Update Category' %>
         <div class="d-flex flex-row-reverse">
-          <button class="btn color-semi-black btn-large align-right" type="submit" name="action">Add Category</button>
+          <button class="btn color-semi-black btn-large align-right" type="submit" name="action"> <%= sumbit_label%> </button>
         </div>
       <% end %>
     </div>

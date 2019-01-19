@@ -1,0 +1,15 @@
+<div class="row">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-4">
+      <li class="breadcrumb-item">
+        <%= link_to "Categories", categories_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= "#{category.name}" %>
+      </li>
+      <% if active_link.presence %>
+        <li class="breadcrumb-item active" aria-current="page"><%= active_link %></li>
+      <% end %>
+    </ol>
+  </nav>
+</div>

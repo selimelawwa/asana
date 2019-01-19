@@ -1,0 +1,2 @@
+module JumbotronsHelper
+end

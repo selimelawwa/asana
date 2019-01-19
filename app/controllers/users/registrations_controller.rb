@@ -33,6 +33,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource_updated
       bypass_sign_in resource, scope: resource_name
+      flash[:notice] = "Account succesfully updated!"
       respond_with resource, location: after_update_path_for(resource)
     else
       clean_up_passwords resource
@@ -47,16 +48,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_password
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     if user_params[:password].blank? || user_params[:password_confirmation].blank?
+      flash[:alert] = "Current Password Can't be Blank"
       render "edit_password"
     elsif resource.update_with_password(user_params)
+      flash[:notice] = "Password succesfully updated!"
       bypass_sign_in resource, scope: resource_name
-      redirect_to edit_user_password_path
+      redirect_to edit_user_registration_path(resource)
     else
+      flash[:alert] = resource.reload.valid_password?(params.dig(:user,:current_password)) ? "New Password Invalid / Dont Match Confirmation" : "Please Enter Correct Password"
       render "edit_password"
     end
   end
-  
-  
 
   # DELETE /resource
   # def destroy
@@ -99,7 +101,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    edit_registration_path(resource)
+    edit_user_registration_path(resource)
   end
 
   # The path used after sign up.
