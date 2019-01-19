@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       post 'assign_products', to: 'tags#assign_products', as: 'assign_products'
     end
     resources :slides, except: :show
+    resources :jumbotrons, except: [:show, :destroy]
     resources :cities, except: [:show, :destroy]
   end
   

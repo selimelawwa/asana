@@ -42,7 +42,7 @@
           </div>
         <% else %>
           <div class="col-12">
-            <p>Your have no cities, <%= link_to 'Create a new city', new_city_path if policy(City).create?%>
+            <p>You have no cities, <%= link_to 'Create a new city', new_city_path if policy(City).create?%>
           </div>
         <% end %>
       </div>
