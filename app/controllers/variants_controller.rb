@@ -5,10 +5,16 @@ class VariantsController < ApplicationController
   def index
     sort_order = ["XS","S", "M", "L", "XL", "2XL", "3XL"]
     @variants = @product.variants.sized.includes(variant_includes).order("colors.name , position(sizes.name in '#{sort_order.join(",")}') asc")
+    authorize @variants
+    @colors = @product.variants.main.map(&:color)
+    @search = @variants.ransack(params[:q])
+    @variants = @search.result
   end
   def new
+    authorize @product
   end
   def create
+    authorize @product
     # we create variant by update product and creating associated variants
     if @product.update(product_params)
       redirect_to product_variants_path
@@ -19,6 +25,7 @@ class VariantsController < ApplicationController
 
   def update_stock
     @variant =  Variant.find(params[:variant_id])
+    authorize @variant
     if @variant.update(stock: params[:new_stock])
       updated_variant = @variant.reload
       render json: { new_stock: updated_variant.stock }

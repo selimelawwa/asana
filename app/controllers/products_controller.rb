@@ -19,15 +19,14 @@ class ProductsController < ApplicationController
 
   #list for admin
   def list
-    if params[:category_id].blank?
-      @products = Product.unscoped
+    if params[:show_hidden] == "1"
+      @products = Product.hidden
     else
-      @category = Category.find( params[:category_id])
-      @products = @category.products
+      @products = Product.published
     end
     authorize @products
-    @q = @products.ransack(params[:q])
-    @products = @q.result.order(:created_at).paginate(:page => params[:page], :per_page => 25)
+    @search = @products.ransack(params[:q])
+    @products = @search.result.order(:created_at).paginate(:page => params[:page], :per_page => 25)
     @custom_paginate_renderer = custom_paginate_renderer
   end
 

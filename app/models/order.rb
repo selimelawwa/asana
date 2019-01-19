@@ -12,7 +12,7 @@ class Order < ApplicationRecord
   before_create :set_default_status
 
   before_update :validate_no_out_of_stock_variants
-
+  #TODO set total cost on finalize, all variants + shipping + vat
   def finalize
     if update(cart: false, status: 'confirmed', total_cost: current_total_cost)
       decrement_variant_stocks
