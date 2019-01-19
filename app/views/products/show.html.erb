@@ -54,22 +54,25 @@
         <div class="col-12 col-md-6 pl-3">
           <div class="single_product_desc">
 
-            <h3 class="title"><%= @product.name %></h3>
+            <h3 class="title"><%= @product.name&.humanize %></h3>
 
-            <h5 class="price mb-4">EGP <%= @product.price %></h5>
-
-            <p class="available">Available: <span class="text-muted">In Stock</span></p>
+            <h5 style="color: #434343;" class="price mb-4">EGP <%= @product.price %></h5>
 
             <div class="form-group">
               <div class="container">
                 <div class="row">
                   <label class="pt-1 mr-40" for="size_select">Size</label>
-                  <select class="form-control pb-2 bg-light" id="size_select" style="width:20%; height:0%;font-size:0.8em;">
-                    <% Size.all.each do |s|%>
-                      <option value= "<%= s.id %>"> <%= s.name %> </option>
+                  <% Size.all.each do |s|%>
+                    <% if @available_sizes.include? s.id%>
+                      <label id = "<%="label_#{s.id}"%>" class="checkbox_label pointer size mr-1" for="<%="size_#{s.id}"%>"> <%=s.name%> </label>
+                      <input type="radio" style="display: none;" name="size_id" class="size_select" id="<%="size_#{s.id}"%>" value="<%= "#{s.id}" %>">
+                    <% else %>
+                      <label id = "<%="label_#{s.id}"%>" class="checkbox_label_disabled pointer size mr-1" for="<%="size_#{s.id}"%>"> <%=s.name%> </label>
+                      <input disabled type="radio" style="display: none;" name="size_id" class="size_select" id="<%="size_#{s.id}"%>" value="<%= "#{s.id}" %>">
                     <% end %>
-                  </select>
+                  <% end %>
                 </div>
+                <p style= "display=inline-block;" class="error_msg red"></p>
               </div>
             </div>
 
@@ -159,58 +162,60 @@
   <!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
 
   <!-- <<<<<<<<<<<<<<<<<<<< Related Products Area Start >>>>>>>>>>>>>>>>>>>>>>>>> -->
-  <div class="container mb-5">
-    <div class="row">
-      <div class="col-12 col-md-12 text-center">
-          <h3>You may also like</h3>
+  <% if @related_products.any? %>
+    <div class="container mb-5">
+      <div class="row">
+        <div class="col-12 col-md-12 text-center">
+            <h3>You may also like</h3>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Visible on Desktop Computers -->
-  <div class="d-none d-sm-block mt-4 mb-2">
-    <div class="container pb-4 pt-3">
-      <div class="row">
-        <% @related_products.each do |p|%>
-          <div class="col-md-3">
-            <div class="card border-0 card-wid">
-              <div class="inner">
-                <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
+    <!-- Visible on Desktop Computers -->
+    <div class="d-none d-sm-block mt-4 mb-2">
+      <div class="container pb-4 pt-3">
+        <div class="row">
+          <% @related_products.each do |p|%>
+            <div class="col-md-3">
+              <div class="card border-0 card-wid">
+                <div class="inner">
+                  <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"> <%= link_to p.name, product_path(p) %> </h5>
+                  <p class="card-text"><small class="text-muted"> <%=p.price%> EGP </small></p>
+                </div>
               </div>
-              <div class="card-body">
-                <h5 class="card-title"> <%= link_to p.name, product_path(p) %> </h5>
-                <p class="card-text"><small class="text-muted"> <%=p.price%> EGP </small></p>
+            </div>
+          <% end %>
+        </div>    
+      </div>
+    </div>
+
+
+    <!-- Visible on Mobile Phones -->
+    <div class="d-block d-sm-none">
+      <div class="container-fluid mt-2 pb-5">
+        <div class="row">
+        <% @related_products.each do |p|%>
+          <div class="col-6">
+            <div class="row px-1">
+              <div class="card border-0">
+                <div class="inner">
+                  <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"> <%= link_to p.name, product_path(p) %> </h5>
+                  <p class="card-text"><small class="text-muted"> <%=p.price%> EGP </small></p>
+                </div>
               </div>
             </div>
           </div>
         <% end %>
-      </div>    
-    </div>
-  </div>
-
-
-  <!-- Visible on Mobile Phones -->
-  <div class="d-block d-sm-none">
-    <div class="container-fluid mt-2 pb-5">
-      <div class="row">
-      <% @related_products.each do |p|%>
-        <div class="col-6">
-          <div class="row px-1">
-            <div class="card border-0">
-              <div class="inner">
-                <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"> <%= link_to p.name, product_path(p) %> </h5>
-                <p class="card-text"><small class="text-muted"> <%=p.price%> EGP </small></p>
-              </div>
-            </div>
-          </div>
         </div>
-      <% end %>
       </div>
     </div>
-  </div>
+  <% end %>
   <!-- <<<<<<<<<<<<<<<<<<<< Related Products Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
 </div>
 
@@ -238,27 +243,41 @@
         .children('.photo').css({'background-image': 'url('+ $(this).attr('data-image') +')'});
     })
 
+    $('.checkbox_label').click(function(){
+      $.each($(".checkbox_label"), function(){  
+        $(this).removeClass("active");
+      });
+      $(this).addClass("active");
+    });
+
     $('#add_to_cart').click(function(){
-      size_id = $('#size_select').val();
+      size_id = $("input[name=size_id]:checked").val();
       quantity = $('#qty').val();
       product_id = "<%= @product.id %>";
       color_id = "<%= params[:color_id] %>";
-      $.ajax({
-        type: "POST",
-        url: '/add_to_cart',
-        data: {size_id: size_id, quantity: quantity, product_id: product_id, color_id: color_id},
-        success: function(response, data, status, xhr) {
-          debugger;
-          if (response['saved'] == 1){
-            $('#exampleModalCenter').modal('show');
-          } else{
-            $('#error_modal_div').html(response);
-            $('#add_to_cart_error_modal').modal('show');
+      if (size_id == null){
+        $('.error_msg').html('Please select a size first').show();
+        setTimeout(function(){ 
+          $('.error_msg').hide();
+          }, 2500);
+      } else {
+        $.ajax({
+          type: "POST",
+          url: '/add_to_cart',
+          data: {size_id: size_id, quantity: quantity, product_id: product_id, color_id: color_id},
+          success: function(response, data, status, xhr) {
+            debugger;
+            if (response['saved'] == 1){
+              $('#exampleModalCenter').modal('show');
+            } else{
+              $('#error_modal_div').html(response);
+              $('#add_to_cart_error_modal').modal('show');
+            }
+          },
+          error: function() {
+            alert('error');
           }
-        },
-        error: function() {
-          alert('error');
-        }
-      });
+        });
+      }
     });
 </script>
