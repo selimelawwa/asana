@@ -82,7 +82,8 @@
                     </td>
                     <td>
                       <% if p.published?%>
-                        <%= link_to 'Hide', product_publish_path(product_id: p.id), class: 'red', method: :post %>
+                        <%= link_to 'Hide', product_publish_path(product_id: p.id), class: 'red', method: :post,
+                              data: { confirm: 'Are you sure you want to hide product? Stock of this product will be set to zero' } %>
                       <% else %>
                         <%= link_to 'Publish', product_publish_path(product_id: p.id), class: 'green', method: :post %>
                       <% end %>

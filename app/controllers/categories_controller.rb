@@ -1,13 +1,16 @@
 class CategoriesController < ApplicationController
   def index
     @categories = Category.category
+    authorize @categories
   end
   def new
     @category = Category.new
+    authorize @category
   end
 
   def create
     @category = Category.new(category_params)
+    authorize @category
     if @category.save
       redirect_to categories_path
     else

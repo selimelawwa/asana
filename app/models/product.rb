@@ -17,6 +17,7 @@ class Product < ApplicationRecord
   
   after_save :create_variants_based_on_colors
   before_create :validate_color_ids_present
+  before_save :set_stocks_to_zero_if_hidden
 
   # validations
   validates :name, :price, :category_ids, :sub_category_ids, :main_photo, presence: true
@@ -101,6 +102,14 @@ class Product < ApplicationRecord
   #to be viewed with color select at product show
   def main_variant_image(color_id)
     variants.main.where(color_id: color_id).first.main_photo&.image || Color.find(color_id).photo
+  end
+
+  def set_stocks_to_zero_if_hidden
+    if published_changed? && !published?
+      variants.sized.each do |v|
+        v.update(stock: 0)
+      end
+    end
   end
 
   private
