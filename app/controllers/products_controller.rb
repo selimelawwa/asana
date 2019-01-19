@@ -37,9 +37,14 @@ class ProductsController < ApplicationController
   end
 
   def show
-    params[:color_id] ||= @product.main_color_id
-    @colored_variant = @product.variants.main.where(color_id: params[:color_id]).first
-    @related_products =  Product.joins(:tags).where(tags: {id: @product.tags.pluck(:id)}).where.not(products: {id: @product.id})&.shuffle&.first(4)
+    if @product.published?
+      params[:color_id] ||= @product.main_color_id
+      @colored_variant = @product.variants.main.where(color_id: params[:color_id]).first
+      @related_products =  Product.joins(:tags).where(tags: {id: @product.tags.pluck(:id)}).where.not(products: {id: @product.id})&.shuffle&.first(4)
+    else
+      flash[:error] = "This Product is currently unavailable"
+      redirect_to products_path
+    end
   end
 
   def edit
@@ -49,7 +54,7 @@ class ProductsController < ApplicationController
   def update
     authorize @product
     if @product.update(product_params)
-      redirect_to product_path
+      redirect_to edit_product_path(@product)
     else
       render 'edit'
     end
@@ -82,6 +87,7 @@ class ProductsController < ApplicationController
   # TODO - handle fail
   def publish
     @product = Product.find(params[:product_id])
+    authorize @product
     @product.published? ? @product.update(published: false) : @product.update(published: true)
     redirect_to product_list_path
   end
