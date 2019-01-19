@@ -1,0 +1,51 @@
+<div class="container mt-3">
+  <div class="row justify-content-end">
+    <% if policy(City).create? && @cities.any?%>
+      <h5> <%= link_to 'Add a new City', new_city_path, class: "push-m9 text-dark" %> </h5> 
+    <% end %>
+  </div>
+</div>
+<div class="container mt-3 mb-5">
+  <div class="row">
+    <div class = "col-md-4 col-lg-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'cities'}%>
+    </div>
+    <div class="col-md-8 col-lg-9">
+      <div class="col-sm-12 d-flex align-items-center justify-content-between">
+        <h1> Cities </h1>
+      </div>
+      <div class="row">
+        <% if @cities.any?%>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th> Name </th>
+                  <th> Shipping Rate </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="order_details">
+                <% @cities.each_with_index do |c,i| %>
+                  <tr>
+                    <td scope="row"><%= i+1 %></td>
+                    <td> <%= c.name %> </td>
+                    <td> EGP <%= c.shipping_price %> </td>
+                    <td class="text-right"> 
+                      <%= link_to 'Edit', edit_city_path(c) %> 
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <div class="col-12">
+            <p>Your have no cities, <%= link_to 'Create a new city', new_city_path if policy(City).create?%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

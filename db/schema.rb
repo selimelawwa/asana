@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_18_131320) do
+ActiveRecord::Schema.define(version: 2019_01_19_135727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,13 @@ ActiveRecord::Schema.define(version: 2019_01_18_131320) do
   create_table "addresses", force: :cascade do |t|
     t.bigint "user_id"
     t.boolean "default_addresses", default: false
-    t.string "city"
     t.string "mobile"
     t.string "telephone"
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_addresses_on_city_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -43,6 +44,15 @@ ActiveRecord::Schema.define(version: 2019_01_18_131320) do
     t.index ["product_id"], name: "index_categories_products_on_product_id"
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.decimal "shipping_price", precision: 8, scale: 2
+    t.bigint "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_cities_on_country_id"
+  end
+
   create_table "colors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -51,6 +61,13 @@ ActiveRecord::Schema.define(version: 2019_01_18_131320) do
     t.string "photo_content_type"
     t.integer "photo_file_size"
     t.datetime "photo_updated_at"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.decimal "default_shipping_price", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "images", force: :cascade do |t|
@@ -188,6 +205,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_131320) do
     t.index ["size_id"], name: "index_variants_on_size_id"
   end
 
+  add_foreign_key "addresses", "cities"
   add_foreign_key "addresses", "users"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "variants"

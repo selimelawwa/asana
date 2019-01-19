@@ -16,6 +16,14 @@
                 <%= f.text_field :name, required: true, placeholder: "Name", id: "name", class: "form-control" %>
                 <label for="name" class="py-auto">Name</label>
               </div>
+              <div class="form-label-group">
+                <%= f.email_field :email, required: true, autocomplete: "email", id: "email", class: "form-control", placeholder: "Email address" %>
+                <label for="email" class="py-auto">Email address</label>
+              </div>
+              <div class="form-label-group">
+                <%= f.text_field :mobile, required: true, autocomplete: "mobile", id: "mobile", class: "form-control", placeholder: "Mobile" %>
+                <label for="mobile" class="py-auto">Mobile number</label>
+              </div>
               <div class="container">
                 <div class="row">
                   <div class="col-12 col-lg-6">
@@ -35,10 +43,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="form-label-group">
-                <%= f.email_field :email, required: true, autocomplete: "email", id: "email", class: "form-control", placeholder: "Email address" %>
-                <label for="email" class="py-auto">Email address</label>
               </div>
               <div class="container">
                 <div class="row">

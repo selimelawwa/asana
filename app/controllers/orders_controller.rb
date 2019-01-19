@@ -52,13 +52,12 @@ class OrdersController < ApplicationController
     @order.refresh_line_items if @order.cart?
   end
 
+  #TODO
   def cart
     if current_user || current_or_guest_user.orders.any?
       @order = current_order
       authorize @order
-      @order.refresh_line_items if @order.cart?
-    else
-      
+      @order.refresh_line_items
     end
   end
 
@@ -88,6 +87,7 @@ class OrdersController < ApplicationController
       @order.update(address_id: @address.id)
       redirect_to order_confirm_details_path(order_id:  @order.id)
     else
+      @addresses = current_user.addresses.reload
       render 'select_address'
     end
   end
@@ -117,7 +117,7 @@ class OrdersController < ApplicationController
 
   private
   def address_params
-    params.require(:address).permit(:city, :mobile, :telephone, :address, :default_addresses)
+    params.require(:address).permit(:city_id, :mobile, :telephone, :address, :default_addresses)
   end
 
   def set_order

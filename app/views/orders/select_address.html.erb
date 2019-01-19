@@ -12,7 +12,6 @@
                   <th>Address</th>
                   <th>City</th>
                   <th>Mobile</th>
-                  <th>City</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -22,9 +21,8 @@
                         <input type="radio" name="address" class="checked_products" id="<%= "address_#{a.id}" %>" value="<%= "#{a.id}" %>">
                       </td>
                       <td><%= a.address&.truncate(50) %></td>
-                      <td><%= a.city %></td>
+                      <td><%= a.city.name %></td>
                       <td><%= a.mobile %></td>
-                      <td><%= a.city %></td>
                   </tr>
                   <% end %>
                 </tbody>
