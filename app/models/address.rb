@@ -1,6 +1,7 @@
 class Address < ApplicationRecord
   belongs_to :order, optional: true
   belongs_to :user
+  belongs_to :city
 
   after_save :ensure_only_1_default_address
   before_create :set_to_default_address_if_first

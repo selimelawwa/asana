@@ -36,15 +36,13 @@
                   <th>Address</th>
                   <th>City</th>
                   <th>Mobile</th>
-                  <th>City</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td><%= @address.address&.truncate(50) %></td>
-                    <td><%= @address.city %></td>
+                    <td><%= @address.city.name %></td>
                     <td><%= @address.mobile %></td>
-                    <td><%= @address.city %></td>
                   </tr>
                 </tbody>
             </table>

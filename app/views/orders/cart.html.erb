@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="row">
-    <% if @order.line_items.any?%>
+    <% if @order.presence && @order.line_items.any?%>
       <div class="col-8">
         <div class="row" id="order_details_div">
           <%= render partial: 'order_details_partial', locals: {order: @order, line_items: @order.line_items}%>
