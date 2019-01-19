@@ -8,6 +8,11 @@
     <% end %>
   </div>
   <% if @variants.any?%>
+    <%= search_form_for @search, url: product_variants_path(@product.id) do |f| %>
+      <%= f.label :color_id_in, 'Filter by color' %>
+      <%= f.select :color_id_in, @colors.map {|c| [c.name, c.id]} , {include_blank: true}, class: 'form-control' %>
+      <button id="filter-btn" class="btn btn-success btn-large mt-2 mb-2 float-right" type="submit" name="action">Search</button>
+    <% end %>
     <div class="table-responsive">
       <table class="table">
         <thead>
