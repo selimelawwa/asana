@@ -1,0 +1,34 @@
+<div class="container my-5">
+  <div class = "row">
+    <div class = "col-md-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'cities'}%>
+    </div>
+    <div class= "col-md-9">
+      <div class="row">
+        <div class="mx-auto">
+          <% if city.new_record? %>
+            <h1> New City </h1>
+          <% else %>
+            <h1> Edit <%= city.name %> </h1>
+          <% end %>
+        </div>
+      </div>
+      <%= simple_form_for city, url: (city.new_record? ? cities_path : city_path)  do |f| %>
+  
+        <div class="form-group">
+          <%= f.input :name, class: 'form-control'  %>
+        </div>
+
+        <div class="form-group">
+          <%= f.input :shipping_price, class: 'form-control'  %>
+        </div>
+  
+        <% submit_label = city.new_record? ? "Add City" : "Update City"%>
+        <div class="d-flex flex-row-reverse">
+          <button class="btn color-semi-black btn-large align-right mb-3" type="submit" name="action"><%= submit_label%>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>      
+</div>
