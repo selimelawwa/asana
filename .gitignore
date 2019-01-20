@@ -20,6 +20,10 @@
 /node_modules
 /yarn-error.log
 
+gemfiles/*.gemfile.lock
+Gemfile.lock
+
+
 /public/assets
 .byebug_history
 
@@ -28,6 +32,9 @@
 
 #ignore Paperclip attachments
 /public/system
+
+/config/database.yml
+
 
 config/settings.yml
 config/settings.local.yml
