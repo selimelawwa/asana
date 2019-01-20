@@ -114,7 +114,7 @@
 //homepage
 .carousel-inner img{
   width: 100%;
-  height: 100%;
+//   height: 100%;
 }
 
 .social a{
@@ -336,6 +336,9 @@
       background-color:#fff;
       color:white;
     }
+    .carousel-img-size{
+        height: 211px;
+    }
   }
 
 // iphone x portrait
@@ -350,6 +353,9 @@
       background-color:#fff;
       color:white;
     }
+    .carousel-img-size{
+        height: 426px;
+    }
   }
 
 //  iphone 7,8 portrait
@@ -363,6 +369,9 @@
       background-color:#fff;
       color:white;
     }
+    .carousel-img-size{
+        height: 282px;
+    }
   }
 
 // iphone 7,8 plus portrait
@@ -375,6 +384,9 @@
       height:50%;
       background-color:#fff;
       color:white;
+    }
+    .carousel-img-size{
+        height: 329px;
     }
    }
 
@@ -419,6 +431,9 @@
     .edit-pass-font{
         font-size: 0.8rem;
     }
+    .carousel-img-size{
+        height: 388px;
+    }
   }
 
 // Large devices (desktops, 992px and up)
@@ -438,12 +453,18 @@
     .fix-footer{
         min-height: calc(100vh - 426px);
     }
+    .carousel-img-size{
+        height: 590px;
+    }
   }
 
 // Extra large devices (large desktops, 1200px and up)
     @media (min-width: 1200px) { 
         .fix-footer{
             min-height: calc(100vh - 426px);
+        }
+        .carousel-img-size{
+            height: 470px;
         }
     }
 
