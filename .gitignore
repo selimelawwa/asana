@@ -29,8 +29,6 @@
 #ignore Paperclip attachments
 /public/system
 
-config/database.yml
-
 config/settings.yml
 config/settings.local.yml
 config/settings/*.local.yml
