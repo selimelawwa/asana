@@ -216,6 +216,11 @@
     background-color: #0e110D;
 }
 
+.text-dec-none:hover{
+    color: white;
+    text-decoration: none;
+}
+
 .search-toggle {
 	position: relative;
 	display: block;
@@ -1343,20 +1348,18 @@ td a:hover{
 }
 
 .confirm_order_btn{
-    padding: 20px;
-    border: 1px solid black;
-    background: #3f3f3f;
+    padding: 15px;
+    // border: 1px solid black;
+    background: #0e110D;
     color: white;
-    font-size: 25px;
-    font-weight: bold;
+    font-size: 20px;
+    // font-weight: bold;
     margin-bottom: 19px;
 }
 
 .confirm_order_btn:hover, .confirm_order_btn:focus{
     color: white;
     text-decoration: none;
-    font-size: 25px;
-    font-weight: bold;
 }
 
 .error_msg_pre{

@@ -142,8 +142,8 @@
           </div>
           <% end %>
           <div class="row" id="nav-row">
-            <i class="fas fa-shopping-cart pt-2 pl-3 pr-2 color-black"></i>
-            <li class="nav-item"> <%= link_to "Cart (0)", "#", class:"nav-link" %></li>
+            <i class="fas fa-shopping-cart pt-2 pl-3 pr-2 mt-1 color-black"></i>
+            <li class="nav-item"> <%= link_to "Cart", cart_path, class:"nav-link" %></li>
           </div>
           <% if user_signed_in? %>
             <div class="row" id="nav-row">

@@ -19,7 +19,7 @@
         <% line_items.each_with_index do |l,i| %>
           <tr>
             <% variant = l.variant%>
-            <td scope="row"><%= i %></td>
+            <td scope="row"><%= i + 1 %></td>
             <td><%= image_tag variant.main_photo_thubmnail %></td>
             <td><%= link_to variant.name_with_options_text, product_path(variant.product) %> </td>
             <td><%= "EGP #{l.cost}" %></td>
