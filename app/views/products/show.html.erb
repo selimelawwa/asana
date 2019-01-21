@@ -105,7 +105,9 @@
 
 
             <div class="cart">
-              <button id= "add_to_cart" type="submit" name="addtocart" value="5" class="btn cart-submit d-block ml-0 mb-5">Add to cart</button>
+              <div class="d-flex">
+                <button id= "add_to_cart" type="submit" name="addtocart" value="5" class="btn cart-submit d-block ml-0 mb-5 col-12 col-md-4">Add to cart</button>
+              </div>
             </div>
 
             <div id="accordion" role="tablist">
@@ -142,10 +144,10 @@
                 <div class="card">
                   <div class="card-header" role="tab" id="headingTwo">
                     <h6 class="mb-0">
-                        <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Fabric & Care Details</a>
+                        <a class="collapsed text-color-dark" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Fabric & Care Details</a>
                     </h6>
                   </div>
-                  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                  <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body">
                       <p> <%= @product.fabric_details %> </p>
                     </div>

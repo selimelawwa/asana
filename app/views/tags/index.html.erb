@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="row justify-content-end">
     <% if policy(Tag).create? && @tags.any?%>
-      <h5> <%= link_to 'Create a new Tag', new_tag_path, class: "push-m9 text-dark" %> </h5> 
+      <h5> <%= link_to 'Create a new Tag', new_tag_path, class: "push-m9" %> </h5> 
     <% end %>
   </div>
 </div>

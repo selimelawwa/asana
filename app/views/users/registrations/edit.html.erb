@@ -11,25 +11,18 @@
             <div class="col-md-4 col-lg-4 col-xl-3">
               <%= render 'sidebar', current: 'edit_password'%>
             </div>
-            <div class="col-md-7 col-lg-6 col-xl-6">
+            <div class="col-md-7 col-lg-6 col-xl-7">
               <div class="form-group">
                 <%= devise_error_messages! %>
+              </div>
+              <div class="form-group">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: 'form-control', required: true %>
               </div>
               <div class="form-group">
                 <%= f.label :name %>
                 <%= f.text_field :name, placeholder: "Name", required: true, value: resource.name, class: 'form-control' %>
               </div>
-      
-              <div class="form-group">
-                <%= f.label :email %><br />
-                <%= f.email_field :email, autocomplete: "email",placeholder: "Email", class: 'form-control', required: true %>
-              </div>
-
-              <div class="form-group">
-                <%= f.label :mobile %>
-                <%= f.text_field :mobile, required: true, autocomplete: "mobile", id: "mobile", class: "form-control", placeholder: "Mobile" %>
-              </div>
-      
               <div class="container">
                 <div class="row">
                   <div class="col-12 col-md-6">
@@ -50,6 +43,14 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group">
+                  <%= f.label :mobile %>
+                  <%= f.text_field :mobile, required: true, autocomplete: "mobile", id: "mobile", class: "form-control", placeholder: "Mobile", maxlength: "11" %>
+              </div>
+              <div class="pl-4" id="validate-number" style="font-size: 0.8rem; display: none;">
+                <p id="validate-num" class="invalid">Starts with '01'</p>
+                <p id="validate-num2" class="invalid">Consists of 11 numbers</p>
+              </div>
               <div class="container mt-3">
                 <div class="row justify-content-end">
                   <button class="col-12 col-md-5 col-lg-4 col-xl-3 btn color-semi-black" id="submit-button" type="submit" name="action">
@@ -64,3 +65,67 @@
     </div>
   </div>
 </div>
+
+
+<script>
+    var validate_number = document.getElementById("validate-number")
+       ,validate_num = document.getElementById("validate-num")
+       , mobile = document.getElementById("mobile")
+       ,validate_num2 = document.getElementById("validate-num2");
+
+       function validatePassword(){
+        var flag1 = 0;
+        var flag2 = 0;
+        var flag3 = 0;
+        if (mobile.value.length > 0)
+        {
+          validate_number.style.display = "block";
+          if ( mobile.value.match(/^[0-9]+$/) == null ){
+            flag1 = 0;
+          }
+          else
+          {
+            if ( mobile.value.length != 11 )
+            {
+              flag1 = 0;
+              validate_num2.classList.remove("valid");
+              validate_num2.classList.add("invalid");
+            }
+            else
+            {
+              flag1 = 1;
+              validate_num2.classList.remove("invalid");
+              validate_num2.classList.add("valid");
+            }
+          }
+          if (mobile.value.substring(0,2) == "01")
+          {
+            flag2 = 1;
+            validate_num.classList.remove("invalid");
+            validate_num.classList.add("valid");
+          }
+          else
+          {
+            flag2 = 0;
+            validate_num.classList.remove("valid");
+            validate_num.classList.add("invalid");
+          }
+        }
+        else
+        {
+          validate_number.style.display = "none";
+          flag1 = 0;
+        }
+        if (flag1 == 1 && flag2 == 1)
+        {
+          $("#submit-button").removeClass("disabled");
+        }
+        else
+        {
+          $("#submit-button").addClass("disabled");
+        }
+      }
+
+      mobile.onkeyup = validatePassword;
+
+</script>

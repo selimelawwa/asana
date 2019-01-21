@@ -19,7 +19,7 @@
         <% line_items.each_with_index do |l,i| %>
           <tr>
             <% variant = l.variant%>
-            <td scope="row"><%= i %></td>
+            <td scope="row"><%= i + 1 %></td>
             <td><%= image_tag variant.main_photo_thubmnail %></td>
             <td><%= link_to variant.name_with_options_text, product_path(variant.product) %> </td>
             <td><%= "EGP #{l.cost}" %></td>
@@ -35,13 +35,13 @@
                 <%= l.quantity%>
               <% end %>
             </td>
-            <td> <%= l.total_cost%> </td>
+            <td>EGP  <%= l.total_cost%> </td>
             <% if order.cart? %>
               <td>
-                <a class="update_quantity" id="<%="li_#{l.id}"%>"> <i class="fas fa-sync-alt fa-2x green"></i> </a>
+                <a class="update_quantity pointer" id="<%="li_#{l.id}"%>"> <i class="fas fa-sync-alt fa-2x green"></i> </a>
               </td>
               <td>
-                <a class="remove_item" id="<%="li_#{l.id}"%>"> <i class="fas fa-trash fa-2x red"></i> </a>
+                <a class="remove_item pointer" id="<%="li_#{l.id}"%>"> <i class="fas fa-trash fa-2x red" data-toggle="tooltip" title="Remove"></i> </a>
               </td>
             <% end %>
           </tr>

@@ -1,8 +1,6 @@
 <div class="container mt-3">
   <div class="row justify-content-end">
-    <% if policy(City).create? && @cities.any?%>
-      <h5> <%= link_to 'Add a new City', new_city_path, class: "push-m9 text-dark" %> </h5> 
-    <% end %>
+    <h5> <%= link_to 'Add a new City', new_city_path, class: "push-m9" %> </h5> 
   </div>
 </div>
 <div class="container mt-3 mb-5">
@@ -42,7 +40,7 @@
           </div>
         <% else %>
           <div class="col-12">
-            <p>You have no cities, <%= link_to 'Create a new city', new_city_path if policy(City).create?%>
+            <p class="pl-4 mt-2">You have no cities yet</p>
           </div>
         <% end %>
       </div>
