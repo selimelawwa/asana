@@ -2,9 +2,9 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:select_address, :create_address, :assign_address, :confirm_details, :confirm_order]
   def index
     if current_user.admin?
-      @orders = Order.all
+      @orders = Order.all.joins(:line_items)
     else
-      @orders = current_user.orders
+      @orders = current_user.orders.joins(:line_items)
     end
   end
 
@@ -52,7 +52,6 @@ class OrdersController < ApplicationController
     @order.refresh_line_items if @order.cart?
   end
 
-  #TODO
   def cart
     if current_user || current_or_guest_user.orders.any?
       @order = current_order
@@ -93,6 +92,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm_details
+    # have to be a signed up user
     redirect_to new_user_session_path(redirect_to: cart_path) unless current_user.presence
     if flash[:error]
       @error_msg = flash[:error]
@@ -104,6 +104,7 @@ class OrdersController < ApplicationController
     redirect_to order_path(@order) unless @order.has_line_items?
   end
 
+  #TODO if no line items
   def confirm_order
     @address = @order.address    
     if @order.finalize

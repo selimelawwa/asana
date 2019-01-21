@@ -61,6 +61,14 @@
             <div class="form-group">
               <div class="container">
                 <div class="row">
+                  <h6 class="pt-1 mr-40"><%= "Color: #{@colored_variant.color.name}" %> </h6>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="container">
+                <div class="row">
                   <label class="pt-1 mr-40" for="size_select">Size</label>
                   <% Size.all.each do |s|%>
                     <% if @available_sizes.include? s.id%>

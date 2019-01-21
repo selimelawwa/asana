@@ -4,7 +4,6 @@ class Product < ApplicationRecord
   has_many :variants, inverse_of: :product, dependent: :destroy
   has_and_belongs_to_many :tags
 
-  #TODO handle this to get the sized
   scope :with_photos, -> { joins(variants: :variant_images).distinct } 
   scope :published, -> { where(published: true) }
   scope :hidden, -> { where(published: false) }

@@ -12,11 +12,29 @@ class Order < ApplicationRecord
   before_create :set_default_status
 
   before_update :validate_no_out_of_stock_variants
-  #TODO set total cost on finalize, all variants + shipping + vat
+  before_update :validate_assigned_address
+
   def finalize
-    if update(cart: false, status: 'confirmed', total_cost: current_total_cost)
+    if update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.now)
       decrement_variant_stocks
     end
+  end
+
+  def final_total
+    total = current_total_cost
+    total = total + shipping_fees if address.present?
+    total + vat_amount
+  end
+
+  def shipping_fees
+    address.city.shipping_price
+  end
+
+  #TODO
+  def vat_amount
+    total = current_total_cost
+    total = total + shipping_fees if address.present?
+    total * 0
   end
 
   def decrement_variant_stocks
@@ -43,6 +61,13 @@ class Order < ApplicationRecord
         errors.add(:out_of_stock_variants, "#{errors_messages} \nPlease remove item(s)/adjust quantity to complete order", variant_ids: no_stock_variants.ids)
         throw :abort
       end
+    end
+  end
+
+  def validate_assigned_address
+    if cart_changed? && !address.presence
+      errors.add(:address_not_selected, "Please Select an Address")
+      throw :abort
     end
   end
 
