@@ -1,0 +1,31 @@
+<%= search_form_for @search, url: orders_path do |f| %>
+  <div class="row">
+    <div class="col-12 col-md-4 col-xl-5">
+      <%= f.label :id_eq, 'Filter by Order Number' %>
+      <%= f.search_field :id_eq, class: 'form-control' %>
+    </div>
+    <div class="col-12 col-md-4 col-xl-5">
+      <%= f.label :products_name_cont, 'Filter by Product Name' %>
+      <%= f.search_field :products_name_cont, class: 'form-control' %>
+    </div>
+    <div class="col-12 col-md-4 col-xl-5">
+      <%= f.label :user_name_cont, 'Filter by User Name' %>
+      <%= f.search_field :user_name_cont,  class: 'form-control mb-2' %>
+    </div>
+    <div class="col-12 col-md-4 col-xl-5">
+      <%= f.label :address_city_id_in, 'Filter by Delivery City' %>
+      <%= f.select :address_city_id_in, City.all.map {|c| [c.name, c.id]} , {include_blank: true}, class: 'form-control' %>
+    </div>
+    <div class="col-12 col-md-4 col-xl-5">
+      <%= f.label :confirmed_at_gteq, 'Confirmed Date From' %>
+      <%= f.date_field :confirmed_at_gteq, max: Date.today, class: 'form-control datepicker' %>
+    </div>
+    <div class="col-12 col-md-4 col-xl-5">
+      <%= f.label :confirmed_at_lteq, 'Confirmed Date To' %>
+      <%= f.date_field :confirmed_at_lteq, class: 'form-control datepicker' %>
+    </div>
+    <div class="col-12 col-md-3 col-xl-2 pt-4 pr-md-5 pb-2"> 
+      <button class="btn btn-success btn-large mx-auto col-12 mb-2 mt-2 float-right" type="submit" name="action">Search</button>
+    </div>
+  </div>
+<% end %>

@@ -15,6 +15,22 @@
           <h1> Orders </h1>
         <% end %>
       </div>
+      <% if current_user&.admin? %>
+        <div class="row">
+          <div class = "col-12 d-sm-block my-2">
+            <%= render 'filter_form'%>
+          </div>
+        </div>  
+      <% end %>
+
+      <% if @orders.present? && @orders.any?%>
+        <div class="row">
+          <div  class= "center-align">
+            <%= will_paginate @orders , renderer: @custom_paginate_renderer %>
+          </div>
+        </div>
+      <% end %>
+
       <div class="row">
         <% if @orders.present? && @orders.any?%>
           <div class="table-responsive">
@@ -24,7 +40,7 @@
                   <th>#</th>
                   <th> Order Number </th>
                   <th>Status</th>
-                  <th>Created at</th>
+                  <th>Confirmed at</th>
                   <th>Total Cost</th>
                   <% if current_user.admin? %>
                     <th> User Name </th>
@@ -37,7 +53,7 @@
                     <td scope="row"><%= i+1 %></td>
                     <td> <%= link_to "Order-#{o.id}", order_path(o.id) %> </td>
                     <td><%= o.status.humanize %></td>
-                    <td><%= o.created_at %></td>
+                    <td><%= o.confirmed_at %></td>
                     <td> <%= o.cart? ? o.current_total_cost : o.total_cost %> </td>
                     <% if current_user.admin? %>
                       <td> <%= o.user.name%> </td>

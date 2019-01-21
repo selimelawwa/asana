@@ -3,9 +3,12 @@ class OrdersController < ApplicationController
   def index
     if current_user&.admin?
       @orders = Order.all.joins(:line_items)
+      @search = @orders.ransack(params[:q])
+      @orders = @search.result.order(:created_at).paginate(:page => params[:page], :per_page => 25)
     else
       @orders = current_user&.orders&.joins(:line_items)
     end
+    @custom_paginate_renderer = custom_paginate_renderer
   end
 
   def add_to_cart

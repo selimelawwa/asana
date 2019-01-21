@@ -8,7 +8,7 @@
   <p> VAT: EGP <%= order.vat_amount %></p>
 <% end %>
 <hr>
-<b> Total: EGP <%= order.final_total%></b>
+<p style="font-weight: bold;"> Total: EGP <%= order.final_total%></p>
 <% if order.cart? && show_checkout%>
   <%= link_to 'Check Out', order_select_address_path(order_id: order.id), class: "btn color-semi-black text-dec-none mt-2 mb-3 col-12 col-md-11 col-lg-8 col-xl-7" %>
 <% end %>
