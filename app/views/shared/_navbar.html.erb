@@ -35,7 +35,7 @@
           </li>
         </ul>
           <ul class="navbar-nav" id="left-nav">
-            <% if current_user && policy(Product).create? %>
+            <% if current_user&.admin? && policy(Product).create? %>
               <li class="nav-item"> <%= link_to product_list_path, class:"nav-link" do %>
                 <i class="fas fa-toolbox fa-2x color-black" data-toggle="tooltip" title="Admin Settings"></i>
                 <% end %>

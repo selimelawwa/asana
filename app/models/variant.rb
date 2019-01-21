@@ -50,4 +50,12 @@ class Variant < ApplicationRecord
     "#{color.name}"
   end
 
+  def out_of_stock?
+    if sized?
+      main_variant.color_out_of_stock?
+    else
+      !sized_variants.where("stock > 0").any?
+    end
+  end
+
 end

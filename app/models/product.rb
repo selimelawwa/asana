@@ -86,6 +86,7 @@ class Product < ApplicationRecord
     in_stock_c_ids
   end
 
+  # variant with Image and stock
   def main_color_id
     available_in_stock_colors_ids.first || available_colors_ids.first
   end
@@ -110,6 +111,10 @@ class Product < ApplicationRecord
         v.update(stock: 0)
       end
     end
+  end
+
+  def out_of_stock?
+    !variants.sized.where('stock > 0').any?
   end
 
   private
