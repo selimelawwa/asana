@@ -97,7 +97,7 @@
           <%= search_form_for @q, url: search_products_path do |f| %>
             <div class="form-row align-items-center">
               <div class= "col-auto text">
-                <%= f.search_field :name_cont,  class: 'form-control', placeholder: "Search", id: "search-col", style: "color: black;" %>
+                <%= f.search_field :name_cont,  class: 'form-control', placeholder: "Search", id: "search-col" %>
               </div>
               <button class="btn btn-link" type="submit" name="action">
                 <i class="fa fa-search" style="color: #868e96;"></i>
