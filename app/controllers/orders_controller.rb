@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:select_address, :create_address, :assign_address, :confirm_details, :confirm_order]
   def index
-    if current_user.admin?
+    if current_user&.admin?
       @orders = Order.all.joins(:line_items)
     else
-      @orders = current_user.orders.joins(:line_items)
+      @orders = current_user&.orders&.joins(:line_items)
     end
   end
 

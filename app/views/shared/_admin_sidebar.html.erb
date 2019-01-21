@@ -3,6 +3,9 @@
     <li class="list-group-item <%= "#{'active bg-dark' if current=='products'}" %>">
       <%= link_to 'Products', product_list_path, class: 'text-color-dark'%>
     </li>
+    <li class="list-group-item <%= "#{'active bg-dark' if current=='system_orders'}" %>">
+      <%= link_to 'System Orders', orders_path, class: 'text-color-dark'%>
+    </li>
     <li class="list-group-item <%= "#{'active bg-dark' if current=='colors'}" %>">
       <%= link_to 'Colors', colors_path, class: 'text-color-dark' %>
     </li>

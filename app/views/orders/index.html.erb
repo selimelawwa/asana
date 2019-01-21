@@ -1,16 +1,22 @@
 <div class="container my-5">
   <div class="row">
-    <div class="col-12">
+    <% if current_user&.admin? %>
+      <div class= "col-md-3">
+        <%= render partial: 'shared/admin_sidebar' , locals: {current: 'system_orders'}%>
+      </div>
+    <% end %>
+    <% col_class = current_user&.admin? ? 'col-9' : 'col-12'%>
+    <div class="<%= col_class %>">
       <div class="row d-flex align-items-center">
         <i class="fas fa-user fa-2x pb-2 px-3"></i>
-        <% if current_user.admin? %>
+        <% if current_user&.admin? %>
           <h1> System Orders </h1>
         <% else %>
           <h1> Orders </h1>
         <% end %>
       </div>
       <div class="row">
-        <% if @orders.any?%>
+        <% if @orders.present? && @orders.any?%>
           <div class="table-responsive">
             <table class="table">
               <thead>
@@ -42,7 +48,7 @@
             </table>
           </div>
         <% else %>
-          <% if current_user.admin? %>
+          <% if current_user&.admin? %>
             <p> System still has no completed orders</p>
           <% else %>
             <p>You have no completed orders, <%= link_to 'Continue Shopping', products_path %> </p>
