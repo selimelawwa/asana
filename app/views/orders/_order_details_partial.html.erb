@@ -70,7 +70,6 @@
   $('.update_quantity').click(function(){
     line_item_id = this.id.substring(3);
     quantity = $('#qty_'+line_item_id).val();
-    debugger
     $.ajax({
       type: "POST",
       url: '/update_line_item_quantity',

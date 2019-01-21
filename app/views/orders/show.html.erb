@@ -18,7 +18,7 @@
       </div>
       <div class="col-4">
         <h4> Order Summary</h4>
-        <p> Total Amount:  <%= @order.current_total_cost%></p>
+        <p> Total Amount:  <%= @order.cart? ? @order.current_total_cost : @order.total_cost%></p>
         <% if @order.cart? %>
           <%= link_to 'Check Out', order_select_address_path(order_id: @order.id) %>
         <% end %>

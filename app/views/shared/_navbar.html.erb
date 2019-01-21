@@ -4,7 +4,6 @@
     <!-- Navbar on large screens -->
     <nav class="header-nav navbar navbar-expand-md bg-white navbar-white d-none d-sm-none d-md-block">
       <div class="container-fluid">
-        <a class="navbar-brand pl-3" href="<%= "/"%>"><%= image_tag 'Asana_logo_design_Rv02.svg', class: "", style: "height: 53px; width: 89px;" %></a>
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center">
           <li class="nav-item">
               <a class="nav-link color-black text-muted-hover" href="<%= "/"%>">Home</a>
@@ -36,7 +35,7 @@
           </li>
         </ul>
           <ul class="navbar-nav" id="left-nav">
-            <% if policy(Product).create? %>
+            <% if current_user && policy(Product).create? %>
               <li class="nav-item"> <%= link_to product_list_path, class:"nav-link" do %>
                 <i class="fas fa-toolbox fa-2x color-black" data-toggle="tooltip" title="Admin Settings"></i>
                 <% end %>
@@ -62,8 +61,8 @@
               </li>
             <% end %>
             <li class="nav-item pr-4"> <%= link_to cart_path, class:"nav-link" do %>
-              <i class="fas fa-shopping-cart fa-2x color-black" data-toggle="tooltip" title="Cart"></i>
-            <% end if current_user%> 
+              <i class="fas fa-shopping-cart fa-2x" data-toggle="tooltip" title="Cart"></i>
+            <% end %> 
             </li>
             <div class="search-button pr-4">
               <a href="#" class="search-toggle" data-selector="#header-1" data-toggle="tooltip" title="Search"></a>
@@ -114,25 +113,25 @@
           </li>
           <% if Category.any? %>
             <% Category.category.each do |c| %>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= c.name %>
-              </a>
-              <ul class="dropdown-menu"  id="nav-all-col">
-                <a class="dropdown-item" style="text-decoration: underline;" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
-                <% Category.sub_category.where(parent_id: c.id).each do |c| %>
-                  <li class="dropdown-item">
-                    <a href="<%= products_path(category_id: c.id) %>">
-                      <%= c.name %>
-                    </a>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= c.name %>
+                </a>
+                <ul class="dropdown-menu"  id="nav-all-col">
+                  <a class="dropdown-item" style="text-decoration: underline;" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
+                  <% Category.sub_category.where(parent_id: c.id).each do |c| %>
+                    <li class="dropdown-item">
+                      <a href="<%= products_path(category_id: c.id) %>">
+                        <%= c.name %>
+                      </a>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
             <% end %>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Sale</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sale</a>
+            </li>
           <% end %>
           <span class="border-top my-1"></span>
           <% if policy(Product).create? %>

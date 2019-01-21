@@ -52,17 +52,22 @@ class OrdersController < ApplicationController
     @order.refresh_line_items if @order.cart?
   end
 
+  #TODO
   def cart
-    @order = current_order
-    if @order
+    if current_user || current_or_guest_user.orders.any?
+      @order = current_order
       authorize @order
-      @order.refresh_line_items if @order.cart?
+      @order.refresh_line_items
     end
   end
 
   def select_address
-    @addresses = current_user.addresses.where.not(id: nil)
-    @address  = current_user.addresses.new
+    if current_user
+      @addresses = current_user.addresses.where.not(id: nil)
+      @address  = current_user.addresses.new
+    else
+      redirect_to new_user_session_path(redirect_to: cart_path)
+    end
   end
 
   def assign_address
@@ -88,6 +93,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm_details
+    redirect_to new_user_session_path(redirect_to: cart_path) unless current_user.presence
     if flash[:error]
       @error_msg = flash[:error]
       flash.discard(:error) 
@@ -101,7 +107,7 @@ class OrdersController < ApplicationController
   def confirm_order
     @address = @order.address    
     if @order.finalize
-      flash[:notice]
+      flash[:notice] = "Order Confirmed"
       redirect_to order_path(@order)
     else
       flash[:error] = @order.errors[:out_of_stock_variants]&.first if @order.errors.any?

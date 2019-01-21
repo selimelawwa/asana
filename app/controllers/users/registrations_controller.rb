@@ -7,14 +7,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy, :edit_password]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    self.resource = resource_class.new(sign_up_params)
+    store_location_for(resource, params[:redirect_to])
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super    
-  # end
+  def create
+    super
+    current_or_guest_user
+  end
 
   # GET /resource/edit
   # def edit
@@ -102,9 +105,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    sign_up_url = new_user_registration_url
+    if request.referer == sign_up_url
+      super(resource)
+    else
+      stored_location_for(resource) || request.referer || root_path
+    end
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

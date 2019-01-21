@@ -35,7 +35,11 @@
                 <% end %>
                 <div class="container mt-4">
                   <div class="row">
-                    <%= link_to "New to Asana? Sign up here!", new_user_registration_path, class:"mx-auto text-dark" %>
+                    <% if  params[:redirect_to].presence %>
+                      <%= link_to "New to Asana? Sign up here!", new_user_registration_path(redirect_to: params[:redirect_to]), class:"mx-auto text-dark" %>
+                    <% else %>
+                      <%= link_to "New to Asana? Sign up here!", new_user_registration_path, class:"mx-auto text-dark" %>
+                    <% end %>
                   </div>
                 </div>
               </div>
