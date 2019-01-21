@@ -84,5 +84,6 @@ test:
 production:
   <<: *default
   database: asana
-  username: rails
+  username: pguser
   password: <%= ENV['RAIL_POSTGRESS_PASS'] %>
+
