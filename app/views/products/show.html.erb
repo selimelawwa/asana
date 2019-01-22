@@ -1,9 +1,7 @@
 <div id="wrapper">
-  <!-- <<<<<<<<<<<<<<<<<<<< Product Details Area Start >>>>>>>>>>>>>>>>>>>>>>>>> -->
   <section class="single_product_details_area section_padding_0_60 pt-5">
     <div class="container">
       <div class="row">
-
         <%= render 'added_to_cart_modal'%>
         <div id="error_modal_div">
         </div>
@@ -14,17 +12,17 @@
             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
               <% if @colored_variant && @colored_variant.photos.any?%>
                 <ol class="carousel-indicators">
-                  <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
+                  <% @colored_variant.photos.first(6).each_with_index do |p,i|%>
                     <li class="<%= "#{'active' if i == 0}" %>" data-target="#product_details_slider" data-slide-to="<%="#{i}"%>" style="background-image: url(<%=p.image.url%>);">
                     </li>
                   <% end %>
                 </ol>
                 <div class="carousel-inner">
-                  <% @colored_variant.photos.first(4).each_with_index do |p,i|%>
+                  <% @colored_variant.photos.first(6).each_with_index do |p,i|%>
                     <div class="carousel-item <%= "#{'active' if i == 0}" %> ">
                       <a class="gallery_img">
                         <div class="tile">
-                          <%= image_tag p.image.url, class:"photo d-block w-100", alt: "slide" %>
+                          <%= image_tag p.image.url, class:"photo d-block product-img-height", alt: "slide"%>
                         </div>
                       </a>
                     </div>
@@ -39,7 +37,7 @@
                   <div class="carousel-item active ">
                     <a class="gallery_img">
                       <div class="tile">
-                        <%= image_tag @product.main_photo.url, class:"photo d-block w-100", alt: "slide" %>
+                        <%= image_tag @product.main_photo.url, class:"photo d-block product-img-height", alt: "slide" %>
                       </div>
                     </a>
                   </div>
@@ -98,7 +96,7 @@
                 </div>
               </form>
             <% else %>
-              <% out_of_stock_label = @product.out_of_stock? ? "Product Out of Stock" : "This Color is Out of Stock "%>
+              <% out_of_stock_label = @product.out_of_stock? ? "Out of Stock" : "This Color is Out of Stock "%>
               <p class="red"> <%= out_of_stock_label%> </p>
             <% end %>
 
@@ -175,9 +173,8 @@
       </div>
     </div>
   </section>
-  <!-- <<<<<<<<<<<<<<<<<<<< Single Product Details Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
 
-  <!-- <<<<<<<<<<<<<<<<<<<< Related Products Area Start >>>>>>>>>>>>>>>>>>>>>>>>> -->
+  <!-- Related Products Area Start -->
   <% if @related_products.any? %>
     <div class="container mb-5">
       <div class="row">
@@ -232,7 +229,7 @@
       </div>
     </div>
   <% end %>
-  <!-- <<<<<<<<<<<<<<<<<<<< Related Products Area End >>>>>>>>>>>>>>>>>>>>>>>>> -->
+  <!-- Related Products Area End -->
 </div>
 
 

@@ -4,6 +4,7 @@
     <!-- Navbar on large screens -->
     <nav class="header-nav navbar navbar-expand-md bg-white navbar-white">
       <div class="container-fluid">
+          <a class="navbar-brand pl-3" href="<%= "/"%>"><%= image_tag 'Asana_logo_design_Rv02.svg', class: "", style: "height: 53px; width: 89px;" %></a>
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center">
           <li class="nav-item">
               <a class="nav-link color-black text-muted-hover" href="<%= "/"%>">Home</a>
@@ -17,7 +18,7 @@
               <a class="nav-link dropdown-toggle test color-black text-muted-hover" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%= c.name %>
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" style="min-width: 60px !important;">
                 <a class="dropdown-item" style="text-decoration: underline;" id="nav-all" href="<%= products_path(category_id: c.id) %>">All <%= c.name %></a>
                 <% Category.sub_category.where(parent_id: c.id).each do |c| %>
                   <li class="dropdown-item" id="nav-all">
