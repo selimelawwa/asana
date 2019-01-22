@@ -19,6 +19,9 @@
                 <%= f.label :email %><br />
                 <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: 'form-control', required: true %>
               </div>
+              <div class="pl-4" id="validate-email" style="font-size: 0.8rem; display: none;">
+                <p class="invalid">Email already used</p>
+              </div>
               <div class="form-group">
                 <%= f.label :name %>
                 <%= f.text_field :name, placeholder: "Name", required: true, value: resource.name, class: 'form-control' %>
@@ -69,6 +72,7 @@
 <script>
     var validate_number = document.getElementById("validate-number")
        ,validate_num = document.getElementById("validate-num")
+       ,validate_email = document.getElementById("validate-email")
        , mobile = document.getElementById("mobile")
 
        function validatePassword(){
@@ -111,5 +115,31 @@
       }
 
       mobile.onkeyup = validatePassword;
+
+
+
+      $('#email').focusout(function(){
+        user_email = $('#email').val();
+        $.ajax({
+          type: "POST",
+          url: '/check_email',
+          data: {user_email: user_email},
+          success: function(response, data, status, xhr) {
+            if (response['email_used_before'] == true)
+            {
+              validate_email.style.display = "block";
+              $("#submit-button").addClass("disabled");
+            }
+            else
+            {
+              validate_email.style.display = "none";
+              $("#submit-button").removeClass("disabled");
+            }
+          },
+          error: function() {
+            alert('error');
+          }
+        });
+      });
 
 </script>

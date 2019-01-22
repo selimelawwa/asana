@@ -27,6 +27,9 @@
                 <%= f.email_field :email, required: true, autocomplete: "email", id: "email", class: "form-control", placeholder: "Email address" %>
                 <label for="email" class="py-auto">Email address</label>
               </div>
+              <div class="pl-4" id="validate-email" style="font-size: 0.8rem; display: none;">
+                <p class="invalid">Email already used</p>
+              </div>
               <div class="container">
                 <div class="row">
                   <div class="col-12 col-xl-6">
@@ -200,32 +203,28 @@
     return !/\D/.test(str);
   }
 
-  var isMobile = {
-    Android: function() {
-        return navigator.userAgent.match(/Android/i);
-    },
-    BlackBerry: function() {
-        return navigator.userAgent.match(/BlackBerry/i);
-    },
-    iOS: function() {
-        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-    },
-    Opera: function() {
-        return navigator.userAgent.match(/Opera Mini/i);
-    },
-    Windows: function() {
-        return navigator.userAgent.match(/IEMobile/i);
-    },
-    any: function() {
-        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-    }
-  };
-  /*
-  if ( !isMobile.any() ) {
-    $('.mob-only').addClass('w-50')
-  }
-  else {
-    $('.mob-only').addClass('w-100')
-  }*/
+  $('#email').focusout(function(){
+    user_email = $('#email').val();
+    $.ajax({
+      type: "POST",
+      url: '/check_email',
+      data: {user_email: user_email},
+      success: function(response, data, status, xhr) {
+        if (response['email_used_before'] == true)
+        {
+          validate_email.style.display = "block";
+          $("#submit-button").addClass("disabled");
+        }
+        else
+        {
+          validate_email.style.display = "none";
+          $("#submit-button").removeClass("disabled");
+        }
+      },
+      error: function() {
+        alert('error');
+      }
+    });
+  });
 
 </script>
