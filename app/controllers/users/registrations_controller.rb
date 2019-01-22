@@ -48,7 +48,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def check_current_password
-    valid_password = current_user.valid_password?(params[:current_password])
+    valid_password = current_user.valid_password?(params[:user_password])
     render json: {right_current_password: valid_password}
   end
 
