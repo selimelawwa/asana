@@ -103,7 +103,8 @@
     , match = document.getElementById("match")
     , pass_message = document.getElementById("pass-message")
     , confirm_pass_message = document.getElementById("confirm-pass-message")
-    , sign_up_button = document.getElementById("sign-up-button");
+    , sign_up_button = document.getElementById("sign-up-button")
+    , pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
 
   
   function validatePassword(){
@@ -206,26 +207,33 @@
 
   $('#email').focusout(function(){
     user_email = $('#email').val();
-    $.ajax({
-      type: "POST",
-      url: '/check_email',
-      data: {user_email: user_email},
-      success: function(response, data, status, xhr) {
-        if (response['email_used_before'] === true)
-        {
-          validate_email.style.display = "block";
-          $("#submit-button").addClass("disabled");
-        }
-        else
-        {
-          validate_email.style.display = "none";
-          $("#submit-button").removeClass("disabled");
-        }
-      },
-      error: function() {
-        alert('error');
+    if ($('#email').val().length > 0)
+    {
+      if (pattern.test($('#email').val()))
+      {
+        $.ajax({
+          type: "POST",
+          url: '/check_email',
+          data: {user_email: user_email},
+          success: function(response, data, status, xhr) {
+            if (response['email_used_before'] === true)
+            {
+              validate_email.style.display = "block";
+              $("#submit-button").addClass("disabled");
+            }
+            else
+            {
+              validate_email.style.display = "none";
+              $("#submit-button").removeClass("disabled");
+            }
+          },
+          error: function() {
+            alert('error');
+          }
+        });
       }
-    });
+    }
   });
+
 
 </script>
