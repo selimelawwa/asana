@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_001404) do
+ActiveRecord::Schema.define(version: 2019_01_22_191946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_001404) do
     t.bigint "address_id"
     t.datetime "confirmed_at"
     t.decimal "vat", precision: 8, scale: 2, default: "0.0", null: false
+    t.decimal "shipping", precision: 8, scale: 2, default: "0.0", null: false
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

@@ -2,13 +2,13 @@
 <hr class="w-50 ml-0">
 <p> Subtotal: EGP <%= order.cart? ? order.current_total_cost : order.total_cost%></p>
 <% if order.address.present? %>
-  <p> Shipping Fees: EGP <%= order.shipping_fees%></p>
+  <p> Shipping Fees: EGP <%= order.cart? ? order.shipping_fees : order.shipping%></p>
 <% end %>
-<% unless order.vat_amount.zero? %>
-  <p> VAT: EGP <%= order.vat_amount %></p>
+<% if order.vat_amount > 0 || order.vat > 0 %>
+  <p> VAT: EGP <%= order.cart? ? order.vat_amount : order.vat %></p>
 <% end %>
 <hr>
-<p style="font-weight: bold;"> Total: EGP <%= order.final_total%></p>
+<p style="font-weight: bold;"> Total: EGP <%= order.cart? ? order.final_total : order.total_cost%></p>
 <% if order.cart? && show_checkout%>
   <%= link_to 'Check Out', order_select_address_path(order_id: order.id), class: "btn color-semi-black text-dec-none mt-2 mb-3 col-12 col-md-11 col-lg-8 col-xl-7" %>
 <% end %>

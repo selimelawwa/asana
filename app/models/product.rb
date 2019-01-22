@@ -86,9 +86,20 @@ class Product < ApplicationRecord
     in_stock_c_ids
   end
 
+  def available_in_stock_colors_ids_without_images
+    c_ids = available_colors_ids - available_color_ids_with_images
+    in_stock_c_ids = []
+    c_ids.each do |c|
+      if variants.sized.where("color_id = ? AND stock > 0",c).any?
+        in_stock_c_ids << c
+      end
+    end
+    in_stock_c_ids
+  end
+
   # variant with Image and stock
   def main_color_id
-    available_in_stock_colors_ids.first || available_colors_ids.first
+    available_in_stock_colors_ids.first || available_in_stock_colors_ids_without_images.first || available_colors_ids.first
   end
 
   #to be shown in index, get main_variant image or product main image
