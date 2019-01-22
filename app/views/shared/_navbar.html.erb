@@ -69,7 +69,7 @@
               <a href="#" class="search-toggle" data-selector="#header-1" data-toggle="tooltip" title="Search"></a>
             </div>
         </ul>
-        <%= search_form_for @q, url: search_products_path do |f| %>
+        <%= search_form_for @q, url: search_products_path, id: "large-search" do |f| %>
           <div class="form-row search-box">
             <button class="btn color-semi-black search-input" type="submit" name="action" style="width:5%;">
                 <i class="fa fa-search"></i>
@@ -85,16 +85,17 @@
 </div>
 
   <!-- Navbar on small screens -->
-  <nav class="navbar navbar-expand-md navbar-light bg-white d-none d-block d-sm-block d-md-none" id="nav-col">
+<div class=" d-none d-block d-sm-block d-md-none">
+  <nav class="navbar navbar-expand-md navbar-light bg-white" id="nav-col">
     <div class="container">
       <button class="navbar-toggler mb-1" type="button" data-toggle="collapse" data-target="#navbarResponsive">
           <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand mx-auto pr-5" href="<%= "/"%>">
+      <a class="navbar-brand mx-auto" style="padding-right: 2.1rem;" href="<%= "/"%>">
         <%= image_tag 'Asana_logo_design_Rv02.svg', class: "", style: "height: 50px; width: 117px;" %>
       </a>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-          <%= search_form_for @q, url: search_products_path do |f| %>
+          <%= search_form_for @q, url: search_products_path, id: "small-search" do |f| %>
             <div class="form-row align-items-center">
               <div class= "col-auto text">
                 <%= f.search_field :name_cont,  class: 'form-control', placeholder: "Search", id: "search-col" %>
@@ -137,30 +138,30 @@
           <span class="border-top my-1"></span>
           <% if policy(Product).create? %>
           <div class="row" id="nav-row">
-            <i class="fas fa-toolbox pt-2 pl-3 pr-2 color-black"></i>
+            <i class="fas fa-toolbox pl-3 pr-2 color-black" style="padding-top: 0.67rem;"></i>
             <li class="nav-item"> <%= link_to "Admin Settings", product_list_path, class:"nav-link" %></li>
           </div>
           <% end %>
           <div class="row" id="nav-row">
-            <i class="fas fa-shopping-cart pt-2 pl-3 pr-2 mt-1 color-black"></i>
+            <i class="fas fa-shopping-cart pl-3 pr-2 mt-1 color-black" style="padding-top: 0.6rem;"></i>
             <li class="nav-item"> <%= link_to "Cart", cart_path, class:"nav-link" %></li>
           </div>
           <% if user_signed_in? %>
             <div class="row" id="nav-row">
-              <i class="fas fa-user pt-2 pl-3 pr-2 color-black"></i>
+              <i class="fas fa-user pl-3 pr-2 color-black" style="padding-top: 0.67rem;"></i>
               <li class="nav-item"> <%= link_to "Profile", edit_registration_path(:user), class:"nav-link" %> </li>
             </div>
             <div class="row" id="nav-row">
-              <i class="fas fa-sign-out-alt pt-2 pl-3 pr-2 color-black"></i>
+              <i class="fas fa-sign-out-alt pl-3 pr-2 color-black" style="padding-top: 0.8rem;"></i>
               <li class="nav-item"> <%= link_to "Log out", destroy_session_path(:user), :method => :delete, class:"nav-link" %></li>
             </div>
           <% else %>
             <div class="row" id="nav-row">
-              <i class="fas fa-sign-in-alt pt-2 pl-3 pr-2 color-black"></i>
+              <i class="fas fa-sign-in-alt pl-3 pr-2 color-black" style="padding-top: 0.72rem;"></i>
               <li class="nav-item"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
             </div>
             <div class="row" id="nav-row">
-              <i class="fas fa-user-plus pt-2 pl-3 pr-2 color-black"></i>
+              <i class="fas fa-user-plus pl-3 pr-2 color-black" style="padding-top: 0.67rem;"></i>
               <li class="nav-item"> <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
             </div>
           <% end %>
@@ -168,6 +169,8 @@
       </div>
     </div>
   </nav>
+  <hr class="d-block d-sm-none my-0">
+</div>
 
 <script>
     $('.header').on('click', '.search-toggle', function(e) {
