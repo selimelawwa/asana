@@ -97,6 +97,7 @@
     , confirm_password = document.getElementById("password_confirmation")
     ,validate_number = document.getElementById("validate-number")
     ,validate_num = document.getElementById("validate-num")
+    ,validate_email = document.getElementById("validate-email")
     , mobile = document.getElementById("mobile")
     , length = document.getElementById("length")
     , match = document.getElementById("match")
@@ -210,7 +211,7 @@
       url: '/check_email',
       data: {user_email: user_email},
       success: function(response, data, status, xhr) {
-        if (response['email_used_before'] == true)
+        if (response['email_used_before'] === true)
         {
           validate_email.style.display = "block";
           $("#submit-button").addClass("disabled");

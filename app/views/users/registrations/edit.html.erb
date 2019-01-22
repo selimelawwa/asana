@@ -125,7 +125,7 @@
           url: '/check_email',
           data: {user_email: user_email},
           success: function(response, data, status, xhr) {
-            if (response['email_used_before'] == true)
+            if (response['email_used_before'] === true)
             {
               validate_email.style.display = "block";
               $("#submit-button").addClass("disabled");

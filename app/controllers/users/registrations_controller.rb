@@ -47,6 +47,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render json: {email_used_before: email_used_before}
   end
 
+  def check_current_password
+    valid_password = current_user.valid_password?(params[:current_password])
+    render json: {right_current_password: valid_password}
+  end
+
   def edit_password
   end
 
