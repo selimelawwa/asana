@@ -1,37 +1,37 @@
 <div class="d-none d-sm-block">
   <ul class="list-group sidebar-active">
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='products'}" %>">
-      <%= link_to 'Products', product_list_path, class: 'text-color-dark'%>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='products'}" %>">
+      <%= link_to 'Products', product_list_path, class: "#{ current=='products' ? 'text-white': 'text-color-dark'}" %>
     </li>
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='system_orders'}" %>">
-      <%= link_to 'System Orders', orders_path, class: 'text-color-dark'%>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='system_orders'}" %>">
+      <%= link_to 'System Orders', orders_path, class: "#{ current=='system_orders' ? 'text-white': 'text-color-dark'}" %>
     </li>
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='colors'}" %>">
-      <%= link_to 'Colors', colors_path, class: 'text-color-dark' %>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='colors'}" %>">
+      <%= link_to 'Colors', colors_path, class: "#{ current=='colors' ? 'text-white': 'text-color-dark'}" %>
     </li>
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='categories'}" %>">
-      <%= link_to 'Categories', categories_path, class: 'text-color-dark' %>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='categories'}" %>">
+      <%= link_to 'Categories', categories_path, class: "#{ current=='categories' ? 'text-white': 'text-color-dark'}" %>
     </li>
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='tags'}" %>">
-      <%= link_to 'Tags', tags_path, class: 'text-color-dark' %>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='tags'}" %>">
+      <%= link_to 'Tags', tags_path, class: "#{ current=='tags' ? 'text-white': 'text-color-dark'}" %>
     </li>
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='slides'}" %>">
-      <%= link_to 'Carousel Slides', slides_path, class: 'text-color-dark' %>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='slides'}" %>">
+      <%= link_to 'Carousel Slides', slides_path, class: "#{ current=='slides' ? 'text-white': 'text-color-dark'}" %>
     </li>
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='jumbotrons'}" %>">
-      <%= link_to 'Jumbotrons', jumbotrons_path, class: 'text-color-dark' %>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='jumbotrons'}" %>">
+      <%= link_to 'Jumbotrons', jumbotrons_path, class: "#{ current=='jumbotrons' ? 'text-white': 'text-color-dark'}" %>
     </li>
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='cities'}" %>">
-      <%= link_to 'Cities', cities_path, class: 'text-color-dark' %>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='cities'}" %>">
+      <%= link_to 'Cities', cities_path, class: "#{ current=='cities' ? 'text-white': 'text-color-dark'}" %>
     </li>
-    <li class="list-group-item <%= "#{'active bg-dark' if current=='vat'}" %>">
-      <%= link_to 'VAT', edit_vat_path, class: 'text-color-dark' %>
+    <li class="list-group-item <%= "#{'color-semi-black' if current=='vat'}" %>">
+      <%= link_to 'VAT', edit_vat_path, class: "#{ current=='vat' ? 'text-white': 'text-color-dark'}" %>
     </li>
   </ul>
 </div>
 
 <div class="d-block d-sm-none mb-4">
-  <select onchange="location = this.value;" class="bg-dark text-light w-100">
+  <select onchange="location = this.value;" class="color-semi-black text-light w-100">
     <option selected disabled hidden>Admin Pages</option>
     <option value="/admin/products/list">Products</option>
     <option value="/orders">System Orders</option>
