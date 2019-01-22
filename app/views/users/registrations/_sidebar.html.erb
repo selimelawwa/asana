@@ -1,12 +1,12 @@
 <ul class="list-group mb-4 edit-pass-font">
-  <li class="list-group-item bg-light <%= "#{'bg-dark' if current == 'edit'}" %>">
+  <li class="list-group-item <%= "#{ current == 'edit' ? 'bg-semi-black' : 'bg-light'}" %>">
     <%= link_to "EDIT ACCOUNT", edit_registration_path(:user), class:"collection-item #{current == 'edit' ? 'text-white' : 'text-dark' }" %>
   </li>
-  <li class="list-group-item bg-light <%= "#{'bg-dark' if current == 'edit_password'}" %> ">
+  <li class="list-group-item <%= "#{ current == 'edit_password' ? 'bg-semi-black' : 'bg-light'}" %> ">
     <%= link_to "CHANGE PASSWORD", edit_user_password_path, class:"collection-item #{current == 'edit_password' ? 'text-white' : 'text-dark' }"%>
   </li>
   <% unless current_user.admin? %>
-    <li class="list-group-item bg-light <%= "#{'bg-dark' if current == 'orders'}" %>">
+    <li class="list-group-item <%= "#{ current == 'orders'? 'bg-semi-black' : 'bg-light'}" %>">
       <%= link_to "MY ORDERS", orders_path, class:"collection-item #{current == 'orders' ? 'text-white' : 'text-dark' }" %>
     </li>
   <% end %>
