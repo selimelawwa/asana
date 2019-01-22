@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_223633) do
+ActiveRecord::Schema.define(version: 2019_01_22_001404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_223633) do
     t.datetime "updated_at", null: false
     t.bigint "address_id"
     t.datetime "confirmed_at"
+    t.decimal "vat", precision: 8, scale: 2, default: "0.0", null: false
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -216,6 +217,13 @@ ActiveRecord::Schema.define(version: 2019_01_21_223633) do
     t.index ["product_id", "color_id", "size_id"], name: "index_variants_on_product_id_and_color_id_and_size_id", unique: true
     t.index ["product_id"], name: "index_variants_on_product_id"
     t.index ["size_id"], name: "index_variants_on_size_id"
+  end
+
+  create_table "vats", force: :cascade do |t|
+    t.decimal "tax_rate", precision: 8, scale: 2, default: "0.0", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "addresses", "cities"

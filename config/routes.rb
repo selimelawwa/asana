@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :slides, except: :show
     resources :jumbotrons, except: [:show, :destroy]
     resources :cities, except: [:show, :destroy]
+    resource :vat, only: [:edit, :update]
   end
   
   get 'welcome/index'

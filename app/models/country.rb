@@ -3,7 +3,7 @@ class Country < ApplicationRecord
   
   validates :name, :default_shipping_price, presence: true
   validates :name, uniqueness: { case_sensitive: false }
-  validates :default_shipping_price, numericality: { greater_than: 0 }
+  validates :default_shipping_price, numericality: { greater_than_or_equal_to: 0 }
 
   def self.named_egypt
     egypt = find_or_initialize_by(name: 'Egypt')

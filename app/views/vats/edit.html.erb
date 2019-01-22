@@ -1,0 +1,23 @@
+<div class = "container mb-5" style="margin-top: 4rem;">
+  <div class = "row">
+    <div class= "col-md-4 col-lg-3">
+      <%= render partial: 'shared/admin_sidebar' , locals: {current: 'vat'}%>
+    </div>
+    <div class= "col-md-8 col-lg-9">
+      <h1> Edit VAT </h1>
+      <%= simple_form_for @vat, url: vat_url  do |f| %>
+
+        <div class="form-group mt-4">
+          <%= f.input :tax_rate, label: 'Tax Rate', class: 'form-control' %>
+          <%= f.hint "Enter Value as number, i.e for 10% VAT, enter 10"%>
+        </div>   
+
+        <br>
+
+        <div class="d-flex flex-row-reverse">
+          <button class="btn color-semi-black btn-large align-right mt-4 mb-3 col-12 col-sm-3" type="submit" name="action">Update VAT</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

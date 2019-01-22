@@ -14,6 +14,7 @@ class Order < ApplicationRecord
   before_update :validate_no_out_of_stock_variants
   before_update :validate_assigned_address
 
+  #TODO handle VAT change
   def finalize
     if update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.now)
       decrement_variant_stocks
@@ -34,7 +35,7 @@ class Order < ApplicationRecord
   def vat_amount
     total = current_total_cost
     total = total + shipping_fees if address.present?
-    total * 0
+    total * Vat.default.tax_rate_percentage
   end
 
   def decrement_variant_stocks
