@@ -1,4 +1,6 @@
 <% if line_items.any?%>
+  <div id="error_modal_div">
+  </div>
   <div class="table-responsive">
     <table class="table">
       <thead>
@@ -9,8 +11,7 @@
           <th>Price</th>
           <th>Quantity</th>
           <th>Total Amount</th>
-          <% if order.cart? %>
-            <th></th>
+          <% if order.cart? && order.user_id == current_or_guest_user.id%>
             <th></th>
           <% end %>
         </tr>
@@ -24,7 +25,7 @@
             <td><%= link_to variant.name_with_options_text, product_path(variant.product) %> </td>
             <td><%= "EGP #{l.cost}" %></td>
             <td>
-              <% if order.cart? %>
+              <% if order.cart? && order.user_id == current_or_guest_user.id %>
                 <div class="quantity">
                   <% input_id = "qty_#{l.id}"%>
                   <span class="qty-plus" style="background: #f8f9fa;" onclick="var effect = document.getElementById('<%= input_id %>'); var qty = effect.value; if( !isNaN( qty )&amp;&amp; qty &lt; 5) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
@@ -36,11 +37,9 @@
               <% end %>
             </td>
             <td>EGP  <%= l.total_cost%> </td>
-            <% if order.cart? %>
+            <% if order.cart? && order.user_id == current_or_guest_user.id %>
               <td>
-                <a class="update_quantity pointer" id="<%="li_#{l.id}"%>"> <i class="fas fa-sync-alt fa-2x green"></i> </a>
-              </td>
-              <td>
+                <a style="display:none;" class="update_quantity" id="<%="li_#{l.id}"%>"> <i class="fas fa-sync-alt fa-2x green"></i> </a>
                 <a class="remove_item pointer" id="<%="li_#{l.id}"%>"> <i class="fas fa-trash fa-2x red" data-toggle="tooltip" title="Remove"></i> </a>
               </td>
             <% end %>
@@ -52,20 +51,10 @@
 <% end %>
 
 <script>
-  $('.remove_item').click(function(){
-    line_item_id = this.id.substring(3);
-    $.ajax({
-      type: "POST",
-      url: '/remove_line_item',
-      data: {line_item_id: line_item_id},
-      success: function(response, data, status, xhr) {
-        $('#order_details_div').html(response);
-      },
-      error: function() {
-        alert('error');
-      }
-    });
+  $('.qty-plus, .qty-minus').click(function(){
+    $('.update_quantity').trigger("click");
   });
+
 
   $('.update_quantity').click(function(){
     line_item_id = this.id.substring(3);
@@ -75,7 +64,12 @@
       url: '/update_line_item_quantity',
       data: {line_item_id: line_item_id, quantity: quantity},
       success: function(response, data, status, xhr) {
-        $('#order_details_div').html(response);
+        $('#order_details_div').html(response['new_order_details']);
+        $('#order_summary_div').html(response['new_order_summary']);
+        if (response['saved']===false){
+          $('#error_modal_div').html(response['error_modal']);
+          $('#add_to_cart_error_modal').modal('show');
+        }
       },
       error: function() {
         alert('error');

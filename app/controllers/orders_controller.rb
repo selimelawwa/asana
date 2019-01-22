@@ -2,11 +2,11 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:select_address, :create_address, :assign_address, :confirm_details, :confirm_order]
   def index
     if current_user&.admin?
-      @orders = Order.all.joins(:line_items)
+      @orders = Order.all.joins(:line_items).where(cart: false)
       @search = @orders.ransack(params[:q])
       @orders = @search.result.order(:created_at).paginate(:page => params[:page], :per_page => 25)
     else
-      @orders = current_user&.orders&.joins(:line_items)
+      @orders = current_user&.orders&.joins(:line_items).order(:created_at).paginate(:page => params[:page], :per_page => 25)
     end
     @custom_paginate_renderer = custom_paginate_renderer
   end
@@ -33,7 +33,10 @@ class OrdersController < ApplicationController
     line_item = current_order.line_items.find_by(id: params[:line_item_id])
     if line_item.destroy
       if current_order.reload.line_items.any?
-        render partial: 'order_details_partial', locals: {order: current_order.reload, line_items: current_order.reload.line_items}
+        order = current_order.reload
+        new_order_details = render_to_string partial: 'order_details_partial', locals: {order: order, line_items: order.line_items}
+        new_order_summary = render_to_string partial: 'order_summary', locals: {order: order, show_checkout: true}
+        render json: {new_order_details: new_order_details, new_order_summary: new_order_summary}
       else
         redirect_to request.referrer
       end
@@ -42,11 +45,23 @@ class OrdersController < ApplicationController
 
   def update_line_item_quantity
     line_item = current_order.line_items.find_by(id: params[:line_item_id])
-    if line_item.update(quantity: params[:quantity])
-      render partial: 'order_details_partial', locals: {order: current_order.reload, line_items: current_order.reload.line_items}
+    if line_item.variant.stock >= params[:quantity]&.to_i
+      if line_item.update(quantity: params[:quantity])
+        saved = true
+        error_modal = nil
+      else
+        saved = false
+        error_modal = render_to_string partial: 'products/add_to_cart_error_modal_partial' , locals: {error: 'max_5_already_set', current_quantity: line_item&.reload&.quantity}
+      end
     else
-      redirect_to request.referrer
+      #no enough stock
+      saved = false
+      error_modal = render_to_string partial: 'products/add_to_cart_error_modal_partial' , locals: {error: 'no_enough_stock', available_stock: line_item.variant.reload.stock , current_quantity: line_item&.quantity}
     end
+    order = line_item.order.reload
+    new_order_details = render_to_string partial: 'order_details_partial', locals: {order: order, line_items: order.line_items}
+    new_order_summary = render_to_string partial: 'order_summary', locals: {order: order, show_checkout: true}
+    render json: {saved: saved, new_order_details: new_order_details, new_order_summary: new_order_summary, error_modal: error_modal }
   end
 
   def show
@@ -64,6 +79,7 @@ class OrdersController < ApplicationController
   end
 
   def select_address
+    authorize @order
     if current_user
       @addresses = current_user.addresses.where.not(id: nil)
       @address  = current_user.addresses.new
@@ -73,6 +89,7 @@ class OrdersController < ApplicationController
   end
 
   def assign_address
+    authorize @order
     @address = Address.find(params[:address_id])
     if @address && (@address.user_id == current_user.id)
       @order.update(address_id: @address.id)
@@ -83,6 +100,7 @@ class OrdersController < ApplicationController
   end
   
   def create_address
+    authorize @order
     @addresses = current_user.addresses
     @address = current_user.addresses.new(address_params)
     if @address.save
@@ -95,6 +113,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm_details
+    authorize @order
     # have to be a signed up user
     redirect_to new_user_session_path(redirect_to: cart_path) unless current_user.presence
     if flash[:error]
@@ -109,6 +128,7 @@ class OrdersController < ApplicationController
 
   #TODO if no line items
   def confirm_order
+    authorize @order
     @address = @order.address    
     if @order.finalize
       flash[:notice] = "Order Confirmed"
@@ -125,6 +145,6 @@ class OrdersController < ApplicationController
   end
 
   def set_order
-    @order = current_order
+    @order = Order.find_by(id: params[:order_id]) || current_order
   end
 end

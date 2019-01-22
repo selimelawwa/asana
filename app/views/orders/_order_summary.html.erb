@@ -9,6 +9,6 @@
 <% end %>
 <hr>
 <p style="font-weight: bold;"> Total: EGP <%= order.cart? ? order.final_total : order.total_cost%></p>
-<% if order.cart? && show_checkout%>
+<% if order.cart? && show_checkout && policy(order).select_address?%>
   <%= link_to 'Check Out', order_select_address_path(order_id: order.id), class: "btn color-semi-black text-dec-none mt-2 mb-3 col-12 col-md-11 col-lg-8 col-xl-7" %>
 <% end %>

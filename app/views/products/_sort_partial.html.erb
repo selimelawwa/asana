@@ -5,8 +5,8 @@
 <% elsif params.dig(:q,:s)&.eql? "price asc"%>
   <% select_sort_val = "Low Price"%>
 <% else%>
-  <% select_sort_val = "Featured"%>
+  <% select_sort_val = "New Arrivals"%>
 <% end %>
 <%= select_tag(:sort_by, 
-options_for_select([["Featured","Featured"],["New Arrivals","New Arrivals"], ["High Price", "High Price"],["Low Price", "Low Price"]],select_sort_val ),
+options_for_select([["New Arrivals","New Arrivals"], ["High Price", "High Price"],["Low Price", "Low Price"]],select_sort_val ),
 class:"sort_select form-control pointer") %>
