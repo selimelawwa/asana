@@ -21,8 +21,7 @@
                 <label for="mobile" class="py-auto">Mobile number</label>
               </div>
               <div class="pl-4" id="validate-number" style="font-size: 0.8rem; display: none;">
-                <p id="validate-num" class="invalid">Starts with '01'</p>
-                <p id="validate-num2" class="invalid">Consists of 11 numbers</p>
+                <p id="validate-num" class="invalid">Vaild number</p>
               </div>
               <div class="form-label-group">
                 <%= f.email_field :email, required: true, autocomplete: "email", id: "email", class: "form-control", placeholder: "Email address" %>
@@ -95,7 +94,6 @@
     , confirm_password = document.getElementById("password_confirmation")
     ,validate_number = document.getElementById("validate-number")
     ,validate_num = document.getElementById("validate-num")
-    ,validate_num2 = document.getElementById("validate-num2")
     , mobile = document.getElementById("mobile")
     , length = document.getElementById("length")
     , match = document.getElementById("match")
@@ -108,7 +106,6 @@
     var flag1 = 0;
     var flag2 = 0;
     var flag3 = 0;
-    var flag4 = 0;
     if (password.value.length == 0)
     {
       pass_message.style.display = "none";
@@ -165,38 +162,27 @@
       }
       else
       {
-        if ( mobile.value.length != 11 )
+        if ( mobile.value.length != 11 || mobile.value.substring(0,2) != "01")
         {
           flag3 = 0;
-          validate_num2.classList.remove("valid");
-          validate_num2.classList.add("invalid");
+          validate_num.classList.remove("valid");
+          validate_num.classList.add("invalid");
         }
         else
         {
           flag3 = 1;
-          validate_num2.classList.remove("invalid");
-          validate_num2.classList.add("valid");
+          validate_num.classList.remove("invalid");
+          validate_num.classList.add("valid");
         }
       }
-      if (mobile.value.substring(0,2) == "01")
-      {
-        flag4 = 1;
-        validate_num.classList.remove("invalid");
-        validate_num.classList.add("valid");
-      }
-      else
-      {
-        flag4 = 0;
-        validate_num.classList.remove("valid");
-        validate_num.classList.add("invalid");
-      }
+     
     }
     else
     {
       validate_number.style.display = "none";
       flag3 = 0;
     }
-    if (flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1)
+    if (flag1 == 1 && flag2 == 1 && flag3 == 1)
     {
       $("#sign-up-button").removeClass("disabled");
     }
