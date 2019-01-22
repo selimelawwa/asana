@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     post 'publish', to: 'products#publish', as: 'publish'
   end
 
-
+  # footer pages
+  get 'exchange_and_refund', to: 'pages#exchange_and_refund', as: 'exchange_and_refund'
+  get 'mission_and_vision', to: 'pages#mission_and_vision', as: 'mission_and_vision'
+  get 'company_overview', to: 'pages#company_overview', as: 'company_overview'
+  get 'core_values', to: 'pages#core_values', as: 'core_values'
 
   
   resources :orders, only: %i[index show] do
@@ -32,8 +36,8 @@ Rails.application.routes.draw do
   post 'add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
   post 'remove_line_item', to: 'orders#remove_line_item', as: 'remove_line_item'
   post 'update_line_item_quantity', to: 'orders#update_line_item_quantity', as: 'update_line_item_quantity'
-  
-  
+
+
   scope '/admin' do
     get 'products/list', to: 'products#list', as: 'product_list'
     resources :categories, except: :destroy do 

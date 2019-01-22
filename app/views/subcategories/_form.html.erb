@@ -1,4 +1,4 @@
-<div class = "container my-5">
+<div class = "container mb-5">
   <% if category.new_record? %>
     <%= render partial: 'shared/sub_categories_breadcrum', locals: {category: category, active_link: "New Sub-Category"}%>
   <% else %>
@@ -37,9 +37,9 @@
         <%= f.input :parent_id, as: :hidden, input_html: { value: category.id }%>
 
 
-        <% sumbit_label = category.new_record? ? 'Add Sub-Category' : 'Update Sub-Category' %>
+        <% sumbit_label = sub_category.new_record? ? 'Add Sub-Category' : 'Update Sub-Category' %>
         <div class="d-flex flex-row-reverse">
-          <button class="btn color-semi-black btn-large align-right" type="submit" name="action"> <%= sumbit_label%> </button>
+          <button class="btn color-semi-black btn-large align-right mt-4 mb-3 col-12 col-md-4 col-lg-3 " type="submit" name="action"> <%= sumbit_label%> </button>
         </div>
       <% end %>
     </div>

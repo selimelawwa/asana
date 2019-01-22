@@ -16,7 +16,7 @@
       <%= link_to 'Tags', tags_path, class: 'text-color-dark' %>
     </li>
     <li class="list-group-item <%= "#{'active bg-dark' if current=='slides'}" %>">
-      <%= link_to 'Slides', slides_path, class: 'text-color-dark' %>
+      <%= link_to 'Carousel Slides', slides_path, class: 'text-color-dark' %>
     </li>
     <li class="list-group-item <%= "#{'active bg-dark' if current=='jumbotrons'}" %>">
       <%= link_to 'Jumbotrons', jumbotrons_path, class: 'text-color-dark' %>
@@ -34,11 +34,13 @@
   <select onchange="location = this.value;" class="bg-dark text-light w-100">
     <option selected disabled hidden>Admin Pages</option>
     <option value="/admin/products/list">Products</option>
+    <option value="/orders">System Orders</option>
     <option value="/admin/colors">Colors</option>
     <option value="/admin/categories">Categories</option>
     <option value="/admin/tags">Tags</option>
-    <option value="/admin/slides">Slides</option>
+    <option value="/admin/slides">Carousel Slides</option>
     <option value="/admin/jumbotrons">Jumbotrons</option>
     <option value="/admin/cities">Cities</option>
+    <option value="/admin/vat/edit">VAT</option>
   </select>
 </div>

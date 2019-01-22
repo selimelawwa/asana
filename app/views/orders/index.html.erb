@@ -5,7 +5,7 @@
         <%= render partial: 'shared/admin_sidebar' , locals: {current: 'system_orders'}%>
       </div>
     <% end %>
-    <% col_class = current_user&.admin? ? 'col-9' : 'col-12'%>
+    <% col_class = current_user&.admin? ? 'col-12 col-md-9' : 'col-12 col-md-9'%>
     <div class="<%= col_class %>">
       <div class="row d-flex align-items-center">
         <i class="fas fa-user fa-2x pb-2 px-3"></i>
