@@ -4,9 +4,12 @@
       <div class= "col-md-3">
         <%= render partial: 'shared/admin_sidebar' , locals: {current: 'system_orders'}%>
       </div>
+    <% else %>
+      <div class= "col-md-3">
+        <%= render partial: 'users/registrations/sidebar' , locals: {current: 'orders'}%>
+      </div>
     <% end %>
-    <% col_class = current_user&.admin? ? 'col-12 col-md-9' : 'col-12 col-md-9'%>
-    <div class="<%= col_class %>">
+    <div class="col-12 col-md-9">
       <div class="row d-flex align-items-center">
         <i class="fas fa-user fa-2x pb-2 px-3"></i>
         <% if current_user&.admin? %>
