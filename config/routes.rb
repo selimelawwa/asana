@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'users/edit/password', to: 'users/registrations#edit_password', as: 'edit_user_password'
     put 'users/update_password', to: 'users/registrations#update_password', as: 'update_user_password'
+    post  'check_email', to: 'users/registrations#check_email', as: 'check_email'
   end
   resources :products do
     collection do
