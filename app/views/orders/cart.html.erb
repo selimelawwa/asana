@@ -14,8 +14,13 @@
         <hr class="w-75">
       </div>
       <div class="row w-100 justify-content-end">
-        <div class="col-12 col-md-4 my-4 pl-5" id="order_summary_div">
-          <%= render partial: 'order_summary', locals:{order: @order, show_checkout: true}%>
+        <div class="col-12 col-md-4 my-4 pl-5">
+          <div id="order_summary_div">
+            <%= render partial: 'order_summary', locals:{order: @order}%>
+          </div>
+          <% if @order.cart? && policy(@order).select_address? %>
+            <%= link_to 'Check Out', order_select_address_path(order_id: @order.id), class: "btn color-semi-black text-dec-none mt-2 mb-3 col-12 col-md-11 col-lg-8 col-xl-7" %>
+          <% end %>
         </div>
       </div>
     <% else %>

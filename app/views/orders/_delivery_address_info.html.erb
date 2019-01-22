@@ -1,0 +1,21 @@
+<div class="col-12 mt-30">
+  <h1> Delivery Address </h1>
+  <div class="table-responsive">
+      <table class="table">
+          <thead>
+            <tr>
+            <th>Address</th>
+            <th>City</th>
+            <th>Mobile</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= address.address&.truncate(50) %></td>
+              <td><%= address.city.name %></td>
+              <td><%= address.mobile %></td>
+            </tr>
+          </tbody>
+      </table>
+    </div> 
+</div>

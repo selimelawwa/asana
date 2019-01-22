@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
       if current_order.reload.line_items.any?
         order = current_order.reload
         new_order_details = render_to_string partial: 'order_details_partial', locals: {order: order, line_items: order.line_items}
-        new_order_summary = render_to_string partial: 'order_summary', locals: {order: order, show_checkout: true}
+        new_order_summary = render_to_string partial: 'order_summary', locals: {order: order}
         render json: {new_order_details: new_order_details, new_order_summary: new_order_summary}
       else
         redirect_to request.referrer
@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
     end
     order = line_item.order.reload
     new_order_details = render_to_string partial: 'order_details_partial', locals: {order: order, line_items: order.line_items}
-    new_order_summary = render_to_string partial: 'order_summary', locals: {order: order, show_checkout: true}
+    new_order_summary = render_to_string partial: 'order_summary', locals: {order: order}
     render json: {saved: saved, new_order_details: new_order_details, new_order_summary: new_order_summary, error_modal: error_modal }
   end
 

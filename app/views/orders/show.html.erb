@@ -10,22 +10,36 @@
     </div>
   </div>
   
-  <div class="row">
+  
     <% if @order.line_items.any?%>
-      <div class="col-12">
-        <div class="row" id="order_details_div">
-          <%= render partial: 'order_details_partial', locals: {order: @order, line_items: @order.line_items}%>
+      <div class="row">
+        <div class="col-12">
+          <div class="row" id="order_details_div">
+            <%= render partial: 'order_details_partial', locals: {order: @order, line_items: @order.line_items}%>
+          </div>
+          <hr class="w-75">
         </div>
-        <hr class="w-75">
       </div>
-      
-      <div class="row w-100 justify-content-end">
-        <div class="col-12 col-md-4 my-4 pl-5" id="order_summary_div">
-          <%= render partial: 'order_summary', locals:{order: @order, show_checkout: @order.cart?}%>
+      <div class="row">
+        <% if @order.address.presence %>
+          <%= render 'delivery_address_info', address: @order.address%>
+        <% end %>
+      </div>
+      <hr>
+      <div class="container">
+        <div class="row w-100 justify-content-end">
+          <div class="col-12 col-md-4 my-4 pl-5">
+            <div id="order_summary_div">
+              <%= render partial: 'order_summary', locals:{order: @order}%>
+            </div>
+            <% if @order.cart? && policy(@order).select_address?%>
+              <%= link_to 'Check Out', order_select_address_path(order_id: @order.id), class: "btn color-semi-black text-dec-none mt-2 mb-3 col-12 col-md-11 col-lg-8 col-xl-7" %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% else %>
       <p>Your cart is empty, <%= link_to 'Continue Shopping', products_path %></p>
     <% end %>
-  </div>
+  
 </div>

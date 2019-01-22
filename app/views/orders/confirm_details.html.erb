@@ -24,34 +24,16 @@
 
   <div class="row">
     <% if @address%>
-      <div class="col-12 mt-30">
-        <h1> Delivery Address </h1>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                  <tr>
-                  <th>Address</th>
-                  <th>City</th>
-                  <th>Mobile</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><%= @address.address&.truncate(50) %></td>
-                    <td><%= @address.city.name %></td>
-                    <td><%= @address.mobile %></td>
-                  </tr>
-                </tbody>
-            </table>
-          </div> 
-      </div>
+      <%= render 'delivery_address_info', address: @address%>
     <% end %>
   </div>
   <hr>
   <div class="container">
     <div class="row justify-content-end w-100">
-      <div class="mt-3 mx-auto pr-5 pr-md-0 mr-md-0" id="order_summary_div">
-        <%= render partial: 'order_summary', locals:{order: @order, show_checkout: false}%>
+      <div class="mt-3 mx-auto pr-5 pr-md-0 mr-md-0">
+        <div id="order_summary_div">
+          <%= render partial: 'order_summary', locals:{order: @order}%>
+        </div>
       </div>
     </div>
   </div>
