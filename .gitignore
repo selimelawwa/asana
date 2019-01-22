@@ -34,6 +34,7 @@ Gemfile.lock
 /public/system
 
 /config/database.yml
+/config/secrets.yml
 
 
 config/settings.yml
