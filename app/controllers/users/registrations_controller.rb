@@ -43,7 +43,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def check_email
-    email_used_before = User.find_by(email: params[:user_email])&.present?
+    any_user = User.find_by(email: params[:user_email])
+    if current_user
+      email_used_before = any_user&.present? && any_user&.id != current_user.id
+    else
+      email_used_before = any_user&.present?
+    end    
     render json: {email_used_before: email_used_before}
   end
 
