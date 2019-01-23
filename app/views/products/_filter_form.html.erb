@@ -51,5 +51,9 @@
         </ul>
     </div>
   </div>
-  
+
+  <div style="display: none;">
+    <%= f.check_box :on_sale, {checked: params[:on_sale] == "true"}, "true", "false" %>
+    <%= f.check_box :new_arrival, {checked: params[:new_arrival] == "true"}, "true", "false" %>
+  </div>
 <% end %>

@@ -27,6 +27,20 @@
           <div class="col-12 col-md-6">
             <div class="form-group">
               <%= f.input :price, label: 'Product Price', class: 'form-control', input_html: { min: '0', step: 'any' } %>
+              <%= f.hint "You can Update this later to add a discount"%>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <%= f.input :on_sale, label: 'ON SALE?', class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <%= f.input :new_arrival, label: 'NEW ARRIVAL?', class: 'form-control' %>
             </div>
           </div>
         </div>

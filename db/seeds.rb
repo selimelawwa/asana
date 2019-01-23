@@ -11,3 +11,13 @@ end
   end
 end
 puts "Created Egypt, Alexandria,Cairo"
+
+['Women', 'Boys', 'Girls'].each do |category_name|
+  Category.category.where(name: category_name).first_or_create
+end
+puts "Created Main Categories"
+
+['XS','S','M','L','XL','XXL'].each do |size_name|
+  Size.where(name: size_name).first_or_create
+end
+puts "Created Sizes"

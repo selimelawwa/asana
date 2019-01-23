@@ -1,12 +1,12 @@
 <% if params.dig(:q,:s)&.eql? "created_at desc"%>
-  <% select_sort_val = "New Arrivals"%>
+  <% select_sort_val = "Latest"%>
 <% elsif params.dig(:q,:s)&.eql? "price desc"%>
   <% select_sort_val = "High Price"%>
 <% elsif params.dig(:q,:s)&.eql? "price asc"%>
   <% select_sort_val = "Low Price"%>
 <% else%>
-  <% select_sort_val = "New Arrivals"%>
+  <% select_sort_val = "Latest"%>
 <% end %>
 <%= select_tag(:sort_by, 
-options_for_select([["New Arrivals","New Arrivals"], ["High Price", "High Price"],["Low Price", "Low Price"]],select_sort_val ),
+options_for_select([["Latest","Latest"], ["High Price", "High Price"],["Low Price", "Low Price"]],select_sort_val ),
 class:"sort_select form-control pointer") %>

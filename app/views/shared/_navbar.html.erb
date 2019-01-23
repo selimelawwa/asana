@@ -1,5 +1,4 @@
 <div class="sticky-top d-none d-sm-none d-md-block">
-
   <header id="header-1" class="header">
     <!-- Navbar on large screens -->
     <nav class="header-nav navbar navbar-expand-md bg-white navbar-white">
@@ -7,13 +6,10 @@
           <a class="navbar-brand pl-3" href="<%= "/"%>"><%= image_tag 'Asana_logo_design_Rv02.svg', class: "", style: "height: 53px; width: 89px;" %></a>
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center">
           <li class="nav-item">
-              <a class="nav-link color-black text-muted-hover" href="<%= "/"%>">Home</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link color-black text-muted-hover" href="#">New</a>
+            <a class="nav-link color-black text-muted-hover" href="<%= products_path(new_arrival: true) %>">New</a>
           </li>
           <% if Category.any? %>
-            <% Category.category.each do |c| %>
+            <% Category.category.first(4).each do |c| %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle test color-black text-muted-hover" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%= c.name %>
@@ -32,7 +28,7 @@
             <% end %>
           <% end %>
           <li class="nav-item">
-            <a class="nav-link color-black text-muted-hover" href="#">Sale</a>
+            <a class="nav-link color-black text-muted-hover" href="<%= products_path(on_sale: true) %>">Sale</a>
           </li>
         </ul>
           <ul class="navbar-nav" id="left-nav">
@@ -108,13 +104,10 @@
         <span class="border-top my-1 d-block d-sm-none"></span>
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center" id="nav-bar-col">
           <li class="nav-item">
-              <a class="nav-link" href="<%= "/"%>">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">New</a>
+            <a class="nav-link" href="<%= products_path(new_arrival: true) %>">New</a>
           </li>
           <% if Category.any? %>
-            <% Category.category.each do |c| %>
+            <% Category.category.first(4).each do |c| %>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <%= c.name %>
@@ -132,7 +125,7 @@
               </li>
             <% end %>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sale</a>
+              <a class="nav-link" href="<%= products_path(on_sale: true) %>">Sale</a>
             </li>
           <% end %>
           <span class="border-top my-1"></span>

@@ -18,11 +18,12 @@ class Product < ApplicationRecord
   after_save :create_variants_based_on_colors
   before_create :validate_color_ids_present
   before_save :set_stocks_to_zero_if_hidden
+  before_validation :set_original_price
 
   # validations
-  validates :name, :price, :category_ids, :sub_category_ids, :main_photo, presence: true
+  validates :name, :price, :original_price, :category_ids, :sub_category_ids, :main_photo, presence: true
   validates :name, length: { minimum: 3, maximum: 60 }, uniqueness: { case_sensitive: false }
-  validates :price, numericality: { greater_than: 0 }
+  validates :price, :original_price, numericality: { greater_than: 0 }
   validate :sub_category_related_to_category
 
   def sub_category_related_to_category
@@ -122,6 +123,10 @@ class Product < ApplicationRecord
         v.update(stock: 0)
       end
     end
+  end
+
+  def set_original_price
+    self.original_price = price if (new_record? && original_price.nil?)
   end
 
   def out_of_stock?

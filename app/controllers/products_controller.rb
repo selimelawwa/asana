@@ -2,13 +2,21 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:destroy, :edit, :update, :show]
   before_action :set_params, only: [:index]
   
-  def index    
-    if params[:category_id].blank?
-      @products = Product.published
-    else
+  def index
+    params[:on_sale] ||= params[:q][:on_sale]
+    params[:new_arrival] ||= params[:q][:new_arrival]
+    
+    if params[:category_id].present?
       @category = Category.find(params[:category_id])
       @products = @category.products.published
+    elsif params[:on_sale].present? && params[:on_sale] == "true"
+      @products = Product.where(on_sale: true)
+    elsif params[:new_arrival].present? && params[:new_arrival] == "true"
+      @products = Product.where(new_arrival: true)
+    else
+      @products = Product.published
     end
+
     if params.dig(:q,:variants_size_id_in).present?
       @products = @products.joins(:variants).where("variants.size_id IN (?) AND variants.stock > 0",params[:q][:variants_size_id_in])
     end
@@ -54,6 +62,7 @@ class ProductsController < ApplicationController
   def update
     authorize @product
     if @product.update(product_params)
+      flash[:success] = "This Product is Succesfully Updated"
       redirect_to edit_product_path(@product)
     else
       render 'edit'
@@ -95,7 +104,7 @@ class ProductsController < ApplicationController
   private
   def product_params
     params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :category_ids, 
-            :fabric_details, :model_wearing, :sub_category_ids, color_ids: [])
+            :fabric_details, :model_wearing, :sub_category_ids,:new_arrival, :on_sale, color_ids: [])
   end
 
   def set_product
