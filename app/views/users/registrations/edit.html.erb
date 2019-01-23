@@ -17,7 +17,7 @@
               </div>
               <div class="form-group">
                 <%= f.label :email %><br />
-                <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: 'form-control', required: true %>
+                <%= f.email_field :email,id: "email", autocomplete: "email", placeholder: "Email", class: 'form-control', required: true %>
               </div>
               <div class="pl-4" id="validate-email" style="font-size: 0.8rem; display: none;">
                 <p class="invalid">Email already used</p>
@@ -74,6 +74,7 @@
        ,validate_num = document.getElementById("validate-num")
        ,validate_email = document.getElementById("validate-email")
        , mobile = document.getElementById("mobile")
+       , pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
 
        function validatePassword(){
         var flag1 = 0;
@@ -120,26 +121,32 @@
 
       $('#email').focusout(function(){
         user_email = $('#email').val();
-        $.ajax({
-          type: "POST",
-          url: '/check_email',
-          data: {user_email: user_email},
-          success: function(response, data, status, xhr) {
-            if (response['email_used_before'] === true)
-            {
-              validate_email.style.display = "block";
-              $("#submit-button").addClass("disabled");
-            }
-            else
-            {
-              validate_email.style.display = "none";
-              $("#submit-button").removeClass("disabled");
-            }
-          },
-          error: function() {
-            alert('error');
+        if ($('#email').val().length > 0)
+        {
+          if (pattern.test($('#email').val()))
+          {
+            $.ajax({
+              type: "POST",
+              url: '/check_email',
+              data: {user_email: user_email},
+              success: function(response, data, status, xhr) {
+                if (response['email_used_before'] === true)
+                {
+                  validate_email.style.display = "block";
+                  $("#submit-button").addClass("disabled");
+                }
+                else
+                {
+                  validate_email.style.display = "none";
+                  $("#submit-button").removeClass("disabled");
+                }
+              },
+              error: function() {
+                alert('error');
+              }
+            });
           }
-        });
+        }
       });
 
 </script>
