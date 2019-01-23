@@ -70,6 +70,9 @@
 
 <!-- New Arrivals Start -->
 
+<!-- <a class="nav-link color-black text-muted-hover" href="<%= products_path(new_arrival: true) %>">New</a> -->
+
+
 <!-- Visible on Desktop Computers -->
 <% if @new_arrivals.any? %>
 
@@ -77,7 +80,7 @@
     <div class="row mr-4">
       <div class="col-md-4">
         <!-- width: 750px, height:530px -->
-        <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid", id:"new-arr-img" %></a>
+        <a href="<%= products_path(new_arrival: true) %>"><%= image_tag 'newarrivals.jpg', class: "img-fluid", id:"new-arr-img" %></a>
       </div>
       <% @new_arrivals.each do |n_p| %>
         <div class="col-md-2 pl-lg-5 pl-md-4">
@@ -97,7 +100,7 @@
 
   <!-- Visible on Mobile Phones -->
   <div class="d-block d-sm-none">
-    <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid" %></a>
+    <a href="<%= products_path(new_arrival: true) %>"><%= image_tag 'newarrivals.jpg', class: "img-fluid" %></a>
     <div class="container-fluid mt-2">
       <div class="row">
         <% @new_arrivals.each do |n_p| %>

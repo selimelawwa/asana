@@ -63,7 +63,8 @@ class ProductsController < ApplicationController
     authorize @product
     if @product.update(product_params)
       flash[:success] = "This Product is Succesfully Updated"
-      redirect_to edit_product_path(@product)
+      # redirect_to edit_product_path(@products)
+      redirect_to product_list_path
     else
       render 'edit'
     end
