@@ -67,7 +67,7 @@
         </ul>
         <%= search_form_for @q, url: search_products_path, id: "large-search" do |f| %>
           <div class="form-row search-box">
-            <button class="btn color-semi-black search-input" type="submit" name="action" style="width:5%;">
+            <button class="btn search-input" type="submit" name="action" style="width:5%;">
                 <i class="fa fa-search"></i>
             </button>
             <div class="h-100" style="width:95%;">
@@ -151,7 +151,7 @@
           <% else %>
             <div class="row" id="nav-row">
               <i class="fas fa-sign-in-alt pl-3 pr-2 color-black" style="padding-top: 0.72rem;"></i>
-              <li class="nav-item"> <%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
+              <li class="nav-item"> <%= link_to "Login", new_user_session_path, class:"nav-link" %></li>
             </div>
             <div class="row" id="nav-row">
               <i class="fas fa-user-plus pl-3 pr-2 color-black" style="padding-top: 0.67rem;"></i>

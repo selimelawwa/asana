@@ -1,17 +1,22 @@
 <div class = "container mt-1 mb-5">
-  <% if slide.new_record? %>
-    <%= render partial: 'shared/slides_breadcrum', locals: {active_link: "New Slide"}%>
-    <h1> New Slide </h1>
-  <% else %>
-    <%= render partial: 'shared/slides_breadcrum', locals: {active_link: "#{slide.id}"}%>
-    <h1> Edit Slide # <%= slide.id %> </h1>
-  <% end %>
+  <div class="ml-3">
+    <% if slide.new_record? %>
+      <%= render partial: 'shared/slides_breadcrum', locals: {active_link: "New Slide"}%>
+    <% else %>
+      <%= render partial: 'shared/slides_breadcrum', locals: {active_link: "#{slide.id}"}%>
+    <% end %>
+  </div>
 
   <div class = "row">
     <div class= "col-md-3">
       <%= render partial: 'shared/admin_sidebar' , locals: {current: 'slides'}%>
     </div>
     <div class= "col-md-9">
+      <% if slide.new_record? %>
+        <h1> New Slide </h1>
+      <% else %>
+        <h1> Edit Slide # <%= slide.id %> </h1>
+      <% end %>
       <%= simple_form_for slide, url: (slide.new_record? ? slides_path : slide_path)  do |f| %>
 
         <div class="custom-file mb-4">

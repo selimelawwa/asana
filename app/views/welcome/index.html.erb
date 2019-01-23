@@ -86,7 +86,7 @@
               <%= link_to image_tag(n_p.medium_photo, class: "card-img-top card-img-welcome"), product_path(n_p) %>
             </div>
             <div class="card-body card-font-welcome" style="max-height: 215px;">
-              <h6 class="card-title cardtitle-font-welcome"><%= link_to n_p.name, product_path(n_p) %></h6>
+              <h6 class="card-title cardtitle-font-welcome"><%= link_to n_p.name, product_path(n_p), class:"text-semi-black" %></h6>
               <p class="card-text"><small class="text-muted"><%= "EGP #{n_p.price}" %></small></p>
             </div>
           </div>
@@ -102,13 +102,13 @@
       <div class="row">
         <% @new_arrivals.each do |n_p| %>
           <div class="col-6">
-            <div class="row px-1">
+            <div class="row px-1 pb-3">
               <div class="card border-0">
                 <div class="inner">
                   <%= link_to image_tag(n_p.medium_photo, class: "card-img-top"), product_path(n_p) %>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-title"><%= link_to n_p.name, product_path(n_p) %></h6>
+                  <h6 class="card-title"><%= link_to n_p.name, product_path(n_p), class:"text-semi-black", style: "font-size: 1.2rem;" %></h6>
                   <p class="card-text"><small class="text-muted"><%= "EGP #{n_p.price}" %></small></p>
                 </div>
               </div>
