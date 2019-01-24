@@ -34,23 +34,25 @@
     </div>
   </div>
 
-  <input type="hidden" name="q[tags_id_in][]" value="">
-  <div class="mb-30">
-    <h6 class="filter-title mb-3">Tags</h6>
-    <div class="widget-desc">
-        <ul class="justify-content-between size-filter ml-2">
-          <% Tag.with_products.each do |t| %>
-            <% if params.dig(:q,:tags_id_in) && (params.dig(:q,:tags_id_in).include? t.id.to_s)%>
-              <input type="checkbox" style="display: none;" checked value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
-            <% else %>
-              <input type="checkbox" style="display: none;" value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
+  <% if Tag.with_products.any? %>
+    <input type="hidden" name="q[tags_id_in][]" value="">
+    <div class="mb-30">
+      <h6 class="filter-title mb-3">Tags</h6>
+      <div class="widget-desc">
+          <ul class="justify-content-between size-filter ml-2">
+            <% Tag.with_products.each do |t| %>
+              <% if params.dig(:q,:tags_id_in) && (params.dig(:q,:tags_id_in).include? t.id.to_s)%>
+                <input type="checkbox" style="display: none;" checked value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
+              <% else %>
+                <input type="checkbox" style="display: none;" value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
+              <% end %>
+              <% selected = params.dig(:q,:tags_id_in) && (params[:q][:tags_id_in].include? t.id.to_s)%>
+              <label class="checkbox_label pointer tag_label <%="#{'active' if selected}"%> " for="<%="q_tags_id_in_#{t.id}"%>"><%= t.name%></label>
             <% end %>
-            <% selected = params.dig(:q,:tags_id_in) && (params[:q][:tags_id_in].include? t.id.to_s)%>
-            <label class="checkbox_label pointer tag_label <%="#{'active' if selected}"%> " for="<%="q_tags_id_in_#{t.id}"%>"><%= t.name%></label>
-          <% end %>
-        </ul>
+          </ul>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div style="display: none;">
     <%= f.check_box :on_sale, {checked: params[:on_sale] == "true"}, "true", "false" %>

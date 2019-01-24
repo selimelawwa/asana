@@ -108,11 +108,9 @@
 
 <script type="text/javascript">
   $('.sort_select').change(function(){
-    if (this.value == "Featured") {
-      window.location.href = "<%= j products_path(request.query_parameters) %>";
-    } else if (this.value == "New Arrivals") {
+    if (this.value == "Latest") {
       window.location.href = $("<%= j sort_link @q, :created_at , default_order: :desc%>").attr('href'); 
-    } else if (this.value == "Low Price") {
+    } else if (this.value == "Price Low to High") {
       window.location.href = $("<%= j sort_link @q, :price , default_order: :asc%>").attr('href'); 
     } else {
       window.location.href = $("<%= j sort_link @q, :price , default_order: :desc%>").attr('href'); 

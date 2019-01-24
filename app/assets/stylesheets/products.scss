@@ -1356,7 +1356,9 @@ td a:hover{
 .tag_label{
     display: block;
 }
-
+.tag_label.active{
+  font-weight: bold;
+}
 
 
 .modal-body .title{

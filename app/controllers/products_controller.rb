@@ -6,14 +6,18 @@ class ProductsController < ApplicationController
     params[:on_sale] ||= params[:q][:on_sale]
     params[:new_arrival] ||= params[:q][:new_arrival]
 
-    @products = Product.published
-    
     if params[:category_id].present?
       @category = Category.find_by(id: params[:category_id])
-      @products = category.products.published if @category.present?
-    elsif params[:on_sale].present? && params[:on_sale] == "true"
+      @products = @category.products.published if @category.present?
+    else
+      @products = Product.published
+    end
+
+    if params[:on_sale].present? && params[:on_sale] == "true"
       @products = @products.where(on_sale: true)
-    elsif params[:new_arrival].present? && params[:new_arrival] == "true"
+    end
+
+    if params[:new_arrival].present? && params[:new_arrival] == "true"
       @products = @products.where(new_arrival: true)
     end
 
