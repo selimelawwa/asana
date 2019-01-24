@@ -25,6 +25,7 @@
                   <th></th>
                   <th></th>
                   <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody class="order_details">
@@ -36,11 +37,14 @@
                       <%= link_to 'Edit', edit_tag_path(id: t.id) %> 
                     </td>
                     <td class="text-right">
-                      <%= link_to 'Delete', tag_path(id: t.id), class: 'red', method: :delete, 
-                              data: { confirm: 'Are you sure?' }  %>
+                      <%= link_to 'View Tag Products', tag_assigned_products_path(tag_id: t.id)%>
+                    </td>
+                    <td class="text-right"> 
+                      <%= link_to 'Add Products', tag_available_products_path(tag_id: t.id)%> 
                     </td>
                     <td class="text-right">
-                      <%= link_to 'Add products', tag_available_products_path(tag_id: t.id)%> 
+                      <%= link_to 'Delete', tag_path(id: t.id), class: 'red', method: :delete, 
+                              data: { confirm: 'Are you sure?' }  %>
                     </td>
                   </tr>
                 <% end %>
