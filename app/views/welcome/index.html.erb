@@ -41,21 +41,23 @@
         <%= image_tag @jumbotron.photo.url, :class => "img-fluid" %>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 pt-4 pt-md-0 my-auto mx-auto jumbotron-div">
-        <p> <%= @jumbotron.description %> </p>
+        <div class="text-justify">
+          <p> <%= @jumbotron.description %> </p>
+        </div>
         <!-- Small screens only -->
-        <!-- <div class="container-fluid">
+        <div class="container-fluid d-block d-sm-none">
           <div class="row justify-content-center">
             <div class="d-block d-sm-none w-100">
               <a href="<%= products_path(category_id: @jumbotron.category_id_1) %>"><button type="button" class="btn btn-outline-secondary btn-md w-49"><%="Shop #{@category1_name}"%></button></a>
               <a href="<%= products_path(category_id: @jumbotron.category_id_2) %>"><button type="button" class="btn btn-outline-secondary btn-md w-49"><%="Shop #{@category2_name}"%></button></a>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- Large screens only -->
-        <!-- <div class="d-sm-none d-md-block"> 
+        <div class="d-none d-sm-block"> 
             <a href="<%= products_path(category_id: @jumbotron.category_id_1) %>"><button type="button" class="btn btn-outline-secondary w-49 jumb-font"><%="Shop #{@category1_name}"%></button></a>
             <a href="<%= products_path(category_id: @jumbotron.category_id_2) %>"><button type="button" class="btn btn-outline-secondary w-49 jumb-font"><%="Shop #{@category2_name}"%></button></a>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
