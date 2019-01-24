@@ -1352,6 +1352,7 @@ td a:hover{
 
 .tag_label.active::before{
     content:  "\2713 ";
+    margin-right: 2px;
 }
 .tag_label{
     display: block;

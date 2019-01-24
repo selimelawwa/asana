@@ -122,5 +122,16 @@
     $('#'+new_check_id).click(); 
     $('#'+new_check_id).closest('form').submit();
   });
+
+  $('.radio_checkbox_label').click(function(){
+    new_check_id = $(this).attr('for');
+    radio_btn = $('#'+new_check_id);
+    if (radio_btn.prop("checked")===true){
+      radio_btn.prop("checked",false);
+    } else {
+      radio_btn.prop("checked",true);
+    }
+    radio_btn.closest('form').submit();
+  });
   
 </script>
