@@ -70,6 +70,7 @@
 
 <!-- New Arrivals Start -->
 
+
 <!-- Visible on Desktop Computers -->
 <% if @new_arrivals.any? %>
 
@@ -77,7 +78,7 @@
     <div class="row mr-4">
       <div class="col-md-4">
         <!-- width: 750px, height:530px -->
-        <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid", id:"new-arr-img" %></a>
+        <a href="<%= products_path(new_arrival: true) %>"><%= image_tag 'newarrivals.jpg', class: "img-fluid", id:"new-arr-img" %></a>
       </div>
       <% @new_arrivals.each do |n_p| %>
         <div class="col-md-2 pl-lg-5 pl-md-4">
@@ -86,7 +87,7 @@
               <%= link_to image_tag(n_p.medium_photo, class: "card-img-top card-img-welcome"), product_path(n_p) %>
             </div>
             <div class="card-body card-font-welcome" style="max-height: 215px;">
-              <h6 class="card-title cardtitle-font-welcome"><%= link_to n_p.name, product_path(n_p) %></h6>
+              <h6 class="card-title cardtitle-font-welcome card-clip"><%= link_to n_p.name, product_path(n_p), class:"text-semi-black" %></h6>
               <p class="card-text"><small class="text-muted"><%= "EGP #{n_p.price}" %></small></p>
             </div>
           </div>
@@ -97,18 +98,18 @@
 
   <!-- Visible on Mobile Phones -->
   <div class="d-block d-sm-none">
-    <a href="#"><%= image_tag 'newarrivals.jpg', class: "img-fluid" %></a>
+    <a href="<%= products_path(new_arrival: true) %>"><%= image_tag 'newarrivals.jpg', class: "img-fluid" %></a>
     <div class="container-fluid mt-2">
       <div class="row">
         <% @new_arrivals.each do |n_p| %>
           <div class="col-6">
-            <div class="row px-1">
+            <div class="row px-1 pt-2 pb-1">
               <div class="card border-0">
                 <div class="inner">
                   <%= link_to image_tag(n_p.medium_photo, class: "card-img-top"), product_path(n_p) %>
                 </div>
-                <div class="card-body">
-                  <h6 class="card-title"><%= link_to n_p.name, product_path(n_p) %></h6>
+                <div class="card-body pl-1">
+                  <h6 class="card-title card-clip"><%= link_to n_p.name, product_path(n_p), class:"text-semi-black", style: "font-size: 1.2rem;" %></h6>
                   <p class="card-text"><small class="text-muted"><%= "EGP #{n_p.price}" %></small></p>
                 </div>
               </div>

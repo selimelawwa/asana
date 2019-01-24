@@ -1,11 +1,11 @@
-<div class="container my-5">
+<div class="container my-5 pt-3">
   <div class = "row">
     <div class = "col-md-3">
       <%= render partial: 'shared/admin_sidebar' , locals: {current: 'tags'}%>
     </div>
     <div class= "col-md-9">
       <div class="row">
-        <div class="mx-auto">
+        <div class="ml-4">
           <% if tag.new_record? %>
             <h1> New Tag </h1>
           <% else %>
@@ -22,7 +22,7 @@
   
         <% submit_label = tag.new_record? ? "Add Tag" : "Update Tag"%>
         <div class="d-flex flex-row-reverse">
-          <button class="btn color-semi-black btn-large align-right mb-3" type="submit" name="action"><%= submit_label%>
+          <button class="btn color-semi-black btn-large align-right my-3 col-12 col-md-3 col-lg-2" type="submit" name="action"><%= submit_label%>
           </button>
         </div>
       <% end %>

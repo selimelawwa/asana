@@ -212,6 +212,10 @@
     color: #000000;
 }
 
+.text-semi-black{
+    color: #0e110D !important;
+}
+
 .color-semi-black{
     color: #fff !important;
     background-color: #0e110D !important;
@@ -266,12 +270,12 @@
 			border-radius: 0;
 			transform: rotate(45deg);
 			top: 0px;
-			left: 18px;
+			left: 20px;
 		}
 
 		&::after {
 			width: 12px;
-			left: 14px;
+			left: 16px;
 			top: 5px;
 		}
 	}
@@ -484,7 +488,7 @@
             min-height: calc(100vh - 426px);
         }
         .carousel-img-size{
-            height: 470px;
+            height: 500px;
         }
         .product-img-height{
             // height: 360px;
@@ -518,6 +522,12 @@
     margin-bottom: 2rem;
     font-weight: 300;
     font-size: 1.5rem;
+  }
+
+  .card-clip{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: clip;
   }
   
   .card-signin .card-body {
@@ -1424,3 +1434,9 @@ td a:hover{
 .green{
     color: green !important;
 }
+
+.top-right {
+    position: absolute;
+    top: 14px;
+    right: 15px;
+  }

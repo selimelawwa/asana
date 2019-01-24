@@ -1,6 +1,6 @@
 <div class="container mt-4 mb-5">
   <div class="d-flex bd-highlight mb-3">
-    <div class="p-2 bd-highlight">
+    <div class=" ml-3 bd-highlight">
       <%= render partial: 'shared/tags_breadcrum' ,locals: {active_link: "#{@tag.name} "}%>
     </div>
     <div class="ml-auto p-2 bd-highlight d-none d-sm-block">
@@ -66,8 +66,8 @@
             </table>
           </div>
           <div class="container">
-            <div class="row justify-content-end">
-              <button type="button" name="save" class="btn color-semi-black" id="btn_checked_products">Add Tag to Product</button>
+            <div class="d-flex flex-row-reverse">
+              <button type="button" name="save" class="btn color-semi-black col-12 col-md-3 col-lg-2 mr-3" id="btn_checked_products">Add Tag</button>
             </div>
           </div>
         <% end %>
