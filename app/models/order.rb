@@ -15,7 +15,7 @@ class Order < ApplicationRecord
   before_update :validate_assigned_address
 
   def finalize
-    if update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.now, vat: vat_amount, shipping: shipping_fees)
+    if update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.zone.now, vat: vat_amount, shipping: shipping_fees)
       decrement_variant_stocks
     end
   end
