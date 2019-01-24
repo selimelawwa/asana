@@ -99,6 +99,9 @@
     <% if params[:category_id].present?%>
       <%= f.select :categories_id_eq, value: params[:category_id] %>
     <% end %>
+    <% if params.dig(:q, :name_cont).present? %>
+      <%= f.search_field :name_cont,  class: 'text search-input',  value: params.dig(:q, :name_cont),  autocomplete:"off" %>
+    <% end %>
     <%= f.check_box :on_sale, {checked: params[:on_sale] == "true"}, "true", "false" %>
     <%= f.check_box :new_arrival, {checked: params[:new_arrival] == "true"}, "true", "false" %>
   </div>

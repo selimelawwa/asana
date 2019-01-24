@@ -4,7 +4,7 @@
         <% if params[:category_id].present? %>
           <h1> <%= "#{@category.name}" %> </h1>
         <% elsif params[:on_sale].present? && params[:on_sale] == "true"%>
-          <h1> On Sale </h1>
+          <h1> Sale </h1>
         <% elsif params[:new_arrival].present? && params[:new_arrival] == "true"%>
           <h1> New Arrivals </h1>
         <% elsif params.dig(:q, :name_cont).present?%>
