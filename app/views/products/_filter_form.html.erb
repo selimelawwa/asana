@@ -1,6 +1,47 @@
 <%= search_form_for @q do |f| %>
-  <input type="hidden" name="q[variants_color_id_in][]" value="">
 
+  <% if params[:on_sale] == "true" || params[:new_arrival] == "true" || !params[:category_id].present?%>
+    <input type="hidden" name="q[categories_id_in][]" value="">
+    <div class="mb-30">
+      <h6 class="filter-title mb-3">Category</h6>
+      <div class="widget-desc">
+          <ul class="justify-content-between size-filter ml-2">
+            <% Category.category.each do |c| %>
+              <% if params.dig(:q,:categories_id_in) && (params.dig(:q,:categories_id_in).include? c.id.to_s)%>
+                <input type="radio" style="display: none;" checked value="<%= c.id%>" name="q[categories_id_in][]" id="<%="q_categories_id_in_#{c.id}"%>">
+              <% else %>
+                <input type="radio" style="display: none;" value="<%= c.id%>" name="q[categories_id_in][]" id="<%="q_categories_id_in_#{c.id}"%>">
+              <% end %>
+              <% selected = params.dig(:q,:categories_id_in) && (params[:q][:categories_id_in].include? c.id.to_s)%>
+              <label class="radio_checkbox_label pointer tag_label <%="#{'active' if selected}"%> " for="<%="q_categories_id_in_#{c.id}"%>"><%= c.name%></label>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%# Sub Category filter %>
+  <% if @sub_categories && @sub_categories.any? %>
+    <input type="hidden" name="q[sub_categories_id_in][]" value="">
+    <div class="mb-30">
+      <h6 class="filter-title mb-3">Sub Category</h6>
+      <div class="widget-desc">
+          <ul class="justify-content-between size-filter ml-2">
+            <% @sub_categories.each do |c| %>
+              <% if params.dig(:q,:sub_categories_id_in) && (params.dig(:q,:sub_categories_id_in).include? c.id.to_s)%>
+                <input type="checkbox" style="display: none;" checked value="<%= c.id%>" name="q[sub_categories_id_in][]" id="<%="q_sub_categories_id_in_#{c.id}"%>">
+              <% else %>
+                <input type="checkbox" style="display: none;" value="<%= c.id%>" name="q[sub_categories_id_in][]" id="<%="q_sub_categories_id_in_#{c.id}"%>">
+              <% end %>
+              <% selected = params.dig(:q,:sub_categories_id_in) && (params[:q][:sub_categories_id_in].include? c.id.to_s)%>
+              <label class="checkbox_label pointer tag_label <%="#{'active' if selected}"%> " for="<%="q_sub_categories_id_in_#{c.id}"%>"><%= c.name%></label>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <input type="hidden" name="q[variants_color_id_in][]" value="">
   <div class="pr_color">
     <h6 class="filter-title mb-4">Color</h6>
     <ul class="color_list mt-3 pl-1">
@@ -34,25 +75,33 @@
     </div>
   </div>
 
-  <input type="hidden" name="q[tags_id_in][]" value="">
-  <div class="mb-30">
-    <h6 class="filter-title mb-3">Tags</h6>
-    <div class="widget-desc">
-        <ul class="justify-content-between size-filter ml-2">
-          <% Tag.with_products.each do |t| %>
-            <% if params.dig(:q,:tags_id_in) && (params.dig(:q,:tags_id_in).include? t.id.to_s)%>
-              <input type="checkbox" style="display: none;" checked value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
-            <% else %>
-              <input type="checkbox" style="display: none;" value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
+  <% if Tag.with_products.any? %>
+    <input type="hidden" name="q[tags_id_in][]" value="">
+    <div class="mb-30">
+      <h6 class="filter-title mb-3">Tags</h6>
+      <div class="widget-desc">
+          <ul class="justify-content-between size-filter ml-2">
+            <% Tag.with_products.each do |t| %>
+              <% if params.dig(:q,:tags_id_in) && (params.dig(:q,:tags_id_in).include? t.id.to_s)%>
+                <input type="checkbox" style="display: none;" checked value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
+              <% else %>
+                <input type="checkbox" style="display: none;" value="<%= t.id%>" name="q[tags_id_in][]" id="<%="q_tags_id_in_#{t.id}"%>">
+              <% end %>
+              <% selected = params.dig(:q,:tags_id_in) && (params[:q][:tags_id_in].include? t.id.to_s)%>
+              <label class="checkbox_label pointer tag_label <%="#{'active' if selected}"%> " for="<%="q_tags_id_in_#{t.id}"%>"><%= t.name%></label>
             <% end %>
-            <% selected = params.dig(:q,:tags_id_in) && (params[:q][:tags_id_in].include? t.id.to_s)%>
-            <label class="checkbox_label pointer tag_label <%="#{'active' if selected}"%> " for="<%="q_tags_id_in_#{t.id}"%>"><%= t.name%></label>
-          <% end %>
-        </ul>
+          </ul>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div style="display: none;">
+    <% if params[:category_id].present?%>
+      <%= f.select :categories_id_eq, value: params[:category_id] %>
+    <% end %>
+    <% if params.dig(:q, :name_cont).present? %>
+      <%= f.search_field :name_cont,  class: 'text search-input',  value: params.dig(:q, :name_cont),  autocomplete:"off" %>
+    <% end %>
     <%= f.check_box :on_sale, {checked: params[:on_sale] == "true"}, "true", "false" %>
     <%= f.check_box :new_arrival, {checked: params[:new_arrival] == "true"}, "true", "false" %>
   </div>

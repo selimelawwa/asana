@@ -50,6 +50,8 @@ Rails.application.routes.draw do
     resources :tags do
       get 'available_products', to: 'tags#available_products', as: 'available_products'
       post 'assign_products', to: 'tags#assign_products', as: 'assign_products'
+      get 'assigned_products', to: 'tags#assigned_products', as: 'assigned_products'
+      post 'remove_products', to: 'tags#remove_products', as: 'remove_products'
     end
     resources :slides, except: :show
     resources :jumbotrons, except: [:show, :destroy]

@@ -1,21 +1,13 @@
 class ProductsController < ApplicationController
+  include ProductSearchConcern
   before_action :set_product, only: [:destroy, :edit, :update, :show]
   before_action :set_params, only: [:index]
   
   def index
-    params[:on_sale] ||= params[:q][:on_sale]
-    params[:new_arrival] ||= params[:q][:new_arrival]
-    
-    if params[:category_id].present?
-      @category = Category.find(params[:category_id])
-      @products = @category.products.published
-    elsif params[:on_sale].present? && params[:on_sale] == "true"
-      @products = Product.where(on_sale: true)
-    elsif params[:new_arrival].present? && params[:new_arrival] == "true"
-      @products = Product.where(new_arrival: true)
-    else
-      @products = Product.published
-    end
+    @products = Product.published
+    handle_category_id
+    handle_category_filter
+    handle_new_arrival_and_sale
 
     if params.dig(:q,:variants_size_id_in).present?
       @products = @products.joins(:variants).where("variants.size_id IN (?) AND variants.stock > 0",params[:q][:variants_size_id_in])
@@ -62,9 +54,9 @@ class ProductsController < ApplicationController
   def update
     authorize @product
     if @product.update(product_params)
-      flash[:success] = "This Product is Succesfully Updated"
-      # redirect_to edit_product_path(@products)
-      redirect_to product_list_path
+      flash[:success] = "#{@product.name} is Succesfully Updated"
+      show_hidden = @product.published? ? "0" : "1"
+      redirect_to product_list_path(show_hidden: show_hidden)
     else
       render 'edit'
     end
@@ -79,12 +71,14 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     authorize @product
     if @product.save
-      redirect_to product_list_path
+      flash[:success] = "#{@product.name} is Succesfully Created"
+      redirect_to product_list_path(show_hidden: "1")
     else
       render 'new'
     end
   end
 
+  # destroy act as hide (published: false)
   def destroy
     authorize @product
     if @product.update(published: false)
@@ -111,17 +105,4 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
-
-  def set_params
-    params[:q] ||= HashWithIndifferentAccess.new
-    params[:q][:s] ||= "created_at desc"   
-    params[:q].delete(:variants_size_id_in) if params.dig(:q,:variants_size_id_in) == ""
-    params[:q].delete(:variants_color_id_in) if params.dig(:q,:variants_color_id_in) == ""
-    params[:q].delete(:tags_id_in) if params.dig(:q,:tags_id_in) == ""
-
-    params[:q][:variants_size_id_in] =  params.dig(:q,:variants_size_id_in)&.reject { |c| c.empty? } 
-    params[:q][:variants_color_id_in] =  params.dig(:q,:variants_color_id_in)&.reject { |c| c.empty? }
-    params[:q][:tags_id_in] =  params.dig(:q,:tags_id_in)&.reject { |c| c.empty? }
-  end
-
 end

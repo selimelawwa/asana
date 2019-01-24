@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:edit, :update, :destroy, :show, :available_products, :assign_products]
+  before_action :set_tag, only: [:edit, :update, :destroy, :show, :assigned_products, :remove_products, :available_products, :assign_products]
+  
   def index
     @tags = Tag.all
   end
@@ -7,6 +8,12 @@ class TagsController < ApplicationController
   def new
     @tag = Tag.new
     authorize @tag
+  end
+
+  def assigned_products
+    authorize @tag
+    @products =  Product.where(id: Product.joins(:tags).where(tags: {id: @tag.id}).pluck(:id))
+                  .order(:created_at).paginate(:page => params[:page], :per_page => 25)
   end
 
   def available_products
@@ -19,6 +26,12 @@ class TagsController < ApplicationController
     authorize @tag
     products = Product.where(id: params[:product_ids])
     @tag.products << products
+  end
+
+  def remove_products
+    authorize @tag
+    products = Product.where(id: params[:product_ids])
+    @tag.products.delete(products)
   end
 
   def create

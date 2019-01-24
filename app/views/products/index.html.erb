@@ -28,7 +28,7 @@
         <% if params[:category_id].present? %>
           <h1> <%= "#{@category.name}" %> </h1>
         <% elsif params[:on_sale].present? && params[:on_sale] == "true"%>
-          <h1> On Sale </h1>
+          <h1> Sale </h1>
         <% elsif params[:new_arrival].present? && params[:new_arrival] == "true"%>
           <h1> New Arrivals </h1>
         <% elsif params.dig(:q, :name_cont).present?%>
@@ -126,11 +126,9 @@
 
 <script type="text/javascript">
   $('.sort_select').change(function(){
-    if (this.value == "Featured") {
-      window.location.href = "<%= j products_path(request.query_parameters) %>";
-    } else if (this.value == "New Arrivals") {
+    if (this.value == "Latest") {
       window.location.href = $("<%= j sort_link @q, :created_at , default_order: :desc%>").attr('href'); 
-    } else if (this.value == "Low Price") {
+    } else if (this.value == "Price Low to High") {
       window.location.href = $("<%= j sort_link @q, :price , default_order: :asc%>").attr('href'); 
     } else {
       window.location.href = $("<%= j sort_link @q, :price , default_order: :desc%>").attr('href'); 
@@ -141,6 +139,17 @@
     new_check_id = $(this).attr('for');
     $('#'+new_check_id).click(); 
     $('#'+new_check_id).closest('form').submit();
+  });
+
+  $('.radio_checkbox_label').click(function(){
+    new_check_id = $(this).attr('for');
+    radio_btn = $('#'+new_check_id);
+    if (radio_btn.prop("checked")===true){
+      radio_btn.prop("checked",false);
+    } else {
+      radio_btn.prop("checked",true);
+    }
+    radio_btn.closest('form').submit();
   });
   
 </script>

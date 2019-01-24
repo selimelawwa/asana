@@ -1,6 +1,6 @@
 <div class="container mt-4 mb-5">
   <div class="d-flex bd-highlight mb-3">
-    <div class=" ml-3 bd-highlight">
+    <div class="p-2 bd-highlight">
       <%= render partial: 'shared/tags_breadcrum' ,locals: {active_link: "#{@tag.name} "}%>
     </div>
     <div class="ml-auto p-2 bd-highlight d-none d-sm-block">
@@ -33,7 +33,7 @@
     <div class = "col-md-8 col-lg-9 pl-5">
       <div class="row d-flex align-items-center">
         <div>
-          <h2> Available Products </h2>
+          <h2><%= "#{@tag.name} Products"%></h2>
         </div>
         
       </div>
@@ -67,8 +67,12 @@
           </div>
           <div class="container">
             <div class="d-flex flex-row-reverse">
-              <button type="button" name="save" class="btn color-semi-black col-12 col-md-3 col-lg-2 mr-3" id="btn_checked_products">Add Tag</button>
+              <button type="button" style="background-color:red;" name="save" class="btn" id="btn_checked_products">Remove Products</button>
             </div>
+          </div>
+        <% else %>
+          <div class="col-12">
+            <p class="pl-4 mt-2">No Products have been added to this Tag yet, <%= link_to 'Add Products', tag_available_products_path(tag_id: @tag.id) %> </p>
           </div>
         <% end %>
       </div>
@@ -85,7 +89,7 @@
     if (checked_ids.length > 0){
       $.ajax({
         type: "POST",
-        url: "<%= j tag_assign_products_url %>",
+        url: "<%= j tag_remove_products_url %>",
         data: {product_ids: checked_ids},
         success: function(response, data, status, xhr) {
           window.location.href = "<%= j tag_assigned_products_path(tag_id: @tag.id) %>";

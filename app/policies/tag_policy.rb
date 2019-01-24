@@ -14,4 +14,10 @@ class TagPolicy < ApplicationPolicy
   def assign_products?
     user && user.admin?
   end
+  def assigned_products?
+    user && user.admin?
+  end
+  def remove_products?
+    user && user.admin?
+  end
 end
