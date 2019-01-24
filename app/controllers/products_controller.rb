@@ -5,16 +5,16 @@ class ProductsController < ApplicationController
   def index
     params[:on_sale] ||= params[:q][:on_sale]
     params[:new_arrival] ||= params[:q][:new_arrival]
+
+    @products = Product.published
     
     if params[:category_id].present?
-      @category = Category.find(params[:category_id])
-      @products = @category.products.published
+      @category = Category.find_by(id: params[:category_id])
+      @products = category.products.published if @category.present?
     elsif params[:on_sale].present? && params[:on_sale] == "true"
-      @products = Product.where(on_sale: true)
+      @products = @products.where(on_sale: true)
     elsif params[:new_arrival].present? && params[:new_arrival] == "true"
-      @products = Product.where(new_arrival: true)
-    else
-      @products = Product.published
+      @products = @products.where(new_arrival: true)
     end
 
     if params.dig(:q,:variants_size_id_in).present?
@@ -62,8 +62,9 @@ class ProductsController < ApplicationController
   def update
     authorize @product
     if @product.update(product_params)
-      flash[:success] = "This Product is Succesfully Updated"
-      redirect_to edit_product_path(@product)
+      flash[:success] = "#{@product.name} is Succesfully Updated"
+      show_hidden = @product.published? ? "0" : "1"
+      redirect_to product_list_path(show_hidden: show_hidden)
     else
       render 'edit'
     end
@@ -78,12 +79,14 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     authorize @product
     if @product.save
-      redirect_to product_list_path
+      flash[:success] = "#{@product.name} is Succesfully Created"
+      redirect_to product_list_path(show_hidden: "1")
     else
       render 'new'
     end
   end
 
+  # destroy act as hide (published: false)
   def destroy
     authorize @product
     if @product.update(published: false)
