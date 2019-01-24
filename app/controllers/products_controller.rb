@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
       @products = @products.joins(:variants).where("variants.size_id IN (?) AND variants.stock > 0",params[:q][:variants_size_id_in])
     end
     @q = @products.ransack(params[:q])
-    @products = @q.result(distinct: true).order(:created_at).paginate(:page => params[:page], :per_page => 25)
+    @products = @q.result(distinct: true).order(:created_at).paginate(:page => params[:page], :per_page => 24)
     @custom_paginate_renderer = custom_paginate_renderer
   end
 
