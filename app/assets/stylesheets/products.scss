@@ -270,12 +270,12 @@
 			border-radius: 0;
 			transform: rotate(45deg);
 			top: 0px;
-			left: 18px;
+			left: 20px;
 		}
 
 		&::after {
 			width: 12px;
-			left: 14px;
+			left: 16px;
 			top: 5px;
 		}
 	}
@@ -1431,3 +1431,9 @@ td a:hover{
 .green{
     color: green !important;
 }
+
+.top-right {
+    position: absolute;
+    top: 14px;
+    right: 15px;
+  }
