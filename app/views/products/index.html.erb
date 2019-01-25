@@ -52,14 +52,22 @@
               <div style="height:100%; width: 100%;">
                 <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%; height:100%; object-fit: cover;'), product_path(p) %>
                 <% if p.on_sale? %>
-                  <h6><span class="badge badge-danger top-right" style="padding-top: 4px;">SALE</span></h6>
-                <% elsif p.new_arrival? %>
-                  <h6><span class="badge badge-success top-right" style="padding-top: 2.5px; font-size: 0.6rem;">NEW ARRIVAL</span></h6>
+                  <!-- <h6><span class="badge badge-danger top-right" style="padding-top: 4px;">SALE</span></h6> -->
+                <% end %>
+                <% if p.new_arrival? %>
+                  <h5><span class="badge color-semi-black top-right" style="padding-top: 2.5px; font-size: 0.7rem;">NEW</span></h5>
                 <% end %>
               </div>
               <div class="card-body pl-1">
                 <h5 class="card-title card-clip"><%= link_to p.name, product_path(p), class:"text-semi-black", style: "font-size: 1.2rem;" %></h5>
-                <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
+                <div class="d-flex justify-content-start">
+                  <% if p.on_sale? %>
+                    <p class="card-text"><small class="text-muted"><strike><%= "EGP #{p.original_price}" %></strike></small></p>
+                    <p class="card-text ml-2"><small class="red"><%= "EGP #{p.price}" %></small></p>
+                  <% else %>
+                    <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
@@ -95,20 +103,21 @@
                     <div class="container">
                       <div class="row">
                         <%= link_to image_tag(p.medium_photo, class: "card-img-top img-fluid rounded", style: 'width:100%; height:100%;'), product_path(p) %>
-                        <% if p.on_sale? %>
-                          <h6><span class="badge badge-danger top-right" style="padding-top: 4px;">SALE</span></h6>
-                        <% elsif p.new_arrival? %>
-                          <h6><span class="badge badge-success top-right badge-font" style="padding-top: 4px;">NEW ARRIVAL</span></h6>
+                        <% if p.new_arrival? %>
+                          <h5><span class="badge color-semi-black top-right badge-font" style="padding-top: 5.4px;">NEW</span></h5>
                         <% end %>
                       </div>
                     </div>
                   </div>
                   <div class="card-body pl-1">
                     <h5 class="card-title card-clip"><%= link_to p.name, product_path(p), class:"text-semi-black" %></h5>
-                    <div class="d-flex">
-                      <div class="p-2">
+                    <div class="d-flex justify-content-start">
+                      <% if p.on_sale? %>
+                        <p class="card-text"><small class="text-muted"><strike><%= "EGP #{p.original_price}" %></strike></small></p>
+                        <p class="card-text ml-2"><small class="red"><%= "EGP #{p.price}" %></small></p>
+                      <% else %>
                         <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
-                      </div>
+                      <% end %>
                     </div>
                   </div>
                 </div>
