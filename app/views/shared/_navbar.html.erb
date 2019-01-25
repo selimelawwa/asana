@@ -104,12 +104,12 @@
         <span class="border-top my-1 d-block d-sm-none"></span>
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center" id="nav-bar-col">
           <li class="nav-item">
-            <a class="nav-link" href="<%= products_path(new_arrival: true) %>">New</a>
+            <a class="nav-link ml-1" href="<%= products_path(new_arrival: true) %>">New</a>
           </li>
           <% if Category.any? %>
             <% Category.category.first(4).each do |c| %>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ml-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <%= c.name %>
                 </a>
                 <ul class="dropdown-menu"  id="nav-all-col">
@@ -125,7 +125,7 @@
               </li>
             <% end %>
             <li class="nav-item">
-              <a class="nav-link" href="<%= products_path(on_sale: true) %>">Sale</a>
+              <a class="nav-link ml-1" href="<%= products_path(on_sale: true) %>">Sale</a>
             </li>
           <% end %>
           <span class="border-top my-1"></span>
