@@ -15,9 +15,6 @@
   <%= render 'shared/navbar' %>
   <body>
     <%= render 'shared/devise_messages' ,locale: { notice: notice, alert: alert }%>
-    <!-- <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %> -->
     <div class="fix-footer">
       <%= yield %>
     </div>
