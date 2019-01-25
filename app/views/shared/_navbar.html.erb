@@ -115,7 +115,7 @@
           <% if @navbar_categories.any? %>
             <% @navbar_categories.each do |c| %>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ml-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <%= c.name %>
                 </a>
                 <ul class="dropdown-menu"  id="nav-all-col">
@@ -133,7 +133,7 @@
           <% end %>
           <% if @show_on_sale %>
             <li class="nav-item">
-              <a class="nav-link" href="<%= products_path(on_sale: true) %>">Sale</a>
+              <a class="nav-link ml-1" href="<%= products_path(on_sale: true) %>">Sale</a>
             </li>
           <% end %>
           <span class="border-top my-1"></span>
