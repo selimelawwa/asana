@@ -19,6 +19,7 @@ module ProductSearchConcern
         params[:category_id] ||= params[:q][:categories_id_eq]
         params[:q].delete(:categories_id_eq) if params.dig(:q,:categories_id_eq)
       end
+      
       def handle_category_id
         if params[:category_id].present?
           @category = Category.find_by(id: params[:category_id])
@@ -26,8 +27,11 @@ module ProductSearchConcern
             @products = @category.products.published
             @sub_categories = @category.sub_categories.with_products
           end
+        else
+          @products = Product.published
         end
       end
+
       def handle_category_filter
         if params.dig(:q,:categories_id_in).present?
           @sub_categories = Category.sub_category.with_products.where(parent_id: params.dig(:q,:categories_id_in))
@@ -43,6 +47,7 @@ module ProductSearchConcern
           end
         end
       end
+
       def handle_new_arrival_and_sale
         if params[:on_sale].present? && params[:on_sale] == "true"
           @products = @products.where(on_sale: true)

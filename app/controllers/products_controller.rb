@@ -2,9 +2,8 @@ class ProductsController < ApplicationController
   include ProductSearchConcern
   before_action :set_product, only: [:destroy, :edit, :update, :show]
   before_action :set_params, only: [:index]
-  
+
   def index
-    @products = Product.published
     handle_category_id
     handle_category_filter
     handle_new_arrival_and_sale
