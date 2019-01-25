@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   before_action :set_global_search_variable
+  before_action :set_navbar_categories
 
   def set_global_search_variable
     @q ||= Product.ransack(params[:q])
@@ -37,5 +38,11 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:danger] = "You are not authorized to perform this action."
     redirect_to(request.referrer || root_path)
+  end
+
+  def set_navbar_categories
+    @navbar_categories = Rails.cache.fetch('cached_navbar_categories', expires_in: 10.minute) { Category.category.with_products.includes(:sub_categories).first(4) }
+    @show_on_sale = Rails.cache.fetch('cached_show_on_sale', expires_in: 10.minute) { Product.where(on_sale: true).any? }
+    @show_new_arrival = Rails.cache.fetch('cached_show_new_arrival', expires_in: 10.minute) { Product.where(new_arrival: true).any? }
   end
 end

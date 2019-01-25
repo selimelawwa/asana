@@ -24,13 +24,13 @@ module ProductSearchConcern
           @category = Category.find_by(id: params[:category_id])
           if @category.present?
             @products = @category.products.published
-            @sub_categories = @category.sub_categories
+            @sub_categories = @category.sub_categories.with_products
           end
         end
       end
       def handle_category_filter
         if params.dig(:q,:categories_id_in).present?
-          @sub_categories = Category.sub_category.where(parent_id: params.dig(:q,:categories_id_in))
+          @sub_categories = Category.sub_category.with_products.where(parent_id: params.dig(:q,:categories_id_in))
         end
 
         if params.dig(:q,:sub_categories_id_in).present?
