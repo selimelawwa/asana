@@ -19,15 +19,25 @@
       <% end %>
       <%= simple_form_for product, url: (product.new_record? ? products_path : product_path)  do |f| %>
         <div class="row">
-          <div class="col-12 col-md-6">
+          <div class="col-12">
             <div class="form-group">
               <%= f.input :name, class: 'form-control'  %>
             </div>
           </div>
-          <div class="col-12 col-md-6">
+        </div>
+
+        <div class="row">
+          <% unless product.new_record?%>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <%= f.input :original_price, label: 'Original Price', class: 'form-control', input_html: { min: '0', step: 'any' } %>
+              </div>
+            </div>
+          <% end %>
+          <div class="col-12 <%= product.new_record? ? 'col-md-12' : 'col-md-6'%>">
             <div class="form-group">
               <%= f.input :price, label: 'Product Price', class: 'form-control', input_html: { min: '0', step: 'any' } %>
-              <%= f.hint "You can Update this later to add a discount"%>
+              <%= f.hint "You can update this to add a discount"%>
             </div>
           </div>
         </div>

@@ -12,9 +12,9 @@ class Product < ApplicationRecord
 
   has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "70x70>" },
     :convert_options => {:medium => "-gravity center -extent 300x300"}
-    
+
   validates_attachment_content_type :main_photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
-  
+
   after_save :create_variants_based_on_colors
   before_create :validate_color_ids_present
   before_save :set_stocks_to_zero_if_hidden
@@ -25,6 +25,7 @@ class Product < ApplicationRecord
   validates :name, length: { minimum: 3, maximum: 60 }, uniqueness: { case_sensitive: false }
   validates :price, :original_price, numericality: { greater_than: 0 }
   validate :sub_category_related_to_category
+  validate :validate_price_less_than_original_price
 
   def sub_category_related_to_category
     if categories && sub_categories
@@ -35,6 +36,13 @@ class Product < ApplicationRecord
           throw :abort
         end
       end
+    end
+  end
+
+  def validate_price_less_than_original_price
+    if price > original_price
+      errors.add(:price, "Price Must Be Less Than Original Price")
+      throw :abort
     end
   end
 
