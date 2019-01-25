@@ -16,7 +16,7 @@
                 <%= f.text_field :name, required: true,  autocomplete: "name", placeholder: "Name", id: "name", class: "form-control" %>
                 <label for="name" class="py-auto">Name</label>
               </div>
-              <div class="form-label-group pl-1 w-100">
+              <div class="form-label-group w-100">
                 <%= f.text_field :mobile, required: true, autocomplete: "mobile", id: "mobile", class: "form-control", placeholder: "Mobile Number", maxlength: "11" %>
                 <label for="mobile" class="py-auto">Mobile number</label>
               </div>
@@ -45,7 +45,7 @@
                   </div>
                   <div class="col-12 col-xl-6">
                     <div class="row">
-                      <div class="form-label-group pl-1 w-100">
+                      <div class="form-label-group pl-xl-1 w-100">
                         <%= f.password_field :password_confirmation, required: true, placeholder: "confirm password", id: "password_confirmation", class: "form-control" %>
                         <label for="password_confirmation" class="py-auto">Confirm Password</label>
                       </div>
@@ -80,7 +80,7 @@
               <% end %>
               <div class="container mt-4">
                 <div class="row">
-                  <%= link_to "Already have account? Sign in here!", new_user_session_path, class:"mx-auto text-dark" %>
+                  <%= link_to "Already have an account? Sign in here!", new_user_session_path, class:"mx-auto text-dark" %>
                 </div>
               </div>
             </div>
@@ -163,15 +163,17 @@
     {
       validate_number.style.display = "block";
       if ( mobile.value.match(/^[0-9]+$/) == null ){
+        validate_num.classList.remove("valid");
+        validate_num.classList.add("invalid");
         flag3 = 0;
       }
       else
       {
         if ( mobile.value.length != 11 || mobile.value.substring(0,2) != "01")
         {
-          flag3 = 0;
           validate_num.classList.remove("valid");
           validate_num.classList.add("invalid");
+          flag3 = 0;
         }
         else
         {
@@ -180,11 +182,12 @@
           validate_num.classList.add("valid");
         }
       }
-     
     }
     else
     {
       validate_number.style.display = "none";
+      validate_num.classList.remove("valid");
+      validate_num.classList.add("invalid");
       flag3 = 0;
     }
     if (flag1 == 1 && flag2 == 1 && flag3 == 1)

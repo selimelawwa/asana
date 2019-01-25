@@ -12,7 +12,7 @@
               <%= render 'sidebar', current: 'edit'%>
             </div>
             <div class="col-md-7 col-lg-6 col-xl-7">
-              <div class="form-group">
+              <div class="form-group mb-0">
                 <%= devise_error_messages! %>
               </div>
               <div class="form-group">
@@ -22,33 +22,45 @@
               <div class="pl-4" id="validate-email" style="font-size: 0.8rem; display: none;">
                 <p class="invalid">Email already exists</p>
               </div>
-              <div class="form-group">
-                <%= f.label :name %>
-                <%= f.text_field :name, placeholder: "Name", required: true, value: resource.name, class: 'form-control' %>
-              </div>
+              <div class="container">
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      <div class="row">
+                        <div class="form-group w-100">
+                          <%= f.label :name %>
+                          <%= f.text_field :name, placeholder: "Name", required: true, value: resource.name, class: 'form-control' %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <div class="row">
+                        <div class="form-group w-100 pl-0 pl-md-1">
+                          <%= f.label :city %>
+                          <%= f.text_field :city, value: resource.city, class: 'form-control', required: true %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               <div class="container">
                 <div class="row">
                   <div class="col-12 col-md-6">
                     <div class="row">
                       <div class="form-group w-100">
-                        <%= f.label :city %>
-                        <%= f.text_field :city, value: resource.city, class: 'form-control', required: true %>
+                        <%= f.label :mobile %>
+                        <%= f.text_field :mobile, required: true, autocomplete: "mobile", id: "mobile", class: "form-control", placeholder: "Mobile", maxlength: "11" %>
                       </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="row">
-                      <div class="form-group w-100 pl-1">
+                      <div class="form-group w-100 pl-0 pl-md-1">
                         <%= f.label :birthday %>
                         <%= f.date_field :birthday, class: 'form-control', required: true %>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="form-group">
-                  <%= f.label :mobile %>
-                  <%= f.text_field :mobile, required: true, autocomplete: "mobile", id: "mobile", class: "form-control", placeholder: "Mobile", maxlength: "11" %>
               </div>
               <div class="pl-4" id="validate-number" style="font-size: 0.8rem; display: none;">
                 <p id="validate-num" class="invalid">Valid number</p>
@@ -77,24 +89,25 @@
        , pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
 
        function validatePassword(){
-        var flag1 = 0;
         if (mobile.value.length > 0)
         {
           validate_number.style.display = "block";
           if ( mobile.value.match(/^[0-9]+$/) == null ){
-            flag1 = 0;
+            validate_num.classList.remove("valid");
+            validate_num.classList.add("invalid");
+            $("#submit-button").addClass("disabled");
           }
           else
           {
             if ( mobile.value.length != 11 || mobile.value.substring(0,2) != "01")
             {
-              flag1 = 0;
               validate_num.classList.remove("valid");
               validate_num.classList.add("invalid");
+              $("#submit-button").addClass("disabled");
             }
             else
             {
-              flag1 = 1;
+              $("#submit-button").removeClass("disabled");
               validate_num.classList.remove("invalid");
               validate_num.classList.add("valid");
             }
@@ -103,14 +116,8 @@
         else
         {
           validate_number.style.display = "none";
-          flag1 = 0;
-        }
-        if (flag1 == 1)
-        {
-          $("#submit-button").removeClass("disabled");
-        }
-        else
-        {
+          validate_num.classList.remove("valid");
+          validate_num.classList.add("invalid");
           $("#submit-button").addClass("disabled");
         }
       }

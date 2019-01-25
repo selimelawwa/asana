@@ -1,5 +1,5 @@
-<h4> Order Summary </h4>
-<hr class="w-50 ml-0">
+<h4 class="mt-2 mt-md-2"> Order Summary </h4>
+<hr class="color-semi-black">
 <p> Subtotal: EGP <%= order.cart? ? order.current_total_cost : order.total_cost%></p>
 <% if order.address.present? %>
   <p> Shipping Fees: EGP <%= order.cart? ? order.shipping_fees : order.shipping%></p>
@@ -7,5 +7,5 @@
 <% if order.vat_amount > 0 || order.vat > 0 %>
   <p> VAT: EGP <%= order.cart? ? order.vat_amount : order.vat %></p>
 <% end %>
-<hr>
-<p style="font-weight: bold;"> Total: EGP <%= order.cart? ? order.final_total : order.total_cost%></p>
+<hr class="color-semi-black">
+<p class="pb-2 pb-md-0" style="font-weight: bold;"> Total: EGP <%= order.cart? ? order.final_total : order.total_cost%></p>
