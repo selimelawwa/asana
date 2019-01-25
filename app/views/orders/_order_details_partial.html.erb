@@ -55,6 +55,21 @@
     $('.update_quantity').trigger("click");
   });
 
+  $('.remove_item').click(function(){
+    line_item_id = this.id.substring(3);
+    $.ajax({
+      type: "POST",
+      url: '/remove_line_item',
+      data: {line_item_id: line_item_id},
+      success: function(response, data, status, xhr) {
+        $('#order_details_div').html(response['new_order_details']);
+        $('#order_summary_div').html(response['new_order_summary']);
+      },
+      error: function() {
+        alert('error');
+      }
+    });
+  });
 
   $('.update_quantity').click(function(){
     line_item_id = this.id.substring(3);
