@@ -61,8 +61,8 @@
               <i class="fas fa-shopping-cart fa-2x color-black" data-toggle="tooltip" title="Cart"></i>
             <% end %> 
             </li>
-            <div class="search-button pr-4">
-              <a href="#" class="search-toggle" data-selector="#header-1" data-toggle="tooltip" title="Search"></a>
+            <div class="search-button pr-4" data-toggle="tooltip" title="Search">
+              <a href="#" class="search-toggle" data-selector="#header-1"></a>
             </div>
         </ul>
         <%= search_form_for @q, url: search_products_path, id: "large-search" do |f| %>
