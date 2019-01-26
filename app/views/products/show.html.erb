@@ -13,7 +13,7 @@
               <% if @colored_variant && @colored_variant.photos.any?%>
                 <ol class="carousel-indicators">
                   <% @colored_variant.photos.first(6).each_with_index do |p,i|%>
-                    <li class="<%= "#{'active' if i == 0}" %>" data-target="#product_details_slider" data-slide-to="<%="#{i}"%>" style="background-image: url(<%=p.image.url%>);">
+                    <li class="<%= "#{'active' if i == 0}" %>" data-target="#product_details_slider" data-slide-to="<%="#{i}"%>" style="background-image: url(<%=p.image.url(:medium)%>);">
                     </li>
                   <% end %>
                 </ol>
@@ -22,7 +22,7 @@
                     <div class="carousel-item <%= "#{'active' if i == 0}" %> ">
                       <a class="gallery_img">
                         <div class="tile">
-                          <%= image_tag p.image.url, class:"photo d-block product-img-height", alt: "slide"%>
+                          <%= image_tag p.image.url(:medium), class:"photo d-block product-img-height", alt: "slide"%>
                         </div>
                       </a>
                     </div>
@@ -30,14 +30,14 @@
                 </div>
               <% else %>
                 <ol class="carousel-indicators">
-                  <li class="active" data-target="#product_details_slider" data-slide-to="1" style="background-image: url(<%=@product.main_photo.url%>);">
+                  <li class="active" data-target="#product_details_slider" data-slide-to="1" style="background-image: url(<%=@product.main_photo.url(:medium)%>);">
                     </li>
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active ">
                     <a class="gallery_img">
                       <div class="tile">
-                        <%= image_tag @product.main_photo.url, class:"photo d-block product-img-height", alt: "slide" %>
+                        <%= image_tag @product.main_photo.url(:medium), class:"photo d-block product-img-height", alt: "slide" %>
                       </div>
                     </a>
                   </div>
@@ -48,7 +48,6 @@
         </div> 
 
         <!-- Product Details -->
-
         <div class="col-12 col-md-6 pl-3">
           <div class="single_product_desc">
 
@@ -192,7 +191,7 @@
             <div class="col-md-3">
               <div class="card border-0 card-wid">
                 <div class="inner">
-                  <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
+                  <%= link_to image_tag(p.medium_photo, class: "card-img-top img-fluid", style: 'height: 450px;object-fit: cover;'), product_path(p) %>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title"> <%= link_to p.name, product_path(p) %> </h5>
@@ -205,7 +204,6 @@
       </div>
     </div>
 
-
     <!-- Visible on Mobile Phones -->
     <div class="d-block d-sm-none">
       <div class="container-fluid mt-2 pb-5">
@@ -215,7 +213,7 @@
             <div class="row px-1">
               <div class="card border-0">
                 <div class="inner">
-                  <%= link_to image_tag(p.medium_photo, class: "card-img-top", style: 'width:100%;'), product_path(p) %>
+                  <%= link_to image_tag(p.medium_photo, class: "card-img-top img-fluid", style: 'height: 210px;object-fit: cover;'), product_path(p) %>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title"> <%= link_to p.name, product_path(p) %> </h5>

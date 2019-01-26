@@ -3,8 +3,8 @@ class Image < ApplicationRecord
   has_many :variant_images, dependent: :destroy
   has_many :variants, through: :variant_images
   
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "70x70>" },
-    :convert_options => {:medium => "-gravity center -extent 300x300"}
+  has_attached_file :image, styles: { medium: "60%>", thumb: "70x70>" },
+    convert_options: { :medium => "-quality 75" }
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   validates :image, attachment_presence: true

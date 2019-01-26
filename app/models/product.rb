@@ -10,8 +10,8 @@ class Product < ApplicationRecord
 
   attr_accessor :color_ids
 
-  has_attached_file :main_photo, styles: { medium: "300x300>", thumb: "70x70>" },
-    :convert_options => {:medium => "-gravity center -extent 300x300"}
+  has_attached_file :main_photo, styles: { medium: "60%>", thumb: "70x70>" },
+  convert_options: { :medium => "-quality 75" }
 
   validates_attachment_content_type :main_photo, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 

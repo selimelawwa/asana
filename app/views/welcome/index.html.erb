@@ -1,7 +1,6 @@
 <!-- Carousel Start -->
 
 <!-- width: 960px, height: 500px -->
-
 <% if @slides.any?%>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -12,7 +11,7 @@
     <div class="carousel-inner" role="listbox">
       <% @slides.each_with_index do |s,i|%>
         <div class="carousel-item <%= 'active' if i==0%> ">
-          <%= image_tag s.photo.url, class: "carousel-img-size" %>
+          <%= image_tag s.photo.url, class: "img-fluid" %>
         </div>
       <% end %>
     </div>
@@ -70,7 +69,6 @@
 
 <!-- Visible on Desktop Computers -->
 <% if @new_arrivals.any? %>
-
   <div class="d-none d-sm-block mt-4" data-aos="fade-up">
     <div class="row mr-4">
       <div class="col-md-4 pr-md-2 pr-lg-0">
@@ -116,13 +114,10 @@
       </div>
     </div>
   </div>
-  
 <% end %>
 <!-- New Arrivals End -->
 
-
 <!-- Connect Start -->
-
 <div class="container-fluid padding mb-4 mt-0 mt-md-3" data-aos="flip-up">
   <div class="row text-center padding">
     <div class="col-12">
@@ -135,5 +130,4 @@
     </div>
   </div>
 </div>
-
 <!-- Connect End -->
