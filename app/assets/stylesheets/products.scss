@@ -81,7 +81,6 @@
   background-color: #0e110D;
   color: #fff;
   padding-top: 2rem;
-//   margin-top: 2rem;
 }
 
 .footer-btn {
@@ -138,11 +137,6 @@
 .fa-facebook:hover, .fa-twitter:hover, .fa-instagram:hover, .fa-youtube:hover{
   color: #d5d5d5;
 }
-
-
-// .tile{
-//     max-height: 400px;
-// }
 
 .inner{
   overflow: hidden;
@@ -423,7 +417,7 @@
 // Medium devices (tablets, 768px and up)
   @media (min-width: 768px) and (max-width: 991.98px) { 
     #new-arr-img{
-      height: 205px;
+      height: 260px;
     }
 
     .cardtitle-font-welcome{
@@ -457,16 +451,24 @@
         // height: 320px;
     }
     .badge-font{
-        font-size: 0.4rem !important;
+        font-size: 0.55rem !important;
+        padding-top: 5.4px;
+    }
+    .price-font{
+        font-size: 0.8rem;
+    }
+    .img-height{
+        height: 400px; 
+        object-fit: fill;
+    }
+    .welcome-new-arrival{
+        max-height: 16px; 
+        font-size: 0.58rem;
     }
   }
 
 // Large devices (desktops, 992px and up)
   @media (min-width: 992px) and (max-width: 1199.98px) { 
-
-    #new-arr-img{
-      height: 239px;
-    }
 
     .sign-in-form{
         padding-top: 21%;
@@ -479,6 +481,20 @@
     }
     .product-img-height{
         // height: 360px;
+    }
+    .badge-font{
+        padding-top: 5.4px;
+    }
+    .price-font{
+        font-size: 0.95rem;
+    }
+    .img-height{
+        height: 400px; 
+        object-fit: fill;
+    }
+    .welcome-new-arrival{
+        max-height: 13px; 
+        font-size: 0.72rem;
     }
   }
 
@@ -495,6 +511,20 @@
         }
         .sign-in-form{
             padding-top: 1%;
+        }
+        .badge-font{
+            font-size: 0.95rem;
+            padding-top: 6.4px;
+        }
+        .price-font{
+            font-size: 0.95rem;
+        }
+        .img-height{
+            height: 400px; 
+            object-fit: fill;
+        }
+        .welcome-new-arrival{
+            max-height: 24px; 
         }
     }
 
@@ -574,7 +604,6 @@
     display: block;
     width: 100%;
     margin-bottom: 0;
-    /* Override default `<label>` margin */
     line-height: 1.5;
     color: #495057;
     border: 1px solid transparent;
@@ -614,8 +643,6 @@
     color: #777;
   }
   
-
-  /* Add a green text color and a checkmark when the requirements are right */
   .valid {
     color: green;
   }
@@ -626,7 +653,6 @@
     content: "✔";
   }
   
-  /* Add a red text color and an "x" when the requirements are wrong */
   .invalid {
     color: red;
   }
@@ -768,28 +794,9 @@ img {
     vertical-align: middle;
 }
 
-.mt-15 {
-    margin-top: 15px;
-}
 
 .mt-30 {
     margin-top: 30px;
-}
-
-.mt-50 {
-    margin-top: 50px;
-}
-
-.mt-70 {
-    margin-top: 70px;
-}
-
-.mt-100 {
-    margin-top: 100px;
-}
-
-.mb-15 {
-    margin-bottom: 15px;
 }
 
 .mb-30 {
@@ -800,81 +807,18 @@ img {
     margin-bottom: 50px;
 }
 
-.ml-15 {
-    margin-left: 15px;
-}
-
-.ml-30 {
-    margin-left: 30px;
-}
-
 .mr-10 {
   margin-right: 10px;
-}
-
-.mr-15 {
-    margin-right: 15px;
-}
-
-.mr-30 {
-    margin-right: 30px;
 }
 
 .mr-40 {
   margin-right: 40px;
 }
 
-.mb-70 {
-    margin-bottom: 70px;
-}
-
-.mb-100 {
-    margin-bottom: 100px;
-}
-
-
-.line,
-.line-mtb15 {
-    width: 100%;
-    height: 1px;
-    background-color: #ddd;
-    margin: 30px 0;
-}
-
-.line-mtb15 {
-    margin: 15px 0;
-}
-
-.section_padding_100 {
-    padding: 100px 0;
-}
-
-.section_padding_100_0 {
-    padding: 100px 0 0;
-}
-
-.section_padding_0_100 {
-    padding: 0 0 100px;
-}
-
 .section_padding_0_60 {
   padding: 0 0 60px;
 }
-.section_heading {
-    margin-bottom: 50px;
-    position: relative;
-    z-index: 1;
-}
 
-.section_heading h2 {
-    font-size: 48px;
-    margin-bottom: 0;
-    text-transform: uppercase;
-}
-
-.section_heading.text-left {
-    text-align: left !important;
-}
 /* -------------------
 :: 4.0 Wrapper CSS
 ------------------- */
@@ -887,7 +831,6 @@ img {
     top: 0;
     -webkit-transition: all linear 500ms;
     transition: all linear 500ms;
-    // box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
 }
 
 #wrapper.karl-side-menu-open {
@@ -941,7 +884,6 @@ img {
 
 .widget-desc .custom-control-description {
     font-size: 14px;
-    // padding-right: 2rem;
 }
 
 .widget.rating .widget-desc a {
@@ -1325,6 +1267,7 @@ img {
 .color_filter{
     width: 25px;
     height: 25px;
+    border: 1px silver solid;
   }
 
 .color_filter:hover, .color_filter.active{
@@ -1409,11 +1352,9 @@ td a:hover{
 
 .confirm_order_btn{
     padding: 15px;
-    // border: 1px solid black;
     background: #0e110D;
     color: white;
     font-size: 20px;
-    // font-weight: bold;
     margin-bottom: 19px;
 }
 
@@ -1451,6 +1392,7 @@ td a:hover{
 .f-7{
     font-size: 0.7rem;
 }
+
 
 // .alert {
 //     margin-bottom: 0rem !important;

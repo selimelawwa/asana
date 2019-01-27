@@ -1,4 +1,5 @@
 <div class = "container my-5">
+  <h1 class="mb-2">Add Image</h1>
   <%= simple_form_for [@product, @image], html: { multipart: true } do |f| %>
     <%= render partial: 'form', locals: { f: f, image: @image } %>
     <div class="d-flex flex-row-reverse">

@@ -46,23 +46,23 @@
   <div class="container-fluid mt-4">
     <div class="row">
       <% @products.each do |p| %>
-        <div class="col-6">
+        <div class="col-6" data-aos="fade-up">
           <div class="row px-1 pt-2 pb-1">
             <div class="card border-0">
               <div style="height:100%; width: 100%;">
                 <%= link_to image_tag(p.medium_photo, class: "card-img-top img-fluid", style: 'height: 280px;object-fit: fill;'), product_path(p) %>
                 <% if p.new_arrival? %>
-                  <h5><span class="badge color-semi-black top-right" style="padding-top: 2.5px; font-size: 0.7rem;">NEW</span></h5>
+                  <span class="badge color-semi-black top-right" style="padding-top: 2.5px; font-size: 0.7rem;">NEW</span>
                 <% end %>
               </div>
               <div class="card-body pl-1">
                 <h5 class="card-title card-clip"><%= link_to p.name, product_path(p), class:"text-semi-black", style: "font-size: 1.2rem;" %></h5>
                 <div class="d-flex justify-content-start">
                   <% if p.on_sale? %>
-                    <p class="card-text"><small class="text-muted"><strike><%= "EGP #{p.original_price}" %></strike></small></p>
+                    <p class="card-text"><small><strike><%= "EGP #{p.original_price}" %></strike></small></p>
                     <p class="card-text ml-2"><small class="red"><%= "EGP #{p.price}" %></small></p>
                   <% else %>
-                    <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
+                    <p class="card-text"><small><%= "EGP #{p.price}" %></small></p>
                   <% end %>
                 </div>
               </div>
@@ -81,8 +81,8 @@
 <div class="d-none d-sm-none d-md-block">
   <div class="container-fluid padding">
     <div class="row padding justify-content-left">
-      <div class="col-md-3 col-lg-2">
-        <div class="">
+      <div class="col-md-3 col-lg-2" style="z-index: 0;">
+        <div class="sticky-top">
           <div class="form-group mt-3">
             <h6 class="filter-title mb-3">Sort By</h6>
             <%= render 'sort_partial'%>
@@ -93,27 +93,27 @@
       <div class="col-md-9 col-lg-10">
         <div class="card-deck pl-2">
           <% @products.each do |p| %>
-            <div class="col-xs-6 col-sm-3 mb-5">
+            <div class="col-md-4 col-lg-3 mb-5">
               <div class="row">
                 <div class="card border-0 ml-0">
                   <div style="height:100%; width: 100%;">
                     <div class="container">
                       <div class="row">
-                        <%= link_to image_tag(p.medium_photo, class: "card-img-top img-fluid rounded", style: 'height: 400px;object-fit: fill;'), product_path(p) %>
+                        <%= link_to image_tag(p.medium_photo, class: "card-img-top img-fluid rounded img-height"), product_path(p) %>
                         <% if p.new_arrival? %>
-                          <h5><span class="badge color-semi-black top-right badge-font" style="padding-top: 5.4px;">NEW</span></h5>
+                          <span class="badge color-semi-black top-right badge-font">NEW</span>
                         <% end %>
                       </div>
                     </div>
                   </div>
                   <div class="card-body pl-1">
-                    <h5 class="card-title card-clip"><%= link_to p.name, product_path(p), class:"text-semi-black" %></h5>
+                    <h5 class="card-title card-clip"><%= link_to p.name, product_path(p), class:"text-semi-black title-font" %></h5>
                     <div class="d-flex justify-content-start">
                       <% if p.on_sale? %>
-                        <p class="card-text"><small class="text-muted"><strike><%= "EGP #{p.original_price}" %></strike></small></p>
-                        <p class="card-text ml-2"><small class="red"><%= "EGP #{p.price}" %></small></p>
+                        <p class="card-text price-font"><strike><%= "EGP #{p.original_price}" %></strike></p>
+                        <p class="card-text ml-2 red price-font"><%= "EGP #{p.price}" %></p>
                       <% else %>
-                        <p class="card-text"><small class="text-muted"><%= "EGP #{p.price}" %></small></p>
+                        <p class="card-text price-font"><%= "EGP #{p.price}" %></p>
                       <% end %>
                     </div>
                   </div>
