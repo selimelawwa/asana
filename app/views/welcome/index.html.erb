@@ -39,7 +39,7 @@
         <!-- width: 720px, height:324px -->
         <%= image_tag @jumbotron.photo.url, :class => "img-fluid" %>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 pt-4 pt-md-0 my-auto mx-auto jumbotron-div" data-aos="fade-left">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 pt-4 pt-md-0 my-auto mx-auto jumbotron-div" data-aos="fade-up">
         <div class="text-justify">
           <p> <%= @jumbotron.description %> </p>
         </div>
@@ -69,21 +69,28 @@
 
 <!-- Visible on Desktop Computers -->
 <% if @new_arrivals.any? %>
-  <div class="d-none d-sm-block mt-4" data-aos="fade-up">
+  <div class="d-none d-md-block mt-4">
     <div class="row mr-4">
       <div class="col-md-4 pr-md-2 pr-lg-0">
-        <!-- width: 780px, height:520px -->
-        <a href="<%= products_path(new_arrival: true) %>"><%= image_tag 'newNewarrivala.jpg', class: "img-fluid", id:"new-arr-img" %></a>
+        <!-- width: 780px, height:690px -->
+        <a href="<%= products_path(new_arrival: true) %>"><%= image_tag 'rsz_3home1.png', class: "img-fluid", id:"new-arr-img" %></a>
       </div>
       <% @new_arrivals.each do |n_p| %>
-        <div class="col-md-2 pl-lg-5 pl-md-4">
+        <div class="col-md-2 pl-lg-5 pl-md-4" data-aos="fade-down">
           <div class="card shadow border-0 card-wid row">
             <div class="inner">
-              <%= link_to image_tag(n_p.medium_photo, class: "card-img-top card-img-welcome"), product_path(n_p) %>
+              <%= link_to image_tag(n_p.medium_photo, class: "card-img-top img-fluid"), product_path(n_p) %>
             </div>
             <div class="card-body card-font-welcome" style="max-height: 215px;">
               <h6 class="card-title cardtitle-font-welcome card-clip"><%= link_to n_p.name, product_path(n_p), class:"text-semi-black" %></h6>
-              <p class="card-text"><small class="text-muted"><%= "EGP #{n_p.price}" %></small></p>
+              <div class="d-flex justify-content-start welcome-new-arrival">
+                <% if n_p.on_sale? %>
+                  <p class="card-text"><small class="text-color-black"><strike><%= "EGP #{n_p.original_price}" %></strike></small></p>
+                  <p class="card-text"><small class="red ml-2"><%= "EGP #{n_p.price}" %></small></p>
+                <% else %>
+                  <p class="card-text"><small class="text-color-black"><%= "EGP #{n_p.price}" %></small></p>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
@@ -92,7 +99,7 @@
   </div>
 
   <!-- Visible on Mobile Phones -->
-  <div class="d-block d-sm-none">
+  <div class="d-block d-md-none">
     <a href="<%= products_path(new_arrival: true) %>"><%= image_tag 'newarrivals.jpg', class: "img-fluid" %></a>
     <div class="container-fluid mt-3">
       <div class="row">
@@ -105,7 +112,14 @@
                 </div>
                 <div class="card-body pl-1">
                   <h6 class="card-title card-clip"><%= link_to n_p.name, product_path(n_p), class:"text-semi-black", style: "font-size: 1.2rem;" %></h6>
-                  <p class="card-text"><small class="text-muted"><%= "EGP #{n_p.price}" %></small></p>
+                  <% if n_p.on_sale? %>
+                    <div class="d-flex justify-content-start welcome-new-arrival">
+                      <p class="card-text"><small class="text-color"><strike><%= "EGP #{n_p.original_price}" %></strike></small></p>
+                      <p class="card-text"><small class="red ml-2"><%= "EGP #{n_p.price}" %></small></p>
+                    </div>
+                    <% else %>
+                    <p class="card-text"><small class="text-color-black"><%= "EGP #{n_p.price}" %></small></p>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -118,7 +132,7 @@
 <!-- New Arrivals End -->
 
 <!-- Connect Start -->
-<div class="container-fluid padding mb-4 mt-0 mt-md-3" data-aos="flip-up">
+<div class="container-fluid padding mb-4 mt-0 mt-md-3" data-aos="zoom-in">
   <div class="row text-center padding">
     <div class="col-12">
       <hr class="my-4">
