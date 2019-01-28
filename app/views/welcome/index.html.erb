@@ -85,10 +85,10 @@
               <h6 class="card-title cardtitle-font-welcome card-clip"><%= link_to n_p.name, product_path(n_p), class:"text-semi-black" %></h6>
               <div class="d-flex justify-content-start welcome-new-arrival">
                 <% if n_p.on_sale? %>
-                  <p class="card-text"><small class="text-color-black"><strike><%= "EGP #{n_p.original_price}" %></strike></small></p>
-                  <p class="card-text"><small class="red ml-2"><%= "EGP #{n_p.price}" %></small></p>
+                  <p class="card-text"><small class="text-color-black"><strike><%= "EGP #{n_p.original_price.to_i}" %></strike></small></p>
+                  <p class="card-text"><small class="red ml-2"><%= "EGP #{n_p.price.to_i}" %></small></p>
                 <% else %>
-                  <p class="card-text"><small class="text-color-black"><%= "EGP #{n_p.price}" %></small></p>
+                  <p class="card-text"><small class="text-color-black"><%= "EGP #{n_p.price.to_i}" %></small></p>
                 <% end %>
               </div>
             </div>
@@ -114,11 +114,11 @@
                   <h6 class="card-title card-clip"><%= link_to n_p.name, product_path(n_p), class:"text-semi-black", style: "font-size: 1.2rem;" %></h6>
                   <% if n_p.on_sale? %>
                     <div class="d-flex justify-content-start welcome-new-arrival">
-                      <p class="card-text"><small class="text-color"><strike><%= "EGP #{n_p.original_price}" %></strike></small></p>
-                      <p class="card-text"><small class="red ml-2"><%= "EGP #{n_p.price}" %></small></p>
+                      <p class="card-text"><small class="text-color"><strike><%= "EGP #{n_p.original_price.to_i}" %></strike></small></p>
+                      <p class="card-text"><small class="red ml-2"><%= "EGP #{n_p.price.to_i}" %></small></p>
                     </div>
                     <% else %>
-                    <p class="card-text"><small class="text-color-black"><%= "EGP #{n_p.price}" %></small></p>
+                    <p class="card-text"><small class="text-color-black"><%= "EGP #{n_p.price.to_i}" %></small></p>
                   <% end %>
                 </div>
               </div>
