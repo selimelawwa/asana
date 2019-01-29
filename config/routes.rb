@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'mission_and_vision', to: 'pages#mission_and_vision', as: 'mission_and_vision'
   get 'company_overview', to: 'pages#company_overview', as: 'company_overview'
   get 'core_values', to: 'pages#core_values', as: 'core_values'
+  get 'contact_us', to: 'pages#contact_us', as: 'contact_us'
 
   
   resources :orders, only: %i[index show] do

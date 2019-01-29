@@ -7,5 +7,7 @@ class PagesController < ApplicationController
     end
     def core_values
     end
+    def contact_us
+    end
 end
   
