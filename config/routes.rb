@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get 'exchange_and_refund', to: 'pages#exchange_and_refund', as: 'exchange_and_refund'
   get 'mission_and_vision', to: 'pages#mission_and_vision', as: 'mission_and_vision'
   get 'company_overview', to: 'pages#company_overview', as: 'company_overview'
-  get 'core_values', to: 'pages#core_values', as: 'core_values'
+  get 'privacy_policy', to: 'pages#privacy_policy', as: 'privacy_policy'
   get 'contact_us', to: 'pages#contact_us', as: 'contact_us'
 
   
