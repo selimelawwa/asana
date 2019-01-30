@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_232346) do
+ActiveRecord::Schema.define(version: 2019_01_30_194553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,7 +115,9 @@ ActiveRecord::Schema.define(version: 2019_01_22_232346) do
     t.datetime "confirmed_at"
     t.decimal "vat", precision: 8, scale: 2, default: "0.0", null: false
     t.decimal "shipping", precision: 8, scale: 2, default: "0.0", null: false
+    t.bigint "promo_id"
     t.index ["address_id"], name: "index_orders_on_address_id"
+    t.index ["promo_id"], name: "index_orders_on_promo_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -146,6 +148,17 @@ ActiveRecord::Schema.define(version: 2019_01_22_232346) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_products_tags_on_product_id"
     t.index ["tag_id"], name: "index_products_tags_on_tag_id"
+  end
+
+  create_table "promos", force: :cascade do |t|
+    t.string "owner_name"
+    t.string "code"
+    t.string "description"
+    t.decimal "discount_rate", precision: 8, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active", default: false
+    t.integer "used_times", default: 0
   end
 
   create_table "sizes", force: :cascade do |t|
@@ -235,5 +248,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_232346) do
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "variants"
   add_foreign_key "orders", "addresses"
+  add_foreign_key "orders", "promos"
   add_foreign_key "orders", "users"
 end

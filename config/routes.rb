@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     resources :jumbotrons, except: [:show, :destroy]
     resources :cities, except: [:show, :destroy]
     resource :vat, only: [:edit, :update]
+    resources :promos, except: [:show, :destroy]
   end
   
   get 'welcome/index'

@@ -5,6 +5,7 @@ class Order < ApplicationRecord
 
   belongs_to :address, optional: true
   belongs_to :user
+  # belongs_to :promo, optional: true
 
   enum status: %i[in_cart confirmed delivered canceled]
   
