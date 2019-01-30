@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     end
     def company_overview
     end
-    def core_values
+    def privacy_policy
     end
     def contact_us
     end
