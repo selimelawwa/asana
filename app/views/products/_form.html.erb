@@ -80,8 +80,12 @@
 
         <div class="form-group">
           <%= f.input :model_wearing, label: 'Size & Fit', class: 'form-control'  %>
-        </div>        
-  
+        </div>
+        
+        <div class="form-group">
+          <%= f.input :available_in, label: 'Also Available In', class: 'form-control'  %>
+        </div>
+                
         <div class="custom-file mb-4">
           <%= f.input :main_photo, as: :file, class: 'custom-file-input' %>
         </div>

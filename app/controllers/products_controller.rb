@@ -98,7 +98,7 @@ class ProductsController < ApplicationController
   private
   def product_params
     params.require(:product).permit(:name, :gender, :main_photo, :description, :price, :original_price, :category_ids, 
-            :fabric_details, :model_wearing, :sub_category_ids,:new_arrival, :on_sale, color_ids: [])
+            :fabric_details, :model_wearing, :sub_category_ids,:new_arrival, :available_in, :on_sale, color_ids: [])
   end
 
   def set_product
