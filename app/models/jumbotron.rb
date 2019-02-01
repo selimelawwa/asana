@@ -5,7 +5,7 @@ class Jumbotron < ApplicationRecord
   validate :validate_categories_not_the_same
 
   def validate_categories_not_the_same
-    if category_id_1 == category_id_2
+    if (category_id_1 == category_id_2) && category_id_1.present?
       errors.add(:category_id_2, "Category 1 Can't be the same as Category 2")
       throw :abort
     end
