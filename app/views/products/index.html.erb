@@ -59,10 +59,10 @@
                 <h5 class="card-title card-clip"><%= link_to p.name, product_path(p), class:"text-semi-black", style: "font-size: 1.2rem;" %></h5>
                 <div class="d-flex justify-content-start">
                   <% if p.on_sale? %>
-                    <p class="card-text"><small><strike><%= "EGP #{p.original_price.to_i}" %></strike></small></p>
-                    <p class="card-text ml-2"><small class="red"><%= "EGP #{p.price.to_i}" %></small></p>
+                    <p class="card-text pr-1"><small><strike><%= "EGP #{p.original_price.to_i}" %></strike></small></p>
+                    <p class="card-text ml-1"><small class="red"><%= "EGP #{p.price.to_i}" %></small></p>
                   <% else %>
-                    <p class="card-text"><small><%= "EGP #{p.price.to_i}" %></small></p>
+                    <p class="card-text pr-1"><small><%= "EGP #{p.price.to_i}" %></small></p>
                   <% end %>
                 </div>
               </div>
