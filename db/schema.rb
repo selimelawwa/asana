@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_194553) do
+ActiveRecord::Schema.define(version: 2019_01_31_190907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_194553) do
     t.decimal "original_price", precision: 8, scale: 2
     t.boolean "on_sale", default: false
     t.boolean "new_arrival", default: false
+    t.string "available_in"
   end
 
   create_table "products_tags", id: false, force: :cascade do |t|

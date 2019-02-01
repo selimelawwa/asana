@@ -406,7 +406,6 @@
 
 // Extra small devices (portrait phones, less than 576px)
   @media (max-width: 575.98px) { 
-
    }
 
 // Small devices (landscape phones, 576px and up)
@@ -422,10 +421,6 @@
 
     .cardtitle-font-welcome{
       font-size: 0.8rem;
-    }
-
-    .card-font-welcome{
-      font-size: 0.7rem;
     }
 
     .jumbotron-div{
@@ -465,6 +460,9 @@
         max-height: 16px; 
         font-size: 0.58rem;
     }
+    .price-font-home{
+        font-size: 0.65rem;
+    }
   }
 
 // Large devices (desktops, 992px and up)
@@ -496,6 +494,9 @@
         max-height: 13px; 
         font-size: 0.72rem;
     }
+    .price-font-home{
+        font-size: 0.8rem;
+    }
   }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -525,6 +526,9 @@
         }
         .welcome-new-arrival{
             max-height: 24px; 
+        }
+        .price-font-home{
+            font-size: 0.86rem;
         }
     }
 
