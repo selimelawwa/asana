@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
     if @product.published?
       params[:color_id] ||= @product.main_color_id
       @colored_variant = @product.variants.main.where(color_id: params[:color_id]).first
-      @related_products =  Product.joins(:tags).where(tags: {id: @product.tags.pluck(:id)}, products: {published: true}).where.not(products: {id: @product.id})&.shuffle&.first(4)
+      @related_products =  Product.joins(:tags).where(tags: {id: @product.tags.pluck(:id)}, products: {published: true}).where.not(products: {id: @product.id}).distinct&.shuffle&.first(4)
       @available_sizes = @colored_variant.sized_variants.joins(:size).where("variants.stock > 0")&.pluck(:size_id)
     else
       flash[:error] = "This Product is currently unavailable"
