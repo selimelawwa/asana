@@ -32,7 +32,7 @@
 
 
 <!-- Jumbotron Start -->
-<% if @jumbotron.presence && @category1_name.present? && @category2_name.present?%>
+<% if @jumbotron.presence && (@category1_name.present? || @category2_name.present?) %>
   <div class="container-fluid">
     <div class="row jumbotron mb-0">
       <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-7">
@@ -47,15 +47,23 @@
         <div class="container-fluid d-block d-sm-none">
           <div class="row justify-content-center">
             <div class="d-block d-sm-none w-100">
-              <a href="<%= products_path(category_id: @jumbotron.category_id_1) %>"><button type="button" class="btn btn-outline-secondary btn-md w-49"><%="Shop #{@category1_name}"%></button></a>
-              <a href="<%= products_path(category_id: @jumbotron.category_id_2) %>"><button type="button" class="btn btn-outline-secondary btn-md w-49"><%="Shop #{@category2_name}"%></button></a>
+              <% if @jumbotron.category_id_1.present? %>
+                <a href="<%= products_path(category_id: @jumbotron.category_id_1) %>"><button type="button" class="btn btn-outline-secondary btn-md w-49"><%="Shop #{@category1_name}"%></button></a>
+              <% end %>
+              <% if @jumbotron.category_id_2.present? %>
+                <a href="<%= products_path(category_id: @jumbotron.category_id_2) %>"><button type="button" class="btn btn-outline-secondary btn-md w-49"><%="Shop #{@category2_name}"%></button></a>
+              <% end %>
             </div>
           </div>
         </div>
         <!-- Large screens only -->
         <div class="d-none d-sm-block"> 
-            <a href="<%= products_path(category_id: @jumbotron.category_id_1) %>"><button type="button" class="btn btn-outline-secondary w-49 jumb-font"><%="Shop #{@category1_name}"%></button></a>
-            <a href="<%= products_path(category_id: @jumbotron.category_id_2) %>"><button type="button" class="btn btn-outline-secondary w-49 jumb-font"><%="Shop #{@category2_name}"%></button></a>
+            <% if @jumbotron.category_id_1.present? %>
+              <a href="<%= products_path(category_id: @jumbotron.category_id_1) %>"><button type="button" class="btn btn-outline-secondary w-49 jumb-font"><%="Shop #{@category1_name}"%></button></a>
+            <% end %>
+            <% if @jumbotron.category_id_2.present? %>
+              <a href="<%= products_path(category_id: @jumbotron.category_id_2) %>"><button type="button" class="btn btn-outline-secondary w-49 jumb-font"><%="Shop #{@category2_name}"%></button></a>
+            <% end %>
         </div>
       </div>
     </div>
