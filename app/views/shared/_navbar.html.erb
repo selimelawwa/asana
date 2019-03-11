@@ -109,7 +109,7 @@
         <ul class="nav navbar-nav mx-auto w-auto justify-content-center" id="nav-bar-col">
           <% if @show_new_arrival %>
             <li class="nav-item">
-              <a class="nav-link" href="<%= products_path(new_arrival: true) %>">New</a>
+              <a class="nav-link ml-1" href="<%= products_path(new_arrival: true) %>">New</a>
             </li>
           <% end %>
           <% if @navbar_categories.any? %>
