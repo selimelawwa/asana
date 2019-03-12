@@ -132,6 +132,8 @@ class OrdersController < ApplicationController
     @address = @order.address    
     if @order.finalize
       flash[:notice] = "Order Confirmed"
+      UserMailer.confirm_order_admin_email(@current_user,@order).deliver_now
+      UserMailer.confirm_order_user_email(@current_user).deliver_now
       redirect_to order_path(@order)
     else
       flash[:error] = @order.errors[:out_of_stock_variants]&.first if @order.errors.any?
