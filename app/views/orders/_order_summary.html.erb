@@ -1,6 +1,9 @@
 <h4 class="mt-2 mt-md-2"> Order Summary </h4>
 <hr class="color-semi-black">
-<p> Subtotal: EGP <%= order.cart? ? order.current_total_cost : order.total_cost%></p>
+<% if !order.cart? %>
+  <% total_without_shipping = order.total_cost - order.shipping - order.vat%>
+<% end %>
+<p> Subtotal: EGP <%= order.cart? ? order.current_total_cost : total_without_shipping %></p>
 <% if order.address.present? %>
   <p> Shipping Fees: EGP <%= order.cart? ? order.shipping_fees : order.shipping%></p>
 <% end %>

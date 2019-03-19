@@ -8,6 +8,7 @@ class Category < ApplicationRecord
 
   # TODO add where product published
   scope :with_products, -> { joins(:products).distinct }
+  scope :with_published_products, -> { joins(:products).where(products: {published: true}).distinct }
 
   # validations
   validates :name, :kind, presence: true

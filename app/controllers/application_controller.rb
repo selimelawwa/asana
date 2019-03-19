@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_navbar_categories
-    @navbar_categories = Rails.cache.fetch('cached_navbar_categories', expires_in: 10.minute) { Category.category.with_products.includes(:sub_categories).first(4) }
+    @navbar_categories = Rails.cache.fetch('cached_navbar_categories', expires_in: 10.minute) { Category.category.with_published_products.includes(:sub_categories).first(4) }
     @show_on_sale = Rails.cache.fetch('cached_show_on_sale', expires_in: 10.minute) { Product.where(on_sale: true).any? }
     @show_new_arrival = Rails.cache.fetch('cached_show_new_arrival', expires_in: 10.minute) { Product.where(new_arrival: true).any? }
   end

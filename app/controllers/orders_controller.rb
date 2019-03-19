@@ -4,9 +4,9 @@ class OrdersController < ApplicationController
     if current_user&.admin?
       @orders = Order.all.joins(:line_items).where(cart: false)
       @search = @orders.ransack(params[:q])
-      @orders = @search.result.order(:created_at).paginate(:page => params[:page], :per_page => 25)
+      @orders = @search.result(distinct: true).order(:created_at).paginate(:page => params[:page], :per_page => 25)
     else
-      @orders = current_user&.orders&.joins(:line_items).order(:created_at).paginate(:page => params[:page], :per_page => 25)
+      @orders = current_user&.orders&.joins(:line_items).distinct.order(:created_at).paginate(:page => params[:page], :per_page => 25)
     end
     @custom_paginate_renderer = custom_paginate_renderer
   end
