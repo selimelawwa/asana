@@ -121,12 +121,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    sign_up_url = new_user_registration_url
-    if request.referer == sign_up_url
-      super(resource)
-    else
-      stored_location_for(resource) || request.referer || root_path
-    end
+    root_path
   end
 
   # The path used after sign up for inactive accounts.
