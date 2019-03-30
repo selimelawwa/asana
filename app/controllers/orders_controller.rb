@@ -154,10 +154,13 @@ class OrdersController < ApplicationController
     authorize @order
     @address = @order.address    
     if @order.finalize
-      flash[:notice] = "Order Confirmed"
+      flash[:success] = "Order Confirmed"
       redirect_to order_path(@order)
     else
-      flash[:error] = @order.errors[:out_of_stock_variants]&.first if @order.errors.any?
+      if @order.errors.any?
+        errors = @order.errors.messages.values.reject {|e| e&.empty?}
+        flash[:error] = errors.join(', ')
+      end
       redirect_to order_confirm_details_path(@order)
     end
   end
