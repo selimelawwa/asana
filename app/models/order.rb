@@ -5,7 +5,7 @@ class Order < ApplicationRecord
 
   belongs_to :address, optional: true
   belongs_to :user
-  # belongs_to :promo, optional: true
+  belongs_to :promo, optional: true
 
   enum status: %i[in_cart confirmed delivered canceled]
   
@@ -14,17 +14,30 @@ class Order < ApplicationRecord
 
   before_update :validate_no_out_of_stock_variants
   before_update :validate_assigned_address
+  before_update :validate_promo
 
   def finalize
-    if update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.zone.now, vat: vat_amount, shipping: shipping_fees)
+    if update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.zone.now, vat: vat_amount, shipping: shipping_fees, discount: discount_amount, total_before_discount: current_total_cost)
       decrement_variant_stocks
     end
   end
 
   def final_total
-    total = current_total_cost
+    total = total_after_discount
     total = total + shipping_fees if address.present?
     total + vat_amount
+  end
+
+  def discount_amount
+    if promo_id.present?
+      current_total_cost * ( promo.discount_rate.to_f / 100 )
+    else
+      0
+    end
+  end
+  
+  def total_after_discount
+    current_total_cost - discount_amount
   end
 
   def shipping_fees
@@ -67,6 +80,16 @@ class Order < ApplicationRecord
   def validate_assigned_address
     if cart_changed? && !address.presence
       errors.add(:address_not_selected, "Please Select an Address")
+      throw :abort
+    end
+  end
+
+  def validate_promo
+    if promo_id.present? && !promo&.active?
+      errors.add(:promo_inactive, "Promo is in active")
+      throw :abort
+    elsif promo_id.present? && user.orders.where(promo_id: promo_id).where("id != ?",self.id).present?
+      errors.add(:promo_used_before, "You have already used this promo")
       throw :abort
     end
   end

@@ -1,0 +1,44 @@
+<% if order.cart? && !order.promo_id.present? %>
+  <%= form_with url: order_apply_promo_url({order_id: order.id}), id: "apply_promo_form" ,local: true do |form| %>
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= label_tag :promo_code, "Promo Code" %>
+          <%= form.text_field :promo_code, placeholder: "enter promo code...", class: 'form-control'%>
+          <p id="promo_error_msg" class="red"></p>
+        </div>
+        <%= form.submit "Apply" ,class:"btn color-semi-black status_btn" %>
+      </div>               
+    </div>
+  <% end %>
+<% elsif order.cart? && order.promo_id.present? %>
+  <% promo = order.promo%>
+  <div class="d-flex justify-content-between">
+    <p>Promo Code: <%=promo.code%></p>
+    <%= link_to 'Remove', order_remove_promo_path(order), method: :post, class:"red" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  var form_id = 'apply_promo_form';
+  $(`#${form_id}`).submit(function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    $.ajax({
+      type: "POST",
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(response, data, status, xhr) {
+        if (response["promo_applied"]==1) {
+          $('#order_summary_div').html(response['new_order_summary']);
+          $('#apply_promo_div').html(response['new_apply_promo_form']);
+        } else {
+          $('#promo_error_msg').text(response["error_msg"]);
+        }
+      },
+      error: function() {
+        alert('error');
+      }
+    });
+  });
+</script>

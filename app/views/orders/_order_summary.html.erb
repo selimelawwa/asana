@@ -1,9 +1,13 @@
 <h4 class="mt-2 mt-md-2"> Order Summary </h4>
 <hr class="color-semi-black">
 <% if !order.cart? %>
-  <% total_without_shipping = order.total_cost - order.shipping - order.vat%>
+  <% total_with_discount = order.total_before_discount - order.discount%>
 <% end %>
-<p> Subtotal: EGP <%= order.cart? ? order.current_total_cost : total_without_shipping %></p>
+<p> Subtotal: EGP <%= order.cart? ? order.current_total_cost : order.total_before_discount %></p>
+<% if order.promo_id.present? %>
+  <p>Promo Discount: EGP <%= order.cart? ? order.discount_amount :  order.discount  %></p>
+  <p>Subtotal After Discount: EGP <%= order.cart? ? order.total_after_discount : total_with_discount  %></p>
+<% end %>
 <% if order.address.present? %>
   <p> Shipping Fees: EGP <%= order.cart? ? order.shipping_fees : order.shipping%></p>
 <% end %>

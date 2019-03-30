@@ -116,6 +116,7 @@ class OrdersController < ApplicationController
     authorize @order
     # have to be a signed up user
     redirect_to new_user_session_path(redirect_to: cart_path) unless current_user.presence
+    redirect_to order_path(@order) if !@order.cart?
     if flash[:error]
       @error_msg = flash[:error]
       flash.discard(:error) 
@@ -124,6 +125,28 @@ class OrdersController < ApplicationController
     @address = @order.address
     redirect_to order_select_address_path(order_id: @order.id) unless @address
     redirect_to order_path(@order) unless @order.has_line_items?
+  end
+
+  def apply_promo
+    order = current_order
+    promo = Promo.find_by(code: params[:promo_code])
+    if promo.present?
+      if order.update(promo_id: promo.id)
+        new_order_summary = render_to_string partial: 'order_summary', locals: {order: order}
+        new_apply_promo_form = render_to_string partial: 'apply_promo_form', locals: {order: order}
+        render json: {promo_applied: 1, new_order_summary: new_order_summary, new_apply_promo_form: new_apply_promo_form}
+      else
+        errors = order.errors[:promo_inactive] + order.errors[:promo_used_before]
+        render json: {promo_applied: 0, error_msg: errors}
+      end
+    else
+    end
+  end
+
+  def remove_promo
+    order = current_order
+    order.update(promo_id: nil)
+    redirect_to request.referrer
   end
 
   #TODO if no line items
