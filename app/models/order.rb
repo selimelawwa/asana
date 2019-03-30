@@ -19,6 +19,7 @@ class Order < ApplicationRecord
   def finalize
     if update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.zone.now, vat: vat_amount, shipping: shipping_fees, discount: discount_amount, total_before_discount: current_total_cost)
       decrement_variant_stocks
+      increment_promo_usage if promo.present?
     end
   end
 
@@ -48,6 +49,12 @@ class Order < ApplicationRecord
     total = current_total_cost
     total = total + shipping_fees if address.present?
     total * Vat.default.tax_rate_percentage
+  end
+
+  def increment_promo_usage
+    usage = promo.used_times
+    new_usage = usage + 1
+    promo.update(used_times: new_usage)
   end
 
   def decrement_variant_stocks
