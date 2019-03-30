@@ -23,6 +23,7 @@
                   <th>#</th>
                   <th>Promo Code</th>
                   <th>Discount Rate</th>
+                  <th>Active</th>
                   <th>Used Times</th>
                   <th></th>
                 </tr>
@@ -33,6 +34,9 @@
                     <td scope="row"><%= i+1 %></td>
                     <td> <%= p.code %> </td>
                     <td> <%= "#{p.discount_rate} %" %> </td>
+                    <td>
+                      <%= p.active? ? "Yes" : "No" %>
+                    </td>
                     <td> <%= p.used_times %> </td>
                     <td class="text-right"> 
                       <%= link_to 'Edit', edit_promo_path(id: p.id) %> 
