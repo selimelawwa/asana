@@ -140,6 +140,8 @@ class OrdersController < ApplicationController
         render json: {promo_applied: 0, error_msg: errors}
       end
     else
+      errors = "Promo not found."
+      render json: {promo_applied: 0, error_msg: errors}
     end
   end
 
