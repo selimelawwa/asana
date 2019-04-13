@@ -243,7 +243,7 @@
                   <%= link_to image_tag(p.medium_photo, class: "card-img-top img-fluid"), product_path(p) %>
                 </div>
                 <div class="card-body pl-1">
-                  <h5 class="card-title"> <%= link_to p.name, product_path(p), class: "text-semi-black" %> </h5>
+                  <h6 class="card-title card-clip"> <%= link_to p.name, product_path(p), class: "text-semi-black" %> </h6>
                   <% if p.on_sale? %>
                     <div class="d-flex justify-content-start">
                       <p class="card-text"><small class="text-color"><strike><%= "EGP #{p.original_price.to_i}" %></strike></small></p>

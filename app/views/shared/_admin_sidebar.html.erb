@@ -28,7 +28,7 @@
       <%= link_to 'VAT', edit_vat_path, class: "#{ current=='vat' ? 'text-white': 'text-color-dark'}" %>
     </li>
     <li class="list-group-item <%= "#{'color-semi-black' if current=='promos'}" %>">
-      <%= link_to 'Promos', promos_path, class: "#{ current=='promos' ? 'text-white': 'text-color-dark'}" %>
+      <%= link_to 'Promo Codes', promos_path, class: "#{ current=='promos' ? 'text-white': 'text-color-dark'}" %>
     </li>
   </ul>
 </div>
@@ -45,5 +45,6 @@
     <option value="/admin/jumbotrons">Jumbotrons</option>
     <option value="/admin/cities">Cities</option>
     <option value="/admin/vat/edit">VAT</option>
+    <option value="/admin/promos">Promo Codes</option>
   </select>
 </div>

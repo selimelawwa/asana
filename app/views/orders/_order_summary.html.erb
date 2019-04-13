@@ -3,16 +3,16 @@
 <% if !order.cart? %>
   <% total_with_discount = order.total_before_discount - order.discount%>
 <% end %>
-<p> Subtotal: EGP <%= order.cart? ? order.current_total_cost : order.total_before_discount %></p>
+<p> Subtotal: EGP <%= order.cart? ? order.current_total_cost.to_i : order.total_before_discount.to_i %></p>
 <% if order.promo_id.present? %>
-  <p>Promo Discount: EGP <%= order.cart? ? order.discount_amount :  order.discount  %></p>
-  <p>Subtotal After Discount: EGP <%= order.cart? ? order.total_after_discount : total_with_discount  %></p>
+  <p>Promo Code Discount: EGP <%= order.cart? ? order.discount_amount.to_i :  order.discount.to_i  %></p>
+  <p>Subtotal After Discount: EGP <%= order.cart? ? order.total_after_discount.to_i : total_with_discount.to_i  %></p>
 <% end %>
 <% if order.address.present? %>
-  <p> Shipping Fees: EGP <%= order.cart? ? order.shipping_fees : order.shipping%></p>
+  <p> Shipping Fees: EGP <%= order.cart? ? order.shipping_fees.to_i : order.shipping.to_i %></p>
 <% end %>
 <% if order.vat_amount > 0 || order.vat > 0 %>
-  <p> VAT: EGP <%= order.cart? ? order.vat_amount : order.vat %></p>
+  <p> VAT: EGP <%= order.cart? ? order.vat_amount.to_i : order.vat.to_i %></p>
 <% end %>
 <hr class="color-semi-black">
-<p class="pb-2 pb-md-0" style="font-weight: bold;"> Total: EGP <%= order.cart? ? order.final_total : order.total_cost%></p>
+<p class="pb-2 pb-md-0" style="font-weight: bold;"> Total: EGP <%= order.cart? ? order.final_total.to_i : order.total_cost.to_i %></p>

@@ -86,17 +86,17 @@ class Order < ApplicationRecord
 
   def validate_assigned_address
     if cart_changed? && !address.presence
-      errors.add(:address_not_selected, "Please Select an Address")
+      errors.add(:address_not_selected, "Please select an address!")
       throw :abort
     end
   end
 
   def validate_promo
     if promo_id.present? && !promo&.active?
-      errors.add(:promo_inactive, "Promo is in active")
+      errors.add(:promo_inactive, "Promo code is in active!")
       throw :abort
     elsif promo_id.present? && user.orders.where(promo_id: promo_id).where("id != ?",self.id).present?
-      errors.add(:promo_used_before, "You have already used this promo")
+      errors.add(:promo_used_before, "You have already used this promo code!")
       throw :abort
     end
   end
@@ -127,7 +127,7 @@ class Order < ApplicationRecord
 
   def ensure_no_other_un_confirmed_orders
     if user.orders.where(cart: true).any?
-      errors.add(:base, "Cant create a new order while old one is not confirmed")
+      errors.add(:base, "Cant create a new order while old one is not confirmed.")
       throw :abort
     end
   end

@@ -4,17 +4,17 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= label_tag :promo_code, "Promo Code" %>
-          <%= form.text_field :promo_code, placeholder: "enter promo code...", class: 'form-control'%>
-          <p id="promo_error_msg" class="red"></p>
+          <%= form.text_field :promo_code, placeholder: "Enter promo code...", class: 'form-control'%>
+          <p id="promo_error_msg" class="red mt-2"></p>
         </div>
-        <%= form.submit "Apply" ,class:"btn color-semi-black status_btn" %>
+        <%= form.submit "Apply Promo" ,class:"btn color-semi-black col-12 status_btn mt-1" %>
       </div>               
     </div>
   <% end %>
 <% elsif order.cart? && order.promo_id.present? %>
   <% promo = order.promo%>
   <div class="d-flex justify-content-between">
-    <p>Promo Code: <%=promo.code%></p>
+    <p style="color:green">Promo Code: <%=promo.code%></p>
     <%= link_to 'Remove', order_remove_promo_path(order), method: :post, class:"red" %>
   </div>
 <% end %>
