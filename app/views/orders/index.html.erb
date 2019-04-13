@@ -46,10 +46,10 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th> Order Number </th>
+                  <th> Reference Num </th>
                   <th>Status</th>
                   <th>Confirmed at</th>
-                  <th>Total Cost</th>
+                  <th>Cost</th>
                   <% if current_user.admin? %>
                     <th> User Name </th>
                   <% end %>
@@ -59,7 +59,7 @@
                 <% @orders.each_with_index do |o,i| %>
                   <tr>
                     <td scope="row"><%= i+1 %></td>
-                    <td> <%= link_to "Order-#{o.id}", order_path(o.id) %> </td>
+                    <td> <%= link_to "Reference-#-#{o.id}", order_path(o.id) %> </td>
                     <td><%= o.status.humanize %></td>
                     <td><%= o.confirmed_at %></td>
                     <td> <%= o.cart? ? o.current_total_cost : o.total_cost %> </td>
