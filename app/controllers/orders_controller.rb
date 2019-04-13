@@ -116,6 +116,7 @@ class OrdersController < ApplicationController
     authorize @order
     # have to be a signed up user
     redirect_to new_user_session_path(redirect_to: cart_path) unless current_user.presence
+    redirect_to order_path(@order) if !@order.cart?
     if flash[:error]
       @error_msg = flash[:error]
       flash.discard(:error) 
@@ -126,15 +127,42 @@ class OrdersController < ApplicationController
     redirect_to order_path(@order) unless @order.has_line_items?
   end
 
+  def apply_promo
+    order = current_order
+    promo = Promo.find_by(code: params[:promo_code])
+    if promo.present?
+      if order.update(promo_id: promo.id)
+        new_order_summary = render_to_string partial: 'order_summary', locals: {order: order}
+        new_apply_promo_form = render_to_string partial: 'apply_promo_form', locals: {order: order}
+        render json: {promo_applied: 1, new_order_summary: new_order_summary, new_apply_promo_form: new_apply_promo_form}
+      else
+        errors = order.errors[:promo_inactive] + order.errors[:promo_used_before]
+        render json: {promo_applied: 0, error_msg: errors}
+      end
+    else
+      errors = "Promo not found."
+      render json: {promo_applied: 0, error_msg: errors}
+    end
+  end
+
+  def remove_promo
+    order = current_order
+    order.update(promo_id: nil)
+    redirect_to request.referrer
+  end
+
   #TODO if no line items
   def confirm_order
     authorize @order
     @address = @order.address    
     if @order.finalize
-      flash[:notice] = "Order Confirmed"
+      flash[:success] = "Order Confirmed"
       redirect_to order_path(@order)
     else
-      flash[:error] = @order.errors[:out_of_stock_variants]&.first if @order.errors.any?
+      if @order.errors.any?
+        errors = @order.errors.messages.values.reject {|e| e&.empty?}
+        flash[:error] = errors.join(', ')
+      end
       redirect_to order_confirm_details_path(@order)
     end
   end

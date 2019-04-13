@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     post 'create_address', to: 'orders#create_address', as: 'create_address'
     get 'confirm_details', to: 'orders#confirm_details', as: 'confirm_details'
     post 'confirm_order', to: 'orders#confirm_order', as: 'confirm_order'
+    post 'apply_promo', to: 'orders#apply_promo', as: 'apply_promo'
+    post 'remove_promo', to: 'orders#remove_promo', as: 'remove_promo'
   end
   get 'cart', to: 'orders#cart', as: 'cart'
   post 'add_to_cart', to: 'orders#add_to_cart', as: 'add_to_cart'
@@ -58,6 +60,7 @@ Rails.application.routes.draw do
     resources :jumbotrons, except: [:show, :destroy]
     resources :cities, except: [:show, :destroy]
     resource :vat, only: [:edit, :update]
+    resources :promos, except: [:show, :destroy]
   end
   
   get 'welcome/index'

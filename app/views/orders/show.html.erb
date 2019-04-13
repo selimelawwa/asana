@@ -29,6 +29,11 @@
       <div class="container">
         <div class="row w-100 justify-content-end">
           <div class="col-12 col-md-4 my-4 pl-5">
+            <% if @order.cart?%>
+              <div id="apply_promo_div">
+                <%= render partial: 'apply_promo_form', locals:{order: @order}%>
+              </div>
+            <% end %>
             <div id="order_summary_div">
               <%= render partial: 'order_summary', locals:{order: @order}%>
             </div>

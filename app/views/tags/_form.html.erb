@@ -16,7 +16,6 @@
       <%= simple_form_for tag, url: (tag.new_record? ? tags_path : tag_path)  do |f| %>
   
         <div class="form-group">
-          <!-- <%= f.label 'Tag Name', :name %> -->
           <%= f.input :name, class: 'form-control'  %>
         </div>
   
