@@ -90,7 +90,7 @@ Rails.application.configure do
     :address => "smtp.gmail.com",
     :port => 587,
     # :domain => "MYDOMAIN.mailgun.org",
-    :user_name => "asana.athleisure2019@gmail.com",
+    :user_name => "no.reply.asana@gmail.com",
     :password => "asana@123",
     # :enable_starttls_auto => true
   }

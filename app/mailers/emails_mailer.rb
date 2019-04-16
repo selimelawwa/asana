@@ -16,7 +16,7 @@ class EmailsMailer < ApplicationMailer
   def confirm_order_admin_email(user,order)
     @user = user
     @order = order
-    mail(to:  "asana.athleisure2019@gmail.com", subject: 'New Order!')
+    mail(to:  "no.reply.asana@gmail.com", subject: 'New Order!')
   end
 
   def update_password(user)
