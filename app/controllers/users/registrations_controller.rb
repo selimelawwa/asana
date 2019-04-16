@@ -17,6 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     current_or_guest_user
+    EmailsMailer.new_user(@user).deliver_now
   end
 
   # GET /resource/edit
@@ -68,6 +69,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     elsif resource.update_with_password(user_params)
       flash[:notice] = "Password succesfully updated!"
       bypass_sign_in resource, scope: resource_name
+      EmailsMailer.update_password(@user).deliver_now
       redirect_to edit_user_registration_path(resource)
     else
       flash[:alert] = resource.reload.valid_password?(params.dig(:user,:current_password)) ? "New Password Invalid / Dont Match Confirmation" : "Please Enter Correct Password"

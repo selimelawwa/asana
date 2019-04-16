@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    Dear <%= @user.name %>,<br>
+    <p>Your order has been confirmed.</p>
+    <strong>Order reference number = </strong><%= @order.id %><br>
+    <strong>Total cost = </strong><%= @order.total_cost.to_i %> EGP<br><br>
+    Thank You,<br>
+    Asana Team
+  </body>
+</html>

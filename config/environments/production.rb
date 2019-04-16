@@ -111,4 +111,27 @@ Rails.application.configure do
   #   path: '/:class/:attachment/:id/:style/:basename.:extension',
   #   default_url: ''
   # }
+
+
+  config.action_mailer.perform_deliveries = true 
+  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   :authentication => :login,
+  #   :address => "smtp.office365.com",
+  #   :port => 587,
+  #   :user_name => "",
+  #   :password => "",
+  #   :enable_starttls_auto => true
+  # }
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    # :domain => "MYDOMAIN.mailgun.org",
+    :user_name => "asana.athleisure2019@gmail.com",
+    :password => "asana@123",
+    # :enable_starttls_auto => true
+  }
+
+  config.action_mailer.default_url_options = { host:"asanaathleisure.com" }
 end

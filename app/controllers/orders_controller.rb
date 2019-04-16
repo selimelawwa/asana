@@ -156,7 +156,9 @@ class OrdersController < ApplicationController
     authorize @order
     @address = @order.address    
     if @order.finalize
-      flash[:success] = "Order Confirmed"
+      flash[:notice] = "Order Confirmed"
+      EmailsMailer.new_order(@current_user,@order).deliver_now
+      EmailsMailer.confirm_order_admin_email(@current_user,@order).deliver_now
       redirect_to order_path(@order)
     else
       if @order.errors.any?
