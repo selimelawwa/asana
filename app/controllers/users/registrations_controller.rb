@@ -17,7 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     current_or_guest_user
-    UserMailer.signup_confirmation(@user).deliver
   end
 
   # GET /resource/edit

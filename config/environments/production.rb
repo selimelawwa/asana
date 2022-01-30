@@ -111,16 +111,4 @@ Rails.application.configure do
   #   path: '/:class/:attachment/:id/:style/:basename.:extension',
   #   default_url: ''
   # }
-
-  config.action_mailer.raise_delivery_errors = true
-
-  config.action_mailer.delivery_method = :smtp
-
-  config.action_mailer.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :user_name            => "asana.athleisure2019@gmail.com",
-  :password             => "asana@123",
-  :authentication       => "plain",
-  :enable_starttls_auto => true
 end
