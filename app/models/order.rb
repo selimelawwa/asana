@@ -17,10 +17,12 @@ class Order < ApplicationRecord
   before_update :validate_promo
 
   def finalize
-    if update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.zone.now, vat: vat_amount, shipping: shipping_fees, discount: discount_amount, total_before_discount: current_total_cost)
+    udpated = update(cart: false, status: 'confirmed', total_cost: final_total, confirmed_at: Time.zone.now, vat: vat_amount, shipping: shipping_fees, discount: discount_amount, total_before_discount: current_total_cost)
+    if udpated
       decrement_variant_stocks
       increment_promo_usage if promo.present?
     end
+    return udpated
   end
 
   def final_total
