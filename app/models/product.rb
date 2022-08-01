@@ -113,7 +113,7 @@ class Product < ApplicationRecord
 
   #to be shown in index, get main_variant image or product main image
   def medium_photo
-    variant_medium_photo(main_color_id)&.url(:medium) ||  main_photo.url(:medium)
+    main_photo.url(:medium)
   end
 
   def variant_medium_photo(color_id)
